@@ -2,12 +2,8 @@ import Layout from "../components/Layout";
 import Container from "../components/Container";
 import { Icon } from "@iconify/react";
 import { ProjectCard } from "../components/Card";
-import useSWR from "swr";
-import fetcher from "../lib/fetcher";
-import Image from "next/image";
 
 function HomePage() {
-  const { data, error } = useSWR("/api/now-playing", fetcher);
   return (
     <Layout>
       <Container>
@@ -45,7 +41,7 @@ function HomePage() {
                 className="w-7 h-7 text-[#bfbfbf] hover:text-[#fff]"
               />
             </a>
-            <a href="https://keybase.io/34x/pgp_keys.asc?fingerprint=086c9e5aa1111c8cfc7da687f150c22ac0bcce57" target="_blank" rel="noopener noreferrer nofollow">
+            <a href="/pgp" target="_blank" rel="noopener noreferrer nofollow">
               <Icon
                 icon="charm:key"
                 className="w-7 h-7 text-[#bfbfbf] hover:text-[#fff]"
@@ -57,6 +53,11 @@ function HomePage() {
                 className="w-7 h-7 text-[#bfbfbf] hover:text-[#fff]"
               />
             </a>
+          </div>
+          <div>
+            <p className="max-w-3xl mt-4 text-lg text-gray-400">
+            Currently a second year computer science student with a strong understanding of computer science and development. In my free time, I enjoy exploring the field of machine learning and delving into security topics.
+            </p>
           </div>
           <div className="max-w-4xl mt-10">
             <div className="grid gap-5 md:gap-y-5 sm:grid-cols-2">
@@ -78,7 +79,7 @@ function HomePage() {
               />
               <ProjectCard
                 project={{
-                  title: "Code",
+                  title: "Projects",
                   description:
                     "A collection of all my open-source projects, and code I've written. Hosted on GitHub.",
                   url: "https://github.com/xxiz?tab=repositories",
