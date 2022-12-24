@@ -74,7 +74,7 @@ function HomePage() {
                   title: "Blog",
                   description:
                     "I write about anything and everything I find interesting, want to share or just learnt!",
-                  url: "/blog",
+                  url: "https://ashwin.lol/blog",
                 }}
               />
               <ProjectCard
@@ -106,7 +106,8 @@ function HomePage() {
                   title: "Tools",
                   description:
                     "Quirky, and useful tools I have found for various from security to downloading mangas.",
-                  url: "https://a7.wtf/tools",
+                  url: "/tools",
+                  local: true,
                 }}
               />
             </div>
