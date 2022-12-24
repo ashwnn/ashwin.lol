@@ -5,6 +5,7 @@ function Layout({ children }: any) {
     <>
     <Head>
       <title>Ashwin — Student/Developer</title>
+      <link rel="icon" type="image/x-icon" href="https://safe.1m.cx/Z6G18xQ7.png" />
     </Head>
     <div className="flex flex-col min-h-screen antialiased dark:bg-zinc-900 dark:text-zinc-400">
       {children}
