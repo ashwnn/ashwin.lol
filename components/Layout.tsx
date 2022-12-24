@@ -1,9 +1,15 @@
+import Head from "next/head";
+
 function Layout({ children }: any) {
   return (
-    <div className="flex flex-col min-h-screen antialiased bg-white text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400">
+    <>
+    <Head>
+      <title>Ashwin — Student/Developer</title>
+    </Head>
+    <div className="flex flex-col min-h-screen antialiased dark:bg-zinc-900 dark:text-zinc-400">
       {children}
       <footer className="px-6 py-4 pt-0 mt-0 text-xs text-center rounded-b-lg">
-        <div className="container mx-auto">
+        <div className="mx-auto mt-10">
           <p>
             Licensed under{" "}
             <a
@@ -17,6 +23,7 @@ function Layout({ children }: any) {
         </div>
       </footer>
     </div>
+    </>
   );
 }
 

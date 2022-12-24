@@ -1,13 +1,16 @@
 import { Icon } from "@iconify/react";
 
-function DataCard({ title, value, link }: any) {
+function Card({ title, data, link }: any) {
   return (
     <div className="p-4 border rounded-lg border-zinc-200 dark:border-zinc-700">
-      <a target="_blank" rel="noopener noreferrer" href={link}>
-        <span className="opacity-60">{title}</span>
-      </a>
-      <div className="mt-1 text-xl font-semibold shine spacing-sm opacity-90">
-        {value}
+      <span className="mt-1 text-lg font-semibold shine spacing-sm opacity-90">
+        {title}
+      </span>
+
+      <div className="pt-3 mx-2 opacity-60">
+        <a target="_blank" rel="noopener noreferrer" href={link}>
+          {data}
+        </a>
       </div>
     </div>
   );
@@ -15,7 +18,12 @@ function DataCard({ title, value, link }: any) {
 
 function ProjectCard({ project }: any) {
   return (
-    <a target="_blank" rel="noopener noreferrer nofollow" href={project.url} className="relative p-4 duration-150 border rounded-lg border-zinc-200 dark:border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-1">
+    <a
+      target="_blank"
+      rel="noopener noreferrer nofollow"
+      href={project.url}
+      className="relative p-4 duration-150 border rounded-lg text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5"
+    >
       <div>
         <h3 className="mb-2 text-2xl font-semibold">{project.title}</h3>
         <p className="mb-4">{project.description}</p>
@@ -32,4 +40,4 @@ function ProjectCard({ project }: any) {
   );
 }
 
-export { DataCard, ProjectCard };
+export { Card, ProjectCard };

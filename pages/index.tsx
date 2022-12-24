@@ -60,7 +60,7 @@ function HomePage() {
             </p>
           </div>
           <div className="max-w-4xl mt-10">
-            <div className="grid gap-5 md:gap-y-5 sm:grid-cols-2">
+            <div className="grid gap-4 md:gap-y-5 sm:grid-cols-2">
               <ProjectCard
                 project={{
                   title: "Portfolio",
@@ -105,7 +105,7 @@ function HomePage() {
                 project={{
                   title: "Tools",
                   description:
-                    "Quirky, and useful tools I have found for various from security to downloading mangas. Hosted on GitHub.",
+                    "Quirky, and useful tools I have found for various from security to downloading mangas.",
                   url: "https://a7.wtf/tools",
                 }}
               />
