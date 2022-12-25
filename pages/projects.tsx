@@ -23,13 +23,25 @@ function Projects() {
               <span>Projects</span>
             </b>
             <span className="ml-2 text-xs">
-              <a
-                className="text-zinc-300"
-                href="https://github.com/xxiz?tab=repositories"
+              Powered by {" "}<a
+                className="text-[#b8dbe4]"
+                href="https://pocketbase.io/"
               >
-                View All
+                PocketBase
               </a>
             </span>
+            <div className="flex float-none mt-3 -mb-2 md:my-0 i md:float-right">
+              <Link
+                href="https://github.com/xxiz?tab=repositories"
+                className="flex items-center justify-center w-full h-full px-3 py-2 text-sm font-medium text-center rounded-lg shadow-md text-zinc-800 bg-blue-300/80 hover:bg-blue-300/90"
+              >
+                <Icon
+                  icon="line-md:external-link"
+                  className="inline w-5 h-5 mr-2"
+                />
+                <span>View All</span>
+              </Link>
+            </div>
           </h2>
           
           <div className="p-2 my-5 text-center rounded-lg shadow-md text-zinc-800 bg-yellow-300/80">

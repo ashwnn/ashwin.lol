@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import styles from "../../styles/md.module.css";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 
 function Blog({ post }: any) {
   useEffect(() => {
@@ -28,9 +29,19 @@ function Blog({ post }: any) {
           </Link>
           <div>
             <div
-              className="mx-auto bg-cover bg-center rounded-3xl shadow-md h-[200px] md:h-[350px] w-full my-4"
-              style={{ backgroundImage: `url(${post.meta.cover_image})` }}
+              className="relative mx-auto bg-cover bg-center shadow-md h-[200px] md:h-[350px] w-full my-4"
             >
+              <Image
+                alt={post.meta.title}
+                src={post.meta.cover_image}
+                quality={100}
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: "cover",
+                }}
+                className="rounded-3xl"
+              />
             </div>
             <div className="flex flex-wrap mt-4 mb-2 gap-x-4">
               {post.meta.tags.map((tag: any, index: number) => (
@@ -49,8 +60,13 @@ function Blog({ post }: any) {
             </h1>
             <div className="flex items-center mb-5 space-x-2">
               <span>
-              <Icon icon="ic:outline-date-range" width="20" className="inline-block mb-1.5 mr-1" />
-              {post.meta.date}</span>
+                <Icon
+                  icon="ic:outline-date-range"
+                  width="20"
+                  className="inline-block mb-1.5 mr-1"
+                />
+                {post.meta.date}
+              </span>
             </div>
             <hr className="my-5" />
           </div>

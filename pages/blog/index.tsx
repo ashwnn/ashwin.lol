@@ -52,11 +52,11 @@ export async function getStaticProps() {
       "utf-8"
     );
 
-    const { data: metadata, content } = matter(markdownWithMeta);
+    const { data: meta, content } = matter(markdownWithMeta);
 
     return {
       slug,
-      metadata,
+      meta,
       content,
     };
   });

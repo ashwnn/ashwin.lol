@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 
 function Card({ title, data }: any) {
   return (
@@ -46,7 +47,7 @@ function ProjectCard({ project }: any) {
         <h3 className="mb-2 text-2xl font-semibold">{project.title}</h3>
         <p className="md:mb-4">{project.description}</p>
         <div className="flex flex-wrap items-center mb-4">
-          {project.tags.split(',').map((tag: string, index: number) => (
+          {project.tags.split(",").map((tag: string, index: number) => (
             <span
               key={index}
               className="px-3 py-1 mt-3 mr-2 rounded-lg lg:mt-0 bg-zinc-700/50"
@@ -124,31 +125,45 @@ function BlogCard({ post }: any) {
       className="flex flex-col border rounded-xl ease-in-out duration-150 border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5"
     >
       <div
-        className="h-48 bg-center bg-cover rounded-xl"
-        style={{ backgroundImage: `url(${post.metadata.cover_image})` }}
-      ></div>
+        className="relative h-48 bg-center bg-cover rounded-xl"
+        // style={{ backgroundImage: `url(${post.meta.cover_image})` }}
+      >
+        <Image
+          alt={post.meta.title}
+          src={post.meta.cover_image}
+          quality={100}
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: "cover",
+          }}
+        />
+      </div>
       <div className="flex-grow p-6">
         <h3 className="mb-2 text-2xl font-semibold leading-tight">
-          {post.metadata.title}
+          {post.meta.title}
         </h3>
-        <p className="mb-2 text-gray-600">{post.metadata.description}</p>
+        <p className="mb-2 text-gray-600">{post.meta.description}</p>
         <div className="flex items-center mb-4">
           <p className="text-sm font-medium text-gray-600">
-            {post.metadata.author && post.metadata.author}
-            {post.metadata.date && ` - ${post.metadata.date}`}
+            {post.meta.author && post.meta.author}
+            {post.meta.date && ` - ${post.meta.date}`}
           </p>
         </div>
         <div className="flex flex-wrap items-center">
-          {post.metadata.tags && post.metadata.tags.map((tag: string, index: number) => (
-            <span key={index} className="px-2 py-1 mr-2 rounded-lg bg-zinc-700">
-              {tag}
-            </span>
-          ))}
+          {post.meta.tags &&
+            post.meta.tags.map((tag: string, index: number) => (
+              <span
+                key={index}
+                className="px-2 py-1 mr-2 rounded-lg bg-zinc-700"
+              >
+                {tag}
+              </span>
+            ))}
         </div>
       </div>
     </a>
   );
 }
-
 
 export { Card, DisplayCard, ProjectCard, BlogCard };
