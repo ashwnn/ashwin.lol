@@ -7,7 +7,7 @@ function Layout({ children }: any) {
       <title>Ashwin — Student/Developer</title>
       <link rel="icon" type="image/x-icon" href="https://safe.1m.cx/Z6G18xQ7.png" />
     </Head>
-    <div className="flex flex-col min-h-screen antialiased dark:bg-zinc-900 dark:text-zinc-400">
+    <div className="flex flex-col min-h-screen antialiased bg-zinc-900 text-zinc-400 font-Inter">
       {children}
       <footer className="px-6 py-4 pt-0 mt-0 text-xs text-center rounded-b-lg">
         <div className="mx-auto mt-10">

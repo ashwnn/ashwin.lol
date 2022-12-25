@@ -1,38 +1,41 @@
 import Layout from "../components/Layout";
 import Container from "../components/Container";
 import fetcher from "../lib/fetcher";
-import useSWR from 'swr';
+import useSWRImmutable from "swr/immutable";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 
 function Tools() {
-  const { data: bookmarks } = useSWR<any>("/api/bookmarks", fetcher);
+  const { data: bookmarks } = useSWRImmutable<any>("/api/bookmarks", fetcher);
 
   return (
     <Layout>
       <Container>
-        <div className="max-w-screen-xl px-6 mx-auto">
+        <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="/" className="pb-10">
-            <Icon className="inline-block w-5 h-5 mb-5 align-text-top" icon="charm:arrow-left" />
+            <Icon
+              className="inline-block w-5 h-5 mb-5 align-text-top"
+              icon="charm:arrow-left"
+            />
           </Link>
           <h2 className="mb-5 text-2xl leading-snug shine">
             <b className="font-medium">
-             <span>Tools</span>
+              <span>Tools</span>
             </b>
-            <span className="ml-2 text-xs ">
+            <span className="ml-2 text-xs">
               powered by{" "}
-              <a className="text-blue-500" href="https://raindrop.io/">
+              <a className="text-blue-500" href="https://raindrop.io/"  target="_blank" rel="noreferrer">
                 Raindrop
               </a>
             </span>
           </h2>
-          <div className="mt-6 divide-y divide-zinc-100 dark:divide-zinc-800">
+          <div className="mt-6 divide-y divide-zinc-800">
             {bookmarks?.data.map((bookmark: any) => (
               <article key={bookmark._id} className="py-4">
                 <h3 className="font-medium shine">
                   <a
                     href={bookmark.link}
-                    className=""
+                    className="text-zinc-200"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
@@ -55,9 +58,14 @@ function Tools() {
             ))}
             {!bookmarks && (
               <div className="py-4">
-                <h3 className="font-medium shine"><Icon icon="line-md:loading-loop" className="inline w-8 h-8" /></h3>
-                </div>
-                )}
+                <h3 className="font-medium shine">
+                  <Icon
+                    icon="line-md:loading-loop"
+                    className="inline w-8 h-8"
+                  />
+                </h3>
+              </div>
+            )}
           </div>
         </div>
       </Container>

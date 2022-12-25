@@ -1,6 +1,6 @@
 function Container({ children }: any) {
   return (
-      <div className="flex-grow mt-20">{children}</div>
+      <div className="flex-grow font-Inter">{children}</div>
   );
 }
 

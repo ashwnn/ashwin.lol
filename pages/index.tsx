@@ -1,13 +1,13 @@
 import Layout from "../components/Layout";
 import Container from "../components/Container";
 import { Icon } from "@iconify/react";
-import { ProjectCard } from "../components/Card";
+import { DisplayCard } from "../components/Card";
 
 function HomePage() {
   return (
     <Layout>
       <Container>
-        <div className="max-w-screen-xl px-6 mx-auto">
+        <div className="max-w-screen-xl px-6 mx-auto mt-20">
           <h2 className="text-2xl leading-snug shine">
             <b className="font-semibold">
               <span>Hello, I&apos;m Ashwin.</span>
@@ -61,48 +61,34 @@ function HomePage() {
           </div>
           <div className="max-w-4xl mt-10">
             <div className="grid gap-4 md:gap-y-5 sm:grid-cols-2">
-              <ProjectCard
-                project={{
-                  title: "Portfolio",
-                  description:
-                    "A website where you can learn basically everything about myself, including my projects.",
-                  url: "https://ashwin.lol",
-                }}
-              />
-              <ProjectCard
-                project={{
-                  title: "Blog",
-                  description:
-                    "I write about anything and everything I find interesting, want to share or just learnt!",
-                  url: "https://ashwin.lol/blog",
-                }}
-              />
-              <ProjectCard
-                project={{
+              <DisplayCard
+                display={{
                   title: "Projects",
                   description:
-                    "A collection of all my open-source projects, and code I've written. Hosted on GitHub.",
-                  url: "https://github.com/xxiz?tab=repositories",
+                    "A collection of curated projects I have worked or working on currently.",
+                  url: "/projects",
+                  local: true,
                 }}
               />
-              <ProjectCard
-                project={{
+              <DisplayCard
+                display={{
                   title: "Photos",
                   description:
                     "As someone who enjoys photography, a collection of some amateur photos. Hosted on Unsplash.",
                   url: "https://unsplash.com/@axole",
                 }}
               />
-              <ProjectCard
-                project={{
+              <DisplayCard
+                display={{
                   title: "Snippets",
                   description:
                     "Completley random snippets of useful, and weird code I have found over the years. Hosted on GitHub.",
-                  url: "https://gist.github.com/xxiz",
+                  url: "/snippets",
+                  local: true,
                 }}
               />
-              <ProjectCard
-                project={{
+              <DisplayCard
+                display={{
                   title: "Tools",
                   description:
                     "Quirky, and useful tools I have found for various from security to downloading mangas.",
