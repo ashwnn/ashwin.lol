@@ -72,10 +72,11 @@ function HomePage() {
               />
               <DisplayCard
                 display={{
-                  title: "Photos",
+                  title: "Blog",
                   description:
-                    "As someone who enjoys photography, a collection of some amateur photos. Hosted on Unsplash.",
-                  url: "https://unsplash.com/@axole",
+                    "A collection of blog posts I have written on various topics.",
+                  url: "/blog",
+                  local: true,
                 }}
               />
               <DisplayCard

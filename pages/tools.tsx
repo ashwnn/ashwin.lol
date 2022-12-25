@@ -44,8 +44,8 @@ function Tools() {
                 </h3>
                 <div className="flex items-center mt-1 space-x-2">
                   <span>{bookmark.domain}</span>
-                  <span>•</span>
-                  <span className="text-sm">
+                  <span className="hidden md:block">•</span>
+                  <span className="hidden text-sm md:block">
                     {bookmark.tags.map((tag: any, index: number) => (
                       <span key={index}>
                         {tag}

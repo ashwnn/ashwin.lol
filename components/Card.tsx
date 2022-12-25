@@ -120,8 +120,8 @@ function BlogCard({ post }: any) {
     <a
       target="_self"
       rel="noopener noreferrer nofollow"
-      href="#" // {`/blog/${post.slug}`}
-      className="flex flex-col max-w-sm border rounded-xl border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5"
+      href={`/blog/${post.slug}`}
+      className="flex flex-col border rounded-xl ease-in-out duration-150 border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5"
     >
       <div
         className="h-48 bg-center bg-cover rounded-xl"
@@ -133,20 +133,13 @@ function BlogCard({ post }: any) {
         </h3>
         <p className="mb-2 text-gray-600">{post.metadata.description}</p>
         <div className="flex items-center mb-4">
-          {post.author && (
-            <img
-              src={post.metadata.avatarUrl}
-              alt={post.metadata.name}
-              className="w-12 h-12 mr-2 rounded-full"
-            />
-          )}
           <p className="text-sm font-medium text-gray-600">
             {post.metadata.author && post.metadata.author}
             {post.metadata.date && ` - ${post.metadata.date}`}
           </p>
         </div>
         <div className="flex flex-wrap items-center">
-          {post.metadata.tags.map((tag: string, index: number) => (
+          {post.metadata.tags && post.metadata.tags.map((tag: string, index: number) => (
             <span key={index} className="px-2 py-1 mr-2 rounded-lg bg-zinc-700">
               {tag}
             </span>
