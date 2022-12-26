@@ -52,6 +52,16 @@ function Instances() {
                 </div>
               </article>
             ))}
+            {!instances && (
+              <div className="py-4">
+                <h3 className="font-medium shine">
+                  <Icon
+                    icon="line-md:loading-loop"
+                    className="inline w-8 h-8"
+                  />
+                </h3>
+              </div>
+            )}
           </div>
         </div>
       </Container>
