@@ -149,6 +149,15 @@ function HomePage() {
                 }}
               />
               <DisplayCard
+              display={{
+                title: "Instances",
+                description:
+                  "F**king awesome open-source apps that I have deployed on my own server.",
+                url: "/instances",
+                local: true,
+              }}
+            />
+              <DisplayCard
                 display={{
                   title: "Roadmap",
                   description:
