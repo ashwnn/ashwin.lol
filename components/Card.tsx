@@ -62,7 +62,7 @@ function ProjectCard({ project }: any) {
               href={project.github_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`umami--click--${project.title} mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
+              className={`umami--click--${project.title.replace(' ', '-')}-github mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
             >
               <Icon
                 icon="charm:github"
@@ -78,7 +78,7 @@ function ProjectCard({ project }: any) {
               href={project.demo_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`umami--click--${project.title} mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
+              className={`umami--click--${project.title.replace(' ', '-')}-demo mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
             >
               <Icon
                 icon="charm:globe"
@@ -94,7 +94,7 @@ function ProjectCard({ project }: any) {
               href={project.demo_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`umami--click--${project.title} mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
+              className={`umami--click--${project.title.replace(' ', '-')}-case-study mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
             >
               <Icon
                 icon="fluent-mdl2:documentation"

@@ -2,7 +2,7 @@
 title: 'Finding Niche & Untapped Markets'
 date: 'December 25th, 2022'
 excerpt: 'Starting a buisness can be hard, look for niche markets!'
-tags: ["windows", "tutorial", "installation"]
+tags: ["buisness", "analysis", "tips"]
 cover_image: '/static/images/posts/identifying-niche-markets.jpg'
 icon: 'logos:markdown'
 author: 'Ashwin'
