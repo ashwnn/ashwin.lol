@@ -86,7 +86,7 @@ function HomePage() {
             </a>
           </div>
           <div>
-            <p className="max-w-3xl mt-4 text-lg text-gray-400">
+            <p className="max-w-3xl mt-4 text-lg leading-snug text-gray-300">
               Currently a second year computer science student with a strong
               understanding of computer science and development. In my free
               time, I enjoy exploring the field of machine learning and delving
@@ -141,28 +141,11 @@ function HomePage() {
               />
               <DisplayCard
                 display={{
-                  title: "Tools",
+                  title: "About",
                   description:
-                    "Quirky, and useful tools I have found for various from security to downloading mangas.",
-                  url: "/tools",
+                    "A collection of information about me, and my life alongside links to explore this website.",
+                  url: "/about",
                   local: true,
-                }}
-              />
-              <DisplayCard
-              display={{
-                title: "Instances",
-                description:
-                  "F**king awesome open-source apps that I have deployed on my own server.",
-                url: "/instances",
-                local: true,
-              }}
-            />
-              <DisplayCard
-                display={{
-                  title: "Roadmap",
-                  description:
-                    "A collection of resources to help you learn, and grow as a developer.",
-                  url: "https://19x.notion.site/adb0c3c077ee46d7a22fe0cc357132c7?v=8760973cae554b94b4e54e848ca37917",
                 }}
               />
             </div>
