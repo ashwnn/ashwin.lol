@@ -188,7 +188,7 @@ function Uses() {
             </li>
             <li>
               <Link
-                href="javascript:alert('Coming soon!');"
+                href="/uses"
                 className="text-blue-300/80 hover:text-blue-300/90 hover:underline"
               >
                 /uses
@@ -211,26 +211,26 @@ function Uses() {
               >
                 /tools
               </Link>{" "}
-              I use to get things done.
+              I use to get things done
             </li>
             <li>
               <Link
-                href="javascript:alert('Coming soon!');"
+                href="/tor"
                 className="text-blue-300/80 hover:text-blue-300/90 hover:underline"
               >
                 /tor
               </Link>{" "}
-              websites that focus on providing information.
+              websites that I use for the utmost privacy
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="javascript:alert('Coming soon!');"
                 className="text-blue-300/80 hover:text-blue-300/90 hover:underline"
               >
                 /software
               </Link>{" "}
-              that I believe in and cannot live without.
-            </li>
+              that I believe in and cannot live without
+            </li> */}
           </ul>
           {/* <div className="my-7">
             <p>
