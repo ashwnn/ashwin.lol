@@ -168,6 +168,18 @@ function Uses() {
                 height={110}
               />
             </a>
+            <a
+              href="https://www.youtube.com/@_JohnHammond"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Image
+                src="/static/images/about/john-hammond.jpg"
+                alt="John Hammond"
+                width={110}
+                height={110}
+              />
+            </a>
           </div>
           <div>
             <h2 className="mt-3 mb-1 text-xl leading-snug md:mt-6 shine">
