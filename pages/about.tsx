@@ -225,7 +225,7 @@ function Uses() {
               </Link>{" "}
               I use to get things done
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="/tor"
                 className="text-blue-300/80 hover:text-blue-300/90 hover:underline"
@@ -233,7 +233,7 @@ function Uses() {
                 /tor
               </Link>{" "}
               websites that I use for the utmost privacy
-            </li>
+            </li> */}
             {/* <li>
               <Link
                 href="javascript:alert('Coming soon!');"
