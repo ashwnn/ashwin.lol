@@ -22,7 +22,7 @@ function Blog({ post }: any) {
   }, []);
 
   return (
-    <Layout>
+    <Layout title={post.meta.title}>
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="/blog" className="pb-10">

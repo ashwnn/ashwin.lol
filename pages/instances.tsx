@@ -9,7 +9,7 @@ function Instances() {
   const { data: instances } = useSWRImmutable<any>("/api/instances", fetcher);
 
   return (
-    <Layout>
+    <Layout title="Self-Hosting > Paid">
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="javascript:window.history.back();" className="pb-10">

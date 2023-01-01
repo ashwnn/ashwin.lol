@@ -7,7 +7,7 @@ import Bounce from "../components/Bounce";
 
 function Uses() {
   return (
-    <Layout>
+    <Layout title="What I use">
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="javascript:window.history.back();" className="pb-10">

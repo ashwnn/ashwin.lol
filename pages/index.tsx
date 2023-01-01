@@ -38,7 +38,7 @@ function HomePage() {
   ];
 
   return (
-    <Layout>
+    <Layout title="Student/Developer">
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-20">
           <h2 className="text-2xl leading-snug shine">
@@ -116,6 +116,12 @@ function HomePage() {
               <span>
                 {" "}
                 This week I have been mostly working with{" "}
+                {!insight && (
+                  <>
+                    <span className="skeleton">█████</span> and{" "}
+                    <span className="skeleton">█████</span>
+                  </>
+                )}
                 {insight &&
                   insight.languages
                     .slice(0, 2)
@@ -132,8 +138,7 @@ function HomePage() {
                           {lang.name}
                         </a>
                       </>
-                    ))
-                }{" "}
+                    ))}{" "}
                 with{" "}
                 <a
                   className="underline decoration-dotted"
@@ -141,6 +146,7 @@ function HomePage() {
                   target="_blank"
                   rel="noreferrer"
                 >
+                  {!insight && <span className="skeleton">██</span>}
                   {insight && insight.commits}
                 </a>{" "}
                 commits and{" "}
@@ -150,11 +156,12 @@ function HomePage() {
                   target="_blank"
                   rel="noreferrer"
                 >
+                  {!insight && <span className="skeleton">██████</span>}
                   {insight && insight.total_time_coding}
                 </a>{" "}
                 spent coding.
                 {/* spent coding mainly on{" "}
-                  {insight!.projects
+                  {insight!.projectsp
                     .slice(0, 2)
                     .map((project: any, index: number) => (
                       <>
@@ -171,9 +178,8 @@ function HomePage() {
                 <br />
                 <br />
                 {track && track.isPlaying && (
-                  <span
-                  >
-                    Currently listening to{" "}
+                  <span>
+                    Listening to {" "}
                     <a
                       href={track.songUrl}
                       className={`underline decoration-dotted ${
@@ -184,7 +190,17 @@ function HomePage() {
                     >
                       {track!.title}
                     </a>{" "}
-                    by {track!.artist}.
+                    by{" "}
+                    <a
+                      href={`https://open.spotify.com/search/${encodeURIComponent(
+                        track!.artist
+                      )}`}
+                      className={`underline decoration-dotted`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {track!.artist}
+                    </a>{" "}
                   </span>
                 )}
               </span>

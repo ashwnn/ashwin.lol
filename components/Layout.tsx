@@ -1,10 +1,10 @@
 import Head from "next/head";
 
-function Layout({ children }: any) {
+function Layout({ children, title }: any) {
   return (
     <>
     <Head>
-      <title>Ashwin — Student/Developer</title>
+      <title>Ashwin — {title}</title>
       <link rel="icon" type="image/x-icon" href="https://safe.1m.cx/Z6G18xQ7.png" />
     </Head>
     <div className="flex flex-col min-h-screen antialiased bg-zinc-900 text-zinc-400">

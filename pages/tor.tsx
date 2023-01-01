@@ -6,7 +6,7 @@ import Image from "next/image";
 
 function PC() {
   return (
-    <Layout>
+    <Layout title="Tor Websites">
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="javascript:window.history.back();" className="pb-10">

@@ -9,7 +9,7 @@ function Tools() {
   const { data: bookmarks } = useSWRImmutable<any>("/api/bookmarks", fetcher);
 
   return (
-    <Layout>
+    <Layout title="Tools & Services">
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="javascript:window.history.back();" className="pb-10">

@@ -9,7 +9,7 @@ import { ProjectCard } from "../components/Card";
 function Projects() {
   const { data: projects } = useSWRImmutable<any>("/api/projects", fetcher);
   return (
-    <Layout>
+    <Layout title="My Work">
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="/" className="pb-10">

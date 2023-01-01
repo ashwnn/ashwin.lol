@@ -1,0 +1,46 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse
+) {
+    const data = await fetch(`https://api.unsplash.com/users/axole/photos?client_id=${process.env.UNSPLASH_CLIENT_ID}`)
+        .then((res) => res.json())
+        .then((data) => data);
+
+    const photos = data.map((photo : any) => {
+        return {
+            id: photo.id,
+            alt_description: photo.alt_description,
+            unsplash: photo.links.html,
+            thumbnail: {
+                url: photo.urls.small,
+                width: parseInt(photo.urls.small.match(/w=(\d+)/)[0].replace("w=", "")),
+                height: Math.round(parseInt(photo.urls.small.match(/w=(\d+)/)[0].replace("w=", "")) / photo.width * photo.height),
+                quality: parseInt(photo.urls.small.match(/q=(\d+)/)[0].replace("q=", ""))
+            },
+            image: {
+                url: photo.urls.full,
+                width: photo.width,
+                height: photo.height,
+            },
+            regular: {
+                url: photo.urls.regular,
+                width: parseInt(photo.urls.regular.match(/w=(\d+)/)[0].replace("w=", "")),
+                height: Math.round(parseInt(photo.urls.regular.match(/w=(\d+)/)[0].replace("w=", "")) / photo.width * photo.height),
+                quality: parseInt(photo.urls.regular.match(/q=(\d+)/)[0].replace("q=", ""))
+            }
+        };
+    });
+
+    // sort by aspect ratio
+    photos.sort((a: any, b: any) => {
+        return a.regular.width / a.regular.height - b.regular.width / b.regular.height;
+    });
+
+
+    return res.status(200).json({
+        success: true,
+        data: photos,
+    });
+}

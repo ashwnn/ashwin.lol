@@ -8,7 +8,7 @@ import Link from "next/link";
 function Snippets() {
   const { data: snippets } = useSWRImmutable<any>("/api/snippets", fetcher);
   return (
-    <Layout>
+    <Layout title="Random Useful Code">
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="/" className="pb-10">
