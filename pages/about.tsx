@@ -73,18 +73,6 @@ function Uses() {
               />
             </a>
             <a
-              href="https://www.youtube.com/@LinusTechTips"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Image
-                src="/static/images/about/linus-tech-tips.png"
-                alt="Linus Tech Tips"
-                width={110}
-                height={110}
-              />
-            </a>
-            <a
               href="https://www.youtube.com/@TwoMinutePapers"
               target="_blank"
               rel="noreferrer"

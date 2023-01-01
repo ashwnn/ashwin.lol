@@ -140,6 +140,7 @@ function BlogCard({ post }: any) {
           style={{
             objectFit: "cover",
           }}
+          className="rounded-t-xl"
         />
       </div>
       <div className="flex-grow p-6">

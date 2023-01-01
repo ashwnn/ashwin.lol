@@ -9,11 +9,16 @@ import styles from "../../styles/md.module.css";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from "rehype-raw"
 
 function Blog({ post }: any) {
   useEffect(() => {
     const imgs = document.querySelectorAll("img");
-    imgs.forEach((img) => (img.width = 300));
+    imgs.forEach((img) => {
+      img.classList.add("w-full");
+      img.classList.add("md:w-[300px]");
+    });
   }, []);
 
   return (
@@ -70,7 +75,7 @@ function Blog({ post }: any) {
             </div>
             <hr className="my-5" />
           </div>
-          <ReactMarkdown className={styles.markdown_body}>
+          <ReactMarkdown className={styles.markdown_body} remarkPlugins={[remarkGfm]} >
             {post.content}
           </ReactMarkdown>
         </div>

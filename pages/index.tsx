@@ -113,10 +113,11 @@ function HomePage() {
               understanding of computer science and development. In my free
               time, I enjoy exploring the field of machine learning and delving
               into security topics.
-              {insight && (
-                <span>
-                  {" "}This week I have been mostly working with{" "}
-                  {insight!.languages
+              <span>
+                {" "}
+                This week I have been mostly working with{" "}
+                {insight &&
+                  insight.languages
                     .slice(0, 2)
                     .map((lang: any, index: number) => (
                       <>
@@ -132,16 +133,26 @@ function HomePage() {
                         </a>
                       </>
                     ))}{" "}
-                  with{" "}
-                  <a className="underline decoration-dotted" href="https://github.com/xxiz/" target="_blank" rel="noreferrer">
-                    {insight!.commits}
-                  </a>{" "}
-                  commits and{" "}
-                  <a className="underline decoration-dotted" href="https://wakatime.com/@why" target="_blank" rel="noreferrer">
-                    {insight!.total_time_coding}
-                  </a>{" "}
-                  spent coding.
-                  {/* spent coding mainly on{" "}
+                with{" "}
+                <a
+                  className="underline decoration-dotted"
+                  href="https://github.com/xxiz/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {insight && insight.commits}
+                </a>{" "}
+                commits and{" "}
+                <a
+                  className="underline decoration-dotted"
+                  href="https://wakatime.com/@why"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {insight && insight.total_time_coding}
+                </a>{" "}
+                spent coding.
+                {/* spent coding mainly on{" "}
                   {insight!.projects
                     .slice(0, 2)
                     .map((project: any, index: number) => (
@@ -156,15 +167,26 @@ function HomePage() {
                       </>
                     ))}
                   .{" "} */}
-                  <br />
-                  <br />
-                  {track && track.isPlaying && (
-                    <span>
-                      Currently listening to <a href={track.songUrl} className={`underline decoration-dotted ${track.isLocal ?? "text-green-500/90"}`} target="_blank" rel="noreferrer">{track!.title}</a> by {track!.artist}.
-                    </span>
-                  )}
-                </span>
-              )}
+                <br />
+                <br />
+                {track && track.isPlaying && (
+                  <span
+                  >
+                    Currently listening to{" "}
+                    <a
+                      href={track.songUrl}
+                      className={`underline decoration-dotted ${
+                        track.isLocal ?? "text-green-500/90"
+                      }`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {track!.title}
+                    </a>{" "}
+                    by {track!.artist}.
+                  </span>
+                )}
+              </span>
             </p>
 
             {/* <div className="container max-w-4xl my-12">
