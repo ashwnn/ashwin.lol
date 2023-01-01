@@ -132,7 +132,8 @@ function HomePage() {
                           {lang.name}
                         </a>
                       </>
-                    ))}{" "}
+                    ))
+                }{" "}
                 with{" "}
                 <a
                   className="underline decoration-dotted"

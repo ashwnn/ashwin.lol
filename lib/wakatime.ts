@@ -7,8 +7,8 @@ const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
 const ALL_TIME_ENDPOINT = `https://wakatime.com/api/v1/users/current/all_time_since_today`
 const WEEK_STATS_ENDPOINT = `https://wakatime.com/api/v1/users/current/stats`
 const TOKEN_ENDPOINT = `https://wakatime.com/oauth/token`
-const INSIGHT_LANGUAGE_ENDPOINT = `https://wakatime.com/api/v1/users/current/insights/languages/last_7_days`
-const INSIGHT_PROJECT_ENDPOINT = `https://wakatime.com/api/v1/users/current/insights/projects/last_7_days`
+const INSIGHT_LANGUAGE_ENDPOINT = `https://wakatime.com/api/v1/users/current/insights/languages/`
+const INSIGHT_PROJECT_ENDPOINT = `https://wakatime.com/api/v1/users/current/insights/projects/`
 
 
 async function getAccessToken() {
@@ -55,18 +55,18 @@ async function getWeekly() {
     })
 }
 
-async function getLanguageInsight() {
+async function getLanguageInsight(length:  any) {
     const { access_token } = await getAccessToken()
-    return fetch(INSIGHT_LANGUAGE_ENDPOINT, {
+    return fetch(INSIGHT_LANGUAGE_ENDPOINT + length, {
         headers: {
             Authorization: `Bearer ${access_token}`,
         },
     })
 }
 
-async function getProjectInsight() {
+async function getProjectInsight(length : any) {
     const { access_token } = await getAccessToken()
-    return fetch(INSIGHT_PROJECT_ENDPOINT, {
+    return fetch(INSIGHT_PROJECT_ENDPOINT + length, {
         headers: {
             Authorization: `Bearer ${access_token}`,
         },

@@ -6,7 +6,7 @@ async function getGQLData(query: string, variables: any) {
         method: 'POST',
         body: JSON.stringify({
             query,
-            variables,
+            variables
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -33,4 +33,22 @@ async function getCommits() {
     return getGQLData(query, variables)
 }
 
-export { getCommits }
+async function getUserData() {
+    const query = `query {
+      viewer {
+        starredRepositories(last: 5) {
+          edges {
+            node {
+              name
+              url
+            }
+          }
+        }
+      }
+      }
+      `
+  
+      return getGQLData(query, null);
+}
+
+export { getCommits, getUserData }

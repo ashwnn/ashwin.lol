@@ -1,12 +1,10 @@
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 
-function Card({ title, data }: any) {
+function Stats({ title, data, href }: any) {
   return (
     <div className="p-4 border rounded-lg border-zinc-700">
-      <a>
         <span className="opacity-60">{title}</span>
-      </a>
       <div className="mt-1 text-3xl font-semibold shine spacing-sm opacity-90">
         {data}
       </div>
@@ -62,7 +60,10 @@ function ProjectCard({ project }: any) {
               href={project.github_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`umami--click--${project.title.replace(' ', '-')}-github mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
+              className={`umami--click--${project.title.replace(
+                " ",
+                "-"
+              )}-github mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
             >
               <Icon
                 icon="charm:github"
@@ -78,7 +79,10 @@ function ProjectCard({ project }: any) {
               href={project.demo_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`umami--click--${project.title.replace(' ', '-')}-demo mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
+              className={`umami--click--${project.title.replace(
+                " ",
+                "-"
+              )}-demo mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
             >
               <Icon
                 icon="charm:globe"
@@ -94,7 +98,10 @@ function ProjectCard({ project }: any) {
               href={project.demo_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`umami--click--${project.title.replace(' ', '-')}-case-study mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
+              className={`umami--click--${project.title.replace(
+                " ",
+                "-"
+              )}-case-study mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
             >
               <Icon
                 icon="fluent-mdl2:documentation"
@@ -105,9 +112,11 @@ function ProjectCard({ project }: any) {
               <span className="hidden md:inline-block">Case Study</span>
             </a>
           )}
-          {!project.github_url && !project.demo_url && !project.case_study_url && (
-            <span className="text-[#bfbfbf] text-xl">Coming Soon...</span>
-          )}
+          {!project.github_url &&
+            !project.demo_url &&
+            !project.case_study_url && (
+              <span className="text-[#bfbfbf] text-xl">Coming Soon...</span>
+            )}
         </div>
       </div>
       <div className="absolute bottom-0 right-0 p-4">
@@ -170,4 +179,4 @@ function BlogCard({ post }: any) {
   );
 }
 
-export { Card, DisplayCard, ProjectCard, BlogCard };
+export { Stats, DisplayCard, ProjectCard, BlogCard };
