@@ -20,7 +20,7 @@ function Layout({ children, title }: any) {
                 CC BY-NC-SA 4.0
             </a>
           </p>
-          <p>&copy; Ashwin Charathsandran <>{new Date().getFullYear()}</></p>
+          <p>&copy; Ashwin Charathsandran 2022 - <>{new Date().getFullYear()}</></p>
         </div>
       </footer>
     </div>
