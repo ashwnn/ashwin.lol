@@ -105,6 +105,9 @@ function ProjectCard({ project }: any) {
               <span className="hidden md:inline-block">Case Study</span>
             </a>
           )}
+          {!project.github_url && !project.demo_url && !project.case_study_url && (
+            <span className="text-[#bfbfbf] text-xl">Coming Soon...</span>
+          )}
         </div>
       </div>
       <div className="absolute bottom-0 right-0 p-4">
