@@ -32,7 +32,6 @@ async function getAccessToken() {
     const match = regex.exec(await response.text())!;
 
     const accessToken = match[1];
-    console.log(accessToken);
     return { access_token: accessToken };
 
 }
