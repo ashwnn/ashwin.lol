@@ -4,7 +4,6 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import fetcher from "../lib/fetcher";
 import useSWRImmutable from "swr/immutable";
-import { Card } from "../components/Card";
 
 function Instances() {
   const { data: instances } = useSWRImmutable<any>("/api/instances", fetcher);
