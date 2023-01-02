@@ -96,7 +96,7 @@ function HomePage() {
                 className="w-7 h-7 text-[#bfbfbf] hover:text-[#fff]"
               />
             </a>
-            <a
+            {/* <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer nofollow"
@@ -105,7 +105,7 @@ function HomePage() {
                 icon="charm:file"
                 className="w-7 h-7 text-[#bfbfbf] hover:text-[#fff]"
               />
-            </a>
+            </a> */}
           </div>
           <div>
             <p className="max-w-3xl mt-4 text-lg leading-snug text-gray-300">

@@ -39,7 +39,7 @@ function Uses() {
           </h3>
           <ul>
             <li>
-              <b className="font-semibold">Computer:</b> <Bounce text="Custom Built PC (Windows 11 & Arcolinux)" href="/documents/portello.pdf" />
+              <b className="font-semibold">Computer:</b> <Bounce text="Custom Built PC (Windows 11 & Arcolinux)" href="/static/documents/portello.pdf" />
             </li>
             <li>
               <b className="font-semibold">Monitor(s):</b> <Bounce text="MSI Optix G27C4 27&#34;" href="https://www.msi.com/Monitor/Optix-G27C4" />,  <Bounce href="https://www.lg.com/us/monitors/lg-24MK430H-B-led-monitor" text="LG MK430H-B 24&#34;" />
