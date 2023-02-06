@@ -1,4 +1,3 @@
-import { Stats } from "fs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { getLanguageInsight, getWeekly } from "../../lib/wakatime";
@@ -17,7 +16,7 @@ export default async function handler(
     languages = await getLanguageInsight("last_7_days").then((res) => res.json());
   }
 
-  const racknerd = await fetch("https://stats.a7.wtf/").then((res) => res.json());
+  // const racknerd = await fetch("https://stats.a7.wtf/").then((res) => res.json());
   const weekly = await getWeekly().then((res) => res.json());
 
   const commits = await getCommits();
@@ -37,7 +36,7 @@ export default async function handler(
     github: {
       starred: starredRepos,
     },
-    racknerd: racknerd,
+    // racknerd: racknerd,
     languages: languages.data.languages,
   });
 }

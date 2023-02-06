@@ -28,9 +28,9 @@ async function getAccessToken() {
 
     })
 
-    const regex = /access_token=([^&]+)/;
-    const match = regex.exec(await response.text())!;
-
+    const regex = /access_token=([^&]+)&/;
+    let d = await response.text();
+    const match = d.match(regex)!;
     const accessToken = match[1];
     return { access_token: accessToken };
 
