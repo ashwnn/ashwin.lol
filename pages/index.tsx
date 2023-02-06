@@ -38,7 +38,7 @@ function HomePage() {
   ];
 
   return (
-    <Layout title="Student/Developer">
+    <Layout>
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-20">
           <h2 className="text-2xl leading-snug shine">
