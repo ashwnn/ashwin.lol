@@ -8,6 +8,11 @@ export default async function handler(
     .then((res) => res.json())
     .then((data) => data);
 
+
+    data.map((item: any) => {
+        delete item.comments_url;
+    });
+
   res.setHeader(
     "Cache-Control",
     "public, s-maxage=300, stale-while-revalidate=150"

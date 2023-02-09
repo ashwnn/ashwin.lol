@@ -5,9 +5,10 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import fetcher from "../lib/fetcher";
 import useSWRImmutable from "swr/immutable";
+import { UnsplashPhoto } from "../types";
 
 function Uses() {
-  const { data: photos } = useSWRImmutable<any>(`/api/photos`, fetcher);
+  const { data: photos } = useSWRImmutable<UnsplashPhoto>(`/api/photos`, fetcher);
   console.log(photos);
 
   const media = [
@@ -173,7 +174,11 @@ function Uses() {
             </b>
           </h2>
           <div className="grid grid-cols-3 md:grid-cols-10 gap-y-1 gap-x-0 md:gap-x-0 md:gap-y-0">
-            {media.map((item, index) => (
+            {media.map((item: {
+              name: string;
+              url: string;
+              src: string;
+            }, index : number) => (
               <a
                 key={index}
                 href={item.url}
@@ -201,7 +206,15 @@ function Uses() {
             </h2>
             {/* show all photos in responsive gallery */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {photos?.data.map((photo: any, index: any) => (
+              {photos?.data.map((photo: {
+                alt_description: string;
+                thumbnail: {
+                  url: string;
+                  width: number;
+                  height: number;
+                };
+                unsplash: string;
+              }, index: any) => (
                 <a
                   key={index}
                   href={photo.unsplash}

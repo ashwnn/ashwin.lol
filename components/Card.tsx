@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 
-function Stats({ title, data, href }: any) {
+function Stats({ title, data, href }: { title: string; data: string; href?: string }) {
   return (
     <div className="p-4 border rounded-lg border-zinc-700">
         <span className="opacity-60">{title}</span>

@@ -4,9 +4,10 @@ import fetcher from "../lib/fetcher";
 import useSWRImmutable from "swr/immutable";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import { BookmarkCollection } from "../types";
 
 function Tools() {
-  const { data: bookmarks } = useSWRImmutable<any>("/api/bookmarks", fetcher);
+  const { data: bookmarks } = useSWRImmutable<BookmarkCollection>("/api/bookmarks", fetcher);
 
   return (
     <Layout title="Tools & Services">

@@ -5,15 +5,16 @@ import useSWRImmutable from "swr/immutable";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { Stats } from "../components/Card";
+import { Insights } from "../types";
 
 function Tools() {
-  const { data: insights } = useSWRImmutable<any>(
+  const { data: insights } = useSWRImmutable<Insights>(
     "/api/insights?span=last_7_days",
     fetcher
   );
 
   return (
-    <Layout>
+    <Layout title="Personal Statistics">
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="javascript:window.history.back();" className="pb-10">
@@ -33,7 +34,9 @@ function Tools() {
                 <span>Most Used Language(s): </span>
                 {insights.languages
                   .slice(0, 5)
-                  .map((lang: any, index: number) => (
+                  .map((lang: {
+                    name: string;
+                  }, index: number) => (
                     <>
                       {index > 0 && <span>, </span>}
                       <a
@@ -50,7 +53,10 @@ function Tools() {
               </p>
               <p className="text-lg text-gray-500 shine">
                 <span>Recently Starred Repos: </span>
-                {insights.github.starred.map((repo: any, index: number) => (
+                {insights.github.starred.map((repo: {
+                  name: string;
+                  url: string;
+                }, index: number) => (
                   <>
                     {index > 0 && <span>, </span>}
                     <a
