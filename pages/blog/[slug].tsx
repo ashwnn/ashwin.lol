@@ -16,15 +16,13 @@ function Blog({ post }: any) {
   useEffect(() => {
     const imgs = document.querySelectorAll("img");
     imgs.forEach((img) => {
-      img.classList.add("w-full");
-      img.classList.add("md:w-[300px]");
     });
   }, []);
 
   return (
     <Layout title={post.meta.title}>
       <Container>
-        <div className="max-w-screen-xl px-6 mx-auto mt-10">
+        <div className="max-w-4xl mx-auto mt-10">
           <Link href="/blog" className="pb-10">
             <Icon
               className="inline-block w-5 h-5 mb-5 align-text-top"

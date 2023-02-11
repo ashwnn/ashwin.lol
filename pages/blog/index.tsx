@@ -9,24 +9,7 @@ import { BlogCard } from "../../components/Card";
 
 function Blog({ posts } : any) {
   return (
-    <Layout title="@keyframes breathing {
-      0% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.5;
-        transform: scale(0.95);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-    
-    .breathing {
-      animation: breathing 5s ease-in-out infinite;
-    }Posts">
+    <Layout title="Posts">
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
           <Link href="/" className="pb-10">
