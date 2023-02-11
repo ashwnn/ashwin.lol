@@ -3,7 +3,7 @@ title: 'Explore I2P: A Tor Alternative'
 date: '2023-01-06T00:00:00.000Z'
 excerpt: 'Alternative to browsing on the Tor network'
 tags: ["i2p", "security", "peer-to-peer"]
-cover_image: '/static/images/posts/getting-started-i2p.png'
+cover_image: '/static/images/posts/getting-started-i2p.jpg'
 icon: 'logos:markdown'
 author: 'Ashwin'
 ---
