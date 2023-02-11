@@ -31,6 +31,15 @@ function Blog({ post }: any) {
     const imgs = document.querySelectorAll("img");
     imgs.forEach((img) => {
     });
+
+    // if a element has a link that is not within the website, open it in a new tab
+    const links = document.querySelectorAll("a");
+    links.forEach((link) => {
+      if (link.host !== window.location.host) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+      }
+    });
   }, []);
 
 
