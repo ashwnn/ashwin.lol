@@ -16,8 +16,9 @@ import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typesc
 import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash'
 import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json'
 import powershell from 'react-syntax-highlighter/dist/cjs/languages/prism/powershell'
-import oneDark from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import rangeParser from 'parse-numeric-range'
+// import oneDark from 'react-syntax-highlighter/dist/cjs/styles/prism'
+// import rangeParser from 'parse-numeric-range'
+import Head from "next/head";
 
 SyntaxHighlighter.registerLanguage('tsx', tsx)
 SyntaxHighlighter.registerLanguage('typescript', typescript)
@@ -77,6 +78,19 @@ function Blog({ post }: any) {
 
   return (
     <Layout title={post.meta.title}>
+      <Head>
+        <meta name="description" content={post.meta.description} />
+        <meta name="keywords" content={post.meta.tags} />
+        <meta name="author" content={post.meta.author} />
+        <meta property="og:title" content={post.meta.title} />
+        <meta property="og:description" content={post.meta.description} />
+        <meta property="og:image" content={post.meta.cover_image} />
+        <meta property="og:url" content={`https://ashwin.lol/blog/${post.meta.slug}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.meta.title} />
+        <meta name="twitter:description" content={post.meta.description} />
+        <meta name="twitter:image" content={post.meta.cover_image} />
+      </Head>
       <Container>
         <div className="max-w-4xl px-6 mx-auto mt-10">
           <Link href="/blog" className="pb-10">
