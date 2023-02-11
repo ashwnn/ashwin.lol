@@ -1,6 +1,6 @@
 ---
 title: 'Practical Applications of Machine Learning'
-date: 'December 31st, 2022'
+date: '2022-12-31T00:00:00.000Z'
 excerpt: 'Image generation for practical purposes.'
 tags: ["stable diffusion", "ai", "tutorial"]
 cover_image: '/static/images/posts/practical-application-ml.webp'

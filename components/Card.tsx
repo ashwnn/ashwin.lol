@@ -160,7 +160,7 @@ function BlogCard({ post }: any) {
         <div className="flex items-center mb-4">
           <p className="text-sm font-medium text-gray-600">
             {post.meta.author && post.meta.author}
-            {post.meta.date && ` - ${post.meta.date}`}
+            {post.meta.date && ` - ${new Date(post.meta.date).toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' })}`}
           </p>
         </div>
         <div className="flex flex-wrap items-center">

@@ -1,6 +1,6 @@
 ---
-title: 'Practicing Good Opsec'
-date: 'December 25th, 2022'
+title: 'Boost Your Privacy: Simple Opsec Tips'
+date: '2022-12-25T00:00:00.000Z'
 excerpt: 'Protecting your privacy is important, here are some tips.'
 tags: ["windows", "tutorial", "installation"]
 cover_image: '/static/images/posts/practicing-good-opsec.jpg'

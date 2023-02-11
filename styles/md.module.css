@@ -111,7 +111,7 @@
   box-sizing: content-box;
   background-color: #18181b;
   border-radius: 6px;
-  box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.5);
   margin-top: 20px;
   margin-bottom: 20px;
   width: 100%;
@@ -400,6 +400,10 @@
 .markdown_body samp {
   font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
   font-size: 12px;
+}
+
+.markdown_body code > span {
+  display: block;
 }
 
 .markdown_body pre {
@@ -791,7 +795,8 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #161b22;
+  background-color: #272c32;
+  border: 1px solid #30363d;
   border-radius: 6px;
 }
 

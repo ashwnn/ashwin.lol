@@ -1,6 +1,6 @@
 ---
-title: 'Getting Started with I2P'
-date: 'January 6th, 2023'
+title: 'Explore I2P: A Tor Alternative'
+date: '2023-01-06T00:00:00.000Z'
 excerpt: 'Alternative to browsing on the Tor network'
 tags: ["i2p", "security", "peer-to-peer"]
 cover_image: '/static/images/posts/getting-started-i2p.png'
@@ -46,7 +46,7 @@ Now that your I2P client is setup and serving you need to configure FireFox so l
 - Open Firefox and go to your settings (`about:prefrences`)
 - Search for `Network Settings` and expand the settings.
 ![FireFox](https://safe.1m.cx/OtlkGV8E.png)
-- Once the modal opens, select `Manual proxy configuration` and enter as the following image shows. For HTTP Proxy and SSL enter `127.0.0.1` and for Port enter `4444`, then make sure you select SOCKS v5 and in the No Proxy for field enter `loaclhost, 127.0.0.1`. Then click OK.
+- Once the modal opens, select `Manual proxy configuration` and enter as the following image shows. For HTTP Proxy and SSL enter `127.0.0.1` and for Port enter `4444`, then make sure you select SOCKS v5 and in the No Proxy for field enter `localhost, 127.0.0.1`. Then click OK.
 ![FireFox](https://safe.1m.cx/IbCoqbGf.png)
 - Once you have done that head over to your FireFox config by going to `about:config` and search for the property `media.peerConnection.ice.proxy_only` and set it to `true`.
 

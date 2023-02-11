@@ -10,7 +10,20 @@ import Link from "next/link";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import remarkGfm from 'remark-gfm'
-import rehypeRaw from "rehype-raw"
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx'
+import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript'
+import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash'
+import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json'
+import powershell from 'react-syntax-highlighter/dist/cjs/languages/prism/powershell'
+import oneDark from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import rangeParser from 'parse-numeric-range'
+
+SyntaxHighlighter.registerLanguage('tsx', tsx)
+SyntaxHighlighter.registerLanguage('typescript', typescript)
+SyntaxHighlighter.registerLanguage('bash', bash)
+SyntaxHighlighter.registerLanguage('json', json)
+SyntaxHighlighter.registerLanguage('powershell', powershell)
 
 function Blog({ post }: any) {
   useEffect(() => {
@@ -19,10 +32,53 @@ function Blog({ post }: any) {
     });
   }, []);
 
+
+  // const mdCode: object = {
+  //   code({ node, inline, className, ...props }: any) {
+
+  //     const match = /language-(\w+)/.exec(className || '')
+  //     const hasMeta = node?.data?.meta
+
+  //     const applyHighlights: object = (applyHighlights: number) => {
+  //       if (hasMeta) {
+  //         const RE = /{([\d,-]+)}/
+  //         const metadata = node.data.meta?.replace(/\s/g, '')
+  //         const strlineNumbers = RE?.test(metadata)
+  //           ? RE?.exec(metadata)![1]
+  //           : '0'
+  //         const highlightLines = rangeParser(strlineNumbers)
+  //         const highlight = highlightLines
+  //         const data: string | null = highlight.includes(applyHighlights)
+  //           ? 'highlight'
+  //           : null
+  //         return { data }
+  //       } else {
+  //         return {}
+  //       }
+  //     }
+
+  //     return match ? (
+  //       <SyntaxHighlighter
+  //         style={oneDark}
+  //         language={match[1]}
+  //         PreTag="div"
+  //         className="codeStyle"
+  //         showLineNumbers={true}
+  //         wrapLines={hasMeta ? true : false}
+  //         useInlineStyles={true}
+  //         lineProps={applyHighlights}
+  //         {...props}
+  //       />
+  //     ) : (
+  //       <code className={className} {...props} />
+  //     )
+  //   },
+  // }
+
   return (
     <Layout title={post.meta.title}>
       <Container>
-        <div className="max-w-4xl mx-auto mt-10">
+        <div className="max-w-4xl px-6 mx-auto mt-10">
           <Link href="/blog" className="pb-10">
             <Icon
               className="inline-block w-5 h-5 mb-5 align-text-top"
@@ -68,12 +124,12 @@ function Blog({ post }: any) {
                   width="20"
                   className="inline-block mb-1.5 mr-1"
                 />
-                {post.meta.date}
+                {new Date(post.meta.date).toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' })}
               </span>
             </div>
             <hr className="my-5" />
           </div>
-          <ReactMarkdown className={styles.markdown_body} remarkPlugins={[remarkGfm]} >
+          <ReactMarkdown className={styles.markdown_body} remarkPlugins={[remarkGfm]}>
             {post.content}
           </ReactMarkdown>
         </div>

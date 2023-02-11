@@ -7,7 +7,12 @@ import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { BlogCard } from "../../components/Card";
 
-function Blog({ posts } : any) {
+function Blog({ posts }: any) {
+
+  const sortedPosts = posts.sort((a: any, b: any) =>
+    a.meta.date > b.meta.date ? -1 : 1
+  );
+
   return (
     <Layout title="Posts">
       <Container>
@@ -30,8 +35,8 @@ function Blog({ posts } : any) {
               </p>
             </div> */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-y-5">
-            {posts.map((post : any, index : any) => (
-                <BlogCard key={index} post={post} />
+            {sortedPosts.map((post: any, index: any) => (
+              <BlogCard key={index} post={post} />
             ))}
           </div>
         </div>

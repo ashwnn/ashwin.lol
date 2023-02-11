@@ -1,6 +1,6 @@
 ---
-title: 'Finding Niche & Untapped Markets'
-date: 'December 25th, 2022'
+title: 'Discovering Hidden Gem Markets'
+date: '2022-12-25T00:00:00.000Z'
 excerpt: 'Starting a buisness can be hard, look for niche markets!'
 tags: ["buisness", "analysis", "tips"]
 cover_image: '/static/images/posts/identifying-niche-markets.jpg'
