@@ -1,9 +1,9 @@
 type Response = {
     success: boolean;
-    data: IUnsplashPhoto[];   
+    data: UnsplashPhoto[];   
 }
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IUnsplashPhoto } from "../../types";
+import { UnsplashPhoto } from "../../types";
 
 export default async function handler(
     req: NextApiRequest,

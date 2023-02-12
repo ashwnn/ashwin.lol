@@ -1,7 +1,7 @@
-import { IBookmark } from './../../types/index';
+import { Bookmark } from './../../types/index';
 type Response = {
     success: boolean;
-    data: IBookmark[];
+    data: Bookmark[];
 }
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -16,7 +16,7 @@ export default async function handler(
     const created = new Date();
     const data = await getBookmarks(tools, 0, created.toISOString());
 
-    const bookmarks = data.map((bookmark : IBookmark) => {
+    const bookmarks = data.map((bookmark : Bookmark) => {
         return {
             collectionId: bookmark.collectionId,
             _id: bookmark._id,
@@ -25,10 +25,10 @@ export default async function handler(
             link: bookmark.link,
             domain: bookmark.domain,
             created: bookmark.created,
+            year: bookmark.year,
             tags: bookmark.tags,
             type: bookmark.type,
             cover: bookmark.cover,
-            media: bookmark.media,
         }
     });
 
