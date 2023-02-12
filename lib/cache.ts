@@ -55,7 +55,7 @@ function isCacheExpired(key: string) {
     if (cache) {
         const now = new Date().getTime();
         const diff = now - cache.timestamp;
-        return diff > 600000;
+        return diff > 86400000;
 
     } else {
         return true;
