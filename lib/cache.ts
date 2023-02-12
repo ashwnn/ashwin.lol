@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const cachePath = path.resolve(process.cwd(), 'data', 'cache.json');
+// Vercel files are read-only by default to bypass we use /tmp/ (https://github.com/vercel/community/discussions/314?sort=new)
+const cachePath = process.env.DEV ? path.resolve(process.cwd(),  'data', 'cache.json') : '/tmp/data/cache.json';
 
 function cacheData(key : string, data: any) {
 
@@ -23,7 +24,7 @@ function cacheData(key : string, data: any) {
 }
 
 function getCacheByKey(key: string, timestamp: boolean = false) {
-    if (fs.existsSync(cachePath)) {
+    if (fs.existsSync(cachePath)) { 
         const cache = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
         try {
             return timestamp ? { data: cache[key].data, timestamp: cache[key].timestamp } : cache[key].data;

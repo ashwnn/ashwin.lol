@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+// import React, { lazy, Suspense } from 'react';
 import Image from "next/image";
 
 function Stats({ title, data, href }: { title: string; data: string; href?: string }) {
@@ -129,6 +130,7 @@ function ProjectCard({ project }: any) {
 }
 
 function BlogCard({ post }: any) {
+
   return (
     <a
       target="_self"
@@ -143,8 +145,9 @@ function BlogCard({ post }: any) {
         <Image
           alt={post.meta.title}
           src={post.meta.cover_image}
-          quality={100}
+          quality={50}
           fill
+          loading="lazy"
           sizes="100vw"
           style={{
             objectFit: "cover",
@@ -168,7 +171,7 @@ function BlogCard({ post }: any) {
             post.meta.tags.map((tag: string, index: number) => (
               <span
                 key={index}
-                className="px-2 py-1 mr-2 font-medium lowercase rounded-lg bg-zinc-700"
+                className="px-2 py-1 mt-1 mr-2 font-medium lowercase rounded-lg bg-zinc-700"
               >
                 {tag}
               </span>
