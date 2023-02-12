@@ -30,14 +30,57 @@ function Blog({ post }: any) {
   useEffect(() => {
     const imgs = document.querySelectorAll("img");
     imgs.forEach((img) => {
-    });
+      img.setAttribute("loading", "lazy");
 
-    // if a element has a link that is not within the website, open it in a new tab
+      if (img === imgs[0]) {
+        return;
+      }
+      const link = document.createElement("a");
+      link.href = img.src;
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener noreferrer");
+      img.parentNode!.insertBefore(link, img);
+      link.appendChild(img);
+
+    });
     const links = document.querySelectorAll("a");
     links.forEach((link) => {
       if (link.host !== window.location.host) {
         link.setAttribute("target", "_blank");
         link.setAttribute("rel", "noopener noreferrer");
+      }
+
+      if (link.href.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+        if (link.querySelector("img") !== null) {
+          return;
+        }
+        link.addEventListener("mouseover", (event) => {
+          const modal = document.createElement("div");
+          modal.style.position = "absolute";
+          modal.style.top = `${link.offsetTop - link.offsetHeight}px`;
+          modal.style.left = `${link.offsetLeft + link.offsetWidth / 2}px`;
+          modal.style.transform = "translate(-50%, -100%)";
+          modal.style.backgroundColor = "rgba(255, 255, 255, 1)";
+          modal.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
+          modal.style.padding = "15px";
+          modal.style.borderRadius = "5px";
+          modal.style.zIndex = "999";
+
+          const image = document.createElement("img");
+          image.src = link.href;
+          image.style.display = "block";
+          image.style.margin = "auto";
+          image.style.maxHeight = "200px";
+          image.style.borderRadius = "5px";
+
+          modal.appendChild(image);
+          document.body.appendChild(modal);
+        });
+
+        link.addEventListener("mouseout", (event) => {
+          const modal: any = document.querySelector("div[style*='position: absolute']");
+          document.body.removeChild(modal);
+        });
       }
     });
   }, []);
@@ -129,7 +172,7 @@ function Blog({ post }: any) {
               {post.meta.tags.map((tag: any, index: number) => (
                 <span
                   key={index}
-                  className="px-3 py-1 mb-2 text-sm font-medium text-white rounded-lg bg-zinc-600"
+                  className="px-3 py-1 mb-2 text-lg font-medium text-white lowercase rounded-lg bg-zinc-600 space"
                 >
                   {tag}
                 </span>

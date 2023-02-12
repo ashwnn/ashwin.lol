@@ -1,14 +1,12 @@
 ---
-title: 'Explore I2P: A Tor Alternative'
+title: 'Explore I2P: A Tor Alternative for browsing anonymously'
 date: '2023-01-06T00:00:00.000Z'
 excerpt: 'Alternative to browsing on the Tor network'
-tags: ["i2p", "security", "peer-to-peer"]
+tags: ["I2p", "Security", "Peer-to-peer"]
 cover_image: '/static/images/posts/getting-started-i2p.jpg'
 icon: 'logos:markdown'
 author: 'Ashwin'
 ---
-# Introduction
-
 ## What is I2P?
 I2P is a popular service which has the same goals as the well known TOR browser providing the user to browse the internet anonymously and with the utmost privacy. Similar to torrenting it works via peers. With Tor you are using a centralized client-server architecture and it has a higher possibility of being vunerable to attacks. With i2P you are using a peer-to-peer decerlized network which makes it much more secure and less prone to being attacked. Due to the FBI using methods such as traffic analysis to track down users of the TOR network, I2P has become a popular alternative.
 

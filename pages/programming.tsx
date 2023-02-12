@@ -103,7 +103,6 @@ function Projects() {
             </b>
           </h2>
           <div className="flex flex-wrap mx-auto mt-6 gap-x-3 gap-y-3-">
-
           </div>
         </div>
       </Container>
@@ -123,10 +122,8 @@ function sortToolsByType(tools : any[]) {
       return acc;
     }, {});
   
-    // Get the types in the order that we want to sort the tools
     const types = Object.keys(toolsByType).sort();
   
-    // Add the header object and tools for each type to the sortedTools array
     for (const type of types) {
       sortedTools.push({ name: type, isHeader: true });
       sortedTools.push(...toolsByType[type]);

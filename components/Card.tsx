@@ -168,7 +168,7 @@ function BlogCard({ post }: any) {
             post.meta.tags.map((tag: string, index: number) => (
               <span
                 key={index}
-                className="px-2 py-1 mr-2 rounded-lg bg-zinc-700"
+                className="px-2 py-1 mr-2 font-medium lowercase rounded-lg bg-zinc-700"
               >
                 {tag}
               </span>
