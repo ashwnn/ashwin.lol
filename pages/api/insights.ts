@@ -1,3 +1,39 @@
+type IGitHubRepository = {
+  node: {
+      name: string;
+      url: string;
+  }
+}
+
+type Language = {
+  name: string;
+  total_second: number;
+}
+
+type Response = {
+  daily_average: string;
+  commits: number;
+  total_time_coding: string;
+  editor: string;
+  os: string;
+  github: {
+    starred: string[];
+  };
+  // racknerd: {
+  //   hastebin: {
+  //     file_count: number;
+  //     size_mb: number;
+  //     size: number;
+  //   },
+  //   lolisafe: {
+  //     file_count: number;
+  //     size_mb: number;
+  //     size: number;
+  //   }
+  // };
+  languages: Language[];
+}
+
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { getLanguageInsight, getWeekly } from "../../lib/wakatime";
@@ -5,7 +41,7 @@ import { getCommits, getUserData } from "../../lib/github";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<Response>
 ) {
 
   const { span } = req.query;
@@ -20,7 +56,7 @@ export default async function handler(
   const weekly = await getWeekly().then((res) => res.json());
 
   const commits = await getCommits();
-  const starredRepos = await getUserData().then(data => data.data.viewer.starredRepositories.edges.map((repo: any) => {
+  const starredRepos = await getUserData().then(data => data.data.viewer.starredRepositories.edges.map((repo: IGitHubRepository) => {
     return {
       name: repo.node.name,
       url: repo.node.url

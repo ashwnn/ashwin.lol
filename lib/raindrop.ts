@@ -1,16 +1,4 @@
-export type IBookmark = {
-  collectionId: number;
-  _id: number;
-  title: string;
-  excerpt: string;
-  link: string;
-  domain: string;
-  created: string;
-  year: number;
-  tags: string[];
-  type: "link" | "article" | "video" | "document" | "audio";
-  cover: string;
-};
+import { IBookmark } from "../types";
 
 const perPage = 50;
 const client_id = process.env.RAINDROP_CLIENT_ID;
@@ -41,11 +29,7 @@ async function getAccessToken() {
   return response.json();
 }
 
-async function getBookmarks(
-  collectionId: string,
-  page: number = 0,
-  created: string
-): Promise<IBookmark[]> {
+async function getBookmarks(collectionId: string, page: number = 0, created: string): Promise<IBookmark[]> {
   const { access_token } = await getAccessToken();
   const res = await fetch(getEndpoint(collectionId, page, created), {
     method: "GET",

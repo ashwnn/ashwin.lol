@@ -1,14 +1,19 @@
+type Response = {
+    success: boolean;
+    data: IUnsplashPhoto[];   
+}
 import type { NextApiRequest, NextApiResponse } from "next";
+import { IUnsplashPhoto } from "../../types";
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse
+    res: NextApiResponse<Response>
 ) {
     const data = await fetch(`https://api.unsplash.com/users/axole/photos?client_id=${process.env.UNSPLASH_CLIENT_ID}&per_page=100`)
         .then((res) => res.json())
         .then((data) => data);
 
-    const photos = data.map((photo : any) => {
+    const photos = data.map((photo: any) => {
         return {
             id: photo.id,
             alt_description: photo.alt_description,
@@ -33,10 +38,11 @@ export default async function handler(
         };
     });
 
-    // sort by aspect ratio
+
+    photos.sort(() => Math.random() - 0.5); // sort random
     photos.sort((a: any, b: any) => {
         return a.regular.width / a.regular.height - b.regular.width / b.regular.height;
-    });
+    }); // sort by aspect ratio
 
 
     return res.status(200).json({
