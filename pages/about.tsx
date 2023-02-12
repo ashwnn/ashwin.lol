@@ -9,7 +9,6 @@ import { UnsplashPhotoAPI } from "../types";
 
 function Uses() {
   const { data: photos } = useSWRImmutable<UnsplashPhotoAPI>(`/api/photos`, fetcher);
-  console.log(photos);
 
   const media = [
     {

@@ -16,15 +16,18 @@ import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typesc
 import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash'
 import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json'
 import powershell from 'react-syntax-highlighter/dist/cjs/languages/prism/powershell'
-// import oneDark from 'react-syntax-highlighter/dist/cjs/styles/prism'
-// import rangeParser from 'parse-numeric-range'
+import { github } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Head from "next/head";
 
 SyntaxHighlighter.registerLanguage('tsx', tsx)
-SyntaxHighlighter.registerLanguage('typescript', typescript)
-SyntaxHighlighter.registerLanguage('bash', bash)
+SyntaxHighlighter.registerLanguage('ts', typescript)
+SyntaxHighlighter.registerLanguage('sh', bash)
 SyntaxHighlighter.registerLanguage('json', json)
-SyntaxHighlighter.registerLanguage('powershell', powershell)
+SyntaxHighlighter.registerLanguage('ps1', powershell)
+
+const MDObjects : object = {
+
+}
 
 function Blog({ post }: any) {
   useEffect(() => {
@@ -84,49 +87,6 @@ function Blog({ post }: any) {
       }
     });
   }, []);
-
-
-  // const mdCode: object = {
-  //   code({ node, inline, className, ...props }: any) {
-
-  //     const match = /language-(\w+)/.exec(className || '')
-  //     const hasMeta = node?.data?.meta
-
-  //     const applyHighlights: object = (applyHighlights: number) => {
-  //       if (hasMeta) {
-  //         const RE = /{([\d,-]+)}/
-  //         const metadata = node.data.meta?.replace(/\s/g, '')
-  //         const strlineNumbers = RE?.test(metadata)
-  //           ? RE?.exec(metadata)![1]
-  //           : '0'
-  //         const highlightLines = rangeParser(strlineNumbers)
-  //         const highlight = highlightLines
-  //         const data: string | null = highlight.includes(applyHighlights)
-  //           ? 'highlight'
-  //           : null
-  //         return { data }
-  //       } else {
-  //         return {}
-  //       }
-  //     }
-
-  //     return match ? (
-  //       <SyntaxHighlighter
-  //         style={oneDark}
-  //         language={match[1]}
-  //         PreTag="div"
-  //         className="codeStyle"
-  //         showLineNumbers={true}
-  //         wrapLines={hasMeta ? true : false}
-  //         useInlineStyles={true}
-  //         lineProps={applyHighlights}
-  //         {...props}
-  //       />
-  //     ) : (
-  //       <code className={className} {...props} />
-  //     )
-  //   },
-  // }
 
   return (
     <Layout title={post.meta.title}>

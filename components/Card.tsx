@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 // import React, { lazy, Suspense } from 'react';
 import Image from "next/image";
+import Link from "next/link";
 
 function Stats({ title, data, href }: { title: string; data: string; href?: string }) {
   return (
@@ -15,7 +16,7 @@ function Stats({ title, data, href }: { title: string; data: string; href?: stri
 
 function DisplayCard({ display }: any) {
   return (
-    <a
+    <Link
       target={display.local ? "_self" : "_blank"}
       rel="noopener noreferrer nofollow"
       href={display.url}
@@ -26,16 +27,16 @@ function DisplayCard({ display }: any) {
         <p className="mb-4">{display.description}</p>
       </div>
       <div>
-        <a href="#" className="absolute top-0 right-0 p-4">
+        <span className="absolute top-0 right-0 p-4">
           {!display.local && (
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
               <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
             </svg>
           )}
-        </a>
+        </span>
       </div>
-    </a>
+    </Link>
   );
 }
 
@@ -57,7 +58,7 @@ function ProjectCard({ project }: any) {
         </div>
         <div className="my-2 ml-1">
           {project.github_url && (
-            <a
+            <Link
               href={project.github_url}
               target="_blank"
               rel="noopener noreferrer"
@@ -73,10 +74,10 @@ function ProjectCard({ project }: any) {
                 className="mr-1.5 inline align-text-bottom"
               />
               <span className="hidden md:inline-block">GitHub</span>
-            </a>
+            </Link>
           )}
           {project.demo_url && (
-            <a
+            <Link
               href={project.demo_url}
               target="_blank"
               rel="noopener noreferrer"
@@ -92,10 +93,10 @@ function ProjectCard({ project }: any) {
                 className="mr-1.5 inline align-text-bottom"
               />
               <span className="hidden md:inline-block">Demo</span>
-            </a>
+            </Link>
           )}
           {project.case_study_url && (
-            <a
+            <Link
               href={project.demo_url}
               target="_blank"
               rel="noopener noreferrer"
@@ -111,7 +112,7 @@ function ProjectCard({ project }: any) {
                 className="mr-1.5 inline align-text-bottom"
               />
               <span className="hidden md:inline-block">Case Study</span>
-            </a>
+            </Link>
           )}
           {!project.github_url &&
             !project.demo_url &&
@@ -132,7 +133,7 @@ function ProjectCard({ project }: any) {
 function BlogCard({ post }: any) {
 
   return (
-    <a
+    <Link
       target="_self"
       rel="noopener noreferrer nofollow"
       href={`/blog/${post.slug}`}
@@ -178,7 +179,7 @@ function BlogCard({ post }: any) {
             ))}
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
 
