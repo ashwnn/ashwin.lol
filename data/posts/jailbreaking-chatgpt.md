@@ -2,7 +2,7 @@
 title: 'Maximize ChatGPT: Secrets to Breaking the Filters'
 date: '2023-02-11T00:00:00.000Z'
 excerpt: 'ChatGPT is a cutting-edge language model developed by OpenAI, but what if you could make it even more powerful? Discover how to bypass the filters and get ChatGPT to answer any question.'
-tags: ["ChatGPT", "AI", "Reverse Engineering"]
+tags: ["ChatGPT", "AI", "Jailbreak"]
 cover_image: '/static/images/posts/jailbreaking-chatgpt.avif'
 icon: 'logos:markdown'
 author: 'Ashwin'
