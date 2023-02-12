@@ -5,10 +5,10 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import fetcher from "../lib/fetcher";
 import useSWRImmutable from "swr/immutable";
-import { UnsplashPhoto } from "../types";
+import { UnsplashPhotoAPI } from "../types";
 
 function Uses() {
-  const { data: photos } = useSWRImmutable<UnsplashPhoto>(`/api/photos`, fetcher);
+  const { data: photos } = useSWRImmutable<UnsplashPhotoAPI>(`/api/photos`, fetcher);
   console.log(photos);
 
   const media = [

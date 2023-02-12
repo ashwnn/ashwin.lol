@@ -3,7 +3,7 @@ import path from 'path';
 
 const cachePath = path.resolve(process.cwd(), 'data', 'cache.json');
 
-function cacheData({ key, data }: { key: string, data: any }) {
+function cacheData(key : string, data: any) {
 
     if (fs.existsSync(cachePath)) {
         const cache = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));

@@ -1,28 +1,30 @@
 export type UnsplashPhoto = {
-    success: boolean;
-    data: {
-        id: string;
-        alt_description: string;
-        unsplash: string;
-        thumbnail: {
-            url: string;
-            width: number;
-            height: number;
-            quality: number;
-        };
-        image: {
-            url: string;
-            width: number;
-            height: number;
-        };
-        regular: {
-            url: string;
-            width: number;
-            height: number;
-            quality: number;
-        };
-    }[];
+    id: string;
+    alt_description: string;
+    unsplash: string;
+    thumbnail: {
+        url: string;
+        width: number;
+        height: number;
+        quality: number;
+    };
+    image: {
+        url: string;
+        width: number;
+        height: number;
+    };
+    regular: {
+        url: string;
+        width: number;
+        height: number;
+        quality: number;
+    };
 };
+
+export type UnsplashPhotoAPI = {
+    success: boolean;
+    data: UnsplashPhoto[];
+}
 
 export type BookmarkCollection = {
     success: boolean;

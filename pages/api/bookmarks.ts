@@ -16,16 +16,13 @@ export default async function handler(
     let data: Bookmark[] = [];
 
     if (isCacheExpired("api_bookmarks")) {
-        console.log("Cache expired, fetching new data");
         const tools = "29995273"
         const created = new Date();
         data = await getBookmarks(tools, 0, created.toISOString());
-        await cacheData({ key: "api_bookmarks", data });
+        cacheData("api_bookmarks", data);
     }
     else {
-        console.log("Cache not expired, fetching from cache");
         data = await getCacheByKey("api_bookmarks");
-        console.log("Cache data: ", data);
     }
 
 

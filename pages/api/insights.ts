@@ -91,6 +91,8 @@ export default async function handler(
           }
         )
       );
+
+      cacheData("api_insights", data);
     } else {
       data = await getCacheByKey("api_insights");
     }
