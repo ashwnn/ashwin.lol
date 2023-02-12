@@ -4,6 +4,10 @@ import path from 'path';
 // Vercel files are read-only by default to bypass we use /tmp/ (https://github.com/vercel/community/discussions/314?sort=new)
 const cachePath = process.env.DEV ? path.resolve(process.cwd(),  'data', 'cache.json') : '/tmp/data/cache.json';
 
+if (!fs.existsSync(path.dirname(cachePath))) {
+    fs.mkdirSync(path.dirname(cachePath), { recursive: true });
+}
+
 function cacheData(key : string, data: any) {
 
     if (fs.existsSync(cachePath)) {
