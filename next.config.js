@@ -4,6 +4,15 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: ['i.scdn.co', 'images.unsplash.com'],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/qr',
+        destination: '/?from=qr',
+        permanent: true,
+      },
+    ]
   }
 }
 

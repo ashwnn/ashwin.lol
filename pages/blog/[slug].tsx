@@ -10,24 +10,33 @@ import Link from "next/link";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import remarkGfm from 'remark-gfm'
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
-import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx'
-import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript'
-import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash'
-import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json'
-import powershell from 'react-syntax-highlighter/dist/cjs/languages/prism/powershell'
-import { github } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+// import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+// import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx'
+// import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript'
+// import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash'
+// import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json'
+// import powershell from 'react-syntax-highlighter/dist/cjs/languages/prism/powershell'
+// import github from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import Head from "next/head";
 
-SyntaxHighlighter.registerLanguage('tsx', tsx)
-SyntaxHighlighter.registerLanguage('ts', typescript)
-SyntaxHighlighter.registerLanguage('sh', bash)
-SyntaxHighlighter.registerLanguage('json', json)
-SyntaxHighlighter.registerLanguage('ps1', powershell)
+// SyntaxHighlighter.registerLanguage('tsx', tsx)
+// SyntaxHighlighter.registerLanguage('ts', typescript)
+// SyntaxHighlighter.registerLanguage('sh', bash)
+// SyntaxHighlighter.registerLanguage('json', json)
+// SyntaxHighlighter.registerLanguage('ps1', powershell)
 
-const MDObjects : object = {
-
-}
+// const MDObjects: object = {
+//   code: ({ node, inline, className, children, ...props }: any) => {
+//     const match = /language-(\w+)/.exec(className || '')
+//     return !inline && match ? (
+//       <SyntaxHighlighter style={github} language={match[1]} PreTag="div" {...props} >
+//         {String(children).replace(/\n$/, '')}
+//       </SyntaxHighlighter>
+//     ) : (
+//       <code className={className} {...props} />
+//     )
+//   }
+// }
 
 function Blog({ post }: any) {
   useEffect(() => {
