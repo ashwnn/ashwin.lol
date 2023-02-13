@@ -49,11 +49,11 @@ function InternalError() {
                 <meta property="twitter:url" content="https://ashwin.lol/" />
                 <meta name="twitter:title" content="5XX: Interal Server Error" />
                 <meta name="twitter:description" content="Ashwin is a second year computer science student with a strong understanding of computer science and development. He has a neverending passion for learning and creating new things through technology." />
-                <meta name="twitter:image" content="" />
+                <meta name="twitter:image" content="/banner.png" />
 
                 {/* Open Graph */}
                 <meta property="og:title" content="5XX: Interal Server Error" />
-                <meta property="og:image" content="/favicon.ico" />
+                <meta property="og:image" content="/banner.png" />
                 <meta property="og:description" content="Ashwin is a second year computer science student with a strong understanding of computer science and development. He has a neverending passion for learning and creating new things through technology." />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://ashwin.lol" />
