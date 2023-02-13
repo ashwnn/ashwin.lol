@@ -190,8 +190,7 @@ function HomePage() {
                       </>
                     ))}
                   .{" "} */}
-                <br />
-                <br />
+                  <span className="block mb-9"></span>
                 {track && track.isPlaying && (
                   <span>
 

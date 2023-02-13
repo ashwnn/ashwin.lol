@@ -2,8 +2,9 @@ import Link from "next/link";
 import { Icon } from '@iconify/react';
 
 function Footer() {
+
     return (
-        <footer className="fixed bottom-0 w-full px-6 py-4 pt-0 mt-0 text-xs text-center rounded-b-lg">
+        <footer className="bottom-0 w-full px-6 py-4 pt-0 mt-0 text-xs text-center rounded-b-lg">
             <div className="mx-auto mt-10">
                 <p className="pt-5 border-t border-t-zinc-800">
                     Licensed under{" "}

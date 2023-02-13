@@ -113,60 +113,64 @@ function Blog({ post }: any) {
         <meta name="twitter:image" content={post.meta.cover_image} />
       </Head>
       <Container>
-        <div className="max-w-4xl px-6 mx-auto mt-10">
-          <Link href="/blog" className="pb-10">
+        <div className="max-w-screen-xl px-6 mx-auto mt-10">
+
+          <Link href="/blog" className="mb-10">
             <Icon
               className="inline-block w-5 h-5 mb-5 align-text-top"
               icon="charm:arrow-left"
             />
             <p className="inline-block ml-2">All Posts</p>
           </Link>
-          <div>
-            <div
-              className="relative mx-auto bg-cover bg-center shadow-md h-[200px] md:h-[350px] w-full my-4"
-            >
-              <Image
-                alt={post.meta.title}
-                src={post.meta.cover_image}
-                quality={100}
-                fill
-                sizes="100vw"
-                style={{
-                  objectFit: "cover",
-                }}
-                className="rounded-3xl"
-              />
-            </div>
-            <div className="flex flex-wrap mt-4 mb-2 gap-x-4">
-              {post.meta.tags.map((tag: any, index: number) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 mb-2 text-lg font-medium text-white lowercase rounded-lg bg-zinc-600 space"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <h1 className="mb-2 text-3xl leading-snug shine">
-              <b className="font-semibold">
-                <span>{post.meta.title}</span>
-              </b>
-            </h1>
-            <div className="flex items-center mb-5 space-x-2">
-              <span>
-                <Icon
-                  icon="ic:outline-date-range"
-                  width="20"
-                  className="inline-block mb-1.5 mr-1"
+          <div className="justify-center max-w-4xl mx-auto">
+            <div>
+              <div
+                className="relative mx-auto bg-cover bg-center shadow-md h-[200px] md:h-[350px] w-full my-4"
+              >
+                <Image
+                  alt={post.meta.title}
+                  src={post.meta.cover_image}
+                  quality={100}
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: "cover",
+                  }}
+                  className="border border-zinc-700 rounded-3xl"
                 />
-                {new Date(post.meta.date).toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' })}
-              </span>
+              </div>
+              <div className="flex flex-wrap mt-4 mb-2 gap-x-4">
+                {post.meta.tags.map((tag: any, index: number) => (
+                  <a
+                    href={`/blog?tags=${tag}`}
+                    key={index}
+                    className="px-3 py-1 mb-2 text-lg font-medium text-white lowercase rounded-lg bg-zinc-600 space"
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+              <h1 className="mb-2 text-3xl leading-snug shine">
+                <b className="font-semibold">
+                  <span>{post.meta.title}</span>
+                </b>
+              </h1>
+              <div className="flex items-center mb-5 space-x-2">
+                <span>
+                  <Icon
+                    icon="ic:outline-date-range"
+                    width="20"
+                    className="inline-block mb-1.5 mr-1 font-semibold"
+                  />
+                  {new Date(post.meta.date).toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' })}
+                </span>
+              </div>
+              <hr className="my-5" />
             </div>
-            <hr className="my-5" />
+            <ReactMarkdown className={styles.markdown_body} remarkPlugins={[remarkGfm]}>
+              {post.content}
+            </ReactMarkdown>
           </div>
-          <ReactMarkdown className={styles.markdown_body} remarkPlugins={[remarkGfm]}>
-            {post.content}
-          </ReactMarkdown>
         </div>
       </Container>
     </Layout>

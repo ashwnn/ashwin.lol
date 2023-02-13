@@ -2,7 +2,7 @@
 title: "Dual Booting Arch Linux and Windows?"
 date: "2022-12-25T00:00:00.000Z"
 excerpt: "A deep dive into the benefits, downsides, and popularity of dual booting Arch Linux and Windows for programmers."
-tags: ["Arch Linux", "Windows", "Dual Boot"]
+tags: ["arch linux", "windows", "dual boot"]
 cover_image: "/static/images/posts/dual-booting-arch-windows.jpg"
 author: "Ashwin"
 ---

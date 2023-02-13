@@ -6,18 +6,35 @@ import matter from "gray-matter";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { BlogCard } from "../../components/Card";
+import { useRouter } from "next/router";
 
 function Blog({ posts }: any) {
+
+  const router = useRouter();
+  const { tags: tag } = router.query;
+
+  let postsByTag: any = [];
+
+  if (tag) {
+    let tags = tag as string;
+    let tagsArr = tags.split(",");
+
+    postsByTag = posts.filter((post: any) => {
+      return tagsArr.every((tag: string) => {
+        return post.meta.tags.includes(tag);
+      });
+    });
+  }
 
   const sortedPosts = posts.sort((a: any, b: any) =>
     a.meta.date > b.meta.date ? -1 : 1
   );
 
   return (
-    <Layout title="Posts">
+    <Layout title={tag ? "Posts Tagged With #" + tag :  "Posts"}>
       <Container>
         <div className="max-w-screen-xl px-3 mx-auto mt-10">
-          <Link href="/" className="pb-10">
+          <Link href={tag ? "/blog" : "/"}  className="pb-10">
             <Icon
               className="inline-block w-5 h-5 mb-5 align-text-top"
               icon="charm:arrow-left"
@@ -25,7 +42,7 @@ function Blog({ posts }: any) {
           </Link>
           <h2 className="mb-6 text-2xl leading-snug shine">
             <b className="font-medium">
-              <span>Blog</span>
+              <span>{tag ? "#" + tag : "Blog"} </span>
             </b>
           </h2>
           {/* <div className="p-2 my-5 text-center rounded-lg shadow-md text-zinc-800 bg-yellow-300/80">
@@ -35,9 +52,15 @@ function Blog({ posts }: any) {
               </p>
             </div> */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-y-5">
-            {sortedPosts.map((post: any, index: any) => (
-              <BlogCard key={index} post={post} />
-            ))}
+            {!tag ? (
+              sortedPosts.map((post: any, index: any) => (
+                <BlogCard key={index} post={post} />
+              ))
+            ) : (
+              postsByTag.map((post: any, index: any) => (
+                <BlogCard key={index} post={post} />
+              ))
+            )}
           </div>
         </div>
       </Container>

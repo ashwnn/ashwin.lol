@@ -2,7 +2,7 @@
 title: 'Finding and Dominating Niche Markets'
 date: '2022-12-25T00:00:00.000Z'
 excerpt: 'Starting a buisness can be hard, look for niche markets!'
-tags: ["Buisness", "Analysis", "Tips"]
+tags: ["buisness", "analysis", "tips"]
 cover_image: '/static/images/posts/identifying-niche-markets.jpg'
 icon: 'logos:markdown'
 author: 'Ashwin'
