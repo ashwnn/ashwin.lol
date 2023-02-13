@@ -30,6 +30,7 @@ function Article({ children, meta }: LayoutProps) {
                 <meta name="theme-color" content="#18181B" />
                 <meta name="description" content={meta.excerpt} />
                 <meta name="tite" content={meta.title} />
+                <meta name="language" content="English" />
 
                 {/* Safari/Apple */}
                 <meta name="apple-mobile-web-app-capable" content="yes" />

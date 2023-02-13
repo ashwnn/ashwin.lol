@@ -12,6 +12,7 @@ function Header({ title }: { title: string }) {
             <meta name="theme-color" content="#18181B" />
             <meta name="description" content="Ashwin is a second year computer science student with a strong understanding of computer science and development. He has a neverending passion for learning and creating new things through technology." />
             <meta name="tite" content={fullTitle} />
+            <meta name="language" content="English" />
             
             {/* Safari/Apple */}
             <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -36,6 +37,7 @@ function Header({ title }: { title: string }) {
             <meta name="googlebot" content="index, follow" />
             <meta name="google" content="nositelinkssearchbox" />
             <meta name="google" content="notranslate" />
+
         </Head>
     )
 }
