@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Article from "../../components/Article";
 import Container from "../../components/Container";
 import fs from "fs";
 import path from "path";
@@ -98,20 +98,7 @@ function Blog({ post }: any) {
   }, []);
 
   return (
-    <Layout title={post.meta.title}>
-      <Head>
-        <meta name="description" content={post.meta.description} />
-        <meta name="keywords" content={post.meta.tags} />
-        <meta name="author" content={post.meta.author} />
-        <meta property="og:title" content={post.meta.title} />
-        <meta property="og:description" content={post.meta.description} />
-        <meta property="og:image" content={post.meta.cover_image} />
-        <meta property="og:url" content={`https://ashwin.lol/blog/${post.meta.slug}`} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.meta.title} />
-        <meta name="twitter:description" content={post.meta.description} />
-        <meta name="twitter:image" content={post.meta.cover_image} />
-      </Head>
+    <Article slug={post.slug} meta={post.meta}>
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-10">
 
@@ -173,7 +160,7 @@ function Blog({ post }: any) {
           </div>
         </div>
       </Container>
-    </Layout>
+    </Article>
   );
 }
 

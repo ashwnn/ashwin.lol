@@ -32,7 +32,10 @@ function Header({ title }: { title: string }) {
             <meta property="og:type" content="website" />
             <meta property="og:url" content="https://ashwin.lol" />
 
-            {/*  */}
+            <meta name="robots" content="index, follow" />
+            <meta name="googlebot" content="index, follow" />
+            <meta name="google" content="nositelinkssearchbox" />
+            <meta name="google" content="notranslate" />
         </Head>
     )
 }
