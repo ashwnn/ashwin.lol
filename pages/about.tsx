@@ -111,7 +111,7 @@ function Uses() {
             <ul className="py-1">
               <li>
                 <Link
-                  href="https://19x.notion.site/adb0c3c077ee46d7a22fe0cc357132c7?v=8760973cae554b94b4e54e848ca37917"
+                  href="/roadmap"
                   className="text-blue-300/80 hover:text-blue-300/90 hover:underline"
                 >
                   /roadmap

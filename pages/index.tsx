@@ -25,10 +25,10 @@ function HomePage() {
       <Container>
         <div className="max-w-screen-xl px-6 mx-auto mt-20">
           {ref && (
-            <div id="notif" className={`relative px-5 py-2 rounded-lg shadow-md my-7 text-zinc-800 ${ref.color}`}>
+            <div id="notif" className={`relative px-5 py-2 max-w-4xl rounded-lg shadow-md my-7 text-zinc-800 ${ref.color}`}>
               <span className="float-left">
                 <p>
-                  <span className="-ml-3 text-5xl font-semibold md:-ml-5">{ref.logo}</span>
+                  <span className="mr-2 -ml-1 text-5xl font-semibold md:-ml-5">{ref.logo}</span>
                 </p>
               </span>
               <p className="font-normal drop-shadow-lg">
