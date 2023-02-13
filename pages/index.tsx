@@ -58,6 +58,7 @@ function HomePage() {
           {/* social media icons */}
           <div className="flex flex-row mt-4 gap-x-2 socials">
             <Link
+              className="umami--click-socials-github"
               href="https://github.com/xxiz/"
               target="_blank"
               rel="noopener noreferrer nofollow"
@@ -68,6 +69,7 @@ function HomePage() {
               />
             </Link>
             <Link
+              className="umami--click-socials-stackoverflow"
               href="https://stackoverflow.com/users/9254757/"
               target="_blank"
               rel="noopener noreferrer nofollow"
@@ -78,6 +80,7 @@ function HomePage() {
               />
             </Link>
             <Link
+              className="umami--click-socials-linkedin"
               href="https://linkedin.com/in/ax2"
               target="_blank"
               rel="noopener noreferrer nofollow"
@@ -87,13 +90,18 @@ function HomePage() {
                 className="w-7 h-7 text-[#bfbfbf] hover:text-[#fff]"
               />
             </Link>
-            <Link href="/pgp.asc" target="_blank" rel="noopener noreferrer nofollow">
+            <Link 
+            className="umami--click-pgp-key"
+            href="/pgp.asc"
+            target="_blank"
+            rel="noopener noreferrer nofollow">
               <Icon
                 icon="charm:key"
                 className="w-7 h-7 text-[#bfbfbf] hover:text-[#fff]"
               />
             </Link>
             <Link
+            className="umami--click-socials-email"
               href="mailto:its@ashwin.lol"
               target="_blank"
               rel="noopener noreferrer nofollow"

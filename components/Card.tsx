@@ -20,7 +20,7 @@ function DisplayCard({ display }: any) {
       target={display.local ? "_self" : "_blank"}
       rel="noopener noreferrer nofollow"
       href={display.url}
-      className={`umami--click--${display.title} relative p-4 duration-150 border rounded-lg text-zinc-300 border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5`}
+      className={`umami--click--page--${display.title} relative p-4 duration-150 border rounded-lg text-zinc-300 border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5`}
     >
       <div>
         <h3 className="mb-2 text-2xl font-semibold">{display.title}</h3>
@@ -62,7 +62,7 @@ function ProjectCard({ project }: any) {
               href={project.github_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`umami--click--${project.title.replace(
+              className={`umami--click--project-${project.title.replace(
                 " ",
                 "-"
               )}-github mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
@@ -81,7 +81,7 @@ function ProjectCard({ project }: any) {
               href={project.demo_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`umami--click--${project.title.replace(
+              className={`umami--click--project-${project.title.replace(
                 " ",
                 "-"
               )}-demo mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
@@ -97,10 +97,10 @@ function ProjectCard({ project }: any) {
           )}
           {project.case_study_url && (
             <Link
-              href={project.demo_url}
+              href={project.case_study_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`umami--click--${project.title.replace(
+              className={`umami--click--project-${project.title.replace(
                 " ",
                 "-"
               )}-case-study mr-4 my-2 text-[#bfbfbf] hover:text-[#fff]`}
@@ -137,7 +137,7 @@ function BlogCard({ post }: any) {
       target="_self"
       rel="noopener noreferrer nofollow"
       href={`/blog/${post.slug}`}
-      className={`umami--click--${post.slug} flex flex-col border rounded-xl ease-in-out duration-150 border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5`}
+      className={`umami--click--blog-${post.slug} flex flex-col border rounded-xl ease-in-out duration-150 border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5`}
     >
       <div
         className="relative h-48 bg-center bg-cover rounded-xl"
