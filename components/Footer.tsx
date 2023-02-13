@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Icon } from '@iconify/react';
 
 function Footer() {
     return (
@@ -12,8 +13,15 @@ function Footer() {
                     >
                         CC BY-NC-SA 4.0
                     </Link>
+                    {"  /  "}
+                    <Link
+                        className="text-gray-400 underline hover:text-gray-200"
+                        href="https://status.ashwin.lol"
+                    >
+                        Status
+                    </Link>
                 </p>
-                <p>&copy; Ashwin Charathsandran 2022 - <>{new Date().getFullYear()}</></p>
+                <p className="block md:inline-block">&copy; Ashwin Charathsandran 2022 - <>{new Date().getFullYear()}</></p> <span className="invisible md:visible md:inline">{" / "}</span> Powered by{" "} <a className="inline-block -mt-0.5 -ml-0.5 align-middle" target="_blank" rel="noreferrer" href="https://nextjs.org/"><Icon className="h-2.5 text-white/50 fill-current hover:text-white" icon="logos:nextjs" /></a>
             </div>
         </footer>
     )

@@ -23,7 +23,7 @@ function HomePage() {
   return (
     <Layout>
       <Container>
-        <div className="max-w-screen-xl px-6 mx-auto mt-20">
+        <div className="max-w-screen-xl px-3 mx-auto mt-20">
           {ref && (
             <div id="notif" className={`relative px-5 py-2 max-w-4xl rounded-lg shadow-md my-7 text-zinc-800 ${ref.color}`}>
               <span className="float-left">
@@ -90,18 +90,18 @@ function HomePage() {
                 className="w-7 h-7 text-[#bfbfbf] hover:text-[#fff]"
               />
             </Link>
-            <Link 
-            className="umami--click-pgp-key"
-            href="/pgp.asc"
-            target="_blank"
-            rel="noopener noreferrer nofollow">
+            <Link
+              className="umami--click-pgp-key"
+              href="/pgp.asc"
+              target="_blank"
+              rel="noopener noreferrer nofollow">
               <Icon
                 icon="charm:key"
                 className="w-7 h-7 text-[#bfbfbf] hover:text-[#fff]"
               />
             </Link>
             <Link
-            className="umami--click-socials-email"
+              className="umami--click-socials-email"
               href="mailto:its@ashwin.lol"
               target="_blank"
               rel="noopener noreferrer nofollow"
@@ -194,14 +194,18 @@ function HomePage() {
                 <br />
                 {track && track.isPlaying && (
                   <span>
+
                     <svg
-                      className='w-3 animate-pulse fill-current text-green-500 inline-block mr-1.5 mb-0.5 relative'
+                    className='w-5 animate-pulse fill-current text-green-500 inline-block mr-1.5 mb-0.5 relative'
+                     id="root" fill="none" height="17" viewBox="0 0 16 17" width="16" xmlns="http://www.w3.org/2000/svg"><g fill="#10c97a"><ellipse cx="8" cy="8.92878" opacity=".2" rx="8" ry="7.94929" /><ellipse cx="8" cy="8.92875" rx="4" ry="3.97464" /></g></svg>
+
+                    {/* <svg
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <circle cx="12" cy="12" r="10" />
                       <path d="M10.29 16.89L13.11 14.08L14.08 13.11L16.89 10.29L14.08 7.47L13.11 6.5L10.29 8.71L7.47 6.5L6.5 7.47L8.71 10.29L6.5 13.11L7.47 14.08L10.29 16.89Z" />
-                    </svg>
+                    </svg> */}
                     Listening to {" "}
                     <Link
                       href={track.songUrl}

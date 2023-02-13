@@ -90,7 +90,7 @@ function Projects() {
   return (
     <Layout title="My Work">
       <Container>
-        <div className="max-w-screen-xl px-6 mx-auto mt-10">
+        <div className="max-w-screen-xl px-3 mx-auto mt-10">
           <Link href="/" className="pb-10">
             <Icon
               className="inline-block w-5 h-5 mb-5 align-text-top"
