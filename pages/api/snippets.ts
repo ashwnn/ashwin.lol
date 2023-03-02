@@ -6,6 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  
   let data: any = [];
 
   if (isCacheExpired("api_snippets")) {
