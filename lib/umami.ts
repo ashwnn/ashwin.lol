@@ -9,7 +9,7 @@ function useUmami(event: string) {
             event_type: event,
             url: '/',
             website: 'edf4e66f-70e5-44c9-877a-d7cacf96a476',
-            hostname: window.location.hostname
+            hostname: 'ashwin.lol',
         }
     };
 
