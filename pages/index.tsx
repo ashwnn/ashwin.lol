@@ -8,6 +8,7 @@ import fetcher from "../lib/fetcher";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import { getMessage } from "../lib/refferer";
+import useUmami from "../lib/umami";
 
 function HomePage() {
 
@@ -17,8 +18,9 @@ function HomePage() {
   const router = useRouter();
   const { from } = router.query;
 
-  let ref = from && getMessage(from as string);
+  useUmami(`refferrer-${from}`);
 
+  let ref = from && getMessage(from as string);
 
   return (
     <Layout>
