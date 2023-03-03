@@ -14,7 +14,7 @@ export default async function handler(
   if (cachedData) {
     data = cachedData;
   } else {
-    data = await fetch("https://api.github.com/gists/public")
+    data = await fetch("https://api.github.com/users/xxiz/gists")
       .then((res) => res.json())
       .then((data) => data);
 
