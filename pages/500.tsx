@@ -15,9 +15,9 @@ function InternalError() {
             }
         });
 
-        let message = `Error: 500\nDescription: Internal Server Error\nURL: ${window.location.href}\nUser Agent: ${navigator.userAgent}\nReferrer: ${document.referrer}\nTimestamp: ${new Date().toLocaleString()}`
+        let message = `Error: 500\nDescription: Internal Server Error\nURL: ${window.location.href}\nUser Agent: ${navigator.userAgent}\nReferrer: ${document.referrer}\nTimestamp: ${new Date().toLocaleString()}\nPath: ${window.location.pathname}\n`
 
-        fetch(`${process.env.NTFY_SERVER}/ashwin.lol`, {
+        fetch(`${process.env.NTFY_SERVER}/website`, {
             method: 'POST',
             headers: {
                 'Title': '5XX Error @ ashwin.lol',
