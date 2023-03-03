@@ -18,7 +18,7 @@ function HomePage() {
   const router = useRouter();
   const { from } = router.query;
 
-  useUmami(`refferrer-${from}`);
+  useUmami(`refferrer-${from as string}`);
 
   let ref = from && getMessage(from as string);
 

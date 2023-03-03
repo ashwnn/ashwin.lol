@@ -2,7 +2,7 @@
 import useSWR from "swr";
 
 function useUmami(event: string) {
-    const url = 'https://umami.1m.cx/api/collect';
+    const url = 'https://umami.1m.cx/api/collect/';
     const body = {
         type: 'event',
         payload: {
@@ -20,7 +20,7 @@ function useUmami(event: string) {
             body: JSON.stringify(body)
         }).then(res => res.json());
 
-        const { data: result } = useSWR<any>([url, body], fetcher);
+        const { data: result } = useSWR<any>(url, () => fetcher(url, body));
 
     return;
 }
