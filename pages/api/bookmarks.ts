@@ -6,7 +6,7 @@ type Response = {
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { getBookmarks } from '../../lib/raindrop'
-import { getCacheByKey, isCacheExpired, cacheData } from '../../lib/cache';
+import { cache } from '../../lib/cache';
 
 export default async function handler(
     req: NextApiRequest,
@@ -15,16 +15,16 @@ export default async function handler(
 
     let data: Bookmark[] = [];
 
-    if (isCacheExpired("api_bookmarks")) {
+    const cachedData = cache.get<Bookmark[]>('bookmarks');
+
+    if (cachedData) {
+        data = cachedData;
+    } else {
         const tools = "29995273"
         const created = new Date();
         data = await getBookmarks(tools, 0, created.toISOString());
-        cacheData("api_bookmarks", data);
+        cache.set('bookmarks', data);
     }
-    else {
-        data = await getCacheByKey("api_bookmarks");
-    }
-
 
     const bookmarks = data.map((bookmark : Bookmark) => {
         return {

@@ -3,7 +3,9 @@ type Response = {
     data: UnsplashPhoto[];   
 }
 import type { NextApiRequest, NextApiResponse } from "next";
-import { isCacheExpired, cacheData, getCacheByKey } from "../../lib/cache";
+
+import { cache } from "../../lib/cache";
+
 import { UnsplashPhoto } from "../../types";
 
 export default async function handler(
@@ -12,13 +14,18 @@ export default async function handler(
 ) {
     let data: UnsplashPhoto[] = [];
 
-    if (isCacheExpired("api_unsplash")) {
-        data = await fetch(`https://api.unsplash.com/users/axole/photos?client_id=${process.env.UNSPLASH_CLIENT_ID}&per_page=100`).then((res) => res.json()).then((data) => data);
-        cacheData("api_unsplash", data);
+    const cachedData = cache.get<UnsplashPhoto[]>("photos");
 
+    if (cachedData) {
+        data = cachedData;
     } else {
-        data = await getCacheByKey("api_unsplash");
+        data = await fetch("https://api.unsplash.com/photos/random?count=30&client_id=YOUR_CLIENT_ID")
+            .then((res) => res.json())
+            .then((data) => data);
+
+        cache.set("photos", data);
     }
+
 
     const photos = data.map((photo: any) => {
         return {

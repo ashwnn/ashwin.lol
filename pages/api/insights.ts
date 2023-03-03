@@ -38,7 +38,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { getLanguageInsight, getWeekly } from "../../lib/wakatime";
 import { getCommits, getUserData } from "../../lib/github";
-import { getCacheByKey, isCacheExpired, cacheData } from "../../lib/cache";
+
+import { cache } from "../../lib/cache";
 
 export default async function handler(
   req: NextApiRequest,
@@ -70,7 +71,12 @@ export default async function handler(
   };
 
   if (span) {
-    if (isCacheExpired("api_insights")) {
+
+    const cachedData = cache.get<Response>(`insights_${span}`);
+
+    if (cachedData) {
+      data = cachedData;
+    } else {
       let lang = await getLanguageInsight(span).then((res) => res.json());
       data.languages = lang.data.languages;
 
@@ -92,12 +98,15 @@ export default async function handler(
         )
       );
 
-      cacheData("api_insights", data);
-    } else {
-      data = await getCacheByKey("api_insights");
+      cache.set("insights", data);
     }
   } else {
-    if (isCacheExpired("api_insights")) {
+    const cachedData = cache.get<Response>("insights");
+
+    if (cachedData) {
+      data = cachedData;
+    }
+    else {
       let lang = await getLanguageInsight("last_7_days").then((res) =>
         res.json()
       );
@@ -121,8 +130,6 @@ export default async function handler(
           }
         )
       );
-    } else {
-      data = await getCacheByKey("api_insights");
     }
   }
 

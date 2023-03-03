@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { isCacheExpired, getCacheByKey, cacheData } from "../../lib/cache";
+
+import { cache } from "../../lib/cache";
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,13 +9,16 @@ export default async function handler(
 
   let data = null;
 
-  if (isCacheExpired("api_projects")) {
-    data = await fetch("https://pb.a7.wtf/api/collections/projects/records").then((res) => res.json()).then((data) => data);
-    cacheData("api_projects", data);
+  const cachedData = cache.get("projects");
+
+  if (cachedData) {
+    data = cachedData;
   } else {
-    data = await getCacheByKey("api_projects");
+    data = await fetch("https://pb.a7.wtf/api/collections/projects/records").then((res) => res.json()).then((data) => data);
+
+    cache.set("projects", data);
   }
-  
+
   res.setHeader(
     "Cache-Control",
     "public, s-maxage=500, stale-while-revalidate=250"

@@ -1,70 +1,73 @@
 import fs from 'fs';
 import path from 'path';
 
-// Vercel files are read-only by default to bypass we use /tmp/ (https://github.com/vercel/community/discussions/314?sort=new)
-const cachePath = process.env.DEV ? path.resolve(process.cwd(),  'data', 'cache.json') : '/tmp/data/cache.json';
-
-if (!fs.existsSync(path.dirname(cachePath))) {
-    fs.mkdirSync(path.dirname(cachePath), { recursive: true });
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
 }
 
-function cacheData(key : string, data: any) {
+class Cache {
+  private readonly cachePath: string;
+  private data: Record<string, CacheEntry<any>>;
 
-    if (fs.existsSync(cachePath)) {
-        const cache = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
-        cache[key] = {};
-        cache[key].data = data;
-        cache[key].timestamp = new Date().getTime();
-        fs.writeFileSync(cachePath, JSON.stringify(cache));
-    } else {
-        const cache = {
-            [key]: {
-                data: data,
-                timestamp: new Date().getTime()
-            }
-        }
-        fs.writeFileSync(cachePath, JSON.stringify(cache));
+  constructor(cachePath: string) {
+    this.cachePath = cachePath;
+    this.data = this.loadCacheData();
+  }
+
+  private loadCacheData(): Record<string, CacheEntry<any>> {
+    if (!fs.existsSync(this.cachePath)) {
+      return {};
     }
-}
+    const data = fs.readFileSync(this.cachePath, 'utf-8');
+    return data ? JSON.parse(data) : {};
+  }
 
-function getCacheByKey(key: string, timestamp: boolean = false) {
-    if (fs.existsSync(cachePath)) { 
-        const cache = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
-        try {
-            return timestamp ? { data: cache[key].data, timestamp: cache[key].timestamp } : cache[key].data;
-        } catch (error) {
-            return undefined;
-        }
-    } else {
-        return undefined;
+  private saveCacheData(): void {
+    const dirName = path.dirname(this.cachePath);
+    if (!fs.existsSync(dirName)) {
+      fs.mkdirSync(dirName, { recursive: true });
     }
-}
+    fs.writeFileSync(this.cachePath, JSON.stringify(this.data));
+  }
 
-function clearCache() {
-    if (fs.existsSync(path.join(__dirname, '/data/cache.json'))) {
-        fs.unlinkSync(path.join(__dirname, '/data/cache.json'));
+  public set<T>(key: string, data: T, ttl: number = 86400000): void {
+    const timestamp = new Date().getTime();
+    this.data[key] = { data, timestamp };
+    this.saveCacheData();
+  }
+
+  public get<T>(key: string): T | undefined {
+    const entry = this.data[key];
+    if (!entry) {
+      return undefined;
     }
-}
-
-function clearCacheByKey(key: string) {
-    if (fs.existsSync(path.join(__dirname, '/data/cache.json'))) {
-        const cache = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
-        delete cache[key];
-        fs.writeFileSync(path.join(__dirname, '/data/cache.json'), JSON.stringify(cache));
+    if (this.isExpired(entry.timestamp)) {
+      delete this.data[key];
+      this.saveCacheData();
+      return undefined;
     }
+    return entry.data as T;
+  }
+
+  public delete(key: string): void {
+    delete this.data[key];
+    this.saveCacheData();
+  }
+
+  public clear(): void {
+    this.data = {};
+    this.saveCacheData();
+  }
+
+  private isExpired(timestamp: number, ttl: number = 86400000): boolean {
+    const now = new Date().getTime();
+    const diff = now - timestamp;
+    return diff > ttl;
+  }
 }
 
-function isCacheExpired(key: string) {
-    const cache = getCacheByKey(key, true);
+const cachePath = process.env.DEV ? path.resolve(process.cwd(), 'data', 'cache.json') : '/tmp/data/cache.json';
+const cache = new Cache(cachePath);
 
-    if (cache) {
-        const now = new Date().getTime();
-        const diff = now - cache.timestamp;
-        return diff > 86400000;
-
-    } else {
-        return true;
-    }
-}
-
-export { cacheData, getCacheByKey, clearCache, isCacheExpired, clearCacheByKey }
+export { cache };

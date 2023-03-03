@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { isCacheExpired, cacheData, getCacheByKey } from "../../lib/cache";
+import { cache } from "../../lib/cache";
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,15 +8,18 @@ export default async function handler(
 ) {
   let data: any = [];
 
-  if (isCacheExpired("api_snippets")) {
-    data = await fetch("https://api.github.com/users/xxiz/gists")
-    .then((res) => res.json())
-    .then((data) => data);
-    cacheData("api_snippets", data);
-  } else {
-    data = await getCacheByKey("api_snippets");
-  }
 
+  const cachedData = cache.get("snippets");
+
+  if (cachedData) {
+    data = cachedData;
+  } else {
+    data = await fetch("https://api.github.com/gists/public")
+      .then((res) => res.json())
+      .then((data) => data);
+
+    cache.set("snippets", data);
+  }
 
     data.map((item: any) => {
         delete item.comments_url;
