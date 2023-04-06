@@ -8,27 +8,6 @@ const p2p = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 function InternalError() {
 
-    useEffect(() => {
-        document.addEventListener("keydown", (e) => {
-            if (e.key == "Enter") {
-                window.location.href = "/";
-            }
-        });
-
-        let message = `Error: 500\nDescription: Internal Server Error\nURL: ${window.location.href}\nUser Agent: ${navigator.userAgent}\nReferrer: ${document.referrer}\nTimestamp: ${new Date().toLocaleString()}\nPath: ${window.location.pathname}\n`
-
-        fetch(`${process.env.NTFY_SERVER}/website`, {
-            method: 'POST',
-            headers: {
-                'Title': '5XX Error @ ashwin.lol',
-                'Priority': 'urgent',
-                'Tags': 'warning'
-            },
-            body: message
-        })
-
-    }, []);
-
     return (
         <Container>
             <Head>
