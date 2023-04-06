@@ -19,10 +19,9 @@ export default async function handler(
     if (cachedData) {
         data = cachedData;
     } else {
-        data = await fetch("https://api.unsplash.com/photos/random?count=30&client_id=YOUR_CLIENT_ID")
+        data = await fetch("https://api.unsplash.com/photos/random?count=30&client_id=" + process.env.UNSPLASH_CLIENT_ID)
             .then((res) => res.json())
             .then((data) => data);
-
         cache.set("photos", data);
     }
 
