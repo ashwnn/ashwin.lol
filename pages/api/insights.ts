@@ -1,52 +1,26 @@
-type IGitHubRepository = {
-  node: {
-    name: string;
-    url: string;
-  };
-};
-
-type Language = {
-  name: string;
-  total_second: number;
-};
-
-type Response = {
-  daily_average: string;
-  commits: number;
-  total_time_coding: string;
-  editor: string;
-  os: string;
-  github: {
-    starred: string[];
-  };
-  // racknerd: {
-  //   hastebin: {
-  //     file_count: number;
-  //     size_mb: number;
-  //     size: number;
-  //   },
-  //   lolisafe: {
-  //     file_count: number;
-  //     size_mb: number;
-  //     size: number;
-  //   }
-  // };
-  languages: Language[];
-};
-
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { getLanguageInsight, getWeekly } from "../../lib/wakatime";
 import { getCommits, getUserData } from "../../lib/github";
 
-import { cache } from "../../lib/cache";
+import Edge from "../../lib/edge";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response>
+  res: NextApiResponse
 ) {
+
   const { span } = req.query;
-  let data: Response = {
+
+  type IRepoType = {
+    node: {
+      name: string;
+      url: string;
+    };
+  };
+
+
+  let data = {
     daily_average: "",
     commits: 0,
     total_time_coding: "",
@@ -54,31 +28,22 @@ export default async function handler(
     os: "",
     github: {
       starred: [],
-    },
-    // racknerd: {
-    //   hastebin: {
-    //     file_count: 0,
-    //     size_mb: 0,
-    //     size: 0,
-    //   },
-    //   lolisafe: {
-    //     file_count: 0,
-    //     size_mb: 0,
-    //     size: 0,
-    //   }
-    // },
-    languages: [],
+    }
   };
 
   if (span) {
 
-    const cachedData = cache.get<Response>(`insights_${span}`);
+    const cached = new Edge().read(`insights_${span}`);
 
-    if (cachedData) {
-      data = cachedData;
+    if (cached != null) {
+      console.log("cached");
+      await cached.then((res) => {
+        data = res;
+      });
+
     } else {
-      let lang = await getLanguageInsight(span).then((res) => res.json());
-      data.languages = lang.data.languages;
+
+      console.log("not cached");
 
       let waka_weekly = await getWeekly().then((res) => res.json());
       data.daily_average = waka_weekly.data.human_readable_daily_average;
@@ -89,7 +54,7 @@ export default async function handler(
       data.commits = await getCommits();
       data.github.starred = await getUserData().then((data) =>
         data.data.viewer.starredRepositories.edges.map(
-          (repo: IGitHubRepository) => {
+          (repo: IRepoType) => {
             return {
               name: repo.node.name,
               url: repo.node.url,
@@ -98,19 +63,21 @@ export default async function handler(
         )
       );
 
-      cache.set("insights", data);
+      await new Edge().updateCache(`insights_${span}`, data);
+
     }
   } else {
-    const cachedData = cache.get<Response>("insights");
+    
+    const cached = await new Edge().read(`insights_last_7_days`);
 
-    if (cachedData) {
-      data = cachedData;
+    if (cached != null) {
+      console.log(cached);
+      console.log("cached");
+      data = cached;
     }
+
     else {
-      let lang = await getLanguageInsight("last_7_days").then((res) =>
-        res.json()
-      );
-      data.languages = lang.data.languages;
+      console.log("not cached");
 
       let waka_weekly = await getWeekly().then((res) => res.json());
       data.daily_average = waka_weekly.data.human_readable_daily_average;
@@ -122,7 +89,7 @@ export default async function handler(
       data.commits = commits.data.viewer.contributionsCollection.totalCommitContributions;
       data.github.starred = await getUserData().then((data) =>
         data.data.viewer.starredRepositories.edges.map(
-          (repo: IGitHubRepository) => {
+          (repo: IRepoType) => {
             return {
               name: repo.node.name,
               url: repo.node.url,
@@ -130,6 +97,8 @@ export default async function handler(
           }
         )
       );
+
+      await new Edge().updateCache(`insights_last_7_days`, data);
     }
   }
 
