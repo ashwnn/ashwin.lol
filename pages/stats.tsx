@@ -31,27 +31,6 @@ function Tools() {
           {insights && (
             <div>
               <p className="text-lg text-gray-500 shine">
-                <span>Most Used Language(s): </span>
-                {insights.languages
-                  .slice(0, 5)
-                  .map((lang: {
-                    name: string;
-                  }, index: number) => (
-                    <>
-                      {index > 0 && <span>, </span>}
-                      <a
-                        key={index}
-                        href={`https://www.google.com/search?q=${lang.name}+programming+language`}
-                        className="underline decoration-dotted"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {lang.name}
-                      </a>
-                    </>
-                  ))}
-              </p>
-              <p className="text-lg text-gray-500 shine">
                 <span>Recently Starred Repos: </span>
                 {insights.github.starred.map((repo: {
                   name: string;
