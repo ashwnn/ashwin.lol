@@ -69,8 +69,4 @@ export type Insights = {
             url: string;
         }[];
     };
-    languages: {
-        name: string;
-        total_seconds: number;
-    }[];
 }
