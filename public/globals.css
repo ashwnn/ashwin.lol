@@ -1,0 +1,8 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.shine {
+    --tw-text-opacity: 1;
+    color: rgb(250 250 250/var(--tw-text-opacity))
+}
