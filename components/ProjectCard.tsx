@@ -12,7 +12,7 @@ type ProjectCardProps = {
     date: string;
 }
 
-function ProjectCard(project : ProjectCardProps) {
+export default function ProjectCard(project : ProjectCardProps) {
     return (
       <div className="relative p-4 duration-150 border rounded-lg text-zinc-300 border-zinc-700">
         

@@ -1,10 +1,9 @@
 
-function Projects() {
+export default function Projects() {
+    
     return (
         <div>
 
         </div>
     );
 }
-
-export default Projects;
