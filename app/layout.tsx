@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "@/public/globals.css"
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-    title: "a Student/Developer living in Canada",
+export const meta: Metadata = {
+    title: "Ashwin Charathsandran",
+    description: "A student/developer from Vancouver, Canada.",
 };
 
-export default function RootLayout({ children }: Readonly<{children: React.ReactNode}>) {
+export default function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     return (
         <html lang="en">
-            <body className={`flex flex-col min-h-screen antialiased bg-zinc-900 text-zinc-400 ${inter.className}`}>
-                {children}
+            <body
+                className={`flex flex-col min-h-screen antialiased bg-zinc-900 text-zinc-400 ${inter.className}`}
+            >
+                <div className="flex-grow">{children}</div>
             </body>
         </html>
     );
