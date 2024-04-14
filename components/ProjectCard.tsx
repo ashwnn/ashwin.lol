@@ -1,96 +1,82 @@
-'use client' // !! TODO: Convert Icon to SVG & remove use client
+import Link from "next/link";
+import { format, isValid } from "date-fns";
 
-import { Icon } from '@iconify/react';
-
-type ProjectCardProps = {
-    tags: string[];
+interface ProjectCardProps {
+    caseStudy?: string;
+    demo?: string;
+    github?: string;
     title: string;
     description: string;
-    github?: string;
-    demo?: string;
-    case_study?: string;
-    date: string;
+    tags: string;
+    startDate: string;
+    endDate?: string;
 }
 
-export default function ProjectCard(project : ProjectCardProps) {
+const ProjectCard = ({
+    caseStudy,
+    demo,
+    github,
+    title,
+    description,
+    tags,
+    startDate,
+    endDate,
+}: ProjectCardProps) => {
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        if (!isValid(date)) {
+            return "Invalid date";
+        }
+        return format(date, "MMM d, yyyy");
+    };
+
+    const formattedStartDate = formatDate(startDate);
+    const formattedEndDate = endDate ? formatDate(endDate) : "Present";
+
     return (
-      <div className="relative p-4 duration-150 border rounded-lg text-zinc-300 border-zinc-700">
-        
-        <div>
-          <h3 className="mb-2 text-2xl font-semibold">{project.title}</h3>
-          <p className="md:mb-4">{project.description}</p>
-          <div className="flex flex-wrap items-center mb-4">
-            {project.tags.map((tag: string, index: number) => (
-              <span
-                key={index}
-                className="px-3 py-1 mt-3 mr-2 rounded-lg lg:mt-0 bg-zinc-700/50"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          
-          <div className="my-2 ml-1">
-            {project.github && (
-              <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-umami-click={`View Project ${project.title} on GitHub`}
-              >
-                <Icon
-                icon="charm:github"
-                width={20}
-                height={20}
-                className="mr-1.5 inline align-text-bottom"
-              />
-              <span className="hidden md:inline-block">GitHub</span>
-              </a>
-            )}
-            {project.demo && (
-                <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-umami-click={`View Project ${project.title} Demo`}
-                    className="ml-4"
-                >
-                    <Icon
-                    icon="charm:globe"
-                    width={20}
-                    height={20}
-                    className="mr-1.5 inline align-text-bottom"
-                    />
-                    <span className="hidden md:inline-block">Demo</span>
-                </a>
-            )}
-            {project.case_study && (
-                <a
-                href={project.case_study}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-umami-click={`View Project ${project.title} Demo`}
-                className="ml-4"
-            >
-                <Icon
-                icon="fluent-mdl2:documentation"
-                width={20}
-                height={20}
-                className="mr-1.5 inline align-text-bottom"
-                />
-                <span className="hidden md:inline-block">Case Study</span>
-            </a>
-            )}
-            {!project.github && !project.demo && !project.case_study && (
-                <span className="text-[#bfbfbf] text-xl">Private</span>
-            )}
-          </div>
+        <div className="bg-zinc-800 text-zinc-300 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden">
+            <div className="p-4">
+                <h3 className="text-xl font-semibold mb-1">{title}</h3>
+                <p className="text-zinc-400 text-sm mb-2">{description}</p>
+                <div className="flex items-center justify-start space-x-3 mb-3 font-semibold">
+                    {caseStudy && (
+                        <Link href={caseStudy} legacyBehavior>
+                            <a className="text-blue-500 hover:text-blue-600 transition-colors duration-300">
+                                Case Study
+                            </a>
+                        </Link>
+                    )}
+                    {demo && (
+                        <Link href={demo} legacyBehavior>
+                            <a className="text-green-500 hover:text-green-600 transition-colors duration-300">
+                                Demo
+                            </a>
+                        </Link>
+                    )}
+                    {github && (
+                        <Link href={github} legacyBehavior>
+                            <a className="text-zinc-200 hover:text-zinc-400 transition-colors duration-300">
+                                Code
+                            </a>
+                        </Link>
+                    )}
+                </div>
+                <div className="flex flex-wrap gap-1 mb-1">
+                    {tags.split(",").map((tag, index) => (
+                        <span
+                            key={index}
+                            className="bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 mx-0.5 rounded-md"
+                        >
+                            {tag.trim()}
+                        </span>
+                    ))}
+                </div>
+            </div>
+            <div className="bg-zinc-700 text-zinc-100 p-2 text-right text-xs uppercase font-medium">
+                {formattedStartDate} - {formattedEndDate}
+            </div>
         </div>
-        <div className="absolute bottom-0 right-0 p-4">
-          <span className="text-sm font-medium text-gray-600">
-            {project.date}
-          </span>
-        </div>
-      </div>
     );
-  }
+};
+
+export default ProjectCard;
