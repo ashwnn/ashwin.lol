@@ -1,5 +1,4 @@
 import BlogCard from "@/components/BlogCard";
-import Loader from "@/components/Loader";
 import { BlogCardSkeleton } from "@/components/Skeleton";
 import { Blog } from "@/types";
 import { Suspense } from "react";

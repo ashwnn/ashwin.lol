@@ -1,3 +1,6 @@
+import { GistSkeleton } from "@/components/Skeleton";
+import { Suspense } from "react";
+
 async function getGists() {
     return await fetch("https://api.github.com/users/xxiz/gists")
         .then((response) => response.json())
@@ -7,8 +10,7 @@ async function getGists() {
 }
 
 export default async function Snippets() {
-    const gists = getGists();
-    const [data] = await Promise.all([gists]);
+    const gists = await getGists();
 
     return (
         <div>
@@ -18,36 +20,41 @@ export default async function Snippets() {
                 </b>
             </h2>
             <div className="pt-5 divide-y divide-zinc-800">
-                {data.map((gist: any) => (
-                    <article key={gist.id} className="py-4">
-                        <a
-                            href={gist.html_url}
-                            className=""
-                            rel="noopener noreferrer"
-                            target="_blank"
-                        >
-                            <h3>
-                                {Object.keys(gist.files).map((file: any) => (
-                                    <span
-                                        key={file}
-                                        className="text-lg font-medium text-zinc-200"
-                                    >
-                                        {file}
+                <Suspense fallback={<GistSkeleton />}>
+                    {gists.map((gist: any) => (
+                        <article key={gist.id} className="py-4">
+                            <a
+                                href={gist.html_url}
+                                className=""
+                                rel="noopener noreferrer"
+                                target="_blank"
+                            >
+                                <h3>
+                                    {Object.keys(gist.files).map(
+                                        (file: any) => (
+                                            <span
+                                                key={file}
+                                                className="text-lg font-medium text-zinc-200"
+                                            >
+                                                {file}
+                                            </span>
+                                        )
+                                    )}
+                                </h3>
+                                <div>
+                                    <span className="text-sm">
+                                        {gist.description.length > 50
+                                            ? gist.description.substring(
+                                                  0,
+                                                  50
+                                              ) + "..."
+                                            : gist.description}
                                     </span>
-                                ))}
-                            </h3>
-                            <div>
-                                <span className="text-sm">
-                                    {gist.description.length > 50
-                                        ? gist.description.substring(0, 50) +
-                                          "..."
-                                        : gist.description}
-                                </span>
-                            </div>
-                        </a>
-                    </article>
-                ))}
-                {!data && <div>Loading...</div>}
+                                </div>
+                            </a>
+                        </article>
+                    ))}
+                </Suspense>
             </div>
         </div>
     );

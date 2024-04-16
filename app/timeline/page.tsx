@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 async function getTimeline() {
     const res = await fetch(
         "https://pb.bepo.ca/api/collections/timeline/records",

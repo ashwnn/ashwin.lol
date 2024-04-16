@@ -1,6 +1,5 @@
 import Card from "@/components/Card";
 import SocialLinks from "@/components/SocialLinks";
-import Link from "next/link";
 
 export default function Root() {
 

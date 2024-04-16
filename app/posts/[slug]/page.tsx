@@ -1,4 +1,3 @@
-import { error } from "console";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 

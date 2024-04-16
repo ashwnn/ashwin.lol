@@ -45,4 +45,15 @@ function ProjectCardSkeleton() {
       );
 }
 
-export { BlogCardSkeleton, ProjectCardSkeleton };
+function GistSkeleton() {
+  return (
+    <article className="py-4 animate-pulse">
+      <div className="space-y-2">
+        <div className="h-6 bg-zinc-700 rounded w-3/4"></div> {/* Placeholder for the filename */}
+        <div className="h-4 bg-zinc-700 rounded w-full"></div> {/* Placeholder for the description */}
+      </div>
+    </article>
+  )
+}
+
+export { BlogCardSkeleton, ProjectCardSkeleton, GistSkeleton };
