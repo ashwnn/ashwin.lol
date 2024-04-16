@@ -39,4 +39,57 @@ async function getTopTracks() {
     })
 }
 
-export { getNowPlaying, getTopTracks }
+async function getSpotifyData() {
+    const response = await getNowPlaying();
+
+    console.log(response)
+
+    if (response.status === 204 || response.status > 400) {
+        return { isPlaying: false }
+    }
+
+    const song = await response.json();
+
+    if (song.item === null) {
+        return { isPlaying: false }
+    }
+
+    if (!song.item.is_local) {
+        const isPlaying = song.is_playing;
+        const title = song.item.name;
+        const artist = song.item.artists
+            .map((_artist: any) => _artist.name)
+            .join(", ");
+        const album = song.item.album.name;
+        const albumImageUrl = song.item.album.images[0].url;
+        const songUrl = song.item.external_urls.spotify;
+
+        return {
+            album,
+            albumImageUrl,
+            artist,
+            isPlaying,
+            songUrl,
+            title,
+        }
+
+    } else {
+        const isPlaying = song.is_playing;
+        const title = song.item.name;
+        const artist = song.item.artists
+            .map((_artist: any) => _artist.name)
+            .join(", ");
+        const album = song.item.album.name;
+        const isLocal = true;
+
+        return {
+            album,
+            artist,
+            isPlaying,
+            title,
+            isLocal
+        }
+    }
+}
+
+export { getSpotifyData }

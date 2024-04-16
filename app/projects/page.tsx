@@ -11,17 +11,16 @@ async function getProjects() {
 }
 
 export default async function Projects() {
-    const projects = getProjects();
-
-    const [data] = await Promise.all([projects]);
+    
+    const projects = await getProjects();
+    
     return (
         <div>
             <ul>
                 <Suspense fallback={<ProjectCardSkeleton />}>
-                    {data.map((project: Project) => (
+                    {projects.map((project: Project) => (
                         <li key={project.id} className="my-3">
-                            <ProjectCard {...project}
-                            />
+                            <ProjectCard {...project} />
                         </li>
                     ))}
                 </Suspense>

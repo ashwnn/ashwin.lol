@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function AboutLayout({
+export default function TimelineLayout({
     children,
 }: {
     children: React.ReactNode;
@@ -30,7 +30,7 @@ export default function AboutLayout({
             </Link>
             <h2 className="mb-6 text-2xl leading-snug shine">
                 <b className="font-medium">
-                    <span>About Me</span>
+                    <span>Timeline</span>
                 </b>
             </h2>
             {children}
