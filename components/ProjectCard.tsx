@@ -1,56 +1,68 @@
-import React from 'react';
-import Link from 'next/link';
-import { Project } from '@/types';
+import React from "react";
+import Link from "next/link";
+import { Project } from "@/types";
 
 export default function ProjectCard(project: Project) {
-    
     const formatDate = (date: Date) => {
         return new Date(date).toLocaleDateString(undefined, {
-          month: 'long', day: 'numeric', year: 'numeric'
+            month: "short",
+            year: "numeric",
         });
-      };
+    };
 
     return (
-        <div className="overflow-hidden transition-shadow duration-300 rounded-lg shadow-lg bg-zinc-800 hover:shadow-xl text-zinc-300">
-            <div className="p-4">
-                <h3 className="mb-1 text-xl font-semibold">{project.title}</h3>
-                <p className="mb-2 text-sm text-zinc-400">{project.description}</p>
-                <div className="flex items-center justify-start mb-3 space-x-3 font-semibold">
+        <div className="border rounded-sm border-zinc-700 shadow-md shadow-zinc-600">
+            <div className="p-4 bg-zinc-800">
+                <h3 className="text-2xl font-semibold text-white">
+                    {project.title}
+                </h3>
+                <p className="text-lg text-zinc-40">{project.description}</p>
+                <div className="space-x-3 font-semibold my-3">
                     {project.case_study && (
-                        <Link href={project.case_study} legacyBehavior>
-                            <a className="text-blue-500 transition-colors duration-300 hover:text-blue-600">
-                                Case Study
-                            </a>
-                        </Link>
+                        <>
+                            <Link href={project.case_study} legacyBehavior>
+                                <a className="text-gray-300 transition-colors duration-300 hover:text-white">
+                                    Case Study
+                                </a>
+                            </Link>
+                            {(project.demo || project.github) && (
+                                <span className="mx-2">/</span>
+                            )}
+                        </>
                     )}
                     {project.demo && (
-                        <Link href={project.demo} legacyBehavior>
-                            <a className="text-green-500 transition-colors duration-300 hover:text-green-600">
-                                Demo
-                            </a>
-                        </Link>
+                        <>
+                            <Link href={project.demo} legacyBehavior>
+                                <a className="text-gray-300 transition-colors duration-300 hover:text-white">
+                                    Demo
+                                </a>
+                            </Link>
+                            {project.github && <span className="mx-2">/</span>}
+                        </>
                     )}
                     {project.github && (
                         <Link href={project.github} legacyBehavior>
-                            <a className="transition-colors duration-300 text-zinc-200 hover:text-zinc-400">
+                            <a className="text-gray-300 transition-colors duration-300 hover:text-white">
                                 Code
                             </a>
                         </Link>
                     )}
                 </div>
-                <div className="flex flex-wrap gap-1 mb-1">
+
+                <div className="flex flex-wrap">
                     {project.tags.split(",").map((tag, index) => (
                         <span
                             key={index}
-                            className="bg-gray-700 text-gray-300 text-xs font-medium px-2 py-1 mx-0.5 rounded-md"
+                            className="px-2 py-1 mr-2 font-medium text-white lowercase rounded-lg bg-zinc-700"
                         >
                             {tag.trim()}
                         </span>
                     ))}
                 </div>
             </div>
-            <div className="p-2 text-xs font-medium text-right uppercase bg-zinc-700 text-zinc-100">
-                {formatDate(project.start_date)} - {project.end_date ? formatDate(project.end_date) : "Present"}
+            <div className="pb-2 px-2 text-md font-medium text-right text-gray-300 bg-zinc-800">
+                {formatDate(project.start_date)} -{" "}
+                {project.end_date ? formatDate(project.end_date) : "Present"}
             </div>
         </div>
     );

@@ -16,7 +16,7 @@ export default async function Projects() {
     
     return (
         <div>
-            <ul>
+            <ul className="grid gap-y">
                 <Suspense fallback={<ProjectCardSkeleton />}>
                     {projects.map((project: Project) => (
                         <li key={project.id} className="my-3">

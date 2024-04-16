@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 async function getTimeline() {
     const res = await fetch(
         "https://pb.bepo.ca/api/collections/timeline/records",
@@ -24,11 +26,13 @@ export default async function Timeline() {
                         <time className="mb-1 text-sm font-semibold leading-none text-zinc-400">
                             {formatDate(timeline.date)}
                         </time>
+                        
+
                         <h3 className="text-lg font-semibold text-white">
                             {timeline.title}
                         </h3>
                         <div
-                            className="mb-4 text-base font-normal text-zinc-400"
+                            className="mb-4 text-base font-normal text-zinc-400 max-w-[800px]"
                             dangerouslySetInnerHTML={{
                                 __html: timeline.content,
                             }}
