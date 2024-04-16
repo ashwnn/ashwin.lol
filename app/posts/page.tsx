@@ -22,12 +22,17 @@ export default async function Posts() {
             </h2>
             <ul>
                 <Suspense fallback={<BlogCardSkeleton />}>
-                    {posts.map((post: Blog) => (
-                        <li key={post.id} className="my-3">
-                            <BlogCard {...post}
-                            />
-                        </li>
-                    ))}
+                    {posts.length > 0 ? (
+                        <>
+                            {posts.map((post: Blog) => (
+                                <li key={post.id} className="my-3">
+                                    <BlogCard {...post} />
+                                </li>
+                            ))}
+                        </>
+                    ) : (
+                        <p>I&apos;m writing something, check back soon!</p>
+                    )}
                 </Suspense>
             </ul>
         </div>

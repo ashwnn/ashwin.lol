@@ -33,7 +33,7 @@ export default function BlogCard({ id, slug, title, description, cover_image, ta
         <h3 className="mb-2 text-2xl font-semibold leading-tight">
           {title}
         </h3>
-        <p className="mb-2 text-gray-600">
+        <p className="mb-2 italic">
           {description}
         </p>
 

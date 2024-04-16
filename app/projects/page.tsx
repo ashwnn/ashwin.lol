@@ -11,18 +11,23 @@ async function getProjects() {
 }
 
 export default async function Projects() {
-    
     const projects = await getProjects();
-    
+
     return (
         <div>
             <ul className="grid gap-y">
                 <Suspense fallback={<ProjectCardSkeleton />}>
-                    {projects.map((project: Project) => (
-                        <li key={project.id} className="my-3">
-                            <ProjectCard {...project} />
-                        </li>
-                    ))}
+                    {projects.length > 0 ? (
+                        <>
+                            {projects.map((project: Project) => (
+                                <li key={project.id} className="my-3">
+                                    <ProjectCard {...project} />
+                                </li>
+                            ))}
+                        </>
+                    ) : (
+                        <p>I&apos;m upadting things, check back soon!</p>
+                    )}
                 </Suspense>
             </ul>
         </div>
