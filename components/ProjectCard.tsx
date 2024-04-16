@@ -1,27 +1,19 @@
-import Link from "next/link";
-import { format, isValid } from "date-fns";
+import React from 'react';
+import Link from 'next/link';
+import { format, isValid } from 'date-fns';
 
-interface ProjectCardProps {
-    caseStudy?: string;
-    demo?: string;
-    github?: string;
-    title: string;
-    description: string;
-    tags: string;
-    startDate: string;
-    endDate?: string;
-}
+type ProjectCardProps = {
+  title: string;
+  description: string;
+  start_date: string;
+  end_date?: string;
+  case_study?: string;
+  demo?: string;
+  github?: string;
+  tags: string;
+};
 
-const ProjectCard = ({
-    caseStudy,
-    demo,
-    github,
-    title,
-    description,
-    tags,
-    startDate,
-    endDate,
-}: ProjectCardProps) => {
+export default function ProjectCard(project: ProjectCardProps) {
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
         if (!isValid(date)) {
@@ -30,53 +22,51 @@ const ProjectCard = ({
         return format(date, "MMM d, yyyy");
     };
 
-    const formattedStartDate = formatDate(startDate);
-    const formattedEndDate = endDate ? formatDate(endDate) : "Present";
+    const formattedStartDate = formatDate(project.start_date);
+    const formattedEndDate = project.end_date ? formatDate(project.end_date) : "Present";
 
     return (
-        <div className="bg-zinc-800 text-zinc-300 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden">
+        <div className="overflow-hidden transition-shadow duration-300 rounded-lg shadow-lg bg-zinc-800 hover:shadow-xl text-zinc-300">
             <div className="p-4">
-                <h3 className="text-xl font-semibold mb-1">{title}</h3>
-                <p className="text-zinc-400 text-sm mb-2">{description}</p>
-                <div className="flex items-center justify-start space-x-3 mb-3 font-semibold">
-                    {caseStudy && (
-                        <Link href={caseStudy} legacyBehavior>
-                            <a className="text-blue-500 hover:text-blue-600 transition-colors duration-300">
+                <h3 className="mb-1 text-xl font-semibold">{project.title}</h3>
+                <p className="mb-2 text-sm text-zinc-400">{project.description}</p>
+                <div className="flex items-center justify-start mb-3 space-x-3 font-semibold">
+                    {project.case_study && (
+                        <Link href={project.case_study} legacyBehavior>
+                            <a className="text-blue-500 transition-colors duration-300 hover:text-blue-600">
                                 Case Study
                             </a>
                         </Link>
                     )}
-                    {demo && (
-                        <Link href={demo} legacyBehavior>
-                            <a className="text-green-500 hover:text-green-600 transition-colors duration-300">
+                    {project.demo && (
+                        <Link href={project.demo} legacyBehavior>
+                            <a className="text-green-500 transition-colors duration-300 hover:text-green-600">
                                 Demo
                             </a>
                         </Link>
                     )}
-                    {github && (
-                        <Link href={github} legacyBehavior>
-                            <a className="text-zinc-200 hover:text-zinc-400 transition-colors duration-300">
+                    {project.github && (
+                        <Link href={project.github} legacyBehavior>
+                            <a className="transition-colors duration-300 text-zinc-200 hover:text-zinc-400">
                                 Code
                             </a>
                         </Link>
                     )}
                 </div>
                 <div className="flex flex-wrap gap-1 mb-1">
-                    {tags.split(",").map((tag, index) => (
+                    {project.tags.split(",").map((tag, index) => (
                         <span
                             key={index}
-                            className="bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 mx-0.5 rounded-md"
+                            className="bg-gray-700 text-gray-300 text-xs font-medium px-2 py-1 mx-0.5 rounded-md"
                         >
                             {tag.trim()}
                         </span>
                     ))}
                 </div>
             </div>
-            <div className="bg-zinc-700 text-zinc-100 p-2 text-right text-xs uppercase font-medium">
+            <div className="p-2 text-xs font-medium text-right uppercase bg-zinc-700 text-zinc-100">
                 {formattedStartDate} - {formattedEndDate}
             </div>
         </div>
     );
-};
-
-export default ProjectCard;
+}

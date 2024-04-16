@@ -15,7 +15,7 @@ export default function Card(card : CardProps) {
             target={local ? "_self" : "_blank"}
             rel="noopener noreferrer nofollow"
             href={card.url}
-            className={`umami--click--page--${card.title} relative p-4 duration-150 border rounded-lg text-zinc-300 border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5`}
+            className={`relative p-4 duration-150 border rounded-lg text-zinc-300 border-zinc-700 hover:shadow-lg hover:shadow-zinc-600/50 hover:-translate-y-0.5`}
         >
             <div>
                 <h3 className="mb-2 text-2xl font-semibold">{card.title}</h3>

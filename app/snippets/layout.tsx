@@ -1,10 +1,6 @@
 import Link from "next/link";
 
-export default function AboutLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function SnippetsLayout( {children}: {children: React.ReactNode} ) {
     return (
         <div className="max-w-screen-xl px-3 mx-auto mt-10">
             <Link href="javascript:window.history.go(-1);" className="pb-10">
@@ -28,11 +24,11 @@ export default function AboutLayout({
                     <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"></path>
                 </svg>
             </Link>
-            <h2 className="mb-6 text-2xl leading-snug shine">
-                <b className="font-medium">
-                    <span>About Me</span>
-                </b>
-            </h2>
+            <Link href="/">
+                <svg className="inline-block w-8 h-8 ml-2 mb-5 align-text-top text-[#bfbfbf] hover:text-[#fff]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"></path>
+                </svg>
+            </Link>
             {children}
         </div>
     );

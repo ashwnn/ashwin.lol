@@ -5,7 +5,8 @@ const nextConfig = {
     images: {
         domains: [
             'i.scdn.co',            // spotify
-            'images.unsplash.com'   // unsplash
+            'images.unsplash.com',  // unsplash
+            'pb.bepo.ca'            // cdn
         ]
     },
     async redirects() {
