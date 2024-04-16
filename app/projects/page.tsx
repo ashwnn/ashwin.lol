@@ -1,5 +1,6 @@
 import ProjectCard from "@/components/ProjectCard";
 import { ProjectCardSkeleton } from "@/components/Skeleton";
+import { Project } from "@/types";
 import { Suspense } from "react";
 
 async function getProjects() {
@@ -9,18 +10,6 @@ async function getProjects() {
     return response.items;
 }
 
-type ProjectType = {
-    id: string;
-    title: string;
-    description: string;
-    tags: string;
-    start_date: string;
-    end_date: string;
-    demo: string;
-    github: string;
-    case_study: string;
-};
-
 export default async function Projects() {
     const projects = getProjects();
 
@@ -29,7 +18,7 @@ export default async function Projects() {
         <div>
             <ul>
                 <Suspense fallback={<ProjectCardSkeleton />}>
-                    {data.map((project: ProjectType) => (
+                    {data.map((project: Project) => (
                         <li key={project.id} className="my-3">
                             <ProjectCard {...project}
                             />

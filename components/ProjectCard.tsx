@@ -1,29 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import { format, isValid } from 'date-fns';
+import { Project } from '@/types';
 
-type ProjectCardProps = {
-  title: string;
-  description: string;
-  start_date: string;
-  end_date?: string;
-  case_study?: string;
-  demo?: string;
-  github?: string;
-  tags: string;
-};
-
-export default function ProjectCard(project: ProjectCardProps) {
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
-        if (!isValid(date)) {
-            return "Invalid date";
-        }
-        return format(date, "MMM d, yyyy");
-    };
-
-    const formattedStartDate = formatDate(project.start_date);
-    const formattedEndDate = project.end_date ? formatDate(project.end_date) : "Present";
+export default function ProjectCard(project: Project) {
+    
+    const formatDate = (date: Date) => {
+        return new Date(date).toLocaleDateString(undefined, {
+          month: 'long', day: 'numeric', year: 'numeric'
+        });
+      };
 
     return (
         <div className="overflow-hidden transition-shadow duration-300 rounded-lg shadow-lg bg-zinc-800 hover:shadow-xl text-zinc-300">
@@ -65,7 +50,7 @@ export default function ProjectCard(project: ProjectCardProps) {
                 </div>
             </div>
             <div className="p-2 text-xs font-medium text-right uppercase bg-zinc-700 text-zinc-100">
-                {formattedStartDate} - {formattedEndDate}
+                {formatDate(project.start_date)} - {project.end_date ? formatDate(project.end_date) : "Present"}
             </div>
         </div>
     );

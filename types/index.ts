@@ -36,3 +36,26 @@ export type Project = {
     start_date: Date;
     end_date: Date;
 }
+
+export type UnsplashPhoto = {
+    id: string;
+    alt_description: string;
+    unsplash: string;
+    thumbnail: {
+        url: string;
+        width: number;
+        height: number;
+        quality: number;
+    };
+    image: {
+        url: string;
+        width: number;
+        height: number;
+    };
+    regular: {
+        url: string;
+        width: number;
+        height: number;
+        quality: number;
+    };
+};
