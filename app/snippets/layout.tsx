@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export const metadata = {
+    title: "Snippets"
+}
+
 export default function SnippetsLayout( {children}: {children: React.ReactNode} ) {
     return (
         <div className="max-w-screen-xl px-3 mx-auto mt-10">

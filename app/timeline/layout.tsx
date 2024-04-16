@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export const metadata = {
+    title: "Timeline"
+}
+
 export default function TimelineLayout({
     children,
 }: {

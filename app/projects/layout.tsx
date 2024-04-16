@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export const metadata = {
+    title: "Projects"
+}
+
 export default function ProjectLayout({
     children,
 }: {

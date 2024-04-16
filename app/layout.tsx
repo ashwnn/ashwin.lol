@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const meta: Metadata = {
-    title: "Ashwin Charathsandran",
+export const metadata: Metadata = {
+    title: {
+        default: "Ashwin C.",
+        template: "%s - Ashwin C.",
+    },
     description: "A student/developer from Vancouver, Canada.",
 };
 

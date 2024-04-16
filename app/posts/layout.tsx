@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export const metadata = {
+    title: "All Posts"
+}
+
 export default function PostLayout({
     children,
 }: {

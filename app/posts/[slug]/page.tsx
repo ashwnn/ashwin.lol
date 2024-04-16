@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata, ResolvingMetadata } from 'next'
 
 async function getPost(slug: string) {
     const response = await fetch(
@@ -7,6 +8,29 @@ async function getPost(slug: string) {
     ).then((res) => res.json());
 
     return response.items[0];
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }, parent: ResolvingMetadata // For inheriting parent metadata
+): Promise<Metadata> {
+  const slug = params.slug;
+
+  const post = await getPost(slug);
+
+  return {
+    title: post.title, 
+    description: post.excerpt,
+    openGraph: {
+      images: [
+        {
+          url: `https://pb.bepo.ca/api/files/posts/${post.id}/${post.cover_image}`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    // ...other metadata fields
+  };
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
@@ -24,8 +48,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
     }
 
     post.tags = post.tags.split(",").map((tag: string) => tag.trim());
-    post.cover_image = `https://pb.bepo.ca/api/files/posts/${post.id}/${post.cover_image}`;
-
     post.date = formatDate(post.published_date);
 
     return (
@@ -37,7 +59,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               >
                 <Image
                   alt={post.title}
-                  src={post.cover_image}
+                  src={`https://pb.bepo.ca/api/files/posts/${post.id}/${post.cover_image}`}
                   quality={100}
                   fill
                   sizes="100vw"

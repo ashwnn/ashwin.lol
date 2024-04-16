@@ -5,6 +5,7 @@ export default function SocialLinks() {
                 href="https://github.com/xxiz/"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
+                aria-label="GitHub"
             >
                 <svg
                     className="w-8 h-8 text-[#bfbfbf] hover:text-[#fff]"
@@ -21,6 +22,7 @@ export default function SocialLinks() {
                 href="https://stackoverflow.com/users/9254757/"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
+                aria-label="Stack Overflow"
             >
                 <svg
                     className="w-8 h-8 text-[#bfbfbf] hover:text-[#fff]"
@@ -37,6 +39,7 @@ export default function SocialLinks() {
                 href="https://linkedin.com/in/ax2/"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
+                aria-label="LinkedIn"
             >
                 <svg
                     className="w-8 h-8 text-[#bfbfbf] hover:text-[#fff]"
@@ -53,6 +56,7 @@ export default function SocialLinks() {
                 href="/pgp.asc"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
+                aria-label="PGP Key"
             >
                 <svg
                     className="w-8 h-8 text-[#bfbfbf] hover:text-[#fff]"
@@ -69,6 +73,7 @@ export default function SocialLinks() {
                 href="mailto:its@ashwin.lol"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
+                aria-label="Email"
                 >
                 <svg
                     className="w-8 h-8 text-[#bfbfbf] hover:text-[#fff]"

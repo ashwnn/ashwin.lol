@@ -1,6 +1,10 @@
 import Card from "@/components/Card";
 import SocialLinks from "@/components/SocialLinks";
 
+export const metadata = {
+    title: "Hello World! - Ashwin C."
+}
+
 export default function Root() {
 
     return (
