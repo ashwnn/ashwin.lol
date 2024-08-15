@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from 'next'
+import rehypeStringify from "rehype-stringify";
+import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
 
 async function getPost(slug: string) {
     const response = await fetch(
@@ -29,7 +34,6 @@ export async function generateMetadata({ params }: { params: { slug: string } },
         },
       ],
     },
-    // ...other metadata fields
   };
 }
 
@@ -49,6 +53,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
     post.tags = post.tags.split(",").map((tag: string) => tag.trim());
     post.date = formatDate(post.published_date);
+
+    const render = await unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype)
+    .use(rehypeStringify)
+    .process(post.content);
 
     return (
         <div>
@@ -81,7 +92,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               </div>
               <hr className="my-5" />
             </div>
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            <div dangerouslySetInnerHTML={{ __html: render.toString() }}></div>
           </div>
         </div>
     );

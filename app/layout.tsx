@@ -19,13 +19,16 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
-            <body
-                className={`flex flex-col min-h-screen antialiased bg-zinc-900 text-zinc-400 ${inter.className}`}
-            >
-                <div className="flex-grow">{children}</div>
-                <Footer />
-            </body>
-        </html>
+        <>
+            <link rel="icon" href="/favicon.svg" sizes="any" />
+            <html lang="en">
+                <body
+                    className={`flex flex-col min-h-screen antialiased bg-zinc-900 text-zinc-400 ${inter.className}`}
+                >
+                    <div className="flex-grow">{children}</div>
+                    <Footer />
+                </body>
+            </html>
+        </>
     );
 }

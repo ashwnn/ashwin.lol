@@ -21,39 +21,50 @@ function BlogCardSkeleton() {
 
 function ProjectCardSkeleton() {
     return (
-        <div className="overflow-hidden transition-shadow duration-300 rounded-lg shadow-lg bg-zinc-800 text-zinc-300">
-          <div className="p-4 animate-pulse">
-            <div className="h-6 bg-zinc-700 rounded-md mb-2"></div> {/* Title */}
-            <div className="h-4 bg-zinc-700 rounded mb-2"></div> {/* Description */}
-            <div className="flex items-center justify-start mb-3 space-x-3">
-              {/* Placeholder for links */}
-              <div className="h-4 bg-blue-500 w-24 rounded"></div>
-              <div className="h-4 bg-green-500 w-24 rounded"></div>
-              <div className="h-4 bg-zinc-200 w-24 rounded"></div>
+        <div className="border rounded-sm border-zinc-700 shadow-md shadow-zinc-600 animate-pulse">
+            <div className="p-4 bg-zinc-800">
+                <div className="h-6 bg-zinc-700 rounded-md w-3/4 mb-4"></div>{" "}
+                {/* Title placeholder */}
+                <div className="h-4 bg-zinc-700 rounded-md w-full mb-3"></div>{" "}
+                {/* Description placeholder */}
+                <div className="flex space-x-3 mb-3">
+                    <div className="h-4 bg-zinc-700 rounded-md w-20"></div>{" "}
+                    {/* Case study link placeholder */}
+                    <div className="h-4 bg-zinc-700 rounded-md w-20"></div>{" "}
+                    {/* Demo link placeholder */}
+                    <div className="h-4 bg-zinc-700 rounded-md w-20"></div>{" "}
+                    {/* Code link placeholder */}
+                </div>
+                <div className="flex flex-wrap">
+                    <div className="h-4 bg-zinc-700 rounded-md w-12 mr-2 mb-2"></div>{" "}
+                    {/* Tag placeholder */}
+                    <div className="h-4 bg-zinc-700 rounded-md w-12 mr-2 mb-2"></div>{" "}
+                    {/* Tag placeholder */}
+                    <div className="h-4 bg-zinc-700 rounded-md w-12 mr-2 mb-2"></div>{" "}
+                    {/* Tag placeholder */}
+                </div>
             </div>
-            <div className="flex flex-wrap gap-1 mb-1">
-              {/* Tags placeholder */}
-              <div className="h-4 bg-gray-200 w-16 rounded-md"></div>
-              <div className="h-4 bg-gray-200 w-12 rounded-md"></div>
-              <div className="h-4 bg-gray-200 w-8 rounded-md"></div>
+            <div className="pb-2 px-2 text-md font-medium text-right text-gray-300 bg-zinc-800">
+                <div className="h-4 bg-zinc-700 rounded-md w-24 inline-block mr-2"></div>{" "}
+                {/* Start date placeholder */}
+                <div className="h-4 bg-zinc-700 rounded-md w-24 inline-block"></div>{" "}
+                {/* End date placeholder */}
             </div>
-          </div>
-          <div className="p-2 bg-zinc-700">
-            <div className="h-4 bg-zinc-600 rounded-md w-32 mx-auto"></div> {/* Dates */}
-          </div>
         </div>
-      );
+    );
 }
 
 function GistSkeleton() {
-  return (
-    <article className="py-4 animate-pulse">
-      <div className="space-y-2">
-        <div className="h-6 bg-zinc-700 rounded w-3/4"></div> {/* Placeholder for the filename */}
-        <div className="h-4 bg-zinc-700 rounded w-full"></div> {/* Placeholder for the description */}
-      </div>
-    </article>
-  )
+    return (
+        <article className="py-4 animate-pulse">
+            <div className="space-y-2">
+                <div className="h-6 bg-zinc-700 rounded w-3/4"></div>{" "}
+                {/* Placeholder for the filename */}
+                <div className="h-4 bg-zinc-700 rounded w-full"></div>{" "}
+                {/* Placeholder for the description */}
+            </div>
+        </article>
+    );
 }
 
 export { BlogCardSkeleton, ProjectCardSkeleton, GistSkeleton };

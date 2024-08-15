@@ -1,34 +1,27 @@
+'use client';
 import ProjectCard from "@/components/ProjectCard";
 import { ProjectCardSkeleton } from "@/components/Skeleton";
 import { Project } from "@/types";
-import { Suspense } from "react";
+import fetcher from "@/util/fetcher";
+import useSWR from "swr";
 
-async function getProjects() {
-    const response = await fetch(
-        "https://pb.bepo.ca/api/collections/projects/records"
-    ).then((res) => res.json());
-    return response.items;
-}
-
-export default async function Projects() {
-    const projects = await getProjects();
+export default function Projects() {
+    const { data: projects } = useSWR<any>("https://pb.bepo.ca/api/collections/projects/records", fetcher);
 
     return (
         <div>
             <ul className="grid gap-y">
-                <Suspense fallback={<ProjectCardSkeleton />}>
-                    {projects.length > 0 ? (
+                    {projects && projects?.items.length > 0 ? (
                         <>
-                            {projects.map((project: Project) => (
+                            {projects.items.map((project: Project) => (
                                 <li key={project.id} className="my-3">
                                     <ProjectCard {...project} />
                                 </li>
                             ))}
                         </>
                     ) : (
-                        <p>I&apos;m upadting things, check back soon!</p>
+                        <ProjectCardSkeleton />
                     )}
-                </Suspense>
             </ul>
         </div>
     );

@@ -4,13 +4,13 @@ import { Blog } from "@/types";
 import { Suspense } from "react";
 
 async function getPosts() {
-    const res = await fetch("https://pb.bepo.ca/api/collections/posts/records", { cache: 'force-cache'}).then((res) => res.json());
+    const res = await fetch("https://pb.bepo.ca/api/collections/posts/records", { cache: 'force-cache' }).then((res) => res.json());
 
     return res.items;
 }
 
 export default async function Posts() {
-    
+
     const posts = await getPosts();
 
     return (

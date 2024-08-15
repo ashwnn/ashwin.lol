@@ -36,3 +36,10 @@ export type Project = {
     start_date: Date;
     end_date: Date;
 }
+
+export type Referral = {
+    message: string;
+    title: string;
+    logo: string;
+    color: string;
+};

@@ -1,16 +1,10 @@
+'use client';
 import { GistSkeleton } from "@/components/Skeleton";
-import { Suspense } from "react";
+import fetcher from "@/util/fetcher";
+import useSWR from "swr";
 
-async function getGists() {
-    return await fetch("https://api.github.com/users/xxiz/gists")
-        .then((response) => response.json())
-        .then((data) => {
-            return data;
-        });
-}
-
-export default async function Snippets() {
-    const gists = await getGists();
+export default function Snippets() {
+    const { data: gists } = useSWR<any>("https://api.github.com/users/xxiz/gists", fetcher);
 
     return (
         <div>
@@ -20,8 +14,9 @@ export default async function Snippets() {
                 </b>
             </h2>
             <div className="pt-5 divide-y divide-zinc-800">
-                <Suspense fallback={<GistSkeleton />}>
-                    {gists.map((gist: any) => (
+                {gists && gists?.length > 0 ? (
+                    <>
+                    {gists?.map((gist: any) => (
                         <article key={gist.id} className="py-4">
                             <a
                                 href={gist.html_url}
@@ -54,7 +49,11 @@ export default async function Snippets() {
                             </a>
                         </article>
                     ))}
-                </Suspense>
+                    </>
+                ) : (
+                    <GistSkeleton />
+                )}
+                    
             </div>
         </div>
     );
