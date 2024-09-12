@@ -33,7 +33,7 @@ export default function ProjectCard(project: Project) {
                     {project.demo && (
                         <>
                             <Link href={project.demo} legacyBehavior>
-                                <a className="text-gray-300 transition-colors duration-300 hover:text-white">
+                                <a className="text-gray-300 underline transition-colors duration-300 hover:text-white">
                                     Demo
                                 </a>
                             </Link>
@@ -42,7 +42,7 @@ export default function ProjectCard(project: Project) {
                     )}
                     {project.github && (
                         <Link href={project.github} legacyBehavior>
-                            <a className="text-gray-300 transition-colors duration-300 hover:text-white">
+                            <a className="text-gray-300 underline transition-colors duration-300 hover:text-white">
                                 Code
                             </a>
                         </Link>
