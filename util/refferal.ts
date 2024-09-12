@@ -1,6 +1,6 @@
-import { Refferal } from '@/types';
+import { Referral } from '@/types';
 
-const refs: Record<string, Refferal> = {
+const refs: Record<string, Referral> = {
     "qr": {
         "logo": "🔎",
         "title": "You scanned a QR code!",
@@ -9,7 +9,7 @@ const refs: Record<string, Refferal> = {
     },
 };
 
-function getMessage(from: string): Refferal | undefined {
+function getMessage(from: string): Referral | undefined {
     return refs[from];
 }
 

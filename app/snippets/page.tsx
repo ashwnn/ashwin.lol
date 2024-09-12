@@ -14,7 +14,7 @@ export default function Snippets() {
                 </b>
             </h2>
             <p className="mt-2 text-gray-300">
-                Code snippets that I've found useful, interesting or put here to look back on later.
+                Code snippets that I&apos;ve found useful, interesting or put here to look back on later.
             </p>
             <div className="pt-5 divide-y divide-zinc-800">
                 {gists && gists?.length > 0 ? (
