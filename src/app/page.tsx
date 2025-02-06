@@ -37,7 +37,7 @@ export default function Home() {
                 {/* Description */}
                 <div className="mt-6 max-w-2xl text-gray-300 text-center">
                     <p className="text-md">
-                        Hey, my name is Ashwin Charathsandran, I am currently a student enrolled in the <a href="" className="underline"> Forensic Investigation</a> program at <a href="" className="underline">BCIT</a>. I love to tinker with all sorts of tech, from repurposing old technology to building new software, and everything in between.
+                        Hey, my name is Ashwin Charathsandran, I am currently a student enrolled in the <a href="" className="text-[#58a6ff] bg-transparent no-underline hover:text-[#18181b] hover:bg-[#58a6ff]/90"> Forensic Investigation</a> program at <a href="" className="text-[#58a6ff] bg-transparent no-underline hover:text-[#18181b] hover:bg-[#58a6ff]/90">BCIT</a>. I love to tinker with all sorts of tech, from repurposing old technology to building new software, and everything in between.
                     </p>
                     <p className="mt-4">
                     </p>
@@ -54,7 +54,7 @@ export default function Home() {
                         <a
                             key={link.name}
                             href={link.url}
-                            className="text-blue-400 hover:underline"
+                            className="text-[#58a6ff] bg-transparent no-underline hover:text-[#18181b] hover:bg-[#58a6ff]/90"
                         >
                             {link.name}
                         </a>

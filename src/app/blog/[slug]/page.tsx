@@ -15,7 +15,7 @@ import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typesc
 import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash'
 import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json'
 import powershell from 'react-syntax-highlighter/dist/cjs/languages/prism/powershell'
-import github from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+// import github from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import Link from "@/components/Link";
 import ReactMarkdown from "react-markdown";
 import styles from "@/page.module.css"
@@ -27,20 +27,20 @@ SyntaxHighlighter.registerLanguage('sh', bash)
 SyntaxHighlighter.registerLanguage('json', json)
 SyntaxHighlighter.registerLanguage('ps1', powershell)
 
-const MDObjects = {
-  code: ({ node, inline, className, children, ...props }: { node: any, inline: boolean, className: string, children: React.ReactNode }) => {
-    const match = /language-(\w+)/.exec(className || '');
-    const supportedLanguages = ['tsx', 'ts', 'sh', 'json', 'ps1'];
+// const MDObjects = {
+//   code: ({ node, inline, className, children, ...props }: { node: any, inline: boolean, className: string, children: React.ReactNode }) => {
+//     const match = /language-(\w+)/.exec(className || '');
+//     const supportedLanguages = ['tsx', 'ts', 'sh', 'json', 'ps1'];
 
-    return !inline && match && supportedLanguages.includes(match[1]) ? (
-      <SyntaxHighlighter style={github} language={match[1]} PreTag="div" {...props}>
-        {String(children).replace(/\n$/, '')}
-      </SyntaxHighlighter>
-    ) : (
-      <code className={className} {...props} />
-    );
-  }
-};
+//     return !inline && match && supportedLanguages.includes(match[1]) ? (
+//       <SyntaxHighlighter style={github} language={match[1]} PreTag="div" {...props}>
+//         {String(children).replace(/\n$/, '')}
+//       </SyntaxHighlighter>
+//     ) : (
+//       <code className={className} {...props} />
+//     );
+//   }
+// };
 
 interface PostData {
   title: string;
@@ -151,8 +151,35 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           className="prose prose-invert max-w-none"
         // dangerouslySetInnerHTML={{ __html: html }}
         >
-          <ReactMarkdown className={styles.markdown_body} remarkPlugins={[remarkGfm]}
-          >
+          <ReactMarkdown className={styles.markdown_body} remarkPlugins={[remarkGfm]} components={{
+            img: ({ src, alt }) => (
+              <img
+                src={src}
+                alt={alt}
+                style={{ maxWidth: "100%", height: "auto", borderRadius: "8px", marginTop: "2rem", marginBottom: "2rem" }}
+              />
+            ),
+            a: ({ href, children }) => (
+              href && href.startsWith("/") ? (
+                <Link
+                  href={href}
+                  className="text-blue-500"
+                  passHref
+                >
+                  {children}
+                </Link>
+              ) : (
+                <a
+                  href={href}
+                  className="text-blue-500"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {children}
+                </a>
+              )
+            )
+          }}>
             {post.content}
           </ReactMarkdown>
         </div>

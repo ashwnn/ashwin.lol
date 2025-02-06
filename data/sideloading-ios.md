@@ -35,7 +35,9 @@ Using these two provided files, we can now start signing and using any `.ipa` fi
 - Find both your `.p12` and `.mobileprovision` files
 - Once both are imported, click on the `.p12` and click on `Import Certificate Management`, enter the password if needed.
 
-![Import Certificates](/blog/extra/ARuHsQyPdq.png)
+> Once imported, you should be able to head over to `Certificate Management` in the `Settings` tab and see your certificate, it's expiry and whether it is available to sign.
+
+![Import Certificates](/blog/extra/1d04b67b490ae8ed570d0772ae87d821c1ad4780.png)
 
 #### Step 2: Signing IPAs
 - Click the three dots on the top right on the `File` tab
@@ -45,10 +47,9 @@ Using these two provided files, we can now start signing and using any `.ipa` fi
 - Head over to the `Apps` tab and click on the application, then `Signature`
 - After signing the app, it should prompt you to install it, after which you can install it like normal.
 
-![Signing IPAs](/blog/extra/brave_6K3ZLPSIrd.png)
 
 #### Why Sideload?
-Why would anyone sideload? What are the benefits of it? It is very subjective, and for some, it is not required, but for me, the main reasons are:
-Advertisements: I absolutely hate the built-in app integration of ads. They constantly play and often ruin my experience when using apps such as YouTube.
-- PlusPlus Apps: These applications provide "extra" features for applications often behind a paywall. Although I only use this with applications that are older and have a broken payment portal
-- Open Source: I am an avid open source advocate and use open source applications as much as possible because I can trust the security and always fix bugs/issues if needed without waiting for an update. In addition, many beautifully designed open-source applications are unavailable on the App Store due to ludicrous pricing for the developer.
+Why would anyone sideload? What are the benefits of it? Although for the majority of users, the App Store is more than enough, however there are a few reasons why sideloading is something I can't live without:
+- **Advertisements**: I absolutely hate the built-in app integration of ads. They constantly play and often ruin my experience when using apps such as YouTube.
+- **PlusPlus Apps**: These applications provide "extra" features for applications often behind a paywall. Although I only use this with applications that are older and have a broken payment portal
+- **Open Source**: I am an avid open source advocate and use open source applications as much as possible because I can trust the security and always fix bugs/issues if needed without waiting for an update. In addition, many beautifully designed open-source applications are unavailable on the App Store due to ludicrous pricing for the developer.
