@@ -220,6 +220,9 @@
     width: max-content;
     max-width: 100%;
     overflow: auto;
+    /* center */
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .markdown_body td,

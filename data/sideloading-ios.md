@@ -1,55 +1,100 @@
 ---
 title: "iOS Sideloading"
-description: "Build your own apps and install whatever you want; Sideloading is the way to go."
+description: "Discover how to sideload iOS apps, bypass App Store restrictions."
 date: "2025-02-05"
 author: "Ashwin C."
 cover_image: "/blog/sideloading-ios.jpg"
-tags: "ios,freedom,app,development"
+tags: "ios, sideloading, development"
 ---
-## Sideloading
-Apple's iOS ecosystem is known for its strict App Store policies, making sideloading—installing apps from outside the App Store—more complicated than on platforms like Android. For example, on Android, a user can download any application via an APK file; however, iOS takes an entirely polar approach, limiting application installation to strictly via the AppStore or via TestFlight. Recently, however, they announced that the [EU has support for side loading](https://support.apple.com/en-mk/117767); however, devices must be purchased and used in the EU, and there is no recent workaround for this to work in North America.
 
-TestFlight is still viable but requires you to pay for a developer certificate. It has limited slots for beta test apps, making it hard for open-source developers to let an end user try it out without the developer publishing it in the App Store.
+Sideloading on iOS is a way to install applications from their IPA file, which I thought would be a very technical task requiring you to jailbreak your phone. However, it couldn't be simpler. By signing apps this way, you are still eligible for hardware support since your phone has not been modified in any way. It is the best way to download apps outside Apple's strict App Store ecosystem.
 
-## Workaround
-We are left with one other option, signing our own certificates. Apple lets developers manually sign their .ipa files (Application Files) with an Apple Developer Certificate. However, the certificate costs $99 USD/year, which is a steep price to sideload some applications. Thankfully, a variety of providers take advantage of the fact that up to 50 users can share a developer certificate and provide services to buy a slot in the program from $10-20 USD/year.
 
-Some providers include:
-- [AppTesters](https://apptesters.org/)
-- [Signulous](https://www.signulous.com/)
+## The Landscape of iOS App Installation
 
-## Signing Apps
-> Note: Ensure you have Developer Mode enabled on your device before proceeding; if you do not [click here](https://docs.expo.dev/guides/ios-developer-mode/).
+Apple's iOS has long been synonymous with a controlled environment, where every app must pass through the App Store's rigorous review process. This strict curation ensures security and quality but comes at the cost of flexibility; unlike Android, which allows users to install applications via APK files, iOS confines app installations mainly to the App Store or TestFlight for beta testing. This makes it hard for developers to get their apps on the app store without facing the mandatory fees and strict filtering process.
 
-Once purchased, you provide them with your device UUID, after which they add to a developer account; you are then provided with two files to sign your applications with:
-- `x.p12`: contains private key & apple developer certificate
-- `x.mobileprovision`: links applications to Apple developer account
+### Why Sideload?
 
-Using these two provided files, we can now start signing and using any `.ipa` file from the internet directly on your phone. To sign these apps, you first need an application that provides this functionality, the most popular of which is [ESign](https://esign.yyyue.xyz/). To start using App Signing apps, you need to sign them; depending on your provider, they will generally give you a pre-signed IPA with your certificate or offer an online service to sign an App Signer to get started.
+So, why would anyone consider sideloading apps? Here are a few reasons why I personally sideload:
 
-### Using certificates with E-Sign:
+- **Ad-Free Experience:** I use pi.hole and various plugins to block ads on all my devices; however, I hate the mobile ad experience. Almost all third-party apps have some built-in ad component delivered from their CDN servers, making it hard to block without modifying the app itself.
 
-#### Step 1: Import certificates
-- Click the three dots on the top right on the `File` tab
-- Click `Import`
-- Find both your `.p12` and `.mobileprovision` files
-- Once both are imported, click on the `.p12` and click on `Import Certificate Management`, enter the password if needed.
+- **Support for Open Source:** As an avid open source advocate, I love testing out new applications from GitHub; however, regardless of how well the app is created, most of them remain unpublished due to the App Store charging high developer fees. 
 
-> Once imported, you should be able to head over to `Certificate Management` in the `Settings` tab and see your certificate, it's expiry and whether it is available to sign.
+- **Enhanced Functionality:** Some apps, dubbed "PlusPlus" apps, provide extra features that bypass/add features for apps, allowing for ease of use and a more streamlined experience. These are crucial for apps that are no longer on the app store. 
+
+While TestFlight does offer a route to sideload apps, it comes with limitations—most notably, a required developer certificate that costs **$99 USD** per year and a cap on the number of beta testers. This isn't a viable option for open-source developers or anyone looking for a more affordable alternative.
+
+## The Workaround: Self-Signing Certificates
+
+When the official paths seem restrictive, there is one way which is provided by Apple for developers who build their apps. Here’s the gist:
+
+ **Self-Signing with Developer Certificates:** Apple allows developers to manually sign their `.ipa` files (the iOS application package) using an Apple Developer Certificate. However, the price tag of $99 USD per year for an official developer account makes this approach less accessible for casual users.
+
+However, that is quite pricey for a user who is just looking to sign some apps for personal use, there is one alternative (though quite a gray market):
+
+**Third-Party Providers to the Rescue:** Thankfully, several providers have stepped in to offer a cost-effective solution. These services let up to 50 users share a developer certificate for a fraction of the cost—typically between $10 and $20 USD per year. Notable providers include:
+   - [AppTesters](https://apptesters.org/)
+   - [Signulous](https://www.signulous.com/)
+
+Using these services, you can obtain a certificate that lets you sideload virtually any `.ipa` file available online.
+
+
+## How to Sign Your Apps
+
+Before you get started, **make sure Developer Mode is enabled on your iOS device**. If you’re unsure how to do this, check out [Expo’s guide on enabling Developer Mode](https://docs.expo.dev/guides/ios-developer-mode/).
+
+Once you have access to a certificate via one of the third-party providers, you’ll receive two essential files:
+
+- **`x.p12`:** This file contains your private key and the Apple Developer Certificate.
+- **`x.mobileprovision`:** This file links your apps to the Apple developer account.
+
+With these files in hand, you’re ready to sign and install any `.ipa` file you download. The most popular tool for this task is [E-Sign](https://esign.yyyue.xyz/), an application that streamlines the process and trusted by the community.
+
+
+## Step-by-Step Guide: Using E-Sign to Import and Sign Certificates
+
+### Step 1: Import Your Certificates
+
+1. **Open E-Sign** and navigate to the **File** tab.
+2. Click on the three dots at the top-right corner and select **Import**.
+3. Locate and select both your `.p12` and `.mobileprovision` files.
+4. Once imported, click on the `.p12` file and choose **Import Certificate Management**. You may be prompted to enter a password if one was set.
+
+After successfully importing, head over to the **Certificate Management** section within the **Settings** tab. Here, you can verify your certificate’s details, including its expiry date and availability for signing apps.
 
 ![Import Certificates](/blog/extra/1d04b67b490ae8ed570d0772ae87d821c1ad4780.png)
 
-#### Step 2: Signing IPAs
-- Click the three dots on the top right on the `File` tab
-- Click Import
-- Find your desired `.ipa` file
-- Once imported, click on the `.ipa` file and press `Import app library`
-- Head over to the `Apps` tab and click on the application, then `Signature`
-- After signing the app, it should prompt you to install it, after which you can install it like normal.
+### Step 2: Signing an IPA File
+
+1. Again in the **File** tab, click the three dots and choose **Import**.
+2. Locate your desired `.ipa` file and import it into the app.
+3. Switch over to the **Apps** tab, select the imported application, and tap on **Signature**.
+4. After the app is signed, E-Sign will prompt you to install it. Follow the on-screen instructions, and you’ll soon have your newly signed app ready for use.
+
+![Sign Apps](/blog/extra/e340491b54dd3c043f217316379372883c58db6a.png)
+
+## Alternatives
+There is one alternative that does not require a purchase at all. In the unpaid version of an Apple Developer account, you are able to sign apps; however, you have strict limits.
+- A maximum of three apps can be signed at a time
+- Certificates expire after 7 days, requiring renewal
+- A companion device is required to sign them on your phone.
+
+Rather than manually signing each application, requiring more work and an understanding of Apple Development, you can use a few applications which automate the process for you:
+- [AltStore](https://altstore.io/): Open source, and the gold standard in terms of Sideloading this way, the most popular way; however, due to requiring a company app on your device, your app limit is cut down to two rather than three.
+- [Sideloady](https://sideloadly.io/): Partially closed source, however does not offer the same UX as AltStore, rather it is strictly focused on installing `.ipa` files on your phone. Easier than AltStore, and you can use all three slots.
 
 
-#### Why Sideload?
-Why would anyone sideload? What are the benefits of it? Although for the majority of users, the App Store is more than enough, however there are a few reasons why sideloading is something I can't live without:
-- **Advertisements**: I absolutely hate the built-in app integration of ads. They constantly play and often ruin my experience when using apps such as YouTube.
-- **PlusPlus Apps**: These applications provide "extra" features for applications often behind a paywall. Although I only use this with applications that are older and have a broken payment portal
-- **Open Source**: I am an avid open source advocate and use open source applications as much as possible because I can trust the security and always fix bugs/issues if needed without waiting for an update. In addition, many beautifully designed open-source applications are unavailable on the App Store due to ludicrous pricing for the developer.
+## Tips and Additional Insights
+
+- **Stay Informed:** The world of iOS sideloading is a relatively small community, and hopefully, sideloading will eventually be added to native iOS. Monitor provider updates and community forums for the latest developments and potential workarounds.
+- **Security Considerations:** While sideloading opens up a realm of possibilities, always exercise caution. Only download `.ipa` files from trusted sources to avoid compromising your device. Generally, `.ipa` files installed and run on your device cannot cause damage to your phone due to being strictly limited and strict permission control, as your device is not jailbroken; however, some apps may steal credentials or use known vulnerabilities.
+- **Backup Your Certificates:** Losing your certificate files can mean losing access to your apps. Keep your `.p12` and `.mobileprovision` files, and do not share them with others as they are tied to your device UUID.
+
+
+## Conclusion
+
+Sideloading on iOS is something I believe everyone should have access to without requiring workarounds above, or a payment as it provides developers and users with a better experience. Jailbreaking your phone is also a great option to load apps, however due to warranty and certain support functionalities being voided I opted out of jailbreaking on my current phone in favour of Sideloading.
+
+Happy sideloading, and may your iOS experience be ever more personal and powerful.

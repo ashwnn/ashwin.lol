@@ -1,3 +1,4 @@
+
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
@@ -18,7 +19,8 @@ import powershell from 'react-syntax-highlighter/dist/cjs/languages/prism/powers
 // import github from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import Link from "@/components/Link";
 import ReactMarkdown from "react-markdown";
-import styles from "@/page.module.css"
+import styles from "@/page.new.module.css"
+import AnchorLink from "@/components/AnchorLink";
 
 
 SyntaxHighlighter.registerLanguage('tsx', tsx)
@@ -159,16 +161,27 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                 style={{ maxWidth: "100%", height: "auto", borderRadius: "8px", marginTop: "2rem", marginBottom: "2rem" }}
               />
             ),
-            a: ({ href, children }) => (
-              href && href.startsWith("/") ? (
-                <Link
-                  href={href}
-                  className="text-blue-500"
-                  passHref
-                >
-                  {children}
-                </Link>
-              ) : (
+            a: ({ href, children }) => {
+              const isInternalLink = href && href.startsWith("/");
+              const isAnchorLink = href && href.startsWith("#");
+
+              if (isAnchorLink) {
+                return (
+                  <AnchorLink href={href} className="text-blue-500">
+                    {children}
+                  </AnchorLink>
+                );
+              }
+
+              if (isInternalLink) {
+                return (
+                  <Link href={href} className="text-blue-500" passHref>
+                    {children}
+                  </Link>
+                );
+              }
+
+              return (
                 <a
                   href={href}
                   className="text-blue-500"
@@ -177,8 +190,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                 >
                   {children}
                 </a>
-              )
-            )
+              );
+            }
           }}>
             {post.content}
           </ReactMarkdown>
