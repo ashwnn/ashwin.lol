@@ -6,7 +6,15 @@ author: "Ashwin C."
 cover_image: "/blog/homelab.png"
 tags: "self-hosting, homelab, server"
 ---
-
+# Table of Contents
+- [Introduction](#introduction)
+- [Inspiration](#inspiration)
+- [Hardware Specifications & Cost](#hardware-specifications--cost)
+- [Redundancy & Software](#redundancy--software)
+  - [Why Snapraid?](#why-snapraid)
+  - [Software](#software)
+- [Challenges and Lessons Learned](#challenges-and-lessons-learned)
+- [Conclusion](#conclusion)
 
 # Bepo: My HomeLab Adventure
 

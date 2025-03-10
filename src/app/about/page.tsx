@@ -110,7 +110,9 @@ export default function AboutPage() {
 
                             <a
                                 href={interest.link}
-                                className="w-full mt-auto inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded-lg bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white transition-all duration-200 border border-neutral-700/30 cursor-not-allowed"
+                                className="w-full mt-auto inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded-lg bg-neutral-800 text-neutral-300
+                                hover:bg-neutral-700 hover:text-white transition-all duration-200
+                                border border-neutral-700/30 cursor-not-allowed"
                             >
                                 Coming Soon
                                 <svg className="ml-1.5 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
