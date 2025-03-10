@@ -29,7 +29,8 @@ async function getPostBySlug(slug: string): Promise<PostData | null> {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateMetadata({ params }: any): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+  const slug = params.slug;
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return { title: "Post Not Found" };

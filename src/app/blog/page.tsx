@@ -37,7 +37,7 @@ export default async function BlogIndex() {
   const posts = await getLocalPosts();
 
   return (
-    <div className="max-w-3xl mx-auto px-4 md:px-0">
+    <div className="w-full md:max-w-3xl mx-auto px-4 md:px-0">
       <div className="my-5">
         <h1 className="text-3xl font-bold text-gray-100">Blog Posts</h1>
         <p className="mt-2 text-gray-400">

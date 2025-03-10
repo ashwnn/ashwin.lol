@@ -14,13 +14,12 @@ export default function Home() {
           priority
         />
       </div>
-      <div className="mt-4 max-w-2xl text-gray-300 text-center px-2 md:px-0">
-        <p className="text-md">
+      <div className="mt-4 max-w-2xl text-gray-300 text-center px-4 sm:px-6 md:px-0">
+        <p className="text-base sm:text-md leading-relaxed">
           Hey, my name is Ashwin Charathsandran, I am currently a student enrolled in the{" "}
           <Link href="https://www.bcit.ca/programs/forensic-investigation-digital-forensics-and-cybersecurity-option-bachelor-of-technology-full-time-part-time-847cbtech/">
             Forensic Investigation & Cyber Security
           </Link>{" "}
-
           program at{" "}
           <Link href="https://bcit.ca/">
             BCIT
@@ -28,7 +27,6 @@ export default function Home() {
           . I love to tinker with all sorts of tech, from repurposing old technology to building new software, and
           everything in between.
         </p>
-        <p className="mt-4"></p>
       </div>
       <Socials />
     </div>
