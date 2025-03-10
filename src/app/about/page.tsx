@@ -30,7 +30,7 @@ export default function AboutPage() {
                         <h2 className="text-2xl font-bold mb-2">Ashwin Charathsandran</h2>
                         <p className="text-neutral-400 mb-4">Student, Developer & Tech Enthusiast</p>
                         <p className="text-neutral-300">
-                            I'm a computer science student who discovered a passion for cybersecurity, dedicated to building software that addresses real-world challenges. My interests range from web development to machine learning, with a strong emphasis on crafting elegant solutions through clean, efficient code.
+                            I&apos;m a computer science student who discovered a passion for cybersecurity, dedicated to building software that addresses real-world challenges. My interests range from web development to machine learning, with a strong emphasis on crafting elegant solutions through clean, efficient code.
                         </p>
                     </div>
                 </div>

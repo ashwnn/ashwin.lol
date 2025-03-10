@@ -68,7 +68,7 @@ export default async function SnippetsPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Snippets</h1>
-      <p className="text-neutral-400 mb-8">A collection of useful code snippets and gists that I've created and shared.</p>
+      <p className="text-neutral-400 mb-8">A collection of useful code snippets and gists that I&apos;ve created and shared.</p>
       
       <div className="grid grid-cols-1 gap-2">
         {gists.map((gist) => {

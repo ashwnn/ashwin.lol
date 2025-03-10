@@ -28,9 +28,7 @@ async function getPostBySlug(slug: string): Promise<PostData | null> {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  // Make sure params is fully resolved
-  const resolvedParams = await Promise.resolve(params);
-  const post = await getPostBySlug(resolvedParams.slug);
+  const post = await getPostBySlug(params.slug);
   
   if (!post) {
     return { title: "Post Not Found" };
@@ -52,10 +50,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  // Make sure params is fully resolved
-  const resolvedParams = await Promise.resolve(params);
-  const post = await getPostBySlug(resolvedParams.slug);
+interface PageProps {
+  params: { slug: string };
+}
+
+export default async function Page({ params }: PageProps) {
+  const post = await getPostBySlug(params.slug);
   
   if (!post) {
     return notFound();
@@ -69,6 +69,5 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const tags = post.tags ? post.tags.split(",").map((tag) => tag.trim()) : [];
 
-  // Pass all the data to the client component
   return <PostContent post={post} formattedDate={formattedDate} tags={tags} />;
 }

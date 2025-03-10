@@ -74,7 +74,8 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
       } else {
         setIsError(true);
       }
-    } catch (error) {
+    } catch (e) {
+      console.error(e);
       setIsError(true);
     } finally {
       setIsLoading(false);

@@ -110,6 +110,7 @@ export default function PostContent({ post, formattedDate, tags }: PostContentPr
                 
                 return (
                   <span className="my-6 relative group inline-block">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={src}
                       alt={alt || ""}

@@ -12,7 +12,7 @@ export default function ProjectsPage() {
       <div className="my-5">
         <h1 className="text-3xl font-bold text-gray-100">Projects</h1>
         <p className="mt-2 text-gray-400">
-          A collection of some projects I've worked on
+          A collection of some projects I&apos;ve worked on
         </p>
       </div>
 

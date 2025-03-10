@@ -11,4 +11,14 @@ interface TimelineItem {
     }[];
 }
 
-export type { TimelineItem };
+interface BlogPost {
+    slug: string;
+    title: string;
+    description?: string;
+    cover_image: string;
+    tags?: string;
+    published_date: Date;
+    author?: string;
+  }
+
+export type { TimelineItem, BlogPost };
