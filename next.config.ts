@@ -3,15 +3,34 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['pb.bepo.ca', '1m.cx']
-},
+  },
   async redirects() {
     return [
       {
-        "source": "/b/:slug*",
-        "destination": "/blog/:slug*",
-        "permanent": true
-    }
+        source: "/b/:slug*",
+        destination: "/blog/:slug*",
+        permanent: true
+      },
+      {
+        source: "/socials/github/:slug*",
+        destination: "https://github.com/ashwnn/:slug*",
+        permanent: true
+      },
+      {
+        source: "/socials/linkedin",
+        destination: "https://linkedin.com/ax2",
+        permanent: true
+      },
+      {
+        source: "/socials/signal",
+        destination: "https://signal.me/#eu/Q3RPuNH-LFhJjNF8wqfIh4opnlSimz_KbvNpjk3Mt6humpwcOzFIxJm-tk3GVuIU",
+        permanent: true
+      },
+      {
+        source: "/pgp",
+        destination: "https://keys.openpgp.org/search?q=ashwincharath%40gmail.com",
+        permanent: true
+      }
     ]
   },
 };

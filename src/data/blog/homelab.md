@@ -62,14 +62,11 @@ Rather than opting for Proxmox, I ran bare metal and used Docker to manage all m
 - `~/pool` - SnapRAID pool via MergerFS
     - `appdata/` - application data
 
-**Networking**
-For networking I opted to use Cloudflared for it's simplicty to setup, privacy and DOS protection. It lets me easily publish a local application to my domains without the hastle of SSL certificates and port forwarding.
+**Networking**: For networking I opted to use Cloudflared for it's simplicty to setup, privacy and DOS protection. It lets me easily publish a local application to my domains without the hastle of SSL certificates and port forwarding.
 
-**Security**
-Security is my main concern when building a homelab was it contains all of my personal information, therefore all public connections are made through Cloudflared. I use Crowdsec to mitigate any potential attacks and have a strict firewall setup via UFW.
+**Security**: Security is my main concern when building a homelab was it contains all of my personal information, therefore all public connections are made through Cloudflared. I use Crowdsec to mitigate any potential attacks and have a strict firewall setup via UFW.
 
-**Applications**
-I run a variety of applications on my server, all managed via Docker Compose. Here are some applications I run that I cannot live without:
+**Applications**: I run a variety of applications on my server, all managed via Docker Compose. Here are some applications I run that I cannot live without:
 
 | Application       | Description                                  |
 |-------------------|----------------------------------------------|
@@ -95,3 +92,7 @@ I ran into many issues when starting homelabbing, from 2AM debugging sessions in
 - **Networking:** Setting up networking was somewhat tricky initially; however, after planning out my network, it was straightforward. Public and private applications are isolated in their designated docker networks, after which containers are explicitly exposed to the Internet, with the rest of the traffic remaining on the local network.
 
 - **Remote Management**: From configuring SSH to configuring IPTables and UFW, I would lock myself out of my server via SSH access and have to physically connect a monitor and keyboard to fix it. However, after research, I discovered the world of IPMI and PiKVM; this made setting up and configuring my server significantly easier and lets me manage it from anywhere without requiring physical access.
+
+
+## Conclusion
+Building a homelab has been a fantastic learning experience, from hardware to software, networking, and security. It has taught me a lot about managing and securing my data and services, and I have gained a lot of knowledge that I can apply to my future projects and career. I hope this article has inspired you to build your own homelab and learn from my mistakes and experiences. If you have any questions or need help setting up your homelab, feel free to reach out to me.

@@ -3,10 +3,9 @@ import path from "path";
 import Card from "@/components/Blog/Card";
 import { BlogPost } from "@/types";
 import matter from "gray-matter";
-import Layout from "@/layouts/Page";
 
 async function getLocalPosts(): Promise<BlogPost[]> {
-  const postsDir = path.join(process.cwd(), "data");
+  const postsDir = path.join(process.cwd(), "src/data/blog");
   const files = await fs.readdir(postsDir);
 
   const posts = await Promise.all(
@@ -38,23 +37,25 @@ export default async function BlogIndex() {
   const posts = await getLocalPosts();
 
   return (
-    <Layout>
-      <h1 className="text-3xl font-bold shine mt-6">Blog Posts</h1>
-      <p className="text-gray-400">Collection</p>
+    <div className="max-w-3xl mx-auto">
+      <div className="my-5">
+        <h1 className="text-3xl font-bold text-gray-100">Blog Posts</h1>
+        <p className="mt-2 text-gray-400">
+          Collection of my thoughts and experiences.
+        </p>
+      </div>
 
-      <ul className="mt-6 w-full grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {posts.length > 0 ? (
           posts.map((post) => (
-            <li key={post.slug} className="my-3 inline-block w-full">
-              <Card {...post} />
-            </li>
+            <Card key={post.slug} {...post} />
           ))
         ) : (
-          <p className="text-gray-300">
+          <p className="text-gray-300 text-center col-span-2">
             I&apos;m writing something, check back soon!
           </p>
         )}
-      </ul>
-    </Layout>
+      </div>
+    </div>
   );
 }

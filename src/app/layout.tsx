@@ -1,30 +1,38 @@
-import { Inter } from 'next/font/google'
-import { Metadata } from 'next'
-import './globals.css'
-import Footer from '@/layouts/Footer';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Script from "next/script";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: {
-        default: "Ashwin C.",
-        template: "%s - Ashwin C.",
-    },
-    description: "A student/developer from Vancouver, Canada.",
+  title: "Ashwin C.",
+  description: "Personal website of Ashwin Charathsandran",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <>
-            <link rel="icon" href="/favicon.ico" sizes="any" />
-            <html lang="en">
-                <body
-                    className={`flex flex-col min-h-screen antialiased bg-zinc-900 text-zinc-400 ${inter.className}`}
-                >
-                    <div className="flex-grow">{children}</div>
-                    <Footer />
-                </body>
-            </html>
-        </>
-    );
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${inter.className} min-h-screen bg-[#222222] text-gray-200 flex flex-col`}>
+        <Header />
+        <main className="flex-1 flex flex-col">
+          {children}
+        </main>
+        <Footer />
+        <Script
+          src="https://umm.ashwin.lol/script.js"
+          data-website-id="cdd6e3c0-1aa1-4a10-83b7-56157157bab8"
+          strategy="afterInteractive"
+          data-auto-track="true"
+          defer
+        />
+      </body>
+    </html>
+  );
 }

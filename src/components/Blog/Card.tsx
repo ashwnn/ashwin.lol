@@ -1,8 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import Link from "@/components/Link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { BlogPost } from "@/types";
 
 export default function BlogCard({ slug, title, description, cover_image, tags, published_date, author }: BlogPost) {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   
   const formatDate = (date: Date) =>
     new Date(date).toLocaleDateString(undefined, {
@@ -11,40 +17,73 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
       year: "numeric",
     });
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    router.push(`/blog/${slug}`);
+  };
+
   return (
-    <Link
-      href={`/blog/${slug}`}
-      className="flex flex-col bg-[#222222] text-gray-200 border border-zinc-700 rounded-xl shadow-white hover:opacity-50  duration-100 ease-in-out"
+    <div 
+      className="relative flex flex-col h-full bg-[#2a2a2a] border border-zinc-700/50 rounded-xl shadow-lg hover:shadow-xl hover:border-zinc-600 transition-all duration-300 overflow-hidden group"
+      onClick={handleClick}
+      role="link"
+      tabIndex={0}
+      data-umami-event={`blog_${slug}`}
     >
-      <div className="relative h-48 bg-center bg-cover rounded-t-xl">
+      {/* Loading overlay */}
+      {isLoading && (
+        <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm flex items-center justify-center transition-all duration-300">
+          <div className="flex flex-col items-center">
+            <div className="w-8 h-8 border-t-2 border-blue-500 border-solid rounded-full animate-spin mb-3"></div>
+            <span className="text-sm text-blue-300">Loading article...</span>
+          </div>
+        </div>
+      )}
+      
+      <div className="relative h-52 w-full bg-center bg-cover overflow-hidden">
         <Image
           src={cover_image}
           alt={title}
-          quality={50}
+          quality={60}
           fill
-          sizes="100vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
           style={{ objectFit: "cover" }}
-          className="rounded-t-xl"
+          className="transition-transform duration-500 group-hover:scale-105"
         />
+        {/* Add a subtle overlay gradient that appears on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
-      <div className="flex-grow p-6">
-        <h3 className="mb-2 text-2xl font-semibold leading-tight">{title}</h3>
-        <p className="mb-2 italic text-gray-300">{description}</p>
-        <div className="flex flex-wrap items-center">
-          {tags.split(",").map((tag, i) => (
-            <span
-              key={i}
-              className="px-2 py-1 mt-1 mr-2 font-medium text-white lowercase rounded-lg bg-zinc-800"
-            >
-              {tag.trim()}
-            </span>
-          ))}
+      <div className="flex-grow p-5 flex flex-col">
+        <h3 className="text-xl font-bold leading-tight mb-2 text-gray-100 group-hover:text-blue-400 transition-colors duration-300">{title}</h3>
+        {description && (
+          <p className="text-gray-300 text-sm line-clamp-2 mb-3">{description}</p>
+        )}
+        
+        {tags && tags.length > 0 && (
+          <div className="flex flex-wrap mt-auto pt-3">
+            {tags.split(",").slice(0, 3).map((tag, i) => (
+              <span
+                key={i}
+                className="px-2 py-0.5 mr-2 mb-2 text-xs font-medium text-gray-200 rounded-md bg-zinc-700/70 transition-all duration-300 group-hover:bg-zinc-700"
+              >
+                {tag.trim()}
+              </span>
+            ))}
+            {tags.length > 3 && (
+              <span className="text-xs text-gray-400 self-center">+ more</span>
+            )}
+          </div>
+        )}
+        
+        <div className="mt-3 pt-3 text-xs border-t border-zinc-700/50 text-gray-400 flex justify-between items-center">
+          {author && <span>{author}</span>}
+          {published_date && <span>{formatDate(published_date)}</span>}
         </div>
-        <p className="mt-4 text-sm font-medium text-right text-gray-400">
-          {author && `${author}${published_date ? " - " : ""}`}
-          {published_date && formatDate(published_date)}
-        </p>
       </div>
-    </Link>
+      
+      {/* Add a subtle shine effect that animates once on hover */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shine pointer-events-none"></div>
+    </div>
   );
 }

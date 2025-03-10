@@ -7,6 +7,19 @@ cover_image: "/blog/sideloading-ios.jpg"
 tags: "ios, sideloading, development"
 ---
 
+## Table of Contents
+- [Introduction](#introduction)
+- [The Landscape of iOS App Installation](#the-landscape-of-ios-app-installation)
+   - [Why Sideload?](#why-sideload)
+- [The Workaround: Self-Signing Certificates](#the-workaround-self-signing-certificates)
+- [How to Sign Your Apps](#how-to-sign-your-apps)
+- [Step-by-Step Guide: Using E-Sign to Import and Sign Certificates](#step-by-step-guide-using-e-sign-to-import-and-sign-certificates)
+   - [Step 1: Import Your Certificates](#step-1-import-your-certificates)
+   - [Step 2: Signing an IPA File](#step-2-signing-an-ipa-file)
+- [Alternatives](#alternatives)
+- [Tips and Additional Insights](#tips-and-additional-insights)
+- [Conclusion](#conclusion)
+
 Sideloading on iOS is a way to install applications from their IPA file, which I thought would be a very technical task requiring you to jailbreak your phone. However, it couldn't be simpler. By signing apps this way, you are still eligible for hardware support since your phone has not been modified in any way. It is the best way to download apps outside Apple's strict App Store ecosystem.
 
 

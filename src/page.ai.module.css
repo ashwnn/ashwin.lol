@@ -1,0 +1,466 @@
+.markdown_body {
+  /* Global settings */
+  color-scheme: dark;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  color: #e2e2e2;
+  background-color: transparent;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 16px;
+  line-height: 1.7;
+  word-wrap: break-word;
+}
+
+/* Icon for anchor links in headings */
+.markdown_body .octicon {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+/* Headings */
+.markdown_body h1,
+.markdown_body h2,
+.markdown_body h3,
+.markdown_body h4,
+.markdown_body h5,
+.markdown_body h6 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  position: relative;
+}
+
+.markdown_body h1 {
+  font-size: 2.25rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  background: linear-gradient(90deg, #e2e2e2, #aaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.markdown_body h2 {
+  font-size: 1.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.5rem;
+  color: #d4d4d8;
+}
+
+.markdown_body h3 {
+  font-size: 1.5rem;
+  color: #d4d4d8;
+}
+
+.markdown_body h4 {
+  font-size: 1.25rem;
+  color: #d4d4d8;
+}
+
+.markdown_body h5 {
+  font-size: 1.1rem;
+  color: #a1a1aa;
+}
+
+.markdown_body h6 {
+  font-size: 0.9rem;
+  color: #a1a1aa;
+  font-weight: 500;
+}
+
+/* Show anchor icon on hover (if you include anchor elements) */
+.markdown_body .anchor {
+  position: absolute;
+  left: -1.5rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.markdown_body h1:hover .anchor,
+.markdown_body h2:hover .anchor,
+.markdown_body h3:hover .anchor,
+.markdown_body h4:hover .anchor,
+.markdown_body h5:hover .anchor,
+.markdown_body h6:hover .anchor {
+  opacity: 0.8;
+}
+
+/* Paragraphs */
+.markdown_body p {
+  margin: 1.25rem 0;
+  color: #e2e2e2;
+  font-size: 1rem;
+}
+
+/* Links */
+.markdown_body a {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px dotted rgba(59, 130, 246, 0.4);
+  padding-bottom: 1px;
+}
+
+.markdown_body a:hover {
+  color: #60a5fa;
+  border-bottom: 1px solid rgba(96, 165, 250, 0.8);
+  text-decoration: none;
+}
+
+/* Images */
+.markdown_body img {
+  max-width: 100%;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.markdown_body img:hover {
+  transform: scale(1.01);
+}
+
+@media (min-width: 768px) {
+  .markdown_body img {
+    max-width: 90%;
+  }
+}
+
+/* Blockquotes */
+.markdown_body blockquote {
+  margin: 1.75rem 0;
+  padding: 0.75rem 1.5rem;
+  border-left: 4px solid #3b82f6;
+  background-color: rgba(59, 130, 246, 0.08);
+  border-radius: 0 4px 4px 0;
+  color: #d1d5db;
+  font-style: italic;
+}
+
+.markdown_body blockquote p {
+  margin: 0.5rem 0;
+}
+
+/* Lists */
+.markdown_body ul,
+.markdown_body ol {
+  margin: 1rem 0;
+  padding-left: 1.75rem;
+}
+
+.markdown_body li {
+  margin-bottom: 0.25rem;
+  padding-left: 0.25rem;
+}
+
+/* Reduce spacing for nested lists */
+.markdown_body li > ul,
+.markdown_body li > ol {
+  margin: 0.25rem 0;
+}
+
+/* Custom bullets for unordered lists */
+.markdown_body ul li {
+  position: relative;
+}
+
+.markdown_body ul li::before {
+  content: "•";
+  color: #3b82f6;
+  position: absolute;
+  left: -1.25rem;
+  font-size: 1.2em;
+}
+
+/* Ordered lists styling */
+.markdown_body ol {
+  counter-reset: list;
+  list-style: none;
+}
+
+.markdown_body ol li {
+  position: relative;
+  counter-increment: list;
+}
+
+.markdown_body ol li::before {
+  content: counter(list) ".";
+  position: absolute;
+  left: -1.75rem;
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+/* Fix spacing for list items that contain other list items */
+.markdown_body li ul li,
+.markdown_body li ol li {
+  margin-top: 0.125rem;
+  margin-bottom: 0.125rem;
+}
+
+/* Ensure proper spacing between content elements */
+.markdown_body * + h2,
+.markdown_body * + h3,
+.markdown_body * + h4,
+.markdown_body * + h5,
+.markdown_body * + h6 {
+  margin-top: 2rem;
+}
+
+/* Inline code */
+.markdown_body code {
+  font-family: 'JetBrains Mono', 'Source Code Pro', monospace;
+  background-color: #2a2a2a;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  border: 1px solid #333;
+  color: #e2e2e2;
+}
+
+/* Code blocks */
+.markdown_body pre {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #1c1c1c;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow-x: auto;
+  position: relative;
+}
+
+.markdown_body pre code {
+  font-family: 'JetBrains Mono', 'Source Code Pro', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  display: block;
+  color: #e2e2e2;
+}
+
+/* Tables */
+.markdown_body table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.markdown_body th,
+.markdown_body td {
+  border: 1px solid #333;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.markdown_body th {
+  background-color: #2a2a2a;
+  font-weight: 600;
+  color: #e2e2e2;
+}
+
+.markdown_body tr:nth-child(even) {
+  background-color: #252525;
+}
+
+.markdown_body tr:hover {
+  background-color: #2c2c2c;
+}
+
+/* Horizontal rule */
+.markdown_body hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  margin: 2.5rem 0;
+}
+
+/* Details & Summary */
+.markdown_body details {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  transition: all 0.3s ease;
+}
+
+.markdown_body details[open] {
+  padding-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.markdown_body summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  user-select: none;
+  color: #d4d4d8;
+}
+
+.markdown_body summary:hover {
+  color: #3b82f6;
+}
+
+/* Figures and Captions */
+.markdown_body figure {
+  margin: 2.5rem auto;
+  text-align: center;
+}
+
+.markdown_body figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #a1a1aa;
+  font-style: italic;
+}
+
+/* Task Lists */
+.markdown_body .task-list-item {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.markdown_body .task-list-item::before {
+  content: none !important;
+}
+
+.markdown_body .task-list-item input[type="checkbox"] {
+  margin-right: 0.75rem;
+  appearance: none;
+  width: 1.25em;
+  height: 1.25em;
+  border: 1px solid #555;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.markdown_body .task-list-item input[type="checkbox"]:checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.markdown_body .task-list-item input[type="checkbox"]:checked::after {
+  content: "✓";
+  font-size: 0.9em;
+  position: absolute;
+  color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Footnotes */
+.markdown_body .footnotes {
+  font-size: 0.875rem;
+  color: #a1a1aa;
+  border-top: 1px solid #333;
+  padding-top: 1.5rem;
+  margin-top: 3rem;
+}
+
+.markdown_body .footnotes li {
+  margin-bottom: 0.75rem;
+}
+
+.markdown_body [data-footnote-ref] {
+  font-size: 0.75em;
+  vertical-align: super;
+  color: #3b82f6;
+}
+
+/* Miscellaneous elements */
+.markdown_body abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+.markdown_body b,
+.markdown_body strong {
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+.markdown_body dfn {
+  font-style: italic;
+  border-bottom: 1px dotted #666;
+}
+
+.markdown_body small {
+  font-size: 0.875em;
+  color: #a1a1aa;
+}
+
+.markdown_body sub,
+.markdown_body sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.markdown_body sub {
+  bottom: -0.25em;
+}
+
+.markdown_body sup {
+  top: -0.5em;
+}
+
+/* Special styles for syntax highlighting */
+.markdown_body .token.comment,
+.markdown_body .token.prolog,
+.markdown_body .token.doctype,
+.markdown_body .token.cdata {
+  color: #666;
+}
+
+.markdown_body .token.punctuation {
+  color: #999;
+}
+
+.markdown_body .token.property,
+.markdown_body .token.tag,
+.markdown_body .token.boolean,
+.markdown_body .token.number,
+.markdown_body .token.constant,
+.markdown_body .token.symbol {
+  color: #f08d49;
+}
+
+.markdown_body .token.selector,
+.markdown_body .token.attr-name,
+.markdown_body .token.string,
+.markdown_body .token.char,
+.markdown_body .token.builtin {
+  color: #7ec699;
+}
+
+.markdown_body .token.operator,
+.markdown_body .token.entity,
+.markdown_body .token.url,
+.markdown_body .token.variable {
+  color: #67cdcc;
+}
+
+.markdown_body .token.keyword {
+  color: #cc99cd;
+}
+
+.markdown_body .token.function {
+  color: #f08d49;
+}
