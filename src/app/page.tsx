@@ -5,12 +5,12 @@ import Socials from '@/components/Socials';
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center py-12">
-      <div className="relative w-80 h-80 mx-auto">
+      <div className="relative w-60 h-60 mx-auto">
         <Image
           src="/memoji.png"
           alt="Ashwin Charathsandran"
           fill
-          sizes="500px"
+          sizes="700px"
           priority
         />
       </div>

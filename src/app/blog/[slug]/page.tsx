@@ -27,13 +27,14 @@ async function getPostBySlug(slug: string): Promise<PostData | null> {
   }
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
-  
+
   if (!post) {
     return { title: "Post Not Found" };
   }
-  
+
   return {
     title: post.title,
     description: post.description,
@@ -49,14 +50,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     },
   };
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function Page({ params }: any) {
+  const { slug } = params;
+  const post = await getPostBySlug(slug);
 
-interface PageProps {
-  params: { slug: string };
-}
-
-export default async function Page({ params }: PageProps) {
-  const post = await getPostBySlug(params.slug);
-  
   if (!post) {
     return notFound();
   }

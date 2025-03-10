@@ -12,12 +12,9 @@ export default function AboutPage() {
 
     return (
         <div className="max-w-3xl mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-6">About Me</h1>
-
-
             <section className="mb-8">
                 <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
-                    <div className="relative w-60 md:w-full h-60 overflow-hidden rounded-xl border border-neutral-800">
+                    {/* <div className="relative w-60 md:w-full h-60 overflow-hidden rounded-xl border border-neutral-800">
                         <Image
                             src="/about/me.jpg"
                             alt="Ashwin C."
@@ -25,7 +22,7 @@ export default function AboutPage() {
                             className="object-cover"
                             sizes="160px"
                         />
-                    </div>
+                    </div> */}
                     <div>
                         <h2 className="text-2xl font-bold mb-2">Ashwin Charathsandran</h2>
                         <p className="text-neutral-400 mb-4">Student, Developer & Tech Enthusiast</p>
@@ -86,23 +83,23 @@ export default function AboutPage() {
                             description: 'Exploring new cultures and experiencing the world.',
                             link: '#',
                             icon: (
-                                <svg 
-  className="h-8 w-8 mb-3 text-neutral-400"
-  viewBox="0 0 24 24" 
-  fill="none" 
-  xmlns="http://www.w3.org/2000/svg"
->
-  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-  <g id="SVGRepo_iconCarrier">
-    <path 
-      fillRule="evenodd" 
-      clipRule="evenodd" 
-      d="M9.75 6C9.75 5.17157 10.4216 4.5 11.25 4.5L13 4.5C13.6098 4.5 14.25 5.08609 14.25 6L15.75 6C15.75 4.42863 14.5994 3 13 3H11.25C9.59315 3 8.25 4.34315 8.25 6H3.75L3 6.75V19.5L3.75 20.25H20.25L21 19.5V6.75L20.25 6L9.75 6ZM4.5 15.75V7.5L6 7.5C6 8.32843 5.32843 9 4.5 9V10.5C6.15685 10.5 7.5 9.15685 7.5 7.5H16.5C16.5 9.15685 17.8431 10.5 19.5 10.5V15.75C17.8431 15.75 16.5 17.0931 16.5 18.75H7.5C7.5 17.0931 6.15685 15.75 4.5 15.75ZM4.5 17.25V18.75H6C6 17.9216 5.32843 17.25 4.5 17.25ZM19.5 9C18.6716 9 18 8.32843 18 7.5L19.5 7.5V9ZM18 18.75H19.5V17.25C18.6716 17.25 18 17.9216 18 18.75ZM12.3849 12.0978L14.8281 11.4432L14.1735 9L11.7303 9.65465L12.3849 12.0978ZM11.25 14.25C11.25 15.0784 10.5784 15.75 9.75 15.75C8.92157 15.75 8.25 15.0784 8.25 14.25C8.25 13.4216 8.92157 12.75 9.75 12.75C10.5784 12.75 11.25 13.4216 11.25 14.25ZM14.3675 17.3799L16.4946 14.6125L13.0343 14.1541L14.3675 17.3799Z" 
-      fill="currentColor"
-    />
-  </g>
-</svg>
+                                <svg
+                                    className="h-8 w-8 mb-3 text-neutral-400"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            fillRule="evenodd"
+                                            clipRule="evenodd"
+                                            d="M9.75 6C9.75 5.17157 10.4216 4.5 11.25 4.5L13 4.5C13.6098 4.5 14.25 5.08609 14.25 6L15.75 6C15.75 4.42863 14.5994 3 13 3H11.25C9.59315 3 8.25 4.34315 8.25 6H3.75L3 6.75V19.5L3.75 20.25H20.25L21 19.5V6.75L20.25 6L9.75 6ZM4.5 15.75V7.5L6 7.5C6 8.32843 5.32843 9 4.5 9V10.5C6.15685 10.5 7.5 9.15685 7.5 7.5H16.5C16.5 9.15685 17.8431 10.5 19.5 10.5V15.75C17.8431 15.75 16.5 17.0931 16.5 18.75H7.5C7.5 17.0931 6.15685 15.75 4.5 15.75ZM4.5 17.25V18.75H6C6 17.9216 5.32843 17.25 4.5 17.25ZM19.5 9C18.6716 9 18 8.32843 18 7.5L19.5 7.5V9ZM18 18.75H19.5V17.25C18.6716 17.25 18 17.9216 18 18.75ZM12.3849 12.0978L14.8281 11.4432L14.1735 9L11.7303 9.65465L12.3849 12.0978ZM11.25 14.25C11.25 15.0784 10.5784 15.75 9.75 15.75C8.92157 15.75 8.25 15.0784 8.25 14.25C8.25 13.4216 8.92157 12.75 9.75 12.75C10.5784 12.75 11.25 13.4216 11.25 14.25ZM14.3675 17.3799L16.4946 14.6125L13.0343 14.1541L14.3675 17.3799Z"
+                                            fill="currentColor"
+                                        />
+                                    </g>
+                                </svg>
                             )
                         }
                     ].map((interest, idx) => (
@@ -139,7 +136,6 @@ export default function AboutPage() {
                                     </div>
                                 </div>
 
-                                {/* Content */}
                                 <div className="relative">
                                     <time className="mb-1 text-sm font-normal leading-none text-neutral-500">{item.year}</time>
                                     <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>

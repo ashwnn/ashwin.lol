@@ -10,7 +10,7 @@ const projects = [
   {
     title: "SalesScout",
     description: "A full-stack website that alerts a user when specific deals are on RedFlagDeals.com",
-    image: "/projects/forensics.jpg",
+    image: "/projects/rfd.png",
     tags: ["Express", "React", "MongoDB"],
     link: "#",
     github: "/socials/github/SalesScout"
@@ -18,10 +18,17 @@ const projects = [
   {
     title: "Management System",
     description: "A management system for a local club, built with GoLang, GraphQL, and PostgreSQL.",
-    image: "/projects/volleyball.jpg",
+    image: "/projects/baulkham.png",
     tags: ["GoLang", "GraphQL", "PostgreSQL"],
     link: "https://baulkhamhillsvolleyball.com.au/",
   },
+  {
+    title:"Digispark",
+    description: "Explore Keystroke Injection attacks with the Digispark USB development board.",
+    image: "/projects/digispark.jpg",
+    tags: ["Arduino", "Digispark"],
+    github: "/socials/github/Digispark"
+  }
 ];
 
 export default projects;

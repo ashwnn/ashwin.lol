@@ -6,7 +6,7 @@ interface ProjectCardProps {
   description: string;
   image: string;
   tags: string[];
-  link: string;
+  link?: string;
   github?: string;
 }
 
@@ -22,7 +22,7 @@ export default function ProjectCard({ title, description, image, tags, link, git
           sizes="(max-width: 640px) 100vw, 256px"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 to-transparent opacity-80 sm:bg-gradient-to-t"></div>
-      
+
       </div>
 
       <div className="flex flex-col flex-grow p-4 sm:p-6">
@@ -43,7 +43,7 @@ export default function ProjectCard({ title, description, image, tags, link, git
         )}
 
         <div className="flex items-center gap-3 mt-auto">
-          <Link
+          {link && (<Link
             href={link}
             target="_blank"
             className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium text-white bg-neutral-800 hover:bg-neutral-700 transition-colors"
@@ -53,7 +53,7 @@ export default function ProjectCard({ title, description, image, tags, link, git
             <svg className="ml-1.5 h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
-          </Link>
+          </Link>)}
 
           {github && (
             <a
