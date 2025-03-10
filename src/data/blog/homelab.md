@@ -18,11 +18,11 @@ tags: "self-hosting, homelab, server"
 
 # Bepo: My HomeLab Adventure
 
-**Bepo**, my very own HomeLab, is the fruit of my past mistakes, learnings, and experiences setting up my own server. Currently built on a Lenovo Thinkserver TD340, it will go through the hardware setup, software stack, problems I faced, and how I overcame them so you can learn from my mistakes and build your own HomeLab one day.
+**Bepo**, my very own HomeLab, is the fruit of my past mistakes, learnings, and experiences setting up my own server. Currently built on a [Lenovo Thinkserver TD340](https://www.lenovo.com/ph/en/p/servers-storage/servers/towers/thinkserver-td340/77ls7td340d), it will go through the hardware setup, software stack, problems I faced, and how I overcame them so you can learn from my mistakes and build your own HomeLab one day.
 
 ## Inspiration
 
-Before setting up a home lab, I always had a more robust VPS to run my projects and other applications. Still, I did not trust the security and privacy of my data. The saying "The cloud is just someone else's computer" always stuck with me. I wanted more control over my data and services while reducing my dependency on third-party providers. It started with a Dell Optiplex 7010 I picked up for free, a Lenovo ThinkCentre M93P I got for $20 working together, and finally, my Lenovo ThinkServer TD340.
+Before setting up a home lab, I always had a more robust VPS to run my projects and other applications. Still, I did not trust the security and privacy of my data. The saying "The cloud is just someone else's computer" always stuck with me. I wanted more control over my data and services while reducing my dependency on third-party providers. It started with a [Dell Optiplex 7010](https://www.amazon.ca/Dell-Optiplex-7010-Professional-Refurbished/dp/B01LKOZEF0?th=1) I picked up for free, a [Lenovo ThinkCentre M93P](https://www.ebay.ca/itm/255116333817) I got for $20 working together, and finally, my Lenovo ThinkServer TD340.
 
 ## Hardware Specifications & Cost
 
@@ -37,6 +37,8 @@ My home lab is built on a Lenovo ThinkServer TD340, an enterprise-grade server t
     - Cost: $50
 - **Storage:** 2x 14TB Exos mach.2 14TB, 1x 10TB IronWolf Pro, 1x Crucial MX500 1TB
     - Cost: $854.75 = $269.18 x 2 + $246.39 + $70
+
+#### Total Cost: $984.75
 
 ## Redundancy & Software
 The main goal of using a server-grade platform like ThinkServer is the built-in use of RAID, extensive support, and the drive's hot-swapping ability. However, due to my requirements and restrictions, I had to rethink and use a software-based RAID solution when setting up RAID. The main reason is that uneven drives with a mix of 14 & 10TB significantly limited my choices on RAID setups. Ultimately, I ended up going with SnapRaid, which is software-based and offered significant flexibility alongside performance, the only downside being it must be synced & scrubbed via a command.
@@ -60,7 +62,7 @@ Instead, I decided on SnapRAID, a fantastic alternative; however, it lacked a fe
 
 ### Software
 
-- **Operating System:** Ubuntu Server 24.0..1 LTS
+- **Operating System:** Ubuntu Server 24.0.1 LTS
 - **Containerization:** Docker Compose
 
 Rather than opting for Proxmox, I ran bare metal and used Docker to manage all my applications. Specifically, Docker Compose let me organize my applications and made it significantly easier to manage them.
@@ -69,6 +71,9 @@ Rather than opting for Proxmox, I ran bare metal and used Docker to manage all m
 - `~/apps` - application configuration
 - `~/pool` - SnapRAID pool via MergerFS
     - `appdata/` - application data
+    - `media/` - media files
+    - `share/` - SMB share
+    - `downloads/` - downloads
 
 **Networking**: For networking I opted to use Cloudflared for it's simplicty to setup, privacy and DOS protection. It lets me easily publish a local application to my domains without the hastle of SSL certificates and port forwarding.
 

@@ -56,7 +56,6 @@ function getLanguageColor(language: string): string {
     Shell: 'bg-gray-200 text-gray-800',
     Go: 'bg-cyan-200 text-cyan-800',
     Rust: 'bg-amber-200 text-amber-800',
-    // Add more languages as needed
   };
   
   return colors[language] || 'bg-gray-200 text-gray-800';

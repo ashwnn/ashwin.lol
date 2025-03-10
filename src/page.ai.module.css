@@ -164,9 +164,10 @@
   margin: 0.25rem 0;
 }
 
-/* Custom bullets for unordered lists */
+/* Custom bullets for unordered lists - first level */
 .markdown_body ul li {
   position: relative;
+  list-style: none;
 }
 
 .markdown_body ul li::before {
@@ -175,6 +176,79 @@
   position: absolute;
   left: -1.25rem;
   font-size: 1.2em;
+}
+
+/* Second level unordered lists */
+.markdown_body ul ul li::before {
+  content: "◦";
+  color: #60a5fa;
+  font-size: 1.1em;
+}
+
+/* Third level unordered lists */
+.markdown_body ul ul ul li::before {
+  content: "▪";
+  color: #93c5fd;
+  font-size: 0.8em;
+}
+
+/* Ordered lists styling - first level */
+.markdown_body ol {
+  counter-reset: list;
+  list-style: none;
+}
+
+.markdown_body ol li {
+  position: relative;
+  counter-increment: list;
+}
+
+.markdown_body ol li::before {
+  content: counter(list) ".";
+  position: absolute;
+  left: -1.75rem;
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+/* Second level ordered lists */
+.markdown_body ol ol {
+  counter-reset: list-2;
+  list-style: none;
+}
+
+.markdown_body ol ol li {
+  counter-increment: list-2;
+}
+
+.markdown_body ol ol li::before {
+  content: counter(list-2, lower-alpha) ".";
+  color: #60a5fa;
+}
+
+/* Third level ordered lists */
+.markdown_body ol ol ol {
+  counter-reset: list-3;
+  list-style: none;
+}
+
+.markdown_body ol ol ol li {
+  counter-increment: list-3;
+}
+
+.markdown_body ol ol ol li::before {
+  content: counter(list-3, lower-roman) ".";
+  color: #93c5fd;
+}
+
+/* Mixed nested lists */
+.markdown_body ol ul li::before {
+  content: "•";
+  counter-increment: none;
+}
+
+.markdown_body ul ol li::before {
+  content: counter(list) ".";
 }
 
 /* Ordered lists styling */
