@@ -3,6 +3,16 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Snippets | Ashwin Charathsandran',
   description: 'Useful code snippets and gists shared by Ashwin C.',
+  openGraph: {
+    images: [
+      {
+        url: '/memoji-wide.png',
+        width: 2000,
+        height: 1000,
+        alt: 'Ashwin Charathsandran',
+      },
+    ],
+  },
 };
 
 interface Gist {
