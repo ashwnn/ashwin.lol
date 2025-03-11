@@ -5,7 +5,7 @@ import { BlogPost } from "@/types";
 import matter from "gray-matter";
 
 export const metadata = {
-  title: 'Blog | Ashwin Charathsandran',
+  title: 'Blog - Ashwin C.',
   description: 'Collection of my thoughts and experiences.',
   openGraph: {
     images: [

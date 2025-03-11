@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Snippets | Ashwin Charathsandran',
+  title: 'Snippets - Ashwin C.',
   description: 'Useful code snippets and gists shared by Ashwin C.',
   openGraph: {
     images: [

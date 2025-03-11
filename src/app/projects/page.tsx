@@ -2,7 +2,7 @@ import ProjectCard from '@/components/Project/Card';
 import Projects from '@/data/projects';
 
 export const metadata = {
-  title: 'Projects | Ashwin Charathsandran',
+  title: 'Projects - Ashwin C.',
   description: 'Showcase of my projects and work',
   openGraph: {
     images: [

@@ -4,7 +4,7 @@ import { data as TimelineData } from '@/data/timeline';
 import Socials from '@/components/Socials';
 
 export const metadata: Metadata = {
-    title: 'About | Ashwin Charathsandran',
+    title: 'About - Ashwin C.',
     description: 'Learn more about Ashwin C. - student, developer, and tech enthusiast.',
     openGraph: {
       images: [

@@ -8,7 +8,7 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ashwin C.",
+  title: "Home - Ashwin C.",
   description: "Personal website of Ashwin Charathsandran",
 };
 
