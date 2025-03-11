@@ -4,6 +4,21 @@ import Card from "@/components/Blog/Card";
 import { BlogPost } from "@/types";
 import matter from "gray-matter";
 
+export const metadata = {
+  title: 'Blog | Ashwin Charathsandran',
+  description: 'Collection of my thoughts and experiences.',
+  openGraph: {
+    images: [
+      {
+        url: '/memoji-wide.png',
+        width: 2000,
+        height: 1000,
+        alt: 'Ashwin Charathsandran',
+      },
+    ],
+  },
+};
+
 async function getLocalPosts(): Promise<BlogPost[]> {
   const postsDir = path.join(process.cwd(), "src/data/blog");
   const files = await fs.readdir(postsDir);

@@ -4,6 +4,16 @@ import Projects from '@/data/projects';
 export const metadata = {
   title: 'Projects | Ashwin Charathsandran',
   description: 'Showcase of my projects and work',
+  openGraph: {
+    images: [
+      {
+        url: '/memoji-wide.png',
+        width: 2000,
+        height: 1000,
+        alt: 'Ashwin Charathsandran',
+      },
+    ],
+  },
 };
 
 export default function ProjectsPage() {

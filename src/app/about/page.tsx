@@ -6,6 +6,16 @@ import Socials from '@/components/Socials';
 export const metadata: Metadata = {
     title: 'About | Ashwin Charathsandran',
     description: 'Learn more about Ashwin C. - student, developer, and tech enthusiast.',
+    openGraph: {
+      images: [
+        {
+          url: '/memoji-wide.png',
+          width: 2000,
+          height: 1000,
+          alt: 'Ashwin Charathsandran',
+        },
+      ],
+    },
 };
 
 export default function AboutPage() {
