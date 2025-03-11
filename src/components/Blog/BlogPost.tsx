@@ -10,13 +10,12 @@ import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typesc
 import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash';
 import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json';
 import powershell from 'react-syntax-highlighter/dist/cjs/languages/prism/powershell';
-import styles from "@/page.ai.module.css";
+import styles from "@/styles/markdown.module.css";
 import BlogPostLayout from "@/components/Blog/PostLayout";
 import BackToTop from "@/components/Blog/BackToTop";
 import dynamic from "next/dynamic";
 import Link from "@/components/Link";
 
-// Dynamically import the image modal component
 const ImageModal = dynamic(() => import("@/components/Blog/ImageModal"), {
   ssr: false
 });
