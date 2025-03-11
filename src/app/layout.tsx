@@ -22,11 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} min-h-screen bg-[#222222] text-gray-200 flex flex-col`}>
         <Header />
-        <main className="flex-1 flex flex-col pt-6">
-          <Template>
-          {children}
-          </ Template>
-        </main>
+        <Template>
+          <main className="flex-1 flex flex-col pt-6">
+            {children}
+          </main>
+        </Template>
         <Footer />
         <Script
           src="https://umm.ashwin.lol/script.js"
