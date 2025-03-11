@@ -7,14 +7,14 @@ export const metadata: Metadata = {
     title: 'About - Ashwin C.',
     description: 'Learn more about Ashwin C. - student, developer, and tech enthusiast.',
     openGraph: {
-      images: [
-        {
-          url: '/memoji-wide.png',
-          width: 2000,
-          height: 1000,
-          alt: 'Ashwin Charathsandran',
-        },
-      ],
+        images: [
+            {
+                url: '/memoji-wide.png',
+                width: 2000,
+                height: 1000,
+                alt: 'Ashwin Charathsandran',
+            },
+        ],
     },
 };
 

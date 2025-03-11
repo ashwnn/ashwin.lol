@@ -12,7 +12,6 @@ export default function Header() {
     <header className="w-full pt-6 pb-4">
       <div className="max-w-3xl mx-auto px-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          {/* Logo and name section */}
           <div className="flex items-center justify-center sm:justify-start mb-4 sm:mb-0">
             <div className="w-12 h-12 mr-3 rounded-full overflow-hidden">
               <Image 

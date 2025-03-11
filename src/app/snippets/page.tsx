@@ -67,7 +67,7 @@ function getLanguageColor(language: string): string {
     Go: 'bg-cyan-200 text-cyan-800',
     Rust: 'bg-amber-200 text-amber-800',
   };
-  
+
   return colors[language] || 'bg-gray-200 text-gray-800';
 }
 
@@ -78,19 +78,19 @@ export default async function SnippetsPage() {
     <div className="max-w-3xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Snippets</h1>
       <p className="text-neutral-400 mb-8">A collection of useful code snippets and gists that I&apos;ve created and shared.</p>
-      
+
       <div className="grid grid-cols-1 gap-2">
         {gists.map((gist) => {
           const files = Object.values(gist.files);
           const mainFile = files[0];
           const fileCount = files.length;
-          
+
           return (
-            <a 
+            <a
               href={gist.html_url}
               key={gist.id}
               target="_blank"
-              rel="noopener noreferrer" 
+              rel="noopener noreferrer"
               className="block overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/80 transition-all duration-300 hover:border-neutral-700 hover:shadow-lg hover:shadow-black/20"
             >
               <div className="p-5">
@@ -103,12 +103,12 @@ export default async function SnippetsPage() {
                       <p className="text-sm text-neutral-400 mt-1">{gist.description}</p>
                     )}
                   </div>
-                  
+
                   <span className={`text-xs px-2.5 py-1 rounded-full ${getLanguageColor(mainFile.language)}`}>
                     {mainFile.language}
                   </span>
                 </div>
-                
+
                 <div className="flex items-center mt-4 pt-4 border-t border-neutral-800 text-xs text-neutral-500">
                   <div className="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -116,7 +116,7 @@ export default async function SnippetsPage() {
                     </svg>
                     <span>Updated {formatDate(gist.updated_at)}</span>
                   </div>
-                  
+
                   {fileCount > 1 && (
                     <div className="ml-4 flex items-center">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -125,7 +125,7 @@ export default async function SnippetsPage() {
                       <span>{fileCount} files</span>
                     </div>
                   )}
-                  
+
                   <div className="ml-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

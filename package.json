@@ -12,6 +12,7 @@
     "@sendgrid/mail": "^8.1.4",
     "@types/react-syntax-highlighter": "^15.5.13",
     "contentlayer": "^0.3.4",
+    "framer-motion": "^12.4.11",
     "gray-matter": "^4.0.3",
     "next": "15.1.6",
     "pocketbase": "^0.25.1",

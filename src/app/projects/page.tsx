@@ -40,8 +40,8 @@ export default function ProjectsPage() {
         ))}
       </div>
       <div className="mt-10 mb-12 flex justify-center">
-        <a 
-          href="/socials/github?tab=repositories" 
+        <a
+          href="/socials/github?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-5 py-3 rounded-lg bg-neutral-800 text-white hover:bg-neutral-700 transition-colors duration-200 shadow-md shadow-black/10 border border-neutral-700/30"

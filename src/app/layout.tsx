@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Script from "next/script";
+import Template from "@/components/TransitionTemplate";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} min-h-screen bg-[#222222] text-gray-200 flex flex-col`}>
         <Header />
-        <main className="flex-1 flex flex-col">
+        <main className="flex-1 flex flex-col pt-6">
+          <Template>
           {children}
+          </ Template>
         </main>
         <Footer />
         <Script
