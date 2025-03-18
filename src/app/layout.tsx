@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Script from "next/script";
 import Template from "@/components/TransitionTemplate";
+import { Analytics } from "@vercel/analytics/react"
 // import ReferralAnimationWrapper from "@/components/RefferalAnimationWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -39,6 +40,7 @@ export default function RootLayout({
           data-auto-track="true"
           defer
         />
+        <Analytics />
       </body>
     </html>
   );
