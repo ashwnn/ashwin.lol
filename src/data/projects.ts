@@ -23,7 +23,7 @@ const projects = [
     link: "https://baulkhamhillsvolleyball.com.au/",
   },
   {
-    title:"Digispark",
+    title: "Digispark",
     description: "Explore Keystroke Injection attacks with the Digispark USB development board.",
     image: "/projects/digispark.jpg",
     tags: ["Arduino", "Digispark"],

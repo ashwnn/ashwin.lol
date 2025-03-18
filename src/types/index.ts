@@ -19,6 +19,13 @@ interface BlogPost {
     tags?: string;
     published_date: Date;
     author?: string;
-  }
+}
 
-export type { TimelineItem, BlogPost };
+interface ReferralSource {
+      id: string;
+      name: string;
+      message: string;
+      icon: string;
+}
+
+export type { TimelineItem, BlogPost, ReferralSource };

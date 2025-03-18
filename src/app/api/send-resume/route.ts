@@ -10,54 +10,54 @@ class InMemoryRateLimiter {
   async checkDailyLimit(ip: string): Promise<{ allowed: boolean, remaining: number, resetAt: number }> {
     const now = Date.now();
     const resetAt = new Date().setHours(24, 0, 0, 0); // Reset at midnight
-    
+
     const record = this.requests.get(ip);
     if (!record) {
       this.requests.set(ip, { count: 1, resetAt });
       return { allowed: true, remaining: 4, resetAt };
     }
-    
+
     if (now > record.resetAt) {
       this.requests.set(ip, { count: 1, resetAt });
       return { allowed: true, remaining: 4, resetAt };
     }
-    
+
     if (record.count >= 5) {
       return { allowed: false, remaining: 0, resetAt: record.resetAt };
     }
-    
+
     record.count += 1;
     this.requests.set(ip, record);
     return { allowed: true, remaining: 5 - record.count, resetAt: record.resetAt };
   }
-  
+
   async checkShortTermLimit(ip: string): Promise<{ allowed: boolean, retryAfter: number }> {
     const now = Date.now();
     const record = this.shortTermRequests.get(ip);
-    
+
     if (!record) {
       this.shortTermRequests.set(ip, { timestamp: now });
       return { allowed: true, retryAfter: 0 };
     }
-    
+
     const elapsedMs = now - record.timestamp;
     if (elapsedMs < 5000) {
       return { allowed: false, retryAfter: Math.ceil((5000 - elapsedMs) / 1000) };
     }
-    
+
     this.shortTermRequests.set(ip, { timestamp: now });
     return { allowed: true, retryAfter: 0 };
   }
-  
+
   cleanup() {
     const now = Date.now();
-    
+
     for (const [ip, record] of this.requests.entries()) {
       if (now > record.resetAt) {
         this.requests.delete(ip);
       }
     }
-    
+
     for (const [ip, record] of this.shortTermRequests.entries()) {
       if (now - record.timestamp > 60000) {
         this.shortTermRequests.delete(ip);
@@ -74,15 +74,15 @@ setInterval(() => {
 
 export async function POST(request: Request) {
   try {
-    const ip = request.headers.get('x-forwarded-for') || 
-      request.headers.get('x-real-ip') || 
+    const ip = request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
       '127.0.0.1';
-    
+
     const shortTermLimit = await rateLimiter.checkShortTermLimit(ip);
     if (!shortTermLimit.allowed) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
-        { 
+        {
           status: 429,
           headers: {
             'Retry-After': String(shortTermLimit.retryAfter)
@@ -90,12 +90,12 @@ export async function POST(request: Request) {
         }
       );
     }
-    
+
     const dailyLimit = await rateLimiter.checkDailyLimit(ip);
     if (!dailyLimit.allowed) {
       return NextResponse.json(
         { error: 'Daily request limit reached. Please try again tomorrow.' },
-        { 
+        {
           status: 429,
           headers: {
             'X-RateLimit-Limit': '5',
@@ -157,11 +157,11 @@ export async function POST(request: Request) {
     await sgMail.send(msg);
 
     return NextResponse.json(
-      { 
+      {
         success: true,
         remaining: dailyLimit.remaining
       },
-      { 
+      {
         status: 200,
         headers: {
           'X-RateLimit-Limit': '5',

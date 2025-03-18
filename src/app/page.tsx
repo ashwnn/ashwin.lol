@@ -3,6 +3,7 @@ import { default as Link } from '@/components/Link';
 import Socials from '@/components/Socials';
 
 export default function Home() {
+
   return (
     <div className="flex flex-col items-center justify-center py-12">
       <div className="relative w-60 h-60 mx-auto">

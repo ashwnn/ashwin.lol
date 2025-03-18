@@ -33,7 +33,7 @@ export default function ImageModal({ src, alt, onClose }: ImageModalProps) {
       onClick={onClose}
     >
       <div className="relative max-w-[90vw] max-h-[90vh]">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={alt || "Image"}

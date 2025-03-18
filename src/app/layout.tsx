@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Script from "next/script";
 import Template from "@/components/TransitionTemplate";
+// import ReferralAnimationWrapper from "@/components/RefferalAnimationWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,19 +16,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-[#222222] text-gray-200 flex flex-col`}>
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} min-h-screen bg-[#222222] text-gray-200 flex flex-col relative`}>
+        {/* <ReferralAnimationWrapper /> */}
         <Header />
         <Template>
           <main className="flex-1 flex flex-col pt-6">
             {children}
           </main>
         </Template>
-        <Footer />
+        <div className="mt-auto">
+          <Footer />
+        </div>
         <Script
           src="https://umm.ashwin.lol/script.js"
           data-website-id="cdd6e3c0-1aa1-4a10-83b7-56157157bab8"

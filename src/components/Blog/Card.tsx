@@ -8,7 +8,7 @@ import { BlogPost } from "@/types";
 export default function BlogCard({ slug, title, description, cover_image, tags, published_date, author }: BlogPost) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  
+
   const formatDate = (date: Date) =>
     new Date(date).toLocaleDateString(undefined, {
       month: "long",
@@ -23,7 +23,7 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
   };
 
   return (
-    <div 
+    <div
       className="relative flex flex-col h-full bg-[#2a2a2a] border border-zinc-700/50 rounded-xl shadow-lg hover:shadow-xl hover:border-zinc-600 transition-all duration-300 overflow-hidden group"
       onClick={handleClick}
       role="link"
@@ -39,7 +39,7 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
           </div>
         </div>
       )}
-      
+
       <div className="relative h-52 w-full bg-center bg-cover overflow-hidden">
         <Image
           src={cover_image}
@@ -58,7 +58,7 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
         {description && (
           <p className="text-gray-300 text-sm line-clamp-2 mb-3">{description}</p>
         )}
-        
+
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap mt-auto pt-3">
             {tags.split(",").slice(0, 3).map((tag, i) => (
@@ -74,13 +74,13 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
             )}
           </div>
         )}
-        
+
         <div className="mt-3 pt-3 text-xs border-t border-zinc-700/50 text-gray-400 flex justify-between items-center">
           {author && <span>{author}</span>}
           {published_date && <span>{formatDate(published_date)}</span>}
         </div>
       </div>
-      
+
       {/* Add a subtle shine effect that animates once on hover */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shine pointer-events-none"></div>
     </div>

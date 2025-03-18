@@ -24,15 +24,6 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto py-8 px-4 md:px-0">
             <section className="mb-8">
                 <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
-                    {/* <div className="relative w-60 md:w-full h-60 overflow-hidden rounded-xl border border-neutral-800">
-                        <Image
-                            src="/about/me.jpg"
-                            alt="Ashwin C."
-                            fill
-                            className="object-cover"
-                            sizes="160px"
-                        />
-                    </div> */}
                     <div>
                         <h2 className="text-2xl font-bold mb-2">Ashwin Charathsandran</h2>
                         <p className="text-neutral-400 mb-4">Student, Developer & Tech Enthusiast</p>

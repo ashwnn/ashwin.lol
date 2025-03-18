@@ -16,7 +16,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -35,7 +35,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
     }
-    
+
     return () => {
       document.body.style.overflow = "auto";
       window.removeEventListener("keydown", handleKeyDown);
@@ -45,7 +45,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
     setIsError(false);
-    
+
     try {
       const response = await fetch("/api/send-resume", {
         method: "POST",
@@ -54,14 +54,14 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         },
         body: JSON.stringify({ email: data.email }),
       });
-      
+
       if (response.ok) {
         setIsSuccess(true);
 
         const utcTimestamp = new Date().toISOString();
         const umamiUrl = new URL('https://umm.ashwin.lol/api/collect');
-        umamiUrl.searchParams.append('type', 'event');           
-        umamiUrl.searchParams.append('id', 'cdd6e3c0-1aa1-4a10-83b7-56157157bab8'); 
+        umamiUrl.searchParams.append('type', 'event');
+        umamiUrl.searchParams.append('id', 'cdd6e3c0-1aa1-4a10-83b7-56157157bab8');
         umamiUrl.searchParams.append('event_type', 'resume_submission');
         umamiUrl.searchParams.append('email', data.email);
         umamiUrl.searchParams.append('timestamp', utcTimestamp);
@@ -86,7 +86,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={onClose}>
-      <div 
+      <div
         className="bg-neutral-900 rounded-lg p-6 shadow-xl max-w-md w-full border border-neutral-700/30"
         onClick={(e) => e.stopPropagation()}
       >
@@ -96,7 +96,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             <p className="text-neutral-300 text-sm mb-6">
               Enter your email address below to receive a copy of my CV directly to your inbox.
             </p>
-            
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-neutral-300 mb-1">
@@ -106,15 +106,14 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                   id="email"
                   type="email"
                   placeholder="you@example.com"
-                  className={`w-full px-4 py-2 bg-neutral-800 border ${
-                    errors.email ? 'border-red-500' : 'border-neutral-600'
-                  } rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                  {...register("email", { 
-                    required: "Email is required", 
+                  className={`w-full px-4 py-2 bg-neutral-800 border ${errors.email ? 'border-red-500' : 'border-neutral-600'
+                    } rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                  {...register("email", {
+                    required: "Email is required",
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                       message: "Invalid email address"
-                    } 
+                    }
                   })}
                   disabled={isLoading}
                 />
@@ -122,13 +121,13 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                   <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
                 )}
               </div>
-              
+
               {isError && (
                 <div className="text-red-500 text-sm">
                   Something went wrong. Please try again.
                 </div>
               )}
-              
+
               <div className="flex justify-end space-x-2">
                 <button
                   type="button"
