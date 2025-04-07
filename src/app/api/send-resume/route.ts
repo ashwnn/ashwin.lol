@@ -1,7 +1,15 @@
 import { NextResponse } from 'next/server';
-import sgMail from '@sendgrid/mail';
+import formData from 'form-data';
+import Mailgun from 'mailgun.js';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({
+  username: 'api',
+  key: process.env.MAILGUN_API_KEY || '',
+  url: 'https://api.mailgun.net'
+});
+
+const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN || '';
 
 class InMemoryRateLimiter {
   private requests: Map<string, { count: number, resetAt: number }> = new Map();
@@ -67,7 +75,6 @@ class InMemoryRateLimiter {
 }
 
 const rateLimiter = new InMemoryRateLimiter();
-
 setInterval(() => {
   rateLimiter.cleanup();
 }, 5 * 60 * 1000);
@@ -115,51 +122,54 @@ export async function POST(request: Request) {
       );
     }
 
-    const msg = {
+    const htmlContent = `
+      <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background-color: #0f0f0f; color: #e5e5e5; border-radius: 12px; border: 1px solid #333333;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">Ashwin Charathsandran</h1>
+          <p style="margin: 8px 0 0; color: #999999; font-size: 16px;">My Resume</p>
+        </div>
+        <div style="background-color: #1a1a1a; border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #333333;">
+          <h2 style="margin-top: 0; color: #3b82f6; font-size: 18px; font-weight: 500;">Thank you for your interest!</h2>
+          <p style="margin: 16px 0; line-height: 1.6;">Hello,</p>
+          <p style="margin: 16px 0; line-height: 1.6;">Thank you for requesting my CV. I've attached it to this email for your reference.</p>
+          <p style="margin: 16px 0; line-height: 1.6;">Feel free to reach out if you have any questions or would like to discuss potential opportunities.</p>
+        </div>
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #333333;">
+          <p style="margin: 0; color: #999999; font-size: 14px;">Best regards,</p>
+          <p style="margin: 8px 0 0; color: #ffffff; font-size: 16px; font-weight: 500;">Ashwin Charathsandran</p>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+          <a href="https://ashwin.lol" style="display: inline-block; color: #3b82f6; text-decoration: none; font-size: 14px; border-bottom: 1px dotted #3b82f680;">ashwin.lol</a>
+        </div>
+      </div>
+    `;
+
+    // Configure email data
+    const emailData: any = {
+      from: process.env.FROM_EMAIL || `Ashwin Charathsandran <resume@${MAILGUN_DOMAIN}>`,
       to: email,
-      from: process.env.FROM_EMAIL || 'its@ashwin.lol',
       subject: 'Ashwin Charathsandran - Resume',
       text: 'Please find attached my CV.',
-      html: `
-        <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background-color: #0f0f0f; color: #e5e5e5; border-radius: 12px; border: 1px solid #333333;">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">Ashwin Charathsandran</h1>
-            <p style="margin: 8px 0 0; color: #999999; font-size: 16px;">My Resume</p>
-          </div>
-          
-          <div style="background-color: #1a1a1a; border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #333333;">
-            <h2 style="margin-top: 0; color: #3b82f6; font-size: 18px; font-weight: 500;">Thank you for your interest!</h2>
-            <p style="margin: 16px 0; line-height: 1.6;">Hello,</p>
-            <p style="margin: 16px 0; line-height: 1.6;">Thank you for requesting my CV. I've attached it to this email for your reference.</p>
-            <p style="margin: 16px 0; line-height: 1.6;">Feel free to reach out if you have any questions or would like to discuss potential opportunities.</p>
-          </div>
-          
-          <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #333333;">
-            <p style="margin: 0; color: #999999; font-size: 14px;">Best regards,</p>
-            <p style="margin: 8px 0 0; color: #ffffff; font-size: 16px; font-weight: 500;">Ashwin Charathsandran</p>
-          </div>
-          
-          <div style="text-align: center; margin-top: 30px;">
-            <a href="https://ashwin.lol" style="display: inline-block; color: #3b82f6; text-decoration: none; font-size: 14px; border-bottom: 1px dotted #3b82f680;">ashwin.lol</a>
-          </div>
-        </div>
-      `,
-      attachments: process.env.CV_BASE64 ? [
-        {
-          content: process.env.CV_BASE64,
-          filename: 'Ashwin_Charathsandran_CV.pdf',
-          type: 'application/pdf',
-          disposition: 'attachment'
-        },
-      ] : [],
+      html: htmlContent,
     };
 
-    await sgMail.send(msg);
+    // Add attachment if a CV is available – ensure it's passed as an array per Mailgun's API requirements
+    if (process.env.CV_BASE64) {
+      emailData.attachment = [{
+        data: Buffer.from(process.env.CV_BASE64, 'base64'),
+        filename: 'CV.pdf',
+        contentType: 'application/pdf',
+      }];
+    }
+
+    // Send email using Mailgun
+    const result = await mg.messages.create(MAILGUN_DOMAIN, emailData);
 
     return NextResponse.json(
       {
         success: true,
-        remaining: dailyLimit.remaining
+        remaining: dailyLimit.remaining,
+        messageId: result.id || 'unknown'
       },
       {
         status: 200,
