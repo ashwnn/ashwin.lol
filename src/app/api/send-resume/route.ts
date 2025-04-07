@@ -145,6 +145,7 @@ export async function POST(request: Request) {
     `;
 
     // Configure email data
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const emailData: any = {
       from: process.env.FROM_EMAIL || `Ashwin Charathsandran <resume@${MAILGUN_DOMAIN}>`,
       to: email,
