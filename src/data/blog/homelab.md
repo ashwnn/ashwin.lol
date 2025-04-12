@@ -1,10 +1,10 @@
 ---
-title: "Bepo: My Homelab Setup (Containers & VMs)"
-description: "An updated look at my homelab setup: server specs, network configuration, storage strategy, virtualization with KVM/libvirt, and the extensive suite of self-hosted services."
-date: "2025-02-12" # Kept your original date
+title: "Bepo: My Homelab Setup"
+description: "A look at my homelab setup: server specs, network configuration, storage strategy, virtualization with KVM/libvirt, and the extensive suite of self-hosted services."
+date: "2025-02-12"
 author: "Ashwin C."
 cover_image: "/blog/homelab.png"
-tags: "self-hosting, homelab, server, docker, snapraid, mergerfs, cloudflared, kvm, libvirt, virtualization"
+tags: "self-hosting, homelab, server
 ---
 
 # Table of Contents
