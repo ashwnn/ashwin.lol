@@ -4,7 +4,7 @@ description: "A look at my homelab setup: server specs, network configuration, s
 date: "2025-02-12"
 author: "Ashwin C."
 cover_image: "/blog/homelab.png"
-tags: "self-hosting, homelab, server
+tags: "self-hosting, homelab, server"
 ---
 
 # Table of Contents
@@ -41,11 +41,11 @@ My home lab is built on a Lenovo ThinkServer TD340, an enterprise-grade server t
     -   Notes: *Came with 16GB of DDR3 1333MHz ECC RAM & 1x Intel Xeon E5-2420 v2*
 -   **CPU:** 2x Intel Xeon E5-2450 v2 (8 cores, 16 threads each, totaling 16c/32t)
     -   Cost: $20
--   **Memory:** 48GB DDR3 1333MHz ECC RAM
+-   **Memory:** 101GB DDR3 1333MHz ECC RAM
     -   Cost: $50
 -   **Storage:**
-    -   Data Drives: 1x 14TB Exos Mach.2, 1x 10TB IronWolf Pro (`/mnt/data1`, `/mnt/data2`)
-    -   Parity Drive: 1x 14TB Exos Mach.2 (`/mnt/parity1`)
+    -   Data Drives: 1x 14TB Exos Mach.2, 1x 10TB IronWolf Pro, 3x 2TB Generic HDD (`/mnt/data1`, `/mnt/data2`, `/mnt/data3`, `/mnt/data4`, `/mnt/data5`)
+    -   Parity Drive: 1x 14TB Exos Mach.2, 1x 2TB Generic HDD (`/mnt/parity1`, `/mnt/parity2`)
     -   OS/Appdata/VM Drive: 1x Crucial MX500 1TB (SATA SSD)
     -   Cost: $854.75 = $269.18 x 2 + $246.39 + $70
 
@@ -80,8 +80,8 @@ VMs consume more resources (RAM, disk space for the full OS) than containers but
 
 My primary goal was to combine my data drives (14TB and 10TB) into a single, large pool while maintaining redundancy against single drive failure. Hardware RAID wasn't ideal due to the mismatched drive sizes.
 
-1.  **MergerFS:** I use `mergerfs` to create a unified filesystem view (`~/pool`) from my individual data drives (`/mnt/data1`, `/mnt/data2`). This presents all the files across these drives as if they were in one large directory, simplifying data access for my applications and VMs needing bulk storage access. It pools the space without providing redundancy itself.
-2.  **SnapRAID:** For data protection, I use SnapRAID. It calculates parity information from the data drives (`/mnt/data1`, `/mnt/data2`) and stores it on a dedicated parity drive (`/mnt/parity1`, my second 14TB Exos). This allows me to recover the data from a failed drive using the parity information.
+1.  **MergerFS:** I use `mergerfs` to create a unified filesystem view (`~/pool`) from my individual data drives (`/mnt/data1`, `/mnt/data2`, `/mnt/data3`, `/mnt/data4`, `/mnt/data5`). This presents all the files across these drives as if they were in one large directory, simplifying data access for my applications and VMs needing bulk storage access. It pools the space without providing redundancy itself.
+2.  **SnapRAID:** For data protection, I use SnapRAID. It calculates parity information from the data drives (`/mnt/data1`, `/mnt/data2`, `/mnt/data3`, `/mnt/data4`, `/mnt/data5`) and stores it on a dedicated parity drives (`/mnt/parity1` & `/mnt/parity2`). This allows me to recover the data from a failed drive using the parity information.
 
 ### Why SnapRAID?
 
@@ -107,8 +107,7 @@ My file structure is designed for clarity and separation of concerns:
     -   `media/`: All media files (movies, TV shows, music).
     -   `share/`: General network shares (e.g., SMB/CIFS).
     -   `downloads/`: Temporary storage for downloads.
-    -   `backups/`: Backup storage location (e.g., VM backups, configuration backups).
-    -   (Other data categories as needed)
+    -   `backups/`: Backup storage location (e.g., VM backups, configuration backups, time machine backups).
 
 ## Networking, Security, and Applications
 
@@ -127,7 +126,8 @@ With the core infrastructure defined, here's how networking, security, and the a
 Security is paramount:
 -   **Access Control:** Public access is strictly limited via `Cloudflared`. Internal access uses strong passwords and SSH keys.
 -   **Firewall:** UFW (Uncomplicated Firewall) is configured with a default deny policy.
--   **Intrusion Detection/Prevention:** Crowdsec monitors logs and automatically blocks malicious IPs.
+-   **Intrusion Detection/Prevention:** [Crowdsec](https://www.crowdsec.net/) monitors logs and automatically blocks malicious IPs.
+    - **Log Monitoring:** Automated log scanning from `Pi-hole`, Docker containers, and system logs for unusual activity. I wrote a custom script to aggregate and analyze logs, sending alerts for domains/addresses that have a high number of DNS requests.
 -   **Vulnerability Scanning:** `OpenVAS` (via `open-vas` container) is used for periodic vulnerability scans.
 -   **Updates:** `Watchtower` automatically updates Docker containers. Regular OS updates and `libvirt`/KVM updates are applied manually. VM guest OS updates are managed within the VMs themselves.
 
@@ -178,6 +178,9 @@ The vast majority of my day-to-day services run as Docker containers for efficie
 **Utilities:**
 * `IT-Tools`: A collection of useful online tools (converters, formatters, etc.) self-hosted.
 * `13ft`: Alternative frontend for bypassing certain website paywalls/restrictions (use responsibly).
+
+## Personal Infrastructure Security
+Because all of my devices DNS traffic pass through Pi-Hole I am able to analyze and keep track of what devices are making the most requests. I wrote a custom script that aggregates and analyzes logs, sending alerts for domains/addresses that have a high number of DNS requests. This helps me identify any unusual activity or potential security issues on all of my devices. Although using something like Wazuh would be more robust, this simple solution works well for my needs.
 
 ## Challenges Faced and Lessons Learned
 
