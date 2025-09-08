@@ -14,6 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Home - Ashwin C.",
   description: "Personal website of Ashwin Charathsandran",
+  metadataBase: new URL("https://ashwin.lol"),
 };
 
 export default function RootLayout({
