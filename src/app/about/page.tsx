@@ -46,7 +46,8 @@ export default function AboutPage() {
                         {
                             title: 'Working Out',
                             description: 'Weightlifting and calisthenics to stay active and healthy.',
-                            link: '#',
+                            link: '/about/interests/working-out',
+                            slug: 'working-out',
                             icon: (
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                                     viewBox="0 0 485.535 485.535"
@@ -68,7 +69,8 @@ export default function AboutPage() {
                         {
                             title: 'Hiking',
                             description: 'Exploring the great outdoors and capturing the beauty of nature.',
-                            link: '#',
+                            link: '/about/interests/hiking',
+                            slug: 'hiking',
                             icon: (
                                 <svg className="h-8 w-8 mb-3 text-neutral-400" viewBox="0 0 24 24" fillOpacity={0} xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -82,7 +84,8 @@ export default function AboutPage() {
                         {
                             title: 'Travelling',
                             description: 'Exploring new cultures and experiencing the world.',
-                            link: '#',
+                            link: '/about/interests/travelling',
+                            slug: 'travelling',
                             icon: (
                                 <svg
                                     className="h-8 w-8 mb-3 text-neutral-400"
@@ -113,9 +116,9 @@ export default function AboutPage() {
                                 href={interest.link}
                                 className="w-full mt-auto inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded-lg bg-neutral-800 text-neutral-300
                                 hover:bg-neutral-700 hover:text-white transition-all duration-200
-                                border border-neutral-700/30 cursor-not-allowed"
+                                border border-neutral-700/30"
                             >
-                                Coming Soon
+                                View Gallery
                                 <svg className="ml-1.5 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                 </svg>

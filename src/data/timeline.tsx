@@ -2,6 +2,17 @@ import { TimelineItem } from "@/types"
 
 export const data: TimelineItem[] = [
     {
+        year: '2025',
+        title: "IT Support for Large Clients",
+        description: "My first experience into working and supporting a large userbase specializing in the migration to Windows 11 & modern management. I provided technical support for software issues both in person and remotely. In addition I worked on various projects related to cybersecurity and hardware.",
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+        ),
+        image: "/about/timeline/it_support_2025.png"
+    },
+    {
         year: '2023',
         title: 'Installation & Large Networks',
         description: 'Working as an installation technician for guest entertainment and WiFi infrastructure, I gained experience with enterprise hardware and large network design. I worked with various technologies like fiber optics, ethernet, and telecommunications.',
