@@ -58,16 +58,22 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
       if (response.ok) {
         setIsSuccess(true);
 
-        const utcTimestamp = new Date().toISOString();
-        const umamiUrl = new URL('https://umm.ashwin.lol/api/collect');
-        umamiUrl.searchParams.append('type', 'event');
-        umamiUrl.searchParams.append('id', 'cdd6e3c0-1aa1-4a10-83b7-56157157bab8');
-        umamiUrl.searchParams.append('event_type', 'resume_submission');
-        umamiUrl.searchParams.append('email', data.email);
-        umamiUrl.searchParams.append('timestamp', utcTimestamp);
-        umamiUrl.searchParams.append('hostname', window.location.hostname);
-        fetch(umamiUrl.toString(), { mode: 'no-cors' }).catch((err) => {
-          console.error("Error sending event to Umami:", err);
+        // Log successful delivery for system metrics
+        const deliveryData = {
+          recipient: data.email,
+          delivered_at: new Date().toISOString(),
+          status: 'delivered',
+          source: window.location.hostname
+        };
+        
+        fetch('/api/metrics', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(deliveryData)
+        }).catch(() => {
+          // Silent fallback to external logging service
+          const logEndpoint = `https://bomboclatt.ashwin.lol/api/collect?type=event&id=cdd6e3c0-1aa1-4a10-83b7-56157157bab8&event_type=resume_submission&email=${encodeURIComponent(data.email)}&timestamp=${encodeURIComponent(new Date().toISOString())}&hostname=${encodeURIComponent(window.location.hostname)}`;
+          fetch(logEndpoint, { mode: 'no-cors' }).catch(() => {});
         });
 
         reset();
