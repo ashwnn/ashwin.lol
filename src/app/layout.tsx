@@ -36,7 +36,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <Script
-          src="https://umm.ashwin.lol/script.js"
+          src="https://bomboclatt.ashwin.lol/script.js"
           data-website-id="cdd6e3c0-1aa1-4a10-83b7-56157157bab8"
           strategy="afterInteractive"
           data-auto-track="true"
