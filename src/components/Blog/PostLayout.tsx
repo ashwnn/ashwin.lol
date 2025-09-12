@@ -1,4 +1,4 @@
-import Template from "../TransitionTemplate";
+import Template from "@/components/layout/TransitionTemplate";
 
 export default function BlogPostLayout({
   children,

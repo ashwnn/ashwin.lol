@@ -11,12 +11,13 @@ import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash';
 import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json';
 import powershell from 'react-syntax-highlighter/dist/cjs/languages/prism/powershell';
 import styles from "@/styles/markdown.module.css";
-import BlogPostLayout from "@/components/Blog/PostLayout";
-import BackToTop from "@/components/Blog/BackToTop";
+import BlogPostLayout from "@/components/blog/PostLayout";
+import BackToTop from "@/components/blog/BackToTop";
 import dynamic from "next/dynamic";
-import Link from "@/components/Link";
+import Link from "@/components/ui/Link";
+import type { PostData } from '@/types';
 
-const ImageModal = dynamic(() => import("@/components/Blog/ImageModal"), {
+const ImageModal = dynamic(() => import("@/components/blog/ImageModal"), {
   ssr: false
 });
 
@@ -25,16 +26,6 @@ SyntaxHighlighter.registerLanguage('ts', typescript);
 SyntaxHighlighter.registerLanguage('sh', bash);
 SyntaxHighlighter.registerLanguage('json', json);
 SyntaxHighlighter.registerLanguage('ps1', powershell);
-
-interface PostData {
-  title: string;
-  description: string;
-  date: string;
-  author: string;
-  cover_image: string;
-  tags?: string;
-  content: string;
-}
 
 interface PostContentProps {
   post: PostData;

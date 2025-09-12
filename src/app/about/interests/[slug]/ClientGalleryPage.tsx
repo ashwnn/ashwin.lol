@@ -1,14 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import MasonryLayout from '@/components/Gallery/MasonryLayout';
-import FullscreenModal from '@/components/Gallery/FullscreenModal';
-
-interface GalleryImage {
-    src: string;
-    alt: string;
-    thumbnail: string;
-}
+import { EnhancedMasonryLayout, FullscreenModal } from '@/components/gallery';
+import type { GalleryImage } from '@/types';
 
 interface ClientGalleryPageProps {
     images: GalleryImage[];
@@ -56,7 +50,7 @@ export default function ClientGalleryPage({ images, title }: ClientGalleryPagePr
 
     return (
         <>
-            <MasonryLayout images={images} onImageClick={handleImageClick} />
+            <EnhancedMasonryLayout images={images} onImageClick={handleImageClick} />
 
             {/* Fullscreen Modal */}
             {selectedImageIndex !== null && (

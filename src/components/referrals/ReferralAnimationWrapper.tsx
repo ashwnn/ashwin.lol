@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { ReferralSource } from "@/types";
 import referrals from "@/data/refferals";
 
-const ReferralAnimation = dynamic(() => import('./RefferalAnimation'), {
+const ReferralAnimation = dynamic(() => import('./ReferralAnimation'), {
   ssr: false
 });
 

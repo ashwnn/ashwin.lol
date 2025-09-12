@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
-import PageTransition from "@/components/Transition";
+import PageTransition from "./Transition";
 
 export default function Template({ children }: { children: ReactNode }) {
   return (

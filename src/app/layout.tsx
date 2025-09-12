@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import Script from "next/script";
-import Template from "@/components/TransitionTemplate";
+import Template from "@/components/layout/TransitionTemplate";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next';
-// import ReferralAnimationWrapper from "@/components/RefferalAnimationWrapper";
+// import ReferralAnimationWrapper from "@/components/referrals/ReferralAnimationWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 

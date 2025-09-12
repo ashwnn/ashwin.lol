@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import ResumeModal from './ResumeModal';
+import ResumeModal from '@/components/modals/ResumeModal';
 
 export default function Socials() {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);

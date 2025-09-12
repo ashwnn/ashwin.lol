@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import ExifReader from 'exifreader';
 import fs from 'fs';
 import path from 'path';
+import ExifReader from 'exifreader';
+import type { ExifLocationData } from '@/types';
 
 export async function GET(request: NextRequest) {
     try {
@@ -55,19 +56,7 @@ export async function GET(request: NextRequest) {
     }
 }
 
-interface LocationData {
-    city: string | null;
-    sublocation: string | null;
-    country: string | null;
-    state: string | null;
-    gpsLatitude: string | null;
-    gpsLongitude: string | null;
-    iptcCity: string | null;
-    iptcSublocation: string | null;
-    iptcCountry: string | null;
-}
-
-function formatLocationDisplay(locationData: LocationData): string | null {
+function formatLocationDisplay(locationData: ExifLocationData): string | null {
     const parts = [];
     
     // Priority: Sublocation, City, State, Country

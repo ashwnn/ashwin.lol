@@ -1,36 +1,15 @@
 import { Metadata } from 'next';
+import type { Gist } from '@/types';
 
 export const metadata: Metadata = {
-  title: 'Snippets - Ashwin C.',
-  description: 'Useful code snippets and gists shared by Ashwin C.',
+  title: 'Snippets - Ashwin',
+  description: 'Code snippets and gists from my GitHub.',
   openGraph: {
-    images: [
-      {
-        url: '/memoji-wide.png',
-        width: 2000,
-        height: 1000,
-        alt: 'Ashwin Charathsandran',
-      },
-    ],
+    title: 'Snippets - Ashwin',
+    description: 'Code snippets and gists from my GitHub.',
+    type: 'website',
   },
 };
-
-interface Gist {
-  id: string;
-  html_url: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-  files: {
-    [key: string]: {
-      filename: string;
-      language: string;
-      raw_url: string;
-      size: number;
-      type: string;
-    };
-  };
-}
 
 async function getGists(): Promise<Gist[]> {
   const response = await fetch('https://api.github.com/users/ashwnn/gists', {

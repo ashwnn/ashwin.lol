@@ -1,17 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-
-export interface GalleryImage {
-    src: string;
-    alt: string;
-    thumbnail: string;
-    location?: {
-        displayText: string | null;
-        city: string | null;
-        sublocation: string | null;
-        country: string | null;
-    };
-}
+import type { GalleryImage, InterestSlug } from '@/types';
 
 export async function getInterestImages(interest: string): Promise<GalleryImage[]> {
     const imagesDirectory = path.join(process.cwd(), 'public', 'about', 'interests', interest);
@@ -51,7 +40,6 @@ export async function getInterestImages(interest: string): Promise<GalleryImage[
 }
 
 export const interestSlugs = ['hiking', 'working-out', 'travelling'] as const;
-export type InterestSlug = typeof interestSlugs[number];
 
 export function getInterestDisplayName(slug: InterestSlug): string {
     const displayNames: Record<InterestSlug, string> = {

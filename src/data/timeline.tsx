@@ -1,5 +1,21 @@
 import { TimelineItem } from "@/types"
 
+export const timelineCategories = [
+    { key: 'all', label: 'All', icon: '🎯' },
+    { key: 'development', label: 'Development', icon: '💻' },
+    { key: 'security', label: 'Security', icon: '🔒' },
+    { key: 'infrastructure', label: 'Infrastructure', icon: '🏗️' },
+    { key: 'hardware', label: 'Hardware', icon: '⚡' }
+];
+
+// Timeline modal tabs
+export const timelineModalTabs = [
+    { key: 'overview', label: 'Overview', icon: '📋' },
+    { key: 'tech', label: 'Tech Stack', icon: '⚡' },
+    { key: 'gallery', label: 'Gallery', icon: '🖼️' },
+    { key: 'takeaways', label: 'Takeaways', icon: '💡' }
+];
+
 export const data: TimelineItem[] = [
     {
         year: '2025',
@@ -10,7 +26,14 @@ export const data: TimelineItem[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
         ),
-        image: "/about/timeline/it_support_2025.png"
+        techStack: ['Windows 11', 'Remote Support', 'Hardware', 'Cybersecurity'],
+        categories: ['infrastructure', 'security'],
+        takeaways: [
+            'Gained hands-on experience supporting enterprise users',
+            'Learned modern device management and Windows 11 migration strategies',
+            'Developed skills in remote troubleshooting and technical support',
+            'Enhanced understanding of cybersecurity in corporate environments'
+        ]
     },
     {
         year: '2023',
@@ -21,7 +44,15 @@ export const data: TimelineItem[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
         ),
-        image: "/about/timeline/install_LxaKvbENuK.webp"
+        image: "/about/timeline/install_LxaKvbENuK.webp",
+        techStack: ['Networking', 'Fiber Optics', 'Ethernet', 'Enterprise Hardware'],
+        categories: ['infrastructure', 'hardware'],
+        takeaways: [
+            'Experience with enterprise-grade networking hardware',
+            'Understanding of large-scale network design and implementation',
+            'Knowledge of fiber optics and telecommunications infrastructure',
+            'Skills in troubleshooting complex network issues'
+        ]
     },
     {
         year: '2022',
@@ -33,6 +64,14 @@ export const data: TimelineItem[] = [
             </svg>
         ),
         image: "/about/timeline/nat_e3WBOUDBrl.webp",
+        techStack: ['Linux', 'Docker', 'DNS', 'Self-hosting', 'Media Services'],
+        categories: ['infrastructure'],
+        takeaways: [
+            'Self-hosting and infrastructure management experience',
+            'Docker containerization and service orchestration',
+            'DNS configuration and network security implementation',
+            'Media services and cloud alternatives deployment'
+        ],
         buttons: [
             {
                 label: "Read More",
@@ -54,7 +93,15 @@ export const data: TimelineItem[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
         ),
-        image: "/about/timeline/untitled_Sq19xsYrM7.webp"
+        image: "/about/timeline/untitled_Sq19xsYrM7.webp",
+        techStack: ['React.js', 'Next.js', 'JavaScript', 'Web Development'],
+        categories: ['development'],
+        takeaways: [
+            'Modern web development with React.js and Next.js',
+            'Understanding of full-stack application architecture',
+            'Experience with responsive design and user interfaces',
+            'Project management and development lifecycle skills'
+        ]
     },
     {
         year: '2020',
@@ -65,7 +112,15 @@ export const data: TimelineItem[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
             </svg>
         ),
-        image: "/about/timeline/untitle2d_a8ZP8B4m0L.webp"
+        image: "/about/timeline/untitle2d_a8ZP8B4m0L.webp",
+        techStack: ['PHP', 'Django', 'Flask', 'Python', 'API Development'],
+        categories: ['development'],
+        takeaways: [
+            'Foundation in web technologies and server-side programming',
+            'Database design and management experience',
+            'API design and development experience',
+            'Understanding of web application architecture'
+        ]
     },
     {
         year: '2018',
@@ -76,7 +131,14 @@ export const data: TimelineItem[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
             </svg>
         ),
-        image: "/about/timeline/arduino_2_3NbEzEH6lR.webp"
+        image: "/about/timeline/arduino_2_3NbEzEH6lR.webp",
+        techStack: ['Arduino', 'C++', 'IoT', 'Sensors', 'Hardware'],
+        categories: ['hardware', 'development'],
+        takeaways: [
+            'Embedded systems programming experience',
+            'IoT device development and sensor integration',
+            'Problem-solving through hardware-software integration'
+        ]
     },
     {
         year: '2018',
@@ -87,7 +149,14 @@ export const data: TimelineItem[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
         ),
-        image: "/about/timeline/security_2_xUwUDLmdEe.webp"
+        image: "/about/timeline/security_2_xUwUDLmdEe.webp",
+        techStack: ['Python', 'PowerShell', 'Cybersecurity', 'Network Security'],
+        categories: ['security'],
+        takeaways: [
+            'Understanding of cybersecurity fundamentals',
+            'Experience with security testing and automation',
+            'Knowledge of network and server security principles'
+        ]
     },
     {
         year: '2017',
@@ -98,7 +167,14 @@ export const data: TimelineItem[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
             </svg>
         ),
-        image: "/about/timeline/java_apps_HdE2gwTd2u.webp"
+        image: "/about/timeline/java_apps_HdE2gwTd2u.webp",
+        techStack: ['Java', 'GUI', 'Desktop Apps', 'File Encryption'],
+        categories: ['development', 'security'],
+        takeaways: [
+            'Desktop application development with Java',
+            'GUI design and user experience principles',
+            'Understanding of software security and encryption'
+        ]
     },
     {
         year: '2016',
@@ -109,6 +185,13 @@ export const data: TimelineItem[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
         ),
-        image: "/about/timeline/minecraft_Z8mh0MnMqj.webp"
+        image: "/about/timeline/minecraft_Z8mh0MnMqj.webp",
+        techStack: ['Java', 'Reverse Engineering', 'Modding', 'Anti-cheat'],
+        categories: ['development', 'security'],
+        takeaways: [
+            'Introduction to programming through gaming',
+            'Reverse engineering and code analysis skills',
+            'Understanding of anti-cheat and security mechanisms'
+        ]
     }
 ];

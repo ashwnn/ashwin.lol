@@ -1,4 +1,4 @@
-import ProjectCard from '@/components/Project/Card';
+import ProjectCard from '@/components/ui/ProjectCard';
 import Projects from '@/data/projects';
 
 export const metadata = {

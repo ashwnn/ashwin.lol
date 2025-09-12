@@ -3,17 +3,8 @@ import path from "path";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import PostContent from "@/components/Blog/BlogPost";
-
-interface PostData {
-  title: string;
-  description: string;
-  date: string;
-  author: string;
-  cover_image: string;
-  tags?: string;
-  content: string;
-}
+import PostContent from "@/components/blog/BlogPost";
+import type { PostData } from '@/types';
 
 async function getPostBySlug(slug: string): Promise<PostData | null> {
   try {

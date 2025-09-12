@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import { data as TimelineData } from '@/data/timeline';
-import Socials from '@/components/Socials';
+import Socials from '@/components/ui/Socials';
+import { Timeline } from '@/components/timeline';
 
 export const metadata: Metadata = {
     title: 'About - Ashwin C.',
@@ -128,65 +128,7 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            <section className="mb-8">
-                <h2 className="text-xl font-bold mb-2 pb-2 border-b border-neutral-800">My Journey</h2>
-                <div className="relative">
-                    <div className="absolute w-[2px] bg-gradient-to-b from-neutral-700 via-neutral-700 to-neutral-800/50 h-[calc(100%-2rem)] left-[7px] top-[10px]"></div>
-
-                    <ol className="relative">
-                        {TimelineData.map((item, index) => (
-                            <li key={index} className={`mb-10 pl-8 relative ${index === TimelineData.length - 1 ? 'pb-0' : ''}`}>
-                                <div className="absolute left-0 top-1.5 group">
-                                    <div className="w-4 h-4 bg-neutral-800 border border-neutral-700 rounded-full z-10 shadow-md shadow-black/20 flex items-center justify-center group-hover:bg-neutral-700 transition-colors duration-300">
-                                        <div className="w-1.5 h-1.5 bg-blue-400 rounded-full opacity-70 group-hover:opacity-100 transition-opacity"></div>
-                                    </div>
-                                </div>
-
-                                <div className="relative">
-                                    <time className="mb-1 text-sm font-normal leading-none text-neutral-500">{item.year}</time>
-                                    <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-
-                                    {item.image && (
-                                        <div className="my-4 rounded-lg overflow-hidden border border-neutral-800 shadow-lg shadow-black/10 group/image">
-                                            <div className="relative overflow-hidden">
-                                                <Image
-                                                    src={item.image}
-                                                    alt={item.title}
-                                                    width={500}
-                                                    height={280}
-                                                    className="w-full h-auto object-cover"
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-50"></div>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    <p className="mb-4 text-base font-normal text-neutral-400">{item.description}</p>
-
-                                    {item.buttons && item.buttons.length > 0 && (
-                                        <div className="flex flex-wrap gap-3 mt-3">
-                                            {item.buttons.map((button, idx) => (
-                                                <a
-                                                    key={idx}
-                                                    href={button.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-neutral-300 bg-neutral-800 hover:bg-neutral-700 hover:text-white rounded-lg transition-all duration-200 shadow-sm shadow-black/20 border border-neutral-700/30"
-                                                >
-                                                    {button.icon && (
-                                                        <span className="mr-2 transform group-hover:translate-y-[-1px] transition-transform">{button.icon}</span>
-                                                    )}
-                                                    {button.label}
-                                                </a>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            </li>
-                        ))}
-                    </ol>
-                </div>
-            </section>
+            <Timeline data={TimelineData} />
         </div>
     );
 }

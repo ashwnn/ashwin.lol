@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import Card from "@/components/Blog/Card";
+import Card from "@/components/blog/Card";
 import { BlogPost } from "@/types";
 import matter from "gray-matter";
 

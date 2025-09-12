@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getInterestImages, interestSlugs, getInterestDisplayName, type InterestSlug } from '@/utils/gallery';
+import { getInterestImages, interestSlugs, getInterestDisplayName } from '@/utils/gallery';
+import type { InterestSlug } from '@/types';
 import ClientGalleryPage from './ClientGalleryPage';
 
 export async function generateStaticParams() {

@@ -1,13 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
-interface LocationData {
-    displayText: string | null;
-    city: string | null;
-    sublocation: string | null;
-    country: string | null;
-}
+import type { LocationData } from '@/types';
 
 export function useImageExif(imagePath: string) {
     const [location, setLocation] = useState<LocationData | undefined>(undefined);

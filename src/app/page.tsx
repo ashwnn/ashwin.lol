@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { default as Link } from '@/components/Link';
-import Socials from '@/components/Socials';
+import { default as Link } from '@/components/ui/Link';
+import Socials from '@/components/ui/Socials';
 
 export default function Home() {
 
