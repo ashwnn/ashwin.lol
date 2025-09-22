@@ -15,6 +15,12 @@ interface TimelineModalProps {
 
 const TimelineModal = memo(function TimelineModal({ item, isOpen, onClose }: TimelineModalProps) {
     const [activeTab, setActiveTab] = useState('overview');
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    // Reset image index when item changes
+    useEffect(() => {
+        setCurrentImageIndex(0);
+    }, [item]);
 
     // Memoize expensive calculations
     const techStack = useMemo(() => 
@@ -27,16 +33,51 @@ const TimelineModal = memo(function TimelineModal({ item, isOpen, onClose }: Tim
         [item]
     );
 
+    // Get all images for the current item
+    const allImages = useMemo(() => {
+        return item ? (item.images || (item.image ? [item.image] : [])) : [];
+    }, [item]);
+
     // Memoize tab change handler
     const handleTabChange = useCallback((tabKey: string) => {
         setActiveTab(tabKey);
     }, []);
 
+    // Navigate to previous image
+    const handlePreviousImage = useCallback(() => {
+        setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : allImages.length - 1));
+    }, [allImages.length]);
+
+    // Navigate to next image
+    const handleNextImage = useCallback(() => {
+        setCurrentImageIndex((prev) => (prev < allImages.length - 1 ? prev + 1 : 0));
+    }, [allImages.length]);
+
+    // Add keyboard navigation
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (allImages.length <= 1) return;
+            
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                handlePreviousImage();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                handleNextImage();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [isOpen, allImages.length, handlePreviousImage, handleNextImage]);
+
     if (!isOpen || !item) return null;
 
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-neutral-800">
                     <div>
@@ -75,59 +116,64 @@ const TimelineModal = memo(function TimelineModal({ item, isOpen, onClose }: Tim
                 <div className="p-6 overflow-y-auto max-h-[60vh]">
                     {activeTab === 'overview' && (
                         <div>
-                            {item.image && (
-                                <div className="mb-6 rounded-lg overflow-hidden border border-neutral-800">
+                            {/* Tech Stack at the top */}
+                            {techStack.length > 0 && (
+                                <div className="mb-6">
+                                    <div className="flex flex-wrap gap-2">
+                                        {techStack.map((tech, idx) => (
+                                            <span
+                                                key={idx}
+                                                className="px-3 py-1.5 text-sm font-medium text-blue-400 bg-blue-400/10 border border-blue-400/20 rounded-full"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {allImages.length > 0 && (
+                                <div className="mb-6 rounded-lg overflow-hidden border border-neutral-800 relative group">
                                     <Image
-                                        src={item.image}
-                                        alt={item.title}
+                                        src={allImages[currentImageIndex]}
+                                        alt={`${item.title} - Image ${currentImageIndex + 1}`}
                                         width={800}
                                         height={400}
                                         className="object-cover w-full h-auto"
                                     />
+                                    
+                                    {/* Image Navigation */}
+                                    {allImages.length > 1 && (
+                                        <>
+                                            {/* Previous Button */}
+                                            <button
+                                                onClick={handlePreviousImage}
+                                                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+                                            >
+                                                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                                </svg>
+                                            </button>
+                                            
+                                            {/* Next Button */}
+                                            <button
+                                                onClick={handleNextImage}
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+                                            >
+                                                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </button>
+                                            
+                                            {/* Image Counter */}
+                                            <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                                                {currentImageIndex + 1} / {allImages.length}
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             )}
                             <p className="text-neutral-300 leading-relaxed">{item.description}</p>
-                        </div>
-                    )}
-
-                    {activeTab === 'tech' && (
-                        <div>
-                            <h3 className="text-lg font-semibold text-white mb-4">Technology Stack</h3>
-                            {techStack.length > 0 ? (
-                                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                    {techStack.map((tech, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-center"
-                                        >
-                                            <span className="text-neutral-200 font-medium">{tech}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p className="text-neutral-400">No specific technologies listed for this project.</p>
-                            )}
-                        </div>
-                    )}
-
-                    {activeTab === 'gallery' && (
-                        <div>
-                            <h3 className="text-lg font-semibold text-white mb-4">Project Gallery</h3>
-                            {item.image ? (
-                                <div className="grid gap-4">
-                                    <div className="rounded-lg overflow-hidden border border-neutral-800">
-                                        <Image
-                                            src={item.image}
-                                            alt={item.title}
-                                            width={800}
-                                            height={400}
-                                            className="object-cover w-full h-auto"
-                                        />
-                                    </div>
-                                </div>
-                            ) : (
-                                <p className="text-neutral-400">No images available for this project.</p>
-                            )}
                         </div>
                     )}
 
@@ -189,16 +235,51 @@ interface TimelineCardProps {
 
 const TimelineCard = memo(function TimelineCard({ item, index, isLast, onOpenModal }: TimelineCardProps) {
     const [imageError, setImageError] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    // Content truncation settings
+    const TRUNCATE_LENGTH = 150;
+
+    // Get all images for the current item
+    const allImages = useMemo(() => {
+        return item.images || (item.image ? [item.image] : []);
+    }, [item]);
+
+    // Check if content needs truncation
+    const shouldTruncate = useMemo(() => {
+        return item.description.length > TRUNCATE_LENGTH;
+    }, [item.description]);
+
+    // Get display description with word-aware truncation - still truncate to encourage "View Details"
+    const displayDescription = useMemo(() => {
+        if (!shouldTruncate) {
+            return item.description;
+        }
+        const truncated = item.description.slice(0, TRUNCATE_LENGTH);
+        const lastSpaceIndex = truncated.lastIndexOf(' ');
+        return truncated.slice(0, lastSpaceIndex) + '...';
+    }, [item.description, shouldTruncate]);
     
     // Memoize expensive calculations
     const isEven = useMemo(() => index % 2 === 0, [index]);
-    const techStack = useMemo(() => getTechStack(item), [item]);
     const categories = useMemo(() => getCategories(item), [item]);
     
     // Memoize the image error handler
     const handleImageError = useCallback(() => {
         setImageError(true);
     }, []);
+
+    // Navigate to previous image
+    const handlePreviousImage = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : allImages.length - 1));
+    }, [allImages.length]);
+
+    // Navigate to next image
+    const handleNextImage = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentImageIndex((prev) => (prev < allImages.length - 1 ? prev + 1 : 0));
+    }, [allImages.length]);
 
     return (
         <div className="relative flex items-center justify-center mb-16 group">
@@ -212,8 +293,8 @@ const TimelineCard = memo(function TimelineCard({ item, index, isLast, onOpenMod
                 <div className="absolute inset-0.5 bg-blue-300 rounded-full opacity-90" />
             </div>
 
-            {/* Card Container */}
-            <div className={`w-full lg:w-[calc(50%-1rem)] pl-12 lg:pl-0 ${
+            {/* Card Container - Made wider */}
+            <div className={`w-full lg:w-[calc(55%-1rem)] pl-12 lg:pl-0 ${
                 isEven 
                     ? 'lg:mr-auto lg:pr-6' 
                     : 'lg:ml-auto lg:pl-6'
@@ -246,39 +327,57 @@ const TimelineCard = memo(function TimelineCard({ item, index, isLast, onOpenMod
                     </div>
 
                     {/* Image */}
-                    {item.image && !imageError && (
-                        <div className="mb-4 rounded-lg overflow-hidden border border-neutral-800 shadow-lg">
+                    {allImages.length > 0 && !imageError && (
+                        <div className="mb-4 rounded-lg overflow-hidden border border-neutral-800 shadow-lg relative group/image">
                             <div className="relative aspect-video">
                                 <Image
-                                    src={item.image}
-                                    alt={item.title}
+                                    src={allImages[currentImageIndex]}
+                                    alt={`${item.title} - Image ${currentImageIndex + 1}`}
                                     fill
                                     className="object-cover"
                                     onError={handleImageError}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                                
+                                {/* Image Navigation */}
+                                {allImages.length > 1 && (
+                                    <>
+                                        {/* Previous Button */}
+                                        <button
+                                            onClick={handlePreviousImage}
+                                            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all opacity-0 group-hover/image:opacity-100"
+                                        >
+                                            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        
+                                        {/* Next Button */}
+                                        <button
+                                            onClick={handleNextImage}
+                                            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all opacity-0 group-hover/image:opacity-100"
+                                        >
+                                            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                        
+                                        {/* Image Counter */}
+                                        <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                                            {currentImageIndex + 1} / {allImages.length}
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
                     )}
 
                     {/* Description */}
-                    <p className={`text-neutral-300 leading-relaxed mb-4 text-left ${isEven ? 'lg:text-right' : 'lg:text-left'}`}>
-                        {item.description}
-                    </p>
-
-                    {/* Tech Stack */}
-                    {techStack.length > 0 && (
-                        <div className={`flex flex-wrap gap-2 mb-4 justify-start ${isEven ? 'lg:justify-end' : 'lg:justify-start'}`}>
-                            {techStack.map((tech, idx) => (
-                                <span
-                                    key={idx}
-                                    className="px-2 py-1 text-xs font-medium text-neutral-300 bg-neutral-800 border border-neutral-700 rounded-md"
-                                >
-                                    {tech}
-                                </span>
-                            ))}
-                        </div>
-                    )}
+                    <div className={`text-neutral-300 leading-relaxed mb-4 text-left ${isEven ? 'lg:text-right' : 'lg:text-left'}`}>
+                        <p className={`transition-all duration-300`}>
+                            {displayDescription}
+                        </p>
+                    </div>
 
                     {/* Action Buttons */}
                     <div className={`flex flex-wrap gap-3 justify-start ${isEven ? 'lg:justify-end' : 'lg:justify-start'}`}>

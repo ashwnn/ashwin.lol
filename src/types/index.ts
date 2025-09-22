@@ -59,7 +59,8 @@ interface TimelineItem {
     title: string;
     description: string;
     icon: React.ReactNode;
-    image?: string;
+    image?: string; // For backward compatibility
+    images?: string[]; // New multi-image support
     techStack?: string[];
     takeaways?: string[];
     categories?: string[];
@@ -76,6 +77,27 @@ interface ReferralSource {
       name: string;
       message: string;
       icon: string;
+      theme: {
+        primary: string;
+        secondary: string;
+        accent: string;
+      };
+      recommendations: {
+        title: string;
+        description: string;
+        url: string;
+        icon: React.ReactNode;
+      }[];
+      quickActions: {
+        label: string;
+        url: string;
+        type: 'primary' | 'secondary';
+        icon: React.ReactNode;
+      }[];
+      stats?: {
+        label: string;
+        value: string;
+      }[];
 }
 
 // GitHub/Gist Types
