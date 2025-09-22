@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import Card from "@/components/blog/Card";
+import BlogCard from "@/components/blog/Card";
 import { BlogPost } from "@/types";
 import matter from "gray-matter";
 
@@ -63,7 +63,7 @@ export default async function BlogIndex() {
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {posts.length > 0 ? (
           posts.map((post) => (
-            <Card key={post.slug} {...post} />
+            <BlogCard key={post.slug} {...post} />
           ))
         ) : (
           <p className="text-gray-300 text-center col-span-2">
