@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/socials/linkedin",
-        destination: "https://linkedin.com/ax2",
+        destination: "https://www.linkedin.com/in/ax2/",
         permanent: true
       },
       {
