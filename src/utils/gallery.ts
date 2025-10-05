@@ -10,8 +10,8 @@ export async function getInterestImages(interest: string): Promise<GalleryImage[
         });
 
         const images: GalleryImage[] = records.map((record) => {
-            // Build the full URL for the image
-            const imageUrl = pb.files.getUrl(record, record.image);
+            // Use the direct CDN URL from the image field
+            const imageUrl = record.image;
             
             return {
                 id: record.id,
