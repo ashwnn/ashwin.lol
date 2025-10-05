@@ -58,7 +58,7 @@ export default async function SnippetsPage() {
       <h1 className="text-3xl font-bold mb-6">Snippets</h1>
       <p className="text-neutral-400 mb-8">A collection of useful code snippets and gists that I&apos;ve created and shared.</p>
 
-      <div className="grid grid-cols-1 gap-2">
+      <div className="grid grid-cols-1 gap-3">
         {gists.map((gist) => {
           const files = Object.values(gist.files);
           const mainFile = files[0];

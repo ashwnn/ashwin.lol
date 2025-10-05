@@ -4,7 +4,7 @@ import type { GalleryImage, InterestSlug, PocketbaseGalleryRecord } from '@/type
 export async function getInterestImages(interest: string): Promise<GalleryImage[]> {
     try {
         // Fetch images from Pocketbase where category matches the interest
-        const records = await pb.collection('Gallery').getFullList<PocketbaseGalleryRecord>({
+        const records = await pb.collection('gallery').getFullList<PocketbaseGalleryRecord>({
             filter: `category = "${interest}"`,
             sort: '-takenAt', // Sort by date, newest first
         });
