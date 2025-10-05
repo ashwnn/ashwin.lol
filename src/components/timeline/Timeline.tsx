@@ -18,6 +18,7 @@ interface TimelineCardProps {
 const TimelineCard = memo(function TimelineCard({ item, index, isLast, onImageClick }: TimelineCardProps) {
     const [imageError, setImageError] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isImageLoading, setIsImageLoading] = useState(true);
 
     // Get all images for the current item
     const allImages = useMemo(() => {
@@ -28,6 +29,11 @@ const TimelineCard = memo(function TimelineCard({ item, index, isLast, onImageCl
     const isEven = useMemo(() => index % 2 === 0, [index]);
     const categories = useMemo(() => getCategories(item), [item]);
     const techStack = useMemo(() => getTechStack(item), [item]);
+    
+    // Reset loading state when image changes
+    useEffect(() => {
+        setIsImageLoading(true);
+    }, [currentImageIndex]);
     
     // Memoize the image error handler
     const handleImageError = useCallback(() => {
@@ -102,14 +108,43 @@ const TimelineCard = memo(function TimelineCard({ item, index, isLast, onImageCl
                     {allImages.length > 0 && !imageError && (
                         <div className="mb-4 rounded-lg overflow-hidden border border-neutral-800 shadow-lg relative group/image cursor-pointer">
                             <div className="relative aspect-video" onClick={handleImageClick}>
+                                {/* Loading skeleton */}
+                                {isImageLoading && (
+                                    <div className="absolute inset-0 bg-neutral-800 animate-pulse z-[1]" />
+                                )}
+                                
+                                {/* Current visible image */}
                                 <Image
                                     src={allImages[currentImageIndex]}
                                     alt={`${item.title} - Image ${currentImageIndex + 1}`}
                                     fill
-                                    className="object-cover transition-transform hover:scale-105"
+                                    className={`object-cover transition-all duration-300 hover:scale-105 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
                                     onError={handleImageError}
+                                    onLoad={() => setIsImageLoading(false)}
+                                    priority={index < 3}
+                                    quality={90}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 50vw"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                                
+                                {/* Preload adjacent images (hidden but forces Next.js to cache them) */}
+                                {allImages.length > 1 && allImages.map((img, idx) => {
+                                    if (idx === currentImageIndex) return null;
+                                    const isAdjacent = Math.abs(idx - currentImageIndex) === 1;
+                                    return (
+                                        <Image
+                                            key={idx}
+                                            src={img}
+                                            alt=""
+                                            fill
+                                            className="opacity-0 pointer-events-none"
+                                            priority={isAdjacent}
+                                            quality={90}
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 50vw"
+                                        />
+                                    );
+                                })}
+                                
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-[2]" />
                                 
                                 {/* Image Navigation */}
                                 {allImages.length > 1 && (

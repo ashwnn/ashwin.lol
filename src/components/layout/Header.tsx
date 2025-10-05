@@ -43,9 +43,10 @@ export default function Header() {
                   className={`
                     ${item === 'Snippets' ? 'hidden sm:inline-block' : ''}
                     px-3 py-1.5 text-sm font-medium transition-all duration-200 rounded-lg
+                    relative
                     ${isActive
-                      ? 'text-white bg-neutral-800'
-                      : 'text-gray-400 hover:text-white hover:bg-neutral-800/70'}
+                      ? 'text-white bg-neutral-800 shadow-elevation-dark-md scale-[1.02] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:rounded-t-lg'
+                      : 'text-gray-400 hover:text-white hover:bg-neutral-800/70 hover:shadow-elevation-dark-md hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0'}
                   `}
                   data-umami-event={`nav_${item.toLowerCase()}`}
                 >
