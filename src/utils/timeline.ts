@@ -17,12 +17,3 @@ export function categorizeItem(item: TimelineItem): string[] {
 export function getTakeaways(item: TimelineItem): string[] {
     return item.takeaways || [];
 }
-
-export function calculateTimelineStats(filteredData: TimelineItem[]) {
-    const projectCount = filteredData.length;
-    const yearSpan = filteredData.length > 0 ? 
-        new Date().getFullYear() - parseInt(filteredData[filteredData.length - 1]?.year || '2016') + 1 
-        : 0;
-    
-    return { projectCount, yearSpan };
-}

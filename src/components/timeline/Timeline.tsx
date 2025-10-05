@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import Image from 'next/image';
 import { TimelineItem } from '@/types';
-import { categorizeItem, calculateTimelineStats, getTechStack, getCategories } from '@/utils/timeline';
+import { categorizeItem, getTechStack, getCategories } from '@/utils/timeline';
 import { TIMELINE_CATEGORIES } from '@/components/timeline/TimelineConfig';
 import ImageModal from '@/components/blog/ImageModal';
 
@@ -226,12 +226,6 @@ function Timeline({ data }: TimelineProps) {
         return data.filter(item => categorizeItem(item).includes(activeFilter));
     }, [activeFilter, data]);
 
-    // Memoize stats calculation
-    const timelineStats = useMemo(() => 
-        calculateTimelineStats(filteredData), 
-        [filteredData]
-    );
-
     // Memoize image modal handlers
     const openImageModal = useCallback((imageSrc: string) => {
         setSelectedImage(imageSrc);
@@ -276,14 +270,6 @@ function Timeline({ data }: TimelineProps) {
                             {category.label}
                         </button>
                     ))}
-                </div>
-            </div>
-
-            {/* Timeline Stats */}
-            <div className="flex justify-center mb-8 p-4 bg-neutral-900/50 border border-neutral-800 rounded-xl">
-                <div className="text-center">
-                    <div className="text-2xl font-bold text-green-400">{timelineStats.yearSpan}</div>
-                    <div className="text-xs text-neutral-400">Years of Experience</div>
                 </div>
             </div>
 
