@@ -24,7 +24,7 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
 
   return (
     <div
-      className="relative flex flex-col h-full bg-[#2a2a2a] border border-zinc-700/50 rounded-xl shadow-lg hover:shadow-xl hover:border-zinc-600 transition-all duration-300 overflow-hidden group"
+      className="relative flex flex-col h-full bg-[#2a2a2a] border border-zinc-700/50 rounded-xl shadow-elevation-dark-lg hover:shadow-elevation-dark-xl hover:border-zinc-600 transition-all duration-300 overflow-hidden group hover:scale-[1.01] hover:-translate-y-1 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl before:z-10 hover:cursor-pointer"
       onClick={handleClick}
       role="link"
       tabIndex={0}

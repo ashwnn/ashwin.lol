@@ -9,7 +9,7 @@ export default function NotFound() {
       </p>
       <Link 
         href="/" 
-        className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors px-5 py-3 rounded-lg text-gray-200 group"
+        className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-all duration-200 px-5 py-3 rounded-lg text-gray-200 group shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/15 before:to-transparent before:rounded-t-lg"
       >
         <svg
           className="w-4 h-4 mr-2 transition-transform duration-200 group-hover:-translate-x-1"

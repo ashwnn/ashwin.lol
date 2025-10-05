@@ -30,7 +30,8 @@ export const data: TimelineItem[] = [
             '/about/timeline/bepo_49fef17412.png'
         ],
         techStack: ['Networking', 'Docker', 'Linux', 'Monitoring', 'Security'],
-        categories: ['infrastructure']
+        categories: ['infrastructure'],
+        buttons: [createButton('Read More', '/blog/homelab', <BookIcon />)]
     }),
 
     createTimelineItem({
@@ -58,7 +59,6 @@ export const data: TimelineItem[] = [
         ],
         techStack: ['Linux', 'Docker', 'Self-Hosting', 'Media Services'],
         categories: ['infrastructure'],
-        buttons: [createButton('Read More', '/blog/homelab', <BookIcon />)]
     }),
     createTimelineItem({
         year: '2021',

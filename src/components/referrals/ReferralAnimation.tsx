@@ -157,7 +157,7 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
               {/* Close button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 p-2 rounded-full bg-neutral-800/50 hover:bg-neutral-700/50 transition-all duration-200 text-neutral-400 hover:text-white group"
+                className="absolute top-4 right-4 p-2 rounded-full bg-neutral-800/50 hover:bg-neutral-700/50 transition-all duration-200 text-neutral-400 hover:text-white group shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95"
                 aria-label="Close"
               >
                 <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">

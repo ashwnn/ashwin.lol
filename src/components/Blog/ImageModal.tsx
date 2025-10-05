@@ -41,7 +41,7 @@ export default function ImageModal({ src, alt, onClose }: ImageModalProps) {
           onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
         />
         <button
-          className="absolute top-4 right-4 bg-black/70 text-white p-2 rounded-full hover:bg-black transition-colors"
+          className="absolute top-4 right-4 bg-black/70 text-white p-2 rounded-full hover:bg-black transition-all duration-200 shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95 backdrop-blur-sm"
           onClick={onClose}
           aria-label="Close modal"
         >

@@ -12,7 +12,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ title, description, image, tags, link, github }: ProjectCardProps) {
   return (
-    <div className="group flex flex-col sm:flex-row h-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/80 transition-all duration-300 hover:border-neutral-700 hover:shadow-lg hover:shadow-black/20 mb-4 cursor-grab">
+    <div className="group flex flex-col sm:flex-row h-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/80 transition-all duration-300 hover:border-neutral-700 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl hover:scale-[1.01] hover:-translate-y-1 mb-4 relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl before:z-10">
       <div className="relative h-56 sm:h-auto sm:w-48 md:w-64 overflow-hidden">
         <Image
           src={image}
@@ -46,7 +46,7 @@ export default function ProjectCard({ title, description, image, tags, link, git
           {link && (<Link
             href={link}
             target="_blank"
-            className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium text-white bg-neutral-800 hover:bg-neutral-700 transition-colors"
+            className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium text-white bg-neutral-800 hover:bg-neutral-700 transition-all duration-200 shadow-elevation-dark-sm hover:shadow-elevation-dark-md hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/15 before:to-transparent before:rounded-t-lg"
             data-umami-event={`explore_project_${title}`}
           >
             Explore
@@ -60,7 +60,7 @@ export default function ProjectCard({ title, description, image, tags, link, git
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center rounded-lg bg-neutral-800/50 p-1.5 text-neutral-400 hover:bg-neutral-700 hover:text-white transition-all duration-200"
+              className="flex items-center justify-center rounded-lg bg-neutral-800/50 p-1.5 text-neutral-400 hover:bg-neutral-700 hover:text-white transition-all duration-200 shadow-elevation-dark-sm hover:shadow-elevation-dark-md hover:scale-[1.05] hover:-translate-y-0.5 active:scale-95 active:translate-y-0"
               aria-label="GitHub"
               title="View on GitHub"
               data-umami-event={`github_project_${title}`}
