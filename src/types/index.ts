@@ -58,7 +58,6 @@ interface TimelineItem {
     year: string;
     title: string;
     description: string;
-    icon: React.ReactNode;
     image?: string; // For backward compatibility
     images?: string[]; // New multi-image support
     techStack?: string[];

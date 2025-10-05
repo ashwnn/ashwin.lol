@@ -1,193 +1,142 @@
 import { TimelineItem } from "@/types"
+import { BookIcon } from "@/components/timeline/TimelineIcons"
+import { TIMELINE_CATEGORIES, createTimelineItem, createButton } from "@/components/timeline/TimelineConfig"
 
-export const timelineCategories = [
-    { key: 'all', label: 'All', icon: '🎯' },
-    { key: 'development', label: 'Development', icon: '💻' },
-    { key: 'security', label: 'Security', icon: '🔒' },
-    { key: 'infrastructure', label: 'Infrastructure', icon: '🏗️' },
-    { key: 'hardware', label: 'Hardware', icon: '⚡' }
-];
-
-export const timelineModalTabs = [
-    { key: 'overview', label: 'Overview', icon: '📋' },
-    { key: 'takeaways', label: 'Takeaways', icon: '💡' }
-];
+// Export categories for use in Timeline component
+export const timelineCategories = TIMELINE_CATEGORIES;
 
 export const data: TimelineItem[] = [
-    {
+    createTimelineItem({
         year: '2025',
-        title: "IT Support for Large Clients",
-        description: "My first experience into working and supporting a large userbase specializing in the migration to Windows 11 & modern management. I provided technical support for software issues both in person and remotely. In addition I worked on various projects related to cybersecurity and hardware.",
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-        ),
-        techStack: ['Windows 11', 'Remote Support', 'Hardware', 'Cybersecurity'],
-        categories: ['infrastructure', 'security'],
-        takeaways: [
-            'Gained hands-on experience supporting enterprise users',
-            'Learned modern device management and Windows 11 migration strategies',
-            'Developed skills in remote troubleshooting and technical support',
-            'Enhanced understanding of cybersecurity in corporate environments'
-        ]
-    },
-    {
+        title: 'Enterprise IT Support & Forensics',
+        description:
+            'Provided support for a 30,000+ users during the Windows 11 migration and the adoption of modern device management. Delivered in-person and remote technical assistance for software and endpoint issues. Worked on a few forensics initiatives with smaller private clients.',
+        images: [
+            '/about/timeline/mdm_c0be16a6c5.png',
+            '/about/timeline/win11upgrade_788d7b28c8.jpg',
+            '/about/timeline/intune_788d7b28c8.png',
+        ],
+        techStack: ['Windows 11', 'Remote Support', 'Hardware', 'Digital Forensics'],
+        categories: ['infrastructure', 'security']
+    }),
+    createTimelineItem({
+        year: '2024',
+        title: 'Centralized Homelab Server',
+        description:
+            'Upgraded the homelab to a Lenovo TD340 ThinkServer to increase performance and scalability. Implemented redundant monitoring, recovery, and update automations with smart alerts via Webhooks. Self-hosted services included DNS ad-blocking, AI inference, personal cloud, databases, and task automation.',
+        images: [
+            '/about/timeline/dashboard_49fef17412.png',
+            '/about/timeline/bepo_internal_49fef17412.png',
+            '/about/timeline/bepo_49fef17412.png'
+        ],
+        techStack: ['Networking', 'Docker', 'Linux', 'Monitoring', 'Security'],
+        categories: ['infrastructure']
+    }),
+
+    createTimelineItem({
         year: '2023',
-        title: 'Installation & Large Networks',
-        description: 'Working as an installation technician for guest entertainment and WiFi infrastructure, I gained experience with enterprise hardware and large network design. I worked with various technologies like fiber optics, ethernet, and telecommunications.',
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-        ),
-        image: "/about/timeline/install_LxaKvbENuK.webp",
+        title: 'Field Deployments: Large-Scale Networks',
+        description:
+            'Worked as a field technician on enterprise-scale projects deploying guest entertainment systems, Wi-Fi, and wired Ethernet. Installed and maintained enterprise hardware and performed live upgrades to production network and guest infrastructure.',
+        images: [
+            '/about/timeline/network_rack_1_ee642e7a26.jpg',
+            '/about/timeline/network_rack_ee642e7a26.jpg',
+            '/about/timeline/network_rack_2_ee642e7a26.jpg'
+        ],
         techStack: ['Networking', 'Fiber Optics', 'Ethernet', 'Enterprise Hardware'],
-        categories: ['infrastructure', 'hardware'],
-        takeaways: [
-            'Experience with enterprise-grade networking hardware',
-            'Understanding of large-scale network design and implementation',
-            'Knowledge of fiber optics and telecommunications infrastructure',
-            'Skills in troubleshooting complex network issues'
-        ]
-    },
-    {
+        categories: ['infrastructure', 'hardware']
+    }),
+    createTimelineItem({
         year: '2022',
         title: 'System Administration',
-        description: 'I began self-hosting my services on a Lenovo ThinkServer TD340 instead of using VPS services. My homelab runs everything from DNS ad-blocking to media services and open-source alternatives to popular cloud services. This journey into self-hosting taught me valuable lessons about infrastructure management, security hardening, and the complexities of running production services at home. I learned to configure reverse proxies, manage SSL certificates, implement backup strategies, and monitor system performance. The experience of troubleshooting network issues, optimizing resource usage, and ensuring high availability has been invaluable for my understanding of enterprise infrastructure.',
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-            </svg>
-        ),
-        image: "/about/timeline/nat_e3WBOUDBrl.webp",
-        techStack: ['Linux', 'Docker', 'DNS', 'Self-hosting', 'Media Services'],
-        categories: ['infrastructure'],
-        takeaways: [
-            'Self-hosting and infrastructure management experience',
-            'Docker containerization and service orchestration',
-            'DNS configuration and network security implementation',
-            'Media services and cloud alternatives deployment'
+        description:
+            'Transitioned from a VPS to two small tower servers (OptiPlex 8010 and Lenovo). Evaluated Proxmox and TrueNAS, ultimately standardizing on bare-metal. Hosted media services (Plex/Jellyfin) and additional applications.',
+        images: [
+            '/about/timeline/optiplex_1ff76756bf.jpg',
+            '/about/timeline/lenovo_1ff76756bf.jpg',
+            '/about/timeline/jellyfin_1ff76756bf.png'
         ],
-        buttons: [
-            {
-                label: "Read More",
-                url: "/blog/homelab",
-                icon: (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                )
-            }
-        ]
-    },
-    {
+        techStack: ['Linux', 'Docker', 'Self-Hosting', 'Media Services'],
+        categories: ['infrastructure'],
+        buttons: [createButton('Read More', '/blog/homelab', <BookIcon />)]
+    }),
+    createTimelineItem({
         year: '2021',
         title: 'Full-Stack Development',
-        description: 'I ventured into actual web development, working mainly with React.js & Next.js. Created projects like a fuel efficiency tracker, multiple iterations of my portfolio website, and other projects for school. This period marked a significant transition in my development journey as I moved from desktop applications to modern web development. I learned about component-based architecture, state management, responsive design principles, and the importance of user experience. Working with Next.js introduced me to server-side rendering, static site generation, and API routes. I also gained experience with CSS frameworks, deployment strategies, and modern development workflows including Git version control, continuous integration, and collaborative development practices.',
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-        ),
-        images: ["/about/timeline/untitled_Sq19xsYrM7.webp", "/about/timeline/untitle2d_a8ZP8B4m0L.webp"],
-        techStack: ['React.js', 'Next.js', 'JavaScript', 'Web Development'],
-        categories: ['development'],
-        takeaways: [
-            'Modern web development with React.js and Next.js',
-            'Understanding of full-stack application architecture',
-            'Experience with responsive design and user interfaces',
-            'Project management and development lifecycle skills'
-        ]
-    },
-    {
+        description:
+            'Built applications with React and Next.js, including a fuel-efficiency tracker and portfolio sites. Developed expertise in component design, state management, responsive UI, SSR/SSG, and deployment. Established CI/CD workflows and Git best practices.',
+        images: [
+            '/about/timeline/nextjs_fcf7c1189f.webp',
+            '/about/timeline/fueld_manager_fcf7c1189f.png',
+            '/about/timeline/ci_cd_fcf7c1189f.png'
+        ],
+        techStack: ['React', 'Next.js', 'JavaScript', 'Node', 'Web'],
+        categories: ['development']
+    }),
+
+    createTimelineItem({
         year: '2020',
-        title: 'Exploring the Unknown',
-        description: 'Starting with the ancient language of PHP, I created my first ever API which I used with scripts to send SMS notifications to my phone. Later on I felt the desire to create something public and useful for myself and others this led me to create a self-hosted image converter using Django, later moving onto Flask. This started my journey into web development. Spent most of my time trying to break my own website and making sure that threat actors couldnt break it.`',
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-            </svg>
-        ),
-        images: ["/about/timeline/rest_api_fcf7c1189f.jpg", "/about/timeline/image_magick_fcf7c1189f.png", "/about/timeline/django_sample_fcf7c1189f.png"], 
-        techStack: ['PHP', 'Django', 'Flask', 'Python', 'API Development'],
-        categories: ['development'],
-        takeaways: [
-            'Server-side programming with PHP and Python frameworks',
-            'UI Design with CSS frameworks like Bootstrap, TailwindCSS',
-            'Creating secure and reliable RESTful APIs and web services',
-            'Understanding of web application architecture'
-        ]
-    },
-    {
+        title: 'Backend & Security Foundations',
+        description:
+            'Developed a PHP API for SMS alerts. Built a self-hosted image conversion service (initially Django, later Flask). Conducted security reviews of my personal site and remediated identified issues, reinforcing server-side fundamentals, REST design, and practical security practices.',
+        images: [
+            '/about/timeline/rest_api_fcf7c1189f.jpg',
+            '/about/timeline/php_api_35b4eb3560.png',
+            '/about/timeline/django_sample_fcf7c1189f.png'
+        ],
+        techStack: ['PHP', 'Python', 'Flask/Django', 'APIs'],
+        categories: ['development']
+    }),
+    createTimelineItem({
+        year: '2019',
+        title: 'Embedded Systems with Arduino',
+        description:
+            'Prototyped motion-sensor camera solutions with basic object detection and built an SMS-alert security sensor. Integrated microcontrollers with IoT services, bridging hardware and software workflows.',
+        images: [
+            '/about/timeline/arduino_5f020f5bdf.jpg',
+            '/about/timeline/arduino_sensor_5f020f5bdf.jpg',
+            '/about/timeline/camera_arduino_5f020f5bdf.jpg'
+        ],
+        techStack: ['Arduino', 'C/C++', 'IoT', 'Sensors', 'Hardware'],
+        categories: ['hardware', 'development']
+    }),
+
+    createTimelineItem({
         year: '2018',
-        title: 'Working with Arduinos',
-        description: 'During IT class, I got my hands on a Arduino kit, with this I worked a lot with motion sensors and cameras to do very basic object recogniton and to send SMS notifications as alerts when a specific object/item was present. Alongside a "security" sensor that would alert you if motion was detected during as specified time.',
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-            </svg>
-        ),
-        images: ["/about/timeline/arduino_5f020f5bdf.jpg", "/about/timeline/arduino_sensor_5f020f5bdf.jpg", "/about/timeline/camera_arduino_5f020f5bdf.jpg"],
-        techStack: ['Arduino', 'C++', 'IoT', 'Sensors', 'Hardware'],
-        categories: ['hardware', 'development'],
-        takeaways: [
-            'Worked with Arduino microcontrollers to create a security system that sends SMS alerts',
-            'IoT development and integration with software systems like SMS APIs',
-        ]
-    },
-    {
-        year: '2018',
-        title: 'Security & ScriptKiddie Phase',
-        description: 'Started with using publicly available combo lists to brute force SSH & FTP servers that I found exposed on Shodan & Google Dorking. Continued exploring Google Dorking, eventually trying to break into unprotected .asp applications and exploring unprotected CCTV IP cameras.',
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-        ),
-        images: ["/about/timeline/security_b5c8b1a2f0.jpg", "/about/timeline/shodan_b5c8b1a2f0.png", "/about/timeline/powershell_b5c8b1a2f0.png", "/about/timeline/exploit_db_google_dork_b5c8b1a2f0.png"],
-        techStack: ['Python', 'PowerShell', 'Google Dorking', 'Cybersecurity'],
-        categories: ['security'],
-        takeaways: [
-            'Understanding vulnerabilities in web applications and servers and how to exploit them',
-            'Automation of attack vectors using scripting languages, such as Brute forcing SSH & FTP servers',
-            'Reconnaissance techniques using Shodan and other services to find vulnerable IoT targets'
-        ]
-    },
-    {
+        title: 'Security Research',
+        description:
+            'Used public datasets and OSINT to analyze exposed services and weak credentials in controlled environments. Studied legacy .asp vulnerabilities and misconfigured CCTV to understand operational risk. Focus areas included vulnerability awareness, brute-force risk mitigation, and ethical reconnaissance workflows.',
+        images: [
+            '/about/timeline/security_b5c8b1a2f0.jpg',
+            '/about/timeline/shodan_b5c8b1a2f0.png',
+            '/about/timeline/powershell_b5c8b1a2f0.png',
+            '/about/timeline/exploit_db_google_dork_b5c8b1a2f0.png'
+        ],
+        techStack: ['Python', 'PowerShell', 'OSINT/Shodan', 'Cybersecurity'],
+        categories: ['security']
+    }),
+    createTimelineItem({
         year: '2017',
         title: 'Application Development',
-        description: 'After exploring Java with Minecraft, I moved onto learning Java to create applications to use. I created a few to automate tasks like file encryption, screenshot applications, and obfuscation of software. Learning a bit about AV and how they work.',
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-            </svg>
-        ),
-        images: ["/about/timeline/window_builder_0da0900b53.png" ,"/about/timeline/blind_bytecode_0da0900b53.png", "/about/timeline/memory_screenshot_0da0900b53.png"],
-        techStack: ['Java', 'GUI', 'Desktop Apps', 'File Encryption'],
-        categories: ['development', 'security'],
-        takeaways: [
-            'Explored using Java to perform system-level functions like screenshots and file encryption',
-            'GUI design with WindowBuilder and Swing',
-            'Obfuscation and AV evasion techniques with Java executables'
-        ]
-    },
-    {
+        description:
+            'Created Java utilities such as file-encryption and screenshot tools and explored desktop GUI design. Developed system-level Java capabilities with a focus on secure-by-design principles and user experience.',
+        image: '/about/timeline/window_builder_0da0900b53.png',
+        techStack: ['Java', 'Swing', 'Desktop Apps', 'Crypto Primitives'],
+        categories: ['development', 'security']
+    }),
+
+    createTimelineItem({
         year: '2016',
-        title: 'Tinkering with Minecraft',
-        description: 'My first taste of programming started with tinkering around Minecraftit started off with learning Java making simple mods eventually moving onto create cheats and exploits. After which I moved onto reverse engineering mods and hacked clients to develop anti-cheat solutions.',
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-        ),
-        images: ['/about/timeline/hacked_client_601dbd75dd.jpg', '/about/timeline/enderpeal_check_601dbd75dd.png', '/about/timeline/hacks_sample_601dbd75dd.jpg'],
-        techStack: ['Java', 'Reverse Engineering', 'Modding', 'Anti-cheat'],
-        categories: ['development', 'security'],
-        takeaways: [
-            'Exposure to real-world applications of Java in gaming',
-            'Learned how to reverse engineer hacked clients and create anti-cheat mitigations',
-            'Deep understanding of game mechanics, client-server interactions, and minecraft packet analysis'
-        ]
-    }
+        title: 'Java Modding via Minecraft',
+        description:
+            'Began programming through Java modding. Investigated exploit mechanics and subsequently developed anti-cheat measures, gaining early experience in reverse engineering, packet analysis, and game mechanics.',
+        images: [
+            '/about/timeline/hacked_client_601dbd75dd.jpg',
+            '/about/timeline/enderpeal_check_601dbd75dd.png',
+            '/about/timeline/hacks_sample_601dbd75dd.jpg'
+        ],
+        techStack: ['Java', 'Reverse Engineering', 'Modding', 'Anti-Cheat'],
+        categories: ['development', 'security']
+    })
+
 ];
