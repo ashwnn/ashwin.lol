@@ -13,16 +13,20 @@ export async function getInterestImages(interest: string): Promise<GalleryImage[
             // Use the direct CDN URL from the image field
             const imageUrl = record.image;
             
+            // Determine media type based on file extension
+            const isVideo = /\.(mp4|webm|mov)$/i.test(imageUrl);
+            
             return {
                 id: record.id,
                 src: imageUrl,
-                alt: record.title || `${interest} image`,
+                alt: record.title || `${interest} ${isVideo ? 'video' : 'image'}`,
                 thumbnail: imageUrl,
                 title: record.title,
                 caption: record.caption,
                 category: record.category,
                 takenAt: record.takenAt,
                 tags: record.tags,
+                mediaType: isVideo ? 'video' : 'image',
                 location: record.location ? {
                     displayText: record.location,
                     city: null,

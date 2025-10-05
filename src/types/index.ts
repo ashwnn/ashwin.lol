@@ -9,6 +9,7 @@ interface GalleryImage {
     category?: string;
     takenAt?: string;
     tags?: string[];
+    mediaType?: 'image' | 'video'; // Type of media
     location?: {
         displayText: string | null;
         city: string | null;
