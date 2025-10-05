@@ -20,7 +20,7 @@ async function getPostBySlug(slug: string): Promise<PostData | null> {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateMetadata({ params }: any): Promise<Metadata> {
-  const slug = params.slug;
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post) {
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function Page({ params }: any) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post) {
