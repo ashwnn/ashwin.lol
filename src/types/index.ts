@@ -1,8 +1,14 @@
 // Gallery Types
 interface GalleryImage {
+    id?: string;
     src: string;
     alt: string;
     thumbnail: string;
+    title?: string;
+    caption?: string;
+    category?: string;
+    takenAt?: string;
+    tags?: string[];
     location?: {
         displayText: string | null;
         city: string | null;
@@ -11,25 +17,28 @@ interface GalleryImage {
     };
 }
 
-// Location/EXIF Types
+// Pocketbase Gallery Record
+interface PocketbaseGalleryRecord {
+    id: string;
+    title: string;
+    category: string;
+    caption?: string;
+    takenAt: string;
+    location?: string;
+    tags?: string[];
+    image: string;
+    collectionId: string;
+    collectionName: string;
+    created: string;
+    updated: string;
+}
+
+// Location Types
 interface LocationData {
     displayText: string | null;
     city: string | null;
     sublocation: string | null;
     country: string | null;
-}
-
-// Raw EXIF Location Data (for API processing)
-interface ExifLocationData {
-    city: string | null;
-    sublocation: string | null;
-    country: string | null;
-    state: string | null;
-    gpsLatitude: string | null;
-    gpsLongitude: string | null;
-    iptcCity: string | null;
-    iptcSublocation: string | null;
-    iptcCountry: string | null;
 }
 
 // Blog Types
@@ -118,12 +127,12 @@ interface Gist {
 }
 
 // Gallery Interest Types
-type InterestSlug = 'hiking' | 'working-out' | 'travelling';
+type InterestSlug = 'hiking' | 'working-out' | 'travelling' | 'gym';
 
 export type { 
     GalleryImage,
+    PocketbaseGalleryRecord,
     LocationData,
-    ExifLocationData,
     BlogPost,
     PostData,
     TimelineItem, 

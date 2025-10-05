@@ -1,1 +1,1 @@
-export { ImageGallery, MasonryLayout, EnhancedMasonryLayout, FullscreenModal } from './Gallery';
+export { EnhancedMasonryLayout, FullscreenModal } from './Gallery';
