@@ -215,13 +215,13 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
                     onClick={() => handleQuickAction(action.url, action.label)}
                     className={`
                       flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-900
-                      ${action.type === 'primary' 
+                      ${action.variant === 'primary' 
                         ? 'text-white shadow-lg hover:shadow-xl focus:ring-white/50' 
                         : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700/50 focus:ring-neutral-400'
                       }
                     `}
                     style={{
-                      backgroundColor: action.type === 'primary' ? referral.theme.primary : undefined,
+                      backgroundColor: action.variant === 'primary' ? referral.theme.primary : undefined,
                     }}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.95 }}
