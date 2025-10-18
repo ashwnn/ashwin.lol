@@ -4,6 +4,10 @@ import BlogCard from "@/components/blog/Card";
 import { BlogPost } from "@/types";
 import matter from "gray-matter";
 
+// Enable ISR with revalidation every 30 minutes (1800 seconds)
+// Blog list page revalidates more frequently to show new posts faster
+export const revalidate = 1800;
+
 export const metadata = {
   title: 'Blog - Ashwin C.',
   description: 'Collection of my thoughts and experiences.',

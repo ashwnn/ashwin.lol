@@ -6,6 +6,10 @@ import type { Metadata } from "next";
 import PostContent from "@/components/blog/BlogPost";
 import type { PostData, BlogPageParams } from '@/types';
 
+// Enable ISR with revalidation every 1 hour (3600 seconds)
+// This allows the page to be statically generated and revalidated periodically
+export const revalidate = 3600;
+
 async function getPostBySlug(slug: string): Promise<PostData | null> {
   try {
     const postFilePath = path.join(process.cwd(), "src/data/blog", `${slug}.md`);

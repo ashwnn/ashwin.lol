@@ -1,6 +1,10 @@
 import { Metadata } from 'next';
 import type { Gist } from '@/types';
 
+// Enable ISR with revalidation every 24 hours (86400 seconds)
+// Gists don't change frequently, so we can cache them longer
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   title: 'Snippets - Ashwin',
   description: 'Code snippets and gists from my GitHub.',
@@ -17,7 +21,7 @@ async function getGists(): Promise<Gist[]> {
       headers: {
         'Accept': 'application/vnd.github.v3+json',
       },
-      next: { revalidate: 3600 } // Revalidate every hour
+      next: { revalidate: 86400 } // Revalidate every 24 hours
     });
 
     if (!response.ok) {
