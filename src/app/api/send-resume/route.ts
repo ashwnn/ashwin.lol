@@ -1,54 +1,110 @@
 import { NextResponse } from 'next/server';
+import { checkRateLimit, getClientIdentifier } from '@/lib/rate-limit';
+import { 
+  isValidEmail, 
+  sanitizeEmail, 
+  containsSuspiciousPatterns,
+  hashForLogging,
+  isValidOrigin,
+  addSecurityHeaders
+} from '@/lib/security';
 
 export const runtime = 'nodejs';
 
-// Configuration - Edit these values as needed
-const CV_FILENAME = '881a9cf4113fe492e9fdaa6d1d77ce562ddc6d5b92e5a110.pdf';
-const CV_DISPLAY_NAME = 'CV.pdf';
-const RATE_LIMIT_MAX = 5;
-const EMAIL_SUBJECT = 'Ashwin Charathsandran - Resume';
-const EMAIL_FROM_NAME = 'Ashwin Charathsandran';
-const MAILGUN_DOMAIN = 'mail.ashwin.lol';
+// Configuration from environment variables
+const CV_FILENAME = process.env.CV_FILENAME || '881a9cf4113fe492e9fdaa6d1d77ce562ddc6d5b92e5a110.pdf';
+const CV_DISPLAY_NAME = process.env.CV_DISPLAY_NAME || 'CV.pdf';
+const EMAIL_SUBJECT = process.env.EMAIL_SUBJECT || 'Ashwin Charathsandran - Resume';
+const EMAIL_FROM_NAME = process.env.EMAIL_FROM_NAME || 'Ashwin Charathsandran';
+const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN || 'mail.ashwin.lol';
 const MAILGUN_FROM = `${EMAIL_FROM_NAME} <postmaster@${MAILGUN_DOMAIN}>`;
 
-const rateLimiter = {
-  checkLimits: () => ({
-    dailyAllowed: true,
-    shortTermAllowed: true,
-    remaining: RATE_LIMIT_MAX,
-    resetAt: Date.now() + 24 * 60 * 60 * 1000
-  })
-};
+// Allowed origins for CORS
+const ALLOWED_ORIGINS = [
+  'https://ashwin.lol',
+  'https://www.ashwin.lol',
+  ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : [])
+];
 
 export async function POST(request: Request) {
   try {
-    const limits = rateLimiter.checkLimits();
+    // Security: Validate origin to prevent CSRF
+    if (process.env.ENABLE_CSRF_PROTECTION === 'true') {
+      if (!isValidOrigin(request, ALLOWED_ORIGINS)) {
+        console.warn('Blocked request from invalid origin');
+        return NextResponse.json(
+          { error: 'Invalid request origin' },
+          { status: 403 }
+        );
+      }
+    }
+
+    // Rate limiting
+    const identifier = getClientIdentifier(request);
+    const rateLimit = await checkRateLimit(identifier);
     
-    if (!limits.shortTermAllowed) {
+    if (!rateLimit.success) {
+      console.warn(`Rate limit exceeded for ${hashForLogging(identifier)}`);
+      
+      const headers = new Headers();
+      addSecurityHeaders(headers);
+      headers.set('X-RateLimit-Limit', rateLimit.limit.toString());
+      headers.set('X-RateLimit-Remaining', '0');
+      headers.set('X-RateLimit-Reset', Math.floor(rateLimit.reset / 1000).toString());
+      headers.set('Retry-After', '3600'); // 1 hour
+      
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
-        { status: 429, headers: { 'Retry-After': '5' } }
+        { status: 429, headers }
       );
     }
 
-    if (!limits.dailyAllowed) {
+    // Parse and validate request body
+    let email: string;
+    try {
+      const body = await request.json();
+      email = body.email;
+    } catch {
       return NextResponse.json(
-        { error: 'Daily request limit reached. Please try again tomorrow.' },
-        {
-          status: 429,
-          headers: {
-            'X-RateLimit-Limit': RATE_LIMIT_MAX.toString(),
-            'X-RateLimit-Remaining': '0',
-            'X-RateLimit-Reset': Math.floor(limits.resetAt / 1000).toString()
-          }
-        }
+        { error: 'Invalid request body' },
+        { status: 400 }
       );
     }
 
-    const { email } = await request.json();
+    // Validate email is provided
+    if (!email || typeof email !== 'string') {
+      return NextResponse.json(
+        { error: 'Email is required' },
+        { status: 400 }
+      );
+    }
 
-    if (!email) {
-      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    // Sanitize and validate email
+    const sanitizedEmail = sanitizeEmail(email);
+    
+    if (!isValidEmail(sanitizedEmail)) {
+      return NextResponse.json(
+        { error: 'Invalid email format' },
+        { status: 400 }
+      );
+    }
+
+    // Check for suspicious patterns
+    if (containsSuspiciousPatterns(sanitizedEmail)) {
+      console.warn(`Suspicious email detected: ${hashForLogging(sanitizedEmail)}`);
+      return NextResponse.json(
+        { error: 'Invalid email format' },
+        { status: 400 }
+      );
+    }
+
+    // Validate Mailgun API key is configured
+    if (!process.env.MAILGUN_API_KEY) {
+      console.error('MAILGUN_API_KEY not configured');
+      return NextResponse.json(
+        { error: 'Service temporarily unavailable' },
+        { status: 503 }
+      );
     }
 
     const FormData = (await import('form-data')).default;
@@ -57,7 +113,7 @@ export async function POST(request: Request) {
     
     const mg = mailgun.client({
       username: 'api',
-      key: process.env.MAILGUN_API_KEY || '',
+      key: process.env.MAILGUN_API_KEY,
     });
 
     const htmlContent = `
@@ -93,7 +149,7 @@ export async function POST(request: Request) {
 
     const emailData = {
       from: MAILGUN_FROM,
-      to: [email],
+      to: [sanitizedEmail],
       subject: EMAIL_SUBJECT,
       text: 'Please find attached my CV.',
       html: htmlContent,
@@ -106,21 +162,30 @@ export async function POST(request: Request) {
 
     try {
       const result = await mg.messages.create(MAILGUN_DOMAIN, emailData);
-      console.log('Email sent successfully:', result);
+      
+      // Log success with hashed email for privacy
+      console.log('Email sent successfully:', {
+        messageId: result.id,
+        recipient: hashForLogging(sanitizedEmail),
+        timestamp: new Date().toISOString()
+      });
+
+      // Prepare response headers with security and rate limit info
+      const responseHeaders = new Headers();
+      addSecurityHeaders(responseHeaders);
+      responseHeaders.set('X-RateLimit-Limit', rateLimit.limit.toString());
+      responseHeaders.set('X-RateLimit-Remaining', rateLimit.remaining.toString());
+      responseHeaders.set('X-RateLimit-Reset', Math.floor(rateLimit.reset / 1000).toString());
 
       return NextResponse.json(
         {
           success: true,
-          remaining: limits.remaining,
+          remaining: rateLimit.remaining,
           messageId: result.id || 'unknown'
         },
         {
           status: 200,
-          headers: {
-            'X-RateLimit-Limit': RATE_LIMIT_MAX.toString(),
-            'X-RateLimit-Remaining': limits.remaining.toString(),
-            'X-RateLimit-Reset': Math.floor(limits.resetAt / 1000).toString()
-          }
+          headers: responseHeaders
         }
       );
     } catch (error) {
