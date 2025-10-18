@@ -7,7 +7,6 @@ import ImageModal from '@/components/blog/ImageModal';
 import { TimelineCard } from './TimelineCard';
 import { TimelineFilters } from './TimelineFilters';
 import { TimelineHeader } from './TimelineHeader';
-import { TIMELINE_CATEGORIES } from './TimelineConfig';
 
 // Main Timeline Component
 interface TimelineProps {
