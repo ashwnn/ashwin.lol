@@ -18,7 +18,6 @@ interface GalleryImage {
     };
 }
 
-// Pocketbase Gallery Record
 interface PocketbaseGalleryRecord {
     id: string;
     title: string;
@@ -130,6 +129,24 @@ interface Gist {
 // Gallery Interest Types
 type InterestSlug = 'hiking' | 'working-out' | 'travelling' | 'gym';
 
+// Next.js Dynamic Route Params Types
+// For Next.js 15+ with async params
+interface PageParams<T extends Record<string, string> = Record<string, string>> {
+    params: Promise<T>;
+}
+
+interface BlogPageParams {
+    params: Promise<{
+        slug: string;
+    }>;
+}
+
+interface InterestPageParams {
+    params: Promise<{
+        slug: string;
+    }>;
+}
+
 export type { 
     GalleryImage,
     PocketbaseGalleryRecord,
@@ -139,5 +156,8 @@ export type {
     TimelineItem, 
     ReferralSource,
     Gist,
-    InterestSlug
+    InterestSlug,
+    PageParams,
+    BlogPageParams,
+    InterestPageParams
 };

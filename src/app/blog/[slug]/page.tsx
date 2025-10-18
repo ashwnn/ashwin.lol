@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import PostContent from "@/components/blog/BlogPost";
-import type { PostData } from '@/types';
+import type { PostData, BlogPageParams } from '@/types';
 
 async function getPostBySlug(slug: string): Promise<PostData | null> {
   try {
@@ -18,8 +18,7 @@ async function getPostBySlug(slug: string): Promise<PostData | null> {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata({ params }: any): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPageParams): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
@@ -42,8 +41,8 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
     },
   };
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function Page({ params }: any) {
+
+export default async function Page({ params }: BlogPageParams) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 

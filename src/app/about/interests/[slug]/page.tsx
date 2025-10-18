@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getInterestImages, interestSlugs, getInterestDisplayName } from '@/utils/gallery';
-import type { InterestSlug } from '@/types';
+import type { InterestSlug, InterestPageParams } from '@/types';
 import ClientGalleryPage from './ClientGalleryPage';
 
 export async function generateStaticParams() {
@@ -11,7 +11,7 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: InterestPageParams): Promise<Metadata> {
     const { slug } = await params;
     const typedSlug = slug as InterestSlug;
     
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
 }
 
-export default async function InterestGalleryPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function InterestGalleryPage({ params }: InterestPageParams) {
     const { slug } = await params;
     const typedSlug = slug as InterestSlug;
     
