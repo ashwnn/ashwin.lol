@@ -69,16 +69,24 @@ export default function Socials() {
             key={link.name}
             href={link.onClick ? undefined : link.url}
             onClick={link.onClick}
-            aria-label={link.name}
+            onKeyDown={(e) => {
+              if (link.onClick && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                link.onClick();
+              }
+            }}
+            aria-label={`${link.name} - Opens in new tab`}
             title={link.name}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800/30 transition-all duration-200 cursor-pointer"
+            target={link.onClick ? undefined : "_blank"}
+            rel={link.onClick ? undefined : "noopener noreferrer"}
+            className="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800/30 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
             data-umami-event="outbound-link-click"
             data-event-category="socials"
             data-umami-event-url={link.url}
+            role={link.onClick ? "button" : undefined}
+            tabIndex={0}
           >
-            {link.icon}
+            <span aria-hidden="true">{link.icon}</span>
             <span className="sr-only">{link.name}</span>
           </a>
         ))}

@@ -28,9 +28,11 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        } group fixed bottom-6 right-6 flex items-center px-3 py-2 text-sm font-medium text-gray-300 bg-gray-800/30 hover:bg-gray-700/40 rounded-lg transition-all duration-200 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl hover:scale-[1.05] active:scale-95 z-50 backdrop-blur-sm before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/15 before:to-transparent before:rounded-t-lg`}
-      aria-label="Back to top"
+      className={`${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+        } group fixed bottom-6 right-6 flex items-center px-3 py-2 text-sm font-medium text-gray-300 bg-gray-800/30 hover:bg-gray-700/40 rounded-lg transition-all duration-200 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl hover:scale-[1.05] active:scale-95 z-50 backdrop-blur-sm before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/15 before:to-transparent before:rounded-t-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900`}
+      aria-label="Scroll back to top of page"
+      aria-hidden={!show}
+      tabIndex={show ? 0 : -1}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -41,6 +43,8 @@ export default function BackToTop() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        aria-hidden="true"
+        focusable="false"
       >
         <path d="M12 19V5M5 12L12 5L19 12" />
       </svg>

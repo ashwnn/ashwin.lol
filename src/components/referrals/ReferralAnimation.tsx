@@ -157,10 +157,17 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
               {/* Close button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 p-2 rounded-full bg-neutral-800/50 hover:bg-neutral-700/50 transition-all duration-200 text-neutral-400 hover:text-white group shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95"
-                aria-label="Close"
+                className="absolute top-4 right-4 p-2 rounded-full bg-neutral-800/50 hover:bg-neutral-700/50 transition-all duration-200 text-neutral-400 hover:text-white group shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                aria-label="Close welcome message"
+                title="Close"
               >
-                <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg 
+                  className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -207,10 +214,10 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
                     key={idx}
                     onClick={() => handleQuickAction(action.url, action.label)}
                     className={`
-                      flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:scale-105 active:scale-95
+                      flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-900
                       ${action.type === 'primary' 
-                        ? 'text-white shadow-lg hover:shadow-xl' 
-                        : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700/50'
+                        ? 'text-white shadow-lg hover:shadow-xl focus:ring-white/50' 
+                        : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700/50 focus:ring-neutral-400'
                       }
                     `}
                     style={{
@@ -218,8 +225,9 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
                     }}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label={`Navigate to ${action.label}`}
                   >
-                    {action.icon}
+                    <span aria-hidden="true">{action.icon}</span>
                     {action.label}
                   </motion.button>
                 ))}
@@ -233,8 +241,9 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
                     <motion.button
                       key={idx}
                       onClick={() => handleQuickAction(rec.url, `recommendation-${rec.title}`)}
-                      className="flex items-center gap-4 p-4 rounded-xl bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-700/30 hover:border-neutral-600/50 transition-all duration-200 text-left group"
+                      className="flex items-center gap-4 p-4 rounded-xl bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-700/30 hover:border-neutral-600/50 transition-all duration-200 text-left group focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-neutral-900"
                       whileHover={{ x: 4 }}
+                      aria-label={`${rec.title}: ${rec.description}`}
                     >
                       <div 
                         className="p-2 rounded-lg group-hover:scale-110 transition-transform duration-200"
@@ -242,6 +251,7 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
                           backgroundColor: referral.theme.primary + '20',
                           color: referral.theme.primary 
                         }}
+                        aria-hidden="true"
                       >
                         {rec.icon}
                       </div>

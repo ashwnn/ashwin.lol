@@ -130,10 +130,10 @@ export const FullscreenModal = ({
                     )}
                     <button
                         onClick={onClose}
-                        className="absolute z-10 p-2 text-white transition-all duration-200 rounded-full top-2 right-2 sm:top-4 sm:right-4 hover:text-gray-300 sm:p-3 bg-black/60 backdrop-blur-sm hover:bg-black/80 opacity-80 hover:opacity-100 group-hover:opacity-100 shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95"
-                        aria-label="Close"
+                        className="absolute z-10 p-2 text-white transition-all duration-200 rounded-full top-2 right-2 sm:top-4 sm:right-4 hover:text-gray-300 sm:p-3 bg-black/60 backdrop-blur-sm hover:bg-black/80 opacity-80 hover:opacity-100 group-hover:opacity-100 shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
+                        aria-label="Close fullscreen modal"
                     >
-                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -141,19 +141,19 @@ export const FullscreenModal = ({
                         <>
                             <button
                                 onClick={onPrev}
-                                className="absolute z-10 p-3 text-white transition-all duration-200 -translate-y-1/2 rounded-full left-2 top-1/2 sm:left-4 hover:text-gray-300 sm:p-4 bg-black/60 backdrop-blur-sm hover:bg-black/80 opacity-70 hover:opacity-100 group-hover:opacity-100 shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95"
+                                className="absolute z-10 p-3 text-white transition-all duration-200 -translate-y-1/2 rounded-full left-2 top-1/2 sm:left-4 hover:text-gray-300 sm:p-4 bg-black/60 backdrop-blur-sm hover:bg-black/80 opacity-70 hover:opacity-100 group-hover:opacity-100 shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
                                 aria-label="Previous image"
                             >
-                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                                 </svg>
                             </button>
                             <button
                                 onClick={onNext}
-                                className="absolute z-10 p-3 text-white transition-all duration-200 -translate-y-1/2 rounded-full right-2 top-1/2 sm:right-4 hover:text-gray-300 sm:p-4 bg-black/60 backdrop-blur-sm hover:bg-black/80 opacity-70 hover:opacity-100 group-hover:opacity-100 shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95"
+                                className="absolute z-10 p-3 text-white transition-all duration-200 -translate-y-1/2 rounded-full right-2 top-1/2 sm:right-4 hover:text-gray-300 sm:p-4 bg-black/60 backdrop-blur-sm hover:bg-black/80 opacity-70 hover:opacity-100 group-hover:opacity-100 shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
                                 aria-label="Next image"
                             >
-                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                                 </svg>
                             </button>
@@ -163,7 +163,7 @@ export const FullscreenModal = ({
                         <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 z-10 space-y-2">
                             {image.location?.displayText && (
                                 <div className="flex items-center gap-1.5 text-white text-xs sm:text-sm font-medium px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-black/70 backdrop-blur-sm w-fit mx-auto">
-                                    <svg className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
@@ -252,17 +252,18 @@ const MasonryImage = ({ src, alt, index, onClick, mediaType = 'image', location 
     };
 
     return (
-        <div
-            className="relative overflow-hidden transition-all duration-300 border rounded-lg cursor-pointer group border-neutral-800/50 bg-neutral-900/30 hover:border-neutral-700 hover:shadow-lg hover:shadow-black/20 hover:-translate-y-1"
+        <button
+            className="relative overflow-hidden transition-all duration-300 border rounded-lg cursor-pointer group border-neutral-800/50 bg-neutral-900/30 hover:border-neutral-700 hover:shadow-lg hover:shadow-black/20 hover:-translate-y-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
             style={{
                 aspectRatio: isLoaded ? `1 / ${aspectRatio}` : '1 / 1',
             }}
             onClick={() => onClick(index)}
+            aria-label={`View ${alt} in fullscreen`}
         >
             {loadError ? (
                 <div className="absolute inset-0 flex items-center justify-center bg-neutral-900">
                     <div className="text-center text-neutral-500">
-                        <svg className="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <p className="text-xs">Failed to load</p>
@@ -308,7 +309,7 @@ const MasonryImage = ({ src, alt, index, onClick, mediaType = 'image', location 
             {mediaType === 'video' && isLoaded && (
                 <div className="absolute top-2 right-2 z-10 pointer-events-none">
                     <div className="bg-black/70 backdrop-blur-sm rounded-md p-1.5">
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                             <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
                         </svg>
                     </div>
@@ -318,7 +319,7 @@ const MasonryImage = ({ src, alt, index, onClick, mediaType = 'image', location 
                 <div className="absolute top-2 left-2 right-2 z-10">
                     <div className="bg-black/70 backdrop-blur-sm rounded-md px-2 py-1 text-white text-xs font-medium shadow-lg">
                         <div className="flex items-center gap-1">
-                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
@@ -328,14 +329,14 @@ const MasonryImage = ({ src, alt, index, onClick, mediaType = 'image', location 
                 </div>
             )}
             <div className="absolute inset-0 transition-all duration-300 bg-black/0 group-hover:bg-black/30" />
-            <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100">
-                <div className="p-3 transition-transform duration-300 transform scale-75 rounded-full bg-white/95 backdrop-blur-sm group-hover:scale-100">
-                    <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 group-focus:opacity-100">
+                <div className="p-3 transition-transform duration-300 transform scale-75 rounded-full bg-white/95 backdrop-blur-sm group-hover:scale-100 group-focus:scale-100">
+                    <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
             </div>
-        </div>
+        </button>
     );
 };
 
