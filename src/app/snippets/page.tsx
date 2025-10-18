@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import type { Gist } from '@/types';
+import { fetchUserGists } from '@/lib/api';
+import { logger } from '@/lib/logger';
 
 // Enable ISR with revalidation every 24 hours (86400 seconds)
 // Gists don't change frequently, so we can cache them longer
@@ -17,28 +19,17 @@ export const metadata: Metadata = {
 
 async function getGists(): Promise<Gist[]> {
   try {
-    const response = await fetch('https://api.github.com/users/ashwnn/gists', {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-      },
-      next: { revalidate: 86400 } // Revalidate every 24 hours
-    });
-
-    if (!response.ok) {
-      console.error('Failed to fetch gists from GitHub API', {
-        status: response.status,
-        statusText: response.statusText
-      });
-      
-      // Return empty array instead of throwing to prevent page crash
-      return [];
-    }
-
-    const data = await response.json();
-    return data;
+    // Use enhanced API utility with automatic retry and caching
+    const gists = await fetchUserGists('ashwnn') as Gist[];
+    
+    logger.info('Successfully fetched gists', { count: gists.length });
+    return gists;
   } catch (error) {
-    console.error('Error fetching gists:', error instanceof Error ? error.message : 'Unknown error');
-    // Return empty array to allow page to render
+    logger.error('Failed to fetch gists', {
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
+    
+    // Return empty array to allow page to render gracefully
     return [];
   }
 }

@@ -7,6 +7,7 @@ import {
 } from '@/lib/security';
 import { checkRateLimit, getClientIdentifier } from '@/lib/rate-limit';
 import { logger } from '@/lib/logger';
+import { enhancedFetch } from '@/lib/api';
 
 export const runtime = 'nodejs';
 
@@ -95,12 +96,17 @@ export async function POST(request: Request) {
         analyticsPayload.searchParams.append('timestamp', data.delivered_at);
         analyticsPayload.searchParams.append('hostname', sanitizedSource);
 
-        await fetch(analyticsPayload.toString(), { 
-          mode: 'no-cors',
+        // Use enhanced fetch with retry logic and timeout
+        await enhancedFetch(analyticsPayload.toString(), {
+          method: 'GET',
           headers: {
             'User-Agent': 'System-Metrics/1.0'
           },
-          signal: AbortSignal.timeout(5000) // 5 second timeout
+          timeout: 5000, // 5 second timeout
+          retry: {
+            maxRetries: 2, // Only retry twice for non-critical analytics
+            initialDelay: 500,
+          }
         });
       } catch (analyticsError) {
         // Analytics forwarding is non-critical - just log the failure

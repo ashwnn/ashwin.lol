@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import dynamic from "next/dynamic";
 import { ReferralSource } from "@/types";
-import referrals from "@/data/refferals";
+import referrals from "@/data/referrals";
 
 const ReferralAnimation = dynamic(() => import('./ReferralAnimation'), {
   ssr: false
