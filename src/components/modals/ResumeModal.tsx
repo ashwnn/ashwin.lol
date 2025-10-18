@@ -58,7 +58,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
       if (response.ok) {
         setIsSuccess(true);
 
-        // Log successful delivery for system metrics
+        // Log successful delivery for system metrics (non-blocking)
         const deliveryData = {
           recipient: data.email,
           delivered_at: new Date().toISOString(),
@@ -66,22 +66,29 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           source: window.location.hostname
         };
         
+        // Non-critical: Log to metrics endpoint
         fetch('/api/metrics', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(deliveryData)
-        }).catch(() => {
-          // Silent fallback to external logging service
-          const logEndpoint = `https://bomboclatt.ashwin.lol/api/collect?type=event&id=cdd6e3c0-1aa1-4a10-83b7-56157157bab8&event_type=resume_submission&email=${encodeURIComponent(data.email)}&timestamp=${encodeURIComponent(new Date().toISOString())}&hostname=${encodeURIComponent(window.location.hostname)}`;
-          fetch(logEndpoint, { mode: 'no-cors' }).catch(() => {});
+        }).catch((metricsError) => {
+          // Metrics failed - not critical, just log to console
+          console.warn('Failed to log metrics:', metricsError instanceof Error ? metricsError.message : 'Unknown error');
         });
 
         reset();
       } else {
+        // Handle API error responses
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        console.error('Failed to send CV:', {
+          status: response.status,
+          error: errorData.error
+        });
         setIsError(true);
       }
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      // Network or other errors
+      console.error('Error sending CV request:', error instanceof Error ? error.message : 'Unknown error');
       setIsError(true);
     } finally {
       setIsLoading(false);

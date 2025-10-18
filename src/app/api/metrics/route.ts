@@ -6,6 +6,7 @@ import {
   addSecurityHeaders
 } from '@/lib/security';
 import { checkRateLimit, getClientIdentifier } from '@/lib/rate-limit';
+import { logger } from '@/lib/logger';
 
 export const runtime = 'nodejs';
 
@@ -22,7 +23,9 @@ export async function POST(request: Request) {
     // Security: Validate origin to prevent CSRF
     if (process.env.ENABLE_CSRF_PROTECTION === 'true') {
       if (!isValidOrigin(request, ALLOWED_ORIGINS)) {
-        console.warn('Blocked metrics request from invalid origin');
+        logger.warn('Blocked metrics request from invalid origin', {
+          origin: request.headers.get('origin')
+        });
         return NextResponse.json(
           { error: 'Invalid request origin' },
           { status: 403 }
@@ -35,7 +38,9 @@ export async function POST(request: Request) {
     const rateLimit = await checkRateLimit(`metrics:${identifier}`);
     
     if (!rateLimit.success) {
-      console.warn(`Metrics rate limit exceeded for ${hashForLogging(identifier)}`);
+      logger.warn('Metrics rate limit exceeded', {
+        identifier: hashForLogging(identifier)
+      });
       return NextResponse.json(
         { error: 'Too many requests' },
         { status: 429 }
@@ -72,7 +77,7 @@ export async function POST(request: Request) {
     const sanitizedSource = data.source ? sanitizeString(data.source, 100) : 'unknown';
 
     // Log to console for system monitoring (with hashed email)
-    console.log('Delivery metrics:', {
+    logger.info('Delivery metrics recorded', {
       recipient: hashForLogging(data.recipient),
       timestamp: data.delivered_at,
       status: sanitizedStatus,
@@ -97,9 +102,11 @@ export async function POST(request: Request) {
           },
           signal: AbortSignal.timeout(5000) // 5 second timeout
         });
-      } catch (error) {
-        // Analytics forwarding is non-critical
-        console.log('Analytics service unavailable:', error instanceof Error ? error.message : 'Unknown error');
+      } catch (analyticsError) {
+        // Analytics forwarding is non-critical - just log the failure
+        logger.debug('Analytics service unavailable', {
+          error: analyticsError instanceof Error ? analyticsError.message : 'Unknown error'
+        });
       }
     }
 
@@ -116,7 +123,7 @@ export async function POST(request: Request) {
     );
 
   } catch (error) {
-    console.error('Metrics collection error:', error);
+    logger.error('Metrics collection error', error);
     return NextResponse.json({ 
       error: 'Metrics collection failed' 
     }, { status: 500 });

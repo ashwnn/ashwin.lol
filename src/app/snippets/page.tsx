@@ -12,18 +12,31 @@ export const metadata: Metadata = {
 };
 
 async function getGists(): Promise<Gist[]> {
-  const response = await fetch('https://api.github.com/users/ashwnn/gists', {
-    headers: {
-      'Accept': 'application/vnd.github.v3+json',
-    },
-    next: { revalidate: 3600 } // Revalidate every hour
-  });
+  try {
+    const response = await fetch('https://api.github.com/users/ashwnn/gists', {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+      },
+      next: { revalidate: 3600 } // Revalidate every hour
+    });
 
-  if (!response.ok) {
-    throw new Error('Failed to fetch gists');
+    if (!response.ok) {
+      console.error('Failed to fetch gists from GitHub API', {
+        status: response.status,
+        statusText: response.statusText
+      });
+      
+      // Return empty array instead of throwing to prevent page crash
+      return [];
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching gists:', error instanceof Error ? error.message : 'Unknown error');
+    // Return empty array to allow page to render
+    return [];
   }
-
-  return response.json();
 }
 
 function formatDate(dateString: string): string {

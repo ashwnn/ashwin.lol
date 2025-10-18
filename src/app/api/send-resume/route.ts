@@ -8,6 +8,7 @@ import {
   isValidOrigin,
   addSecurityHeaders
 } from '@/lib/security';
+import { logger } from '@/lib/logger';
 
 export const runtime = 'nodejs';
 
@@ -31,7 +32,10 @@ export async function POST(request: Request) {
     // Security: Validate origin to prevent CSRF
     if (process.env.ENABLE_CSRF_PROTECTION === 'true') {
       if (!isValidOrigin(request, ALLOWED_ORIGINS)) {
-        console.warn('Blocked request from invalid origin');
+        logger.warn('Blocked request from invalid origin', {
+          origin: request.headers.get('origin'),
+          referer: request.headers.get('referer')
+        });
         return NextResponse.json(
           { error: 'Invalid request origin' },
           { status: 403 }
@@ -44,7 +48,11 @@ export async function POST(request: Request) {
     const rateLimit = await checkRateLimit(identifier);
     
     if (!rateLimit.success) {
-      console.warn(`Rate limit exceeded for ${hashForLogging(identifier)}`);
+      logger.warn('Rate limit exceeded', {
+        identifier: hashForLogging(identifier),
+        limit: rateLimit.limit,
+        reset: new Date(rateLimit.reset).toISOString()
+      });
       
       const headers = new Headers();
       addSecurityHeaders(headers);
@@ -91,7 +99,9 @@ export async function POST(request: Request) {
 
     // Check for suspicious patterns
     if (containsSuspiciousPatterns(sanitizedEmail)) {
-      console.warn(`Suspicious email detected: ${hashForLogging(sanitizedEmail)}`);
+      logger.warn('Suspicious email pattern detected', {
+        emailHash: hashForLogging(sanitizedEmail)
+      });
       return NextResponse.json(
         { error: 'Invalid email format' },
         { status: 400 }
@@ -100,7 +110,7 @@ export async function POST(request: Request) {
 
     // Validate Mailgun API key is configured
     if (!process.env.MAILGUN_API_KEY) {
-      console.error('MAILGUN_API_KEY not configured');
+      logger.error('MAILGUN_API_KEY not configured');
       return NextResponse.json(
         { error: 'Service temporarily unavailable' },
         { status: 503 }
@@ -140,7 +150,10 @@ export async function POST(request: Request) {
       const cvPath = path.join(process.cwd(), 'public', CV_FILENAME);
       cvBuffer = fs.readFileSync(cvPath);
     } catch (fileError) {
-      console.error('Failed to load CV file:', fileError);
+      logger.error('Failed to load CV file', fileError, {
+        filename: CV_FILENAME,
+        path: 'public/' + CV_FILENAME
+      });
       return NextResponse.json(
         { error: 'CV file not available. Email cannot be sent.' },
         { status: 500 }
@@ -164,7 +177,7 @@ export async function POST(request: Request) {
       const result = await mg.messages.create(MAILGUN_DOMAIN, emailData);
       
       // Log success with hashed email for privacy
-      console.log('Email sent successfully:', {
+      logger.info('Email sent successfully', {
         messageId: result.id,
         recipient: hashForLogging(sanitizedEmail),
         timestamp: new Date().toISOString()
@@ -188,12 +201,22 @@ export async function POST(request: Request) {
           headers: responseHeaders
         }
       );
-    } catch (error) {
-      console.error('Mailgun error:', error);
-      throw error;
+    } catch (mailgunError) {
+      logger.error('Mailgun API error', mailgunError, {
+        recipient: hashForLogging(sanitizedEmail),
+        domain: MAILGUN_DOMAIN
+      });
+      
+      return NextResponse.json(
+        { error: 'Failed to send email. Please try again later.' },
+        { status: 500 }
+      );
     }
   } catch (error) {
-    console.error('Error sending email:', error);
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+    logger.error('Unexpected error in send-resume endpoint', error);
+    return NextResponse.json(
+      { error: 'An unexpected error occurred. Please try again.' },
+      { status: 500 }
+    );
   }
 }

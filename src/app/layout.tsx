@@ -9,6 +9,7 @@ import Template from "@/components/layout/TransitionTemplate";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import ReferralAnimationWrapper from "@/components/referrals/ReferralAnimationWrapper";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,18 +27,20 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={`${inter.className} min-h-screen bg-[#222222] text-gray-200 flex flex-col relative`}>
-        <Suspense fallback={null}>
-          <ReferralAnimationWrapper />
-        </Suspense>
-        <Header />
-        <Template>
-          <main className="flex-1 flex flex-col pt-6">
-            {children}
-          </main>
-        </Template>
-        <div className="mt-auto">
-          <Footer />
-        </div>
+        <ErrorBoundary>
+          <Suspense fallback={null}>
+            <ReferralAnimationWrapper />
+          </Suspense>
+          <Header />
+          <Template>
+            <main className="flex-1 flex flex-col pt-6">
+              {children}
+            </main>
+          </Template>
+          <div className="mt-auto">
+            <Footer />
+          </div>
+        </ErrorBoundary>
         <Script
           src="https://bomboclatt.ashwin.lol/script.js"
           data-website-id="cdd6e3c0-1aa1-4a10-83b7-56157157bab8"
