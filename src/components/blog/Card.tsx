@@ -21,12 +21,12 @@ function BlogCard({ slug, title, description, cover_image, tags, published_date,
 
   // Memoize tag parsing
   const parsedTags = useMemo(() => {
-    if (!tags || tags.length === 0) return [];
+    if (!tags || typeof tags !== 'string' || tags.length === 0) return [];
     return tags.split(",").slice(0, 3).map(tag => tag.trim());
   }, [tags]);
 
   const hasMoreTags = useMemo(() => {
-    if (!tags) return false;
+    if (!tags || typeof tags !== 'string') return false;
     return tags.split(",").length > 3;
   }, [tags]);
 

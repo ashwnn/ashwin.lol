@@ -49,7 +49,11 @@ async function getLocalPosts(): Promise<BlogPost[]> {
   );
 
   // Sort posts by date (newest first)
-  return posts.sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
+  return posts.sort((a, b) => {
+    const dateA = a.published_date ? new Date(a.published_date).getTime() : 0;
+    const dateB = b.published_date ? new Date(b.published_date).getTime() : 0;
+    return dateB - dateA;
+  });
 }
 
 export default async function BlogIndex() {
