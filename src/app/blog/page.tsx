@@ -40,18 +40,16 @@ async function getLocalPosts(): Promise<BlogPost[]> {
         slug: file.replace(/\.md$/, ""),
         title: data.title,
         description: data.description,
-        date: data.date,
         author: data.author,
         cover_image: data.cover_image,
         tags: data.tags,
-        content: '', // Don't load full content for list view
-        published_date: data.published_data
+        published_date: data.date || data.published_date
       } as BlogPost;
     })
   );
 
   // Sort posts by date (newest first)
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return posts.sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
 }
 
 export default async function BlogIndex() {

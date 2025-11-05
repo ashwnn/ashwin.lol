@@ -97,16 +97,18 @@ export default function PostContent({ post, formattedDate, tags }: PostContentPr
             components={{
               img: ({ src, alt, ...props }) => {
                 if (!src) return null;
+                const altText = typeof alt === 'string' ? alt : '';
+                const srcText = typeof src === 'string' ? src : '';
 
                 return (
                   <span className="my-6 relative group inline-block">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={src}
-                      alt={alt || ""}
+                      src={srcText}
+                      alt={altText}
                       {...props}
                       className="w-full rounded-lg cursor-zoom-in hover:opacity-90 transition-opacity"
-                      onClick={() => openImageModal(src, alt || "")}
+                      onClick={() => openImageModal(srcText, altText)}
                       style={{
                         maxWidth: "100%",
                         height: "auto",

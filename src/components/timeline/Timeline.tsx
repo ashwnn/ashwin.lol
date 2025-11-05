@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import type { TimelineItem } from '@/types';
-import { categorizeItem } from '@/utils/timeline';
 import ImageModal from '@/components/blog/ImageModal';
 import { TimelineCard } from './TimelineCard';
 import { TimelineFilters } from './TimelineFilters';
