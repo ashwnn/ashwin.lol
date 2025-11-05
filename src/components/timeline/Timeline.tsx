@@ -24,7 +24,11 @@ const Timeline = ({ data }: TimelineProps) => {
         if (activeFilter === 'all') {
             return data;
         }
-        return data.filter(item => categorizeItem(item).includes(activeFilter));
+        // More efficient: check categories directly without creating array
+        return data.filter(item => {
+            if (!item.categories) return false;
+            return item.categories.includes(activeFilter);
+        });
     }, [activeFilter, data]);
 
     // Memoize image modal handlers

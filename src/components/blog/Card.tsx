@@ -1,26 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BlogPost } from "@/types";
 
-export default function BlogCard({ slug, title, description, cover_image, tags, published_date, author }: BlogPost) {
+function BlogCard({ slug, title, description, cover_image, tags, published_date, author }: BlogPost) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const formatDate = (date: Date) =>
-    new Date(date).toLocaleDateString(undefined, {
+  // Memoize date formatting
+  const formattedDate = useMemo(() => {
+    if (!published_date) return null;
+    return new Date(published_date).toLocaleDateString(undefined, {
       month: "long",
       day: "numeric",
       year: "numeric",
     });
+  }, [published_date]);
 
-  const handleClick = (e: React.MouseEvent) => {
+  // Memoize tag parsing
+  const parsedTags = useMemo(() => {
+    if (!tags || tags.length === 0) return [];
+    return tags.split(",").slice(0, 3).map(tag => tag.trim());
+  }, [tags]);
+
+  const hasMoreTags = useMemo(() => {
+    if (!tags) return false;
+    return tags.split(",").length > 3;
+  }, [tags]);
+
+  const handleClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     setIsLoading(true);
     router.push(`/blog/${slug}`);
-  };
+  }, [slug, router]);
 
   return (
     <div
@@ -59,17 +73,17 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
           <p className="text-gray-300 text-sm line-clamp-2 mb-3">{description}</p>
         )}
 
-        {tags && tags.length > 0 && (
+        {parsedTags.length > 0 && (
           <div className="flex flex-wrap mt-auto pt-3">
-            {tags.split(",").slice(0, 3).map((tag, i) => (
+            {parsedTags.map((tag, i) => (
               <span
                 key={i}
                 className="px-2 py-0.5 mr-2 mb-2 text-xs font-medium text-gray-200 rounded-md bg-zinc-700/70 transition-all duration-300 group-hover:bg-zinc-700"
               >
-                {tag.trim()}
+                {tag}
               </span>
             ))}
-            {tags.length > 3 && (
+            {hasMoreTags && (
               <span className="text-xs text-gray-400 self-center">+ more</span>
             )}
           </div>
@@ -77,7 +91,7 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
 
         <div className="mt-3 pt-3 text-xs border-t border-zinc-700/50 text-gray-400 flex justify-between items-center">
           {author && <span>{author}</span>}
-          {published_date && <span>{formatDate(published_date)}</span>}
+          {formattedDate && <span>{formattedDate}</span>}
         </div>
       </div>
 
@@ -86,3 +100,5 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
     </div>
   );
 }
+
+export default memo(BlogCard);

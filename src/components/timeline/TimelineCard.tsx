@@ -129,23 +129,39 @@ export const TimelineCard = memo(function TimelineCard({
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 50vw"
                 />
                 
-                {/* Preload adjacent images */}
-                {allImages.length > 1 && allImages.map((img, idx) => {
-                  if (idx === currentImageIndex) return null;
-                  const isAdjacent = Math.abs(idx - currentImageIndex) === 1;
+                {/* Preload only adjacent images for smooth navigation */}
+                {allImages.length > 1 && (() => {
+                  const prevIndex = currentImageIndex > 0 ? currentImageIndex - 1 : allImages.length - 1;
+                  const nextIndex = currentImageIndex < allImages.length - 1 ? currentImageIndex + 1 : 0;
                   return (
-                    <Image
-                      key={idx}
-                      src={img}
-                      alt=""
-                      fill
-                      className="opacity-0 pointer-events-none"
-                      priority={isAdjacent}
-                      quality={90}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 50vw"
-                    />
+                    <>
+                      {prevIndex !== currentImageIndex && (
+                        <Image
+                          key={`prev-${prevIndex}`}
+                          src={allImages[prevIndex]}
+                          alt=""
+                          fill
+                          className="opacity-0 pointer-events-none"
+                          priority={false}
+                          quality={75}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 50vw"
+                        />
+                      )}
+                      {nextIndex !== currentImageIndex && nextIndex !== prevIndex && (
+                        <Image
+                          key={`next-${nextIndex}`}
+                          src={allImages[nextIndex]}
+                          alt=""
+                          fill
+                          className="opacity-0 pointer-events-none"
+                          priority={false}
+                          quality={75}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 50vw"
+                        />
+                      )}
+                    </>
                   );
-                })}
+                })()}
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-[2]" />
                 

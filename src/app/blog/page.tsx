@@ -27,29 +27,31 @@ async function getLocalPosts(): Promise<BlogPost[]> {
   const postsDir = path.join(process.cwd(), "src/data/blog");
   const files = await fs.readdir(postsDir);
 
-  const posts = await Promise.all(
-    files
-      .filter((file) => file.endsWith(".md"))
-      .map(async (file) => {
-        const filePath = path.join(postsDir, file);
-        const fileContent = await fs.readFile(filePath, 'utf8');
-        const { data, content } = matter(fileContent);
+  // Filter markdown files first to avoid unnecessary operations
+  const mdFiles = files.filter((file) => file.endsWith(".md"));
 
-        return {
-          slug: file.replace(/\.md$/, ""),
-          title: data.title,
-          description: data.description,
-          date: data.date,
-          author: data.author,
-          cover_image: data.cover_image,
-          tags: data.tags,
-          content: content,
-          published_date: data.published_data
-        } as BlogPost;
-      })
+  const posts = await Promise.all(
+    mdFiles.map(async (file) => {
+      const filePath = path.join(postsDir, file);
+      const fileContent = await fs.readFile(filePath, 'utf8');
+      const { data } = matter(fileContent, { excerpt: false });
+
+      return {
+        slug: file.replace(/\.md$/, ""),
+        title: data.title,
+        description: data.description,
+        date: data.date,
+        author: data.author,
+        cover_image: data.cover_image,
+        tags: data.tags,
+        content: '', // Don't load full content for list view
+        published_date: data.published_data
+      } as BlogPost;
+    })
   );
 
-  return posts;
+  // Sort posts by date (newest first)
+  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export default async function BlogIndex() {

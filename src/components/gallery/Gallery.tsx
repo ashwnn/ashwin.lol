@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import type { GalleryImage } from '@/types';
@@ -232,24 +232,32 @@ const MasonryImage = ({ src, alt, index, onClick, mediaType = 'image', location 
     const [loadError, setLoadError] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
 
-    const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const handleImageLoad = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
         const img = e.currentTarget;
         const ratio = img.naturalHeight / img.naturalWidth;
-        setAspectRatio(ratio);
-        setIsLoaded(true);
-    };
+        // Batch state updates
+        if (ratio !== aspectRatio || !isLoaded) {
+            setAspectRatio(ratio);
+            setIsLoaded(true);
+        }
+    }, [aspectRatio, isLoaded]);
 
-    const handleVideoLoad = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const handleVideoLoad = useCallback((e: React.SyntheticEvent<HTMLVideoElement>) => {
         const video = e.currentTarget;
         const ratio = video.videoHeight / video.videoWidth;
-        setAspectRatio(ratio || 1);
-        setIsLoaded(true);
-    };
+        // Batch state updates
+        if ((ratio || 1) !== aspectRatio || !isLoaded) {
+            setAspectRatio(ratio || 1);
+            setIsLoaded(true);
+        }
+    }, [aspectRatio, isLoaded]);
 
-    const handleError = () => {
-        setLoadError(true);
-        setIsLoaded(true);
-    };
+    const handleError = useCallback(() => {
+        if (!loadError || !isLoaded) {
+            setLoadError(true);
+            setIsLoaded(true);
+        }
+    }, [loadError, isLoaded]);
 
     return (
         <button
@@ -359,8 +367,19 @@ export function EnhancedMasonryLayout({ images, onImageClick }: EnhancedMasonryL
         };
 
         updateColumns();
-        window.addEventListener('resize', updateColumns);
-        return () => window.removeEventListener('resize', updateColumns);
+        
+        // Debounce resize event for better performance
+        let timeoutId: NodeJS.Timeout;
+        const handleResize = () => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(updateColumns, 150);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            clearTimeout(timeoutId);
+        };
     }, []);
 
     return (

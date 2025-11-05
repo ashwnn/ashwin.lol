@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -10,7 +11,7 @@ interface ProjectCardProps {
   github?: string;
 }
 
-export default function ProjectCard({ title, description, image, tags, link, github }: ProjectCardProps) {
+function ProjectCard({ title, description, image, tags, link, github }: ProjectCardProps) {
   return (
     <div className="group flex flex-col sm:flex-row h-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/80 transition-all duration-300 hover:border-neutral-700 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl hover:scale-[1.01] hover:-translate-y-1 mb-4 relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl before:z-10">
       <div className="relative h-56 sm:h-auto sm:w-48 md:w-64 overflow-hidden">
@@ -75,3 +76,5 @@ export default function ProjectCard({ title, description, image, tags, link, git
     </div>
   );
 }
+
+export default memo(ProjectCard);
