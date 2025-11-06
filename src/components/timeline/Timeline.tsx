@@ -12,16 +12,16 @@ import { ChevronLeftIcon, ChevronRightIcon, ArrowRightIcon, LightningIcon } from
 // ============================================
 
 export interface TimelineCategory {
-    key: string;
-    label: string;
+  key: string;
+  label: string;
 }
 
 export const TIMELINE_CATEGORIES: TimelineCategory[] = [
-    { key: 'all', label: 'All'},
-    { key: 'development', label: 'Development'},
-    { key: 'security', label: 'Security'},
-    { key: 'infrastructure', label: 'Infrastructure'},
-    { key: 'hardware', label: 'Hardware'}
+  { key: 'all', label: 'All' },
+  { key: 'development', label: 'Development' },
+  { key: 'security', label: 'Security' },
+  { key: 'infrastructure', label: 'Infrastructure' },
+  { key: 'hardware', label: 'Hardware' }
 ];
 
 // ============================================
@@ -31,11 +31,8 @@ export const TIMELINE_CATEGORIES: TimelineCategory[] = [
 const TimelineHeader = memo(function TimelineHeader() {
   return (
     <div className="relative flex items-center justify-center mb-8">
-      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/30" aria-hidden="true">
-        <LightningIcon className="w-4 h-4 text-white" />
-      </div>
-      <div className="ml-4 text-sm text-neutral-400">
-        Current
+      <div className="text-xl font-semibold text-neutral-300">
+        {new Date().getFullYear()}
       </div>
     </div>
   );
@@ -50,9 +47,9 @@ interface TimelineFiltersProps {
   onFilterChange: (filterKey: string) => void;
 }
 
-const TimelineFilters = memo(function TimelineFilters({ 
-  activeFilter, 
-  onFilterChange 
+const TimelineFilters = memo(function TimelineFilters({
+  activeFilter,
+  onFilterChange
 }: TimelineFiltersProps) {
   return (
     <div className="flex flex-wrap gap-2">
@@ -60,11 +57,10 @@ const TimelineFilters = memo(function TimelineFilters({
         <button
           key={category.key}
           onClick={() => onFilterChange(category.key)}
-          className={`inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 relative focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${
-            activeFilter === category.key
+          className={`inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 relative focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${activeFilter === category.key
               ? 'bg-blue-600 text-white shadow-elevation-dark-md shadow-blue-600/40 scale-[1.02] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:rounded-t-lg'
               : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700/30 shadow-elevation-dark-sm hover:shadow-elevation-dark-md'
-          }`}
+            }`}
           aria-label={`Filter by ${category.label}`}
           aria-pressed={activeFilter === category.key}
         >
@@ -86,11 +82,11 @@ interface TimelineCardProps {
   onImageClick: (imageSrc: string) => void;
 }
 
-const TimelineCard = memo(function TimelineCard({ 
-  item, 
-  index, 
-  isLast, 
-  onImageClick 
+const TimelineCard = memo(function TimelineCard({
+  item,
+  index,
+  isLast,
+  onImageClick
 }: TimelineCardProps) {
   const [imageError, setImageError] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -100,17 +96,17 @@ const TimelineCard = memo(function TimelineCard({
   const allImages = useMemo(() => {
     return item.images || (item.image ? [item.image] : []);
   }, [item]);
-  
+
   // Memoize expensive calculations
   const isEven = useMemo(() => index % 2 === 0, [index]);
   const categories = useMemo(() => getCategories(item), [item]);
   const techStack = useMemo(() => getTechStack(item), [item]);
-  
+
   // Reset loading state when image changes
   useEffect(() => {
     setIsImageLoading(true);
   }, [currentImageIndex]);
-  
+
   // Memoize the image error handler
   const handleImageError = useCallback(() => {
     setImageError(true);
@@ -148,21 +144,19 @@ const TimelineCard = memo(function TimelineCard({
       </div>
 
       {/* Card Container */}
-      <div className={`w-full lg:w-[calc(75%-1rem)] pl-12 lg:pl-0 ${
-        isEven 
-          ? 'lg:mr-auto lg:pr-6' 
+      <div className={`w-full lg:w-[calc(75%-1rem)] pl-12 lg:pl-0 ${isEven
+          ? 'lg:mr-auto lg:pr-6'
           : 'lg:ml-auto lg:pl-12'
-      }`}>
-        {/* Year Badge */}
-        <div className={`inline-flex items-center px-3 py-1 mb-4 text-sm font-bold text-blue-400 bg-blue-400/10 border border-blue-400/20 rounded-full ${
-          isEven ? 'lg:ml-auto' : ''
         }`}>
+        {/* Year Badge */}
+        <div className={`inline-flex items-center px-3 py-1 mb-4 text-sm font-bold text-blue-400 bg-blue-400/10 border border-blue-400/20 rounded-full ${isEven ? 'lg:ml-auto' : ''
+          }`}>
           {item.year}
         </div>
 
         {/* Main Card */}
         <div className="bg-neutral-900 backdrop-blur-sm border border-neutral-800 rounded-xl p-6 hover:border-neutral-700 transition-all duration-300 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl">
-          
+
           {/* Header */}
           <div className={`mb-4 ${isEven ? 'lg:text-right' : 'lg:text-left'} text-left`}>
             <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-100 transition-colors">
@@ -188,7 +182,7 @@ const TimelineCard = memo(function TimelineCard({
                 {isImageLoading && (
                   <div className="absolute inset-0 bg-neutral-800 animate-pulse z-[1]" />
                 )}
-                
+
                 {/* Current visible image */}
                 <Image
                   src={allImages[currentImageIndex]}
@@ -201,7 +195,7 @@ const TimelineCard = memo(function TimelineCard({
                   quality={90}
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 50vw"
                 />
-                
+
                 {/* Preload adjacent images */}
                 {allImages.length > 1 && allImages.map((img, idx) => {
                   if (idx === currentImageIndex) return null;
@@ -219,9 +213,9 @@ const TimelineCard = memo(function TimelineCard({
                     />
                   );
                 })}
-                
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-[2]" />
-                
+
                 {/* Image Navigation */}
                 {allImages.length > 1 && (
                   <>
@@ -233,7 +227,7 @@ const TimelineCard = memo(function TimelineCard({
                     >
                       <ChevronLeftIcon className="w-4 h-4 text-white" />
                     </button>
-                    
+
                     {/* Next Button */}
                     <button
                       onClick={handleNextImage}
@@ -242,7 +236,7 @@ const TimelineCard = memo(function TimelineCard({
                     >
                       <ChevronRightIcon className="w-4 h-4 text-white" />
                     </button>
-                    
+
                     {/* Image Counter */}
                     <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded z-10">
                       {currentImageIndex + 1} / {allImages.length}
@@ -325,126 +319,117 @@ interface TimelineProps {
 }
 
 const Timeline = ({ data }: TimelineProps) => {
-    const [activeFilter, setActiveFilter] = useState('all');
-    const [isVisible, setIsVisible] = useState(false);
-    const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [isVisible, setIsVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Memoize filtered data calculation
-    const filteredData = useMemo(() => {
-        if (activeFilter === 'all') {
-            return data;
-        }
-        return data.filter(item => categorizeItem(item).includes(activeFilter));
-    }, [activeFilter, data]);
+  // Memoize filtered data calculation
+  const filteredData = useMemo(() => {
+    if (activeFilter === 'all') {
+      return data;
+    }
+    return data.filter(item => categorizeItem(item).includes(activeFilter));
+  }, [activeFilter, data]);
 
-    // Memoize image modal handlers
-    const openImageModal = useCallback((imageSrc: string) => {
-        setSelectedImage(imageSrc);
-        setIsModalOpen(true);
-    }, []);
+  // Memoize image modal handlers
+  const openImageModal = useCallback((imageSrc: string) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  }, []);
 
-    const closeModal = useCallback(() => {
-        setIsModalOpen(false);
-        setSelectedImage(null);
-    }, []);
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  }, []);
 
-    // Memoize filter handler
-    const handleFilterChange = useCallback((filterKey: string) => {
-        setActiveFilter(filterKey);
-    }, []);
+  // Memoize filter handler
+  const handleFilterChange = useCallback((filterKey: string) => {
+    setActiveFilter(filterKey);
+  }, []);
 
-    useEffect(() => {
-        setIsVisible(true);
-    }, []);
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
-    return (
-        <section className="mb-8">
-            {/* Header */}
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 pb-4 border-b border-neutral-800">
-                <h2 className="text-2xl font-bold mb-4 lg:mb-0 bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
-                    My Journey
-                </h2>
-                
-                {/* Filter Controls */}
-                <TimelineFilters 
-                    activeFilter={activeFilter}
-                    onFilterChange={handleFilterChange}
-                />
+  return (
+    <section className="mb-8">
+      {/* Header */}
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 pb-4 border-b border-neutral-800">
+        <h2 className="text-2xl font-bold mb-4 lg:mb-0 bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
+          My Journey
+        </h2>
+
+        {/* Filter Controls */}
+        <TimelineFilters
+          activeFilter={activeFilter}
+          onFilterChange={handleFilterChange}
+        />
+      </div>
+
+      {/* Timeline Content */}
+      <div className="relative">
+        {/* Start Marker */}
+        <TimelineHeader />
+
+        {/* Desktop Center Line */}
+        <div className="absolute left-1/2 top-16 w-0.5 h-[calc(100%-8rem)] bg-blue-500 transform -translate-x-1/2 hidden lg:block z-0">
+        </div>
+
+        {/* Mobile Left Line */}
+        <div className="absolute left-6 top-16 w-0.5 h-[calc(100%-8rem)] bg-blue-500 lg:hidden z-0">
+        </div>
+
+        {/* Timeline Items */}
+        <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          {filteredData.map((item, index) => (
+            <div
+              key={`${item.year}-${index}`}
+              className="animate-fade-in-up"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                animationFillMode: 'both'
+              }}
+            >
+              <TimelineCard
+                item={item}
+                index={index}
+                isLast={index === filteredData.length - 1}
+                onImageClick={openImageModal}
+              />
             </div>
+          ))}
+        </div>
 
-            {/* Timeline Content */}
-            <div className="relative">
-                {/* Start Marker */}
-                <TimelineHeader />
+        {/* End Marker */}
+        <div className="relative mt-8">
+          {/* Desktop End Marker (center-aligned) */}
+          <div className="hidden lg:flex items-center justify-center">
 
-                {/* Desktop Center Line */}
-                <div className="absolute left-1/2 top-16 w-0.5 h-[calc(100%-8rem)] bg-blue-500 transform -translate-x-1/2 hidden lg:block z-0">
-                </div>
-
-                {/* Mobile Left Line */}
-                <div className="absolute left-6 top-16 w-0.5 h-[calc(100%-8rem)] bg-blue-500 lg:hidden z-0">
-                </div>
-
-                {/* Timeline Items */}
-                <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    {filteredData.map((item, index) => (
-                        <div
-                            key={`${item.year}-${index}`}
-                            className="animate-fade-in-up"
-                            style={{
-                                animationDelay: `${index * 100}ms`,
-                                animationFillMode: 'both'
-                            }}
-                        >
-                            <TimelineCard
-                                item={item}
-                                index={index}
-                                isLast={index === filteredData.length - 1}
-                                onImageClick={openImageModal}
-                            />
-                        </div>
-                    ))}
-                </div>
-
-                {/* End Marker */}
-                <div className="relative mt-8">
-                    {/* Desktop End Marker (center-aligned) */}
-                    <div className="hidden lg:flex items-center justify-center">
-                        <div className="w-8 h-8 bg-gradient-to-br from-neutral-600 to-neutral-800 rounded-full flex items-center justify-center shadow-lg">
-                            <svg className="w-4 h-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
-                        <div className="ml-4 text-sm text-neutral-500">
-                            Day One
-                        </div>
-                    </div>
-                    
-                    {/* Mobile End Marker (left-aligned) */}
-                    <div className="flex lg:hidden items-center pl-6">
-                        <div className="w-8 h-8 bg-gradient-to-br from-neutral-600 to-neutral-800 rounded-full flex items-center justify-center shadow-lg">
-                            <svg className="w-4 h-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
-                        <div className="ml-4 text-sm text-neutral-500">
-                            Day One
-                        </div>
-                    </div>
-                </div>
+            <div className="text-xl font-semibold text-neutral-300">
+              2016
             </div>
+          </div>
 
-            {/* Image Modal */}
-            {isModalOpen && selectedImage && (
-                <ImageModal
-                    src={selectedImage}
-                    alt="Timeline Image"
-                    onClose={closeModal}
-                />
-            )}
-        </section>
-    );
+          {/* Mobile End Marker (left-aligned) */}
+          <div className="flex lg:hidden items-center pl-6">
+            <div className="text-xl font-semibold text-neutral-300">
+              2016
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Image Modal */}
+      {isModalOpen && selectedImage && (
+        <ImageModal
+          src={selectedImage}
+          alt="Timeline Image"
+          onClose={closeModal}
+        />
+      )}
+    </section>
+  );
 }
 
 export default memo(Timeline);
