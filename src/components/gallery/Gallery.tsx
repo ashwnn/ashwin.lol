@@ -26,8 +26,6 @@ export const FullscreenModal = ({
     totalImages
 }: FullscreenModalProps) => {
     const touchStartX = useRef<number>(0);
-    const [isPlaying, setIsPlaying] = useState(true);
-    const [showPlayPause, setShowPlayPause] = useState(false);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -58,76 +56,23 @@ export const FullscreenModal = ({
                 onClick={onClose}
             >
                 <div 
-                    className="relative flex items-center justify-center max-w-full max-h-full group"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        if (image.mediaType === 'video') {
-                            const video = e.currentTarget.querySelector('video');
-                            if (video) {
-                                if (video.paused) {
-                                    video.play();
-                                    setIsPlaying(true);
-                                } else {
-                                    video.pause();
-                                    setIsPlaying(false);
-                                }
-                                setShowPlayPause(true);
-                                setTimeout(() => setShowPlayPause(false), 600);
-                            }
-                        }
-                    }}
+                    className="relative flex items-center justify-center w-full h-full group"
+                    onClick={(e) => e.stopPropagation()}
                 >
-                    {image.mediaType === 'video' ? (
-                        <>
-                            <video
-                                src={image.src}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                preload="metadata"
-                                className="object-contain w-auto h-auto max-w-full max-h-full rounded-lg shadow-2xl cursor-pointer"
-                                style={{
-                                    maxWidth: '100%',
-                                    maxHeight: '100%',
-                                    width: 'auto',
-                                    height: 'auto',
-                                }}
-                            />
-                            {showPlayPause && (
-                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                    <div className="bg-black/70 backdrop-blur-sm rounded-full p-4 animate-fade-in-out">
-                                        {isPlaying ? (
-                                            <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                                            </svg>
-                                        ) : (
-                                            <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V4z" />
-                                            </svg>
-                                        )}
-                                    </div>
-                                </div>
-                            )}
-                        </>
-                    ) : (
+                    <div className="relative w-full h-full flex items-center justify-center">
                         <Image
                             src={image.src}
                             alt={image.alt}
-                            width={0}
-                            height={0}
+                            fill
                             sizes="100vw"
-                            className="object-contain w-auto h-auto max-w-full max-h-full rounded-lg shadow-2xl"
+                            className="object-contain rounded-lg shadow-2xl"
                             style={{
-                                maxWidth: '100%',
-                                maxHeight: '100%',
-                                width: 'auto',
-                                height: 'auto',
+                                objectFit: 'contain',
                             }}
                             priority
                             quality={95}
                         />
-                    )}
+                    </div>
                     <button
                         onClick={onClose}
                         className="absolute z-10 p-2 text-white transition-all duration-200 rounded-full top-2 right-2 sm:top-4 sm:right-4 hover:text-gray-300 sm:p-3 bg-black/60 backdrop-blur-sm hover:bg-black/80 opacity-80 hover:opacity-100 group-hover:opacity-100 shadow-elevation-dark-md hover:shadow-elevation-dark-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
@@ -217,7 +162,6 @@ interface MasonryImageProps {
     alt: string;
     index: number;
     onClick: (index: number) => void;
-    mediaType?: 'image' | 'video';
     location?: {
         displayText: string | null;
         city: string | null;
@@ -226,23 +170,19 @@ interface MasonryImageProps {
     };
 }
 
-const MasonryImage = ({ src, alt, index, onClick, mediaType = 'image', location }: MasonryImageProps) => {
+const MasonryImage = ({ src, alt, index, onClick, location }: MasonryImageProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [aspectRatio, setAspectRatio] = useState(1);
+    const [dimensions, setDimensions] = useState<{ width: number; height: number } | null>(null);
     const [loadError, setLoadError] = useState(false);
-    const videoRef = useRef<HTMLVideoElement>(null);
 
     const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
         const img = e.currentTarget;
-        const ratio = img.naturalHeight / img.naturalWidth;
-        setAspectRatio(ratio);
-        setIsLoaded(true);
-    };
-
-    const handleVideoLoad = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-        const video = e.currentTarget;
-        const ratio = video.videoHeight / video.videoWidth;
-        setAspectRatio(ratio || 1);
+        if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+            setDimensions({
+                width: img.naturalWidth,
+                height: img.naturalHeight
+            });
+        }
         setIsLoaded(true);
     };
 
@@ -253,15 +193,13 @@ const MasonryImage = ({ src, alt, index, onClick, mediaType = 'image', location 
 
     return (
         <button
-            className="relative overflow-hidden transition-all duration-300 border rounded-lg cursor-pointer group border-neutral-800/50 bg-neutral-900/30 hover:border-neutral-700 hover:shadow-lg hover:shadow-black/20 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
-            style={{
-                aspectRatio: isLoaded ? `1 / ${aspectRatio}` : '1 / 1',
-            }}
+            className="relative overflow-hidden transition-all duration-300 border rounded-lg cursor-pointer group border-neutral-800/50 bg-neutral-900/30 hover:border-neutral-700 hover:shadow-lg hover:shadow-black/20 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 block"
             onClick={() => onClick(index)}
             aria-label={`View ${alt} in fullscreen`}
+            title={location?.displayText || undefined}
         >
             {loadError ? (
-                <div className="absolute inset-0 flex items-center justify-center bg-neutral-900">
+                <div className="flex items-center justify-center bg-neutral-900 min-h-[200px]">
                     <div className="text-center text-neutral-500">
                         <svg className="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -269,73 +207,45 @@ const MasonryImage = ({ src, alt, index, onClick, mediaType = 'image', location 
                         <p className="text-xs">Failed to load</p>
                     </div>
                 </div>
-            ) : mediaType === 'video' ? (
-                <video
-                    ref={videoRef}
-                    src={src}
-                    muted
-                    playsInline
-                    loop
-                    autoPlay
-                    preload="metadata"
-                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23171717' width='100' height='100'/%3E%3C/svg%3E"
-                    onLoadedData={handleVideoLoad}
-                    onError={handleError}
-                    className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
-                        isLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
-                />
             ) : (
-                <Image
-                    src={src}
-                    alt={alt}
-                    fill
-                    loading="lazy"
-                    className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
-                        isLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    onLoad={handleImageLoad}
-                    onError={handleError}
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                />
+                <>
+                    {!isLoaded && (
+                        <div className="bg-gradient-to-br from-neutral-800 to-neutral-900 animate-pulse min-h-[200px]">
+                            <div className="flex items-center justify-center h-full min-h-[200px]">
+                                <div className="w-8 h-8 border-2 border-neutral-600 border-t-neutral-400 rounded-full animate-spin" />
+                            </div>
+                        </div>
+                    )}
+                    <Image
+                        src={src}
+                        alt={alt}
+                        width={dimensions?.width || 400}
+                        height={dimensions?.height || 300}
+                        loading="lazy"
+                        className={`w-full h-auto object-cover transition-all duration-300 ${
+                            isLoaded ? 'opacity-100' : 'opacity-0 absolute'
+                        }`}
+                        onLoad={handleImageLoad}
+                        onError={handleError}
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                    />
+                </>
             )}
-            {!isLoaded && !loadError && (
-                <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-900 animate-pulse">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-8 h-8 border-2 border-neutral-600 border-t-neutral-400 rounded-full animate-spin" />
-                    </div>
-                </div>
-            )}
-            {mediaType === 'video' && isLoaded && (
-                <div className="absolute top-2 right-2 z-10 pointer-events-none">
-                    <div className="bg-black/70 backdrop-blur-sm rounded-md p-1.5">
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                        </svg>
-                    </div>
-                </div>
-            )}
+            {/* Tooltip that appears on hover */}
             {location?.displayText && (
-                <div className="absolute top-2 left-2 right-2 z-10">
-                    <div className="bg-black/70 backdrop-blur-sm rounded-md px-2 py-1 text-white text-xs font-medium shadow-lg">
-                        <div className="flex items-center gap-1">
+                <div className="absolute bottom-3 left-1/2 z-10 -translate-x-1/2 transform opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="bg-black/80 backdrop-blur-sm rounded-md px-3 py-1.5 text-white text-xs font-medium shadow-lg text-center">
+                        <div className="flex items-center justify-center gap-1.5">
                             <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21L12 3l9 18H3z M12 3l-4.5 9h9L12 3z" />
                             </svg>
                             <span className="truncate">{location.displayText}</span>
                         </div>
                     </div>
                 </div>
             )}
-            <div className="absolute inset-0 transition-all duration-300 bg-black/0 group-hover:bg-black/30" />
-            <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 group-focus:opacity-100">
-                <div className="p-3 transition-transform duration-300 transform scale-75 rounded-full bg-white/95 backdrop-blur-sm group-hover:scale-100 group-focus:scale-100">
-                    <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                </div>
-            </div>
+            {/* Dim overlay on hover */}
+            <div className="absolute inset-0 transition-all duration-300 bg-black/0 group-hover:bg-black/40" />
         </button>
     );
 };
@@ -347,15 +257,17 @@ interface EnhancedMasonryLayoutProps {
 }
 
 export function EnhancedMasonryLayout({ images, onImageClick }: EnhancedMasonryLayoutProps) {
-    const [columns, setColumns] = useState(4);
+    const [columns, setColumns] = useState(3);
 
     useEffect(() => {
         const updateColumns = () => {
-            if (window.innerWidth < 640) setColumns(2);
-            else if (window.innerWidth < 768) setColumns(3);
-            else if (window.innerWidth < 1024) setColumns(4);
-            else if (window.innerWidth < 1280) setColumns(5);
-            else setColumns(6);
+            const width = window.innerWidth;
+            // Optimized breakpoints for better responsive behavior with larger images
+            if (width < 640) setColumns(2);      // Mobile: 1 column
+            else if (width < 768) setColumns(3);  // Small tablet: 2 columns
+            else if (width < 1024) setColumns(4); // Tablet: 3 columns
+            else if (width < 1536) setColumns(3); // Desktop: 3 columns
+            else setColumns(3);                   // Large desktop: 4 columns
         };
 
         updateColumns();
@@ -368,22 +280,25 @@ export function EnhancedMasonryLayout({ images, onImageClick }: EnhancedMasonryL
             className="w-full"
             style={{
                 columnCount: columns,
-                columnGap: '1rem',
-                columnFill: 'balance'
+                columnGap: '1.5rem',
+                columnFill: 'balance', // Distribute items evenly
             }}
         >
             {images.map((image, index) => (
                 <div 
-                    key={index} 
-                    className="mb-4 break-inside-avoid"
-                    style={{ breakInside: 'avoid' }}
+                    key={image.id || index} 
+                    className="mb-6"
+                    style={{ 
+                        breakInside: 'avoid',
+                        pageBreakInside: 'avoid',
+                        display: 'block',
+                    }}
                 >
                     <MasonryImage
                         src={image.thumbnail}
                         alt={image.alt}
                         index={index}
                         onClick={onImageClick}
-                        mediaType={image.mediaType}
                         location={image.location}
                     />
                 </div>
