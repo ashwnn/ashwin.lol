@@ -145,14 +145,14 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2 text-sm bg-transparent border border-neutral-600 text-neutral-300 rounded-md hover:bg-neutral-800 transition-all duration-200 shadow-elevation-dark-sm hover:shadow-elevation-dark-md hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0"
+                  className="px-4 py-2 text-sm bg-transparent border border-neutral-600 text-neutral-300 rounded-md hover:bg-neutral-800 transition-all duration-200 shadow-elevation-dark-sm hover:shadow-elevation-dark-md"
                   disabled={isLoading}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-200 flex items-center justify-center min-w-[80px] shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:rounded-t-md"
+                  className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-200 flex items-center justify-center min-w-[80px] shadow-elevation-dark-md hover:shadow-elevation-dark-lg relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:rounded-t-md"
                   disabled={isLoading}
                 >
                   {isLoading ? (

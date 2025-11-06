@@ -63,7 +63,7 @@ const TimelineFilters = memo(function TimelineFilters({
           className={`inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 relative focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${
             activeFilter === category.key
               ? 'bg-blue-600 text-white shadow-elevation-dark-md shadow-blue-600/40 scale-[1.02] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:rounded-t-lg'
-              : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700/30 shadow-elevation-dark-sm hover:shadow-elevation-dark-md hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0'
+              : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700/30 shadow-elevation-dark-sm hover:shadow-elevation-dark-md'
           }`}
           aria-label={`Filter by ${category.label}`}
           aria-pressed={activeFilter === category.key}
@@ -161,7 +161,7 @@ const TimelineCard = memo(function TimelineCard({
         </div>
 
         {/* Main Card */}
-        <div className="bg-neutral-900 backdrop-blur-sm border border-neutral-800 rounded-xl p-6 hover:border-neutral-700 transition-all duration-300 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl hover:scale-[1.01] hover:-translate-y-1 relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl">
+        <div className="bg-neutral-900 backdrop-blur-sm border border-neutral-800 rounded-xl p-6 hover:border-neutral-700 transition-all duration-300 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl">
           
           {/* Header */}
           <div className={`mb-4 ${isEven ? 'lg:text-right' : 'lg:text-left'} text-left`}>
@@ -194,7 +194,7 @@ const TimelineCard = memo(function TimelineCard({
                   src={allImages[currentImageIndex]}
                   alt={`${item.title} - Image ${currentImageIndex + 1}`}
                   fill
-                  className={`object-cover transition-all duration-300 hover:scale-105 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                  className={`object-cover transition-all duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
                   onError={handleImageError}
                   onLoad={() => setIsImageLoading(false)}
                   priority={index < 3}
@@ -285,7 +285,7 @@ const TimelineCard = memo(function TimelineCard({
                   href={button.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-all duration-200 shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 group/button relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:rounded-t-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-all duration-200 shadow-elevation-dark-md hover:shadow-elevation-dark-lg group/button relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:rounded-t-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-neutral-900"
                   aria-label={`${button.label} - Opens in new tab`}
                 >
                   {button.icon && (

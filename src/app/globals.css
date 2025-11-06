@@ -104,7 +104,6 @@ html {
   .btn-elevated {
     @apply shadow-elevation-dark-md hover:shadow-elevation-dark-lg;
     @apply transform transition-all duration-200;
-    @apply hover:scale-[1.02] hover:-translate-y-0.5;
     position: relative;
   }
 
@@ -123,7 +122,6 @@ html {
   .card-elevated {
     @apply shadow-elevation-dark-lg hover:shadow-elevation-dark-xl;
     @apply transform transition-all duration-300;
-    @apply hover:scale-[1.01] hover:-translate-y-1;
     position: relative;
   }
 
@@ -142,7 +140,6 @@ html {
   .card-floating {
     @apply shadow-elevation-dark-md hover:shadow-elevation-dark-2xl;
     @apply transform transition-all duration-300 ease-out;
-    @apply hover:scale-[1.02] hover:-translate-y-2;
   }
 
   /* Inner glow for depth */

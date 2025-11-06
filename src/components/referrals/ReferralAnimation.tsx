@@ -157,7 +157,7 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
               {/* Close button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 p-2 rounded-full bg-neutral-800/50 hover:bg-neutral-700/50 transition-all duration-200 text-neutral-400 hover:text-white group shadow-elevation-dark-md hover:shadow-elevation-dark-lg hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                className="absolute top-4 right-4 p-2 rounded-full bg-neutral-800/50 hover:bg-neutral-700/50 transition-all duration-200 text-neutral-400 hover:text-white group shadow-elevation-dark-md hover:shadow-elevation-dark-lg focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-neutral-900"
                 aria-label="Close welcome message"
                 title="Close"
               >
@@ -214,7 +214,7 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
                     key={idx}
                     onClick={() => handleQuickAction(action.url, action.label)}
                     className={`
-                      flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-900
+                      flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-900
                       ${action.variant === 'primary' 
                         ? 'text-white shadow-lg hover:shadow-xl focus:ring-white/50' 
                         : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700/50 focus:ring-neutral-400'
@@ -246,7 +246,7 @@ export default function ReferralAnimation({ referral }: ReferralAnimationProps) 
                       aria-label={`${rec.title}: ${rec.description}`}
                     >
                       <div 
-                        className="p-2 rounded-lg group-hover:scale-110 transition-transform duration-200"
+                        className="p-2 rounded-lg transition-transform duration-200"
                         style={{ 
                           backgroundColor: referral.theme.primary + '20',
                           color: referral.theme.primary 

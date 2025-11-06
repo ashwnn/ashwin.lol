@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getInterestImages, interestSlugs, getInterestDisplayName } from '@/utils/gallery';
 import type { InterestSlug, InterestPageParams } from '@/types';
+import { ChevronRightIcon } from '@/components/icons';
 import ClientGalleryPage from './ClientGalleryPage';
 
 export async function generateStaticParams() {
@@ -53,39 +54,32 @@ export default async function InterestGalleryPage({ params }: InterestPageParams
     const displayName = getInterestDisplayName(typedSlug);
 
     return (
-        <div className="w-full py-8 px-4 md:px-6 lg:px-8">
-            {/* Breadcrumb */}
-            <div className="max-w-6xl mx-auto">
-                <nav className="mb-8">
-                    <ol className="flex items-center space-x-2 text-sm text-neutral-400">
-                        <li>
-                            <Link href="/about" className="hover:text-neutral-300 transition-colors">
-                                About
-                            </Link>
-                        </li>
-                        <li>
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </li>
-                        <li className="text-neutral-300">{displayName}</li>
-                    </ol>
-                </nav>
+        <div className="max-w-3xl mx-auto px-4 md:px-0">
+            <nav className="mb-6">
+                <ol className="flex items-center space-x-2 text-sm text-neutral-400">
+                    <li>
+                        <Link href="/about" className="hover:text-neutral-300 transition-colors">
+                            About
+                        </Link>
+                    </li>
+                    <li>
+                        <ChevronRightIcon className="w-4 h-4" />
+                    </li>
+                    <li className="text-neutral-300">{displayName}</li>
+                </ol>
+            </nav>
 
-                {/* Header */}
-                <div className="mb-8">
-                    <h1 className="text-3xl font-bold mb-4">{displayName} Gallery</h1>
-                    <p className="text-neutral-400">
-                        {images.length === 0 
-                            ? `No photos available yet for ${displayName.toLowerCase()}.`
-                            : `Browse through ${images.length} photo${images.length === 1 ? '' : 's'} from my ${displayName.toLowerCase()} adventures.`
-                        }
-                    </p>
-                </div>
+            <div className="my-5">
+                <h1 className="text-3xl font-bold text-gray-100">{displayName} Gallery</h1>
+                <p className="mt-2 text-gray-400">
+                    {images.length === 0 
+                        ? `No photos available yet for ${displayName.toLowerCase()}.`
+                        : `Browse through ${images.length} photo${images.length === 1 ? '' : 's'} from my ${displayName.toLowerCase()} adventures.`
+                    }
+                </p>
             </div>
 
-            {/* Gallery - Full Width */}
-            <div className="max-w-7xl mx-auto">
+            <div className="mt-8">
                 <ClientGalleryPage images={images} title={displayName} />
             </div>
         </div>
