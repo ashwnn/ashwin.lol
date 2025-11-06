@@ -9,10 +9,7 @@ import type { ReactNode, SVGProps } from 'react';
 import type { 
   TimelineItemConfig, 
   GalleryImageConfig, 
-  ReferralConfig,
-  ButtonConfig,
-  MediaType,
-  LocationConfig
+  ReferralConfig
 } from './index';
 
 // ============================================

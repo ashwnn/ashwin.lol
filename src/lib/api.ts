@@ -162,13 +162,17 @@ function parseRateLimitHeaders(headers: Headers): RateLimitInfo | null {
 
 function handleRateLimit(rateLimitInfo: RateLimitInfo): void {
   const now = Math.floor(Date.now() / 1000);
-  const waitTime = rateLimitInfo.reset - now;
+  const waitTime = Math.max(0, rateLimitInfo.reset - now);
 
-  logger.warn('Rate limit detected', {
-    remaining: rateLimitInfo.remaining,
-    limit: rateLimitInfo.limit,
-    resetIn: `${waitTime}s`,
-  });
+  // Only log warning if we're running low on requests (less than 20% remaining)
+  const threshold = Math.floor(rateLimitInfo.limit * 0.2);
+  if (rateLimitInfo.remaining <= threshold) {
+    logger.warn('Rate limit approaching', {
+      remaining: rateLimitInfo.remaining,
+      limit: rateLimitInfo.limit,
+      resetIn: `${waitTime}s`,
+    });
+  }
 
   if (rateLimitInfo.remaining === 0) {
     throw new Error(`Rate limit exceeded. Resets in ${waitTime} seconds.`);
