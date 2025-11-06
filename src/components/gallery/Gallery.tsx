@@ -26,6 +26,12 @@ export const FullscreenModal = ({
     totalImages
 }: FullscreenModalProps) => {
     const touchStartX = useRef<number>(0);
+    const [isImageLoading, setIsImageLoading] = useState(true);
+
+    // Reset loading state when image changes
+    useEffect(() => {
+        setIsImageLoading(true);
+    }, [image.src]);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -60,17 +66,52 @@ export const FullscreenModal = ({
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div className="relative w-full h-full flex items-center justify-center">
+                        {/* Loading skeleton */}
+                        {isImageLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                {/* Translucent skeleton background */}
+                                <div className="absolute inset-8 sm:inset-16 md:inset-24 lg:inset-32 bg-gradient-to-br from-neutral-800/40 via-neutral-700/30 to-neutral-800/40 rounded-lg backdrop-blur-sm animate-pulse">
+                                    {/* Shimmer effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer rounded-lg" 
+                                         style={{
+                                             backgroundSize: '200% 100%',
+                                             animation: 'shimmer 2s infinite'
+                                         }}
+                                    />
+                                </div>
+                                {/* Loading icon in center */}
+                                <div className="relative z-10 flex items-center justify-center">
+                                    <div className="relative">
+                                        {/* Outer ring */}
+                                        <div className="w-20 h-20 sm:w-24 sm:h-24 border-4 border-neutral-700/50 rounded-full" />
+                                        {/* Spinning ring */}
+                                        <div className="absolute inset-0 w-20 h-20 sm:w-24 sm:h-24 border-4 border-transparent border-t-blue-400 border-r-blue-400 rounded-full animate-spin" 
+                                             style={{ animationDuration: '1s' }}
+                                        />
+                                        {/* Center icon */}
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <svg className="w-8 h-8 sm:w-10 sm:h-10 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                         <Image
                             src={image.src}
                             alt={image.alt}
                             fill
                             sizes="100vw"
-                            className="object-contain rounded-lg shadow-2xl"
+                            className={`object-contain rounded-lg shadow-2xl transition-opacity duration-300 ${
+                                isImageLoading ? 'opacity-0' : 'opacity-100'
+                            }`}
                             style={{
                                 objectFit: 'contain',
                             }}
                             priority
                             quality={95}
+                            onLoad={() => setIsImageLoading(false)}
                         />
                     </div>
                     <button
