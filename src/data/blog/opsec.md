@@ -27,9 +27,9 @@ Even the most careful people—such as criminals—get caught because of one sma
 
 Another example is Dmitry Khoroshev, the head of the LockBit ransomware group. He was publicly identified by authorities in 2024 thanks to sloppy OpSec. Despite running one of the world's biggest cybercrime rings, he made basic mistakes like reusing usernames, registering domains with personal details, and leaving communication patterns that linked his alias "LockBitSupp" to his real name. Those small oversights were enough to expose him and tear down his entire network.
 
-![Lockbit Siezed](/blog/extra/38c050e76c5d6f0937bbbb5f68598c19307796f6.png)
+![Lockbit Siezed](/blog/extra/lockbit-seized.png)
 
-In simple terms, OpSec is the process of protecting the small pieces of data that, when connected, reveal more than you want—whether that's your real identity or just sensitive information. It isn't just about the tools you use, like a VPN or encryption; it’s a mindset. It’s about being constantly aware of risks and thinking one step ahead.
+In simple terms, OpSec is the process of protecting the small pieces of data that, when connected, reveal more than you want—whether that's your real identity or just sensitive information. It isn't just about the tools you use, like a VPN or encryption; it's a mindset. It's about being constantly aware of risks and thinking one step ahead.
 
 ## Why Do I Care?
 

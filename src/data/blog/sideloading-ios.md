@@ -75,18 +75,18 @@ With these files in hand, you’re ready to sign and install any `.ipa` file you
 3. Locate and select both your `.p12` and `.mobileprovision` files.
 4. Once imported, click on the `.p12` file and choose **Import Certificate Management**. You may be prompted to enter a password if one was set.
 
-After successfully importing, head over to the **Certificate Management** section within the **Settings** tab. Here, you can verify your certificate’s details, including its expiry date and availability for signing apps.
+After successfully importing, head over to the **Certificate Management** section within the **Settings** tab. Here, you can verify your certificate's details, including its expiry date and availability for signing apps.
 
-![Import Certificates](/blog/extra/1d04b67b490ae8ed570d0772ae87d821c1ad4780.png)
+![Import Certificates](/blog/extra/import-certificates.png)
 
 ### Step 2: Signing an IPA File
 
 1. Again in the **File** tab, click the three dots and choose **Import**.
 2. Locate your desired `.ipa` file and import it into the app.
 3. Switch over to the **Apps** tab, select the imported application, and tap on **Signature**.
-4. After the app is signed, E-Sign will prompt you to install it. Follow the on-screen instructions, and you’ll soon have your newly signed app ready for use.
+4. After the app is signed, E-Sign will prompt you to install it. Follow the on-screen instructions, and you'll soon have your newly signed app ready for use.
 
-![Sign Apps](/blog/extra/e340491b54dd3c043f217316379372883c58db6a.png)
+![Sign Apps](/blog/extra/sign-apps.png)
 
 ## Alternatives
 There is one alternative that does not require a purchase at all. In the unpaid version of an Apple Developer account, you are able to sign apps; however, you have strict limits.
