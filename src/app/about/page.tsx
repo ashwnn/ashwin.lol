@@ -39,7 +39,6 @@ export default function AboutPage() {
                 <Socials />
             </section>
 
-
             <section className="mb-8">
                 <h2 className="text-xl font-bold mb-2 pb-2 border-b border-neutral-800">Beyond The Computer</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -47,7 +46,7 @@ export default function AboutPage() {
                         <a
                             key={idx}
                             href={interest.link}
-                            className="group flex flex-col items-center justify-center text-center p-6 border border-neutral-800 rounded-xl bg-neutral-900/70 hover:bg-neutral-800/70 hover:border-neutral-700 transition-all duration-300 hover:shadow-lg hover:shadow-black/20 min-w-[160px] max-w-[180px]"
+                            className="group flex flex-col items-center justify-center text-center p-6 border border-neutral-800 rounded-xl bg-neutral-900/70 hover:bg-neutral-800/70 hover:border-neutral-700 transition-all duration-300 hover:shadow-lg hover:shadow-black/20 w-full"
                         >
                             <div className="mb-3 transform transition-transform duration-300 group-hover:scale-110">
                                 {interest.icon}
