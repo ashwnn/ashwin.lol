@@ -14,7 +14,7 @@ tags: "self-hosting, homelab, server"
 - [The Core Infrastructure: OS, Storage, and Virtualization](#the-core-infrastructure-os-storage-and-virtualization)
   - [Operating System & Containerization](#operating-system--containerization)
   - [Virtualization Layer: KVM & Libvirt](#virtualization-layer-kvm--libvirt)
-  - [Storage Strategy: MergerFS + SnapRAID](#storage-strategy-mergerfs--snapraid)
+  - [Storage Strategy: MergerFS and SnapRAID](#storage-strategy-mergerfs-and-snapraid)
   - [Why SnapRAID?](#why-snapraid)
   - [File Layout & Data Management](#file-layout--data-management)
 - [Networking, Security, and Applications](#networking-security-and-applications)
@@ -26,28 +26,32 @@ tags: "self-hosting, homelab, server"
 
 # Bepo: My HomeLab Adventure (Containers & VMs)
 
-**Bepo**, my very own HomeLab, is the fruit of my past mistakes, learnings, and experiences setting up my own server. Currently built on a [Lenovo Thinkserver TD340](https://www.lenovo.com/ph/en/p/servers-storage/servers/towers/thinkserver-td340/77ls7td340d), this post details the hardware setup, my storage and software strategy (including both **Docker containers** and **KVM virtual machines**), the extensive suite of applications I run, problems I faced, and how I overcame them. Hopefully, you can learn from my journey and build your own HomeLab one day!
+**Bepo**, my very own HomeLab, is the result of my past mistakes, learnings, and experiences setting up my own server. Currently built on a [Lenovo Thinkserver TD340](https://www.lenovo.com/ph/en/p/servers-storage/servers/towers/thinkserver-td340/77ls7td340d), this post details the hardware, storage and software strategy I use as well as the extensive suite of applications I run, problems I faced, and how I overcame them. Hopefully, you can learn from my journey and build your own HomeLab one day!
 
 ## Inspiration
 
-Before setting up a home lab, I always had a more robust VPS to run my projects and other applications. Still, I did not trust the security and privacy of my data. The saying "The cloud is just someone else's computer" always stuck with me. I wanted more control over my data and services while reducing my dependency on third-party providers. It started with a [Dell Optiplex 7010](https://www.amazon.ca/Dell-Optiplex-7010-Professional-Refurbished/dp/B01LKOZEF0?th=1) I picked up for free, a [Lenovo ThinkCentre M93P](https://www.ebay.ca/itm/255116333817) I got for $20 working together, and finally, my Lenovo ThinkServer TD340.
+Before building Bepo, I always had a more robust VPS to run my projects and other applications. Still, I did not trust the security and privacy of my data. The saying "The cloud is just someone else's computer" always stuck with me. I wanted more control over my data and services while reducing my dependency on third-party providers. It started with a [Dell Optiplex 7010](https://www.amazon.ca/Dell-Optiplex-7010-Professional-Refurbished/dp/B01LKOZEF0?th=1) I picked up for free and a [Lenovo ThinkCentre M93P](https://www.ebay.ca/itm/255116333817) I got for $20, evnetually ending up with my Lenovo ThinkServer TD340.
 
 ## Hardware Specifications & Cost
 
-My home lab is built on a Lenovo ThinkServer TD340, an enterprise-grade server targeted for smaller businesses, released in 2013. I got it for $60 from a local seller who had it sitting in brand-new condition. After some research, it was a great deal and compatible with relatively inexpensive hardware. Here are the key specifications of my setup:
+Bepo is built on a Lenovo ThinkServer TD340, an enterprise-grade server targeted for smaller businesses, released in 2013. I got it for $60 from a local seller who had it sitting in brand-new condition. After some research, it was a great deal and compatible with relatively inexpensive hardware parts.
+
+Here are the hardware specifications of my setup and how much it cost me:
 
 -   **Model:** Lenovo ThinkServer TD340
     -   Cost: $60
     -   Notes: *Came with 16GB of DDR3 1333MHz ECC RAM & 1x Intel Xeon E5-2420 v2*
 -   **CPU:** 2x Intel Xeon E5-2450 v2 (8 cores, 16 threads each, totaling 16c/32t)
     -   Cost: $20
--   **Memory:** 101GB DDR3 1333MHz ECC RAM
+-   **Memory:** 110GB DDR3 1333MHz ECC RAM
     -   Cost: $50
+    -   Notes: Picked up 94GB of the same sticks off a local recycler
 -   **Storage:**
-    -   Data Drives: 1x 14TB Exos Mach.2, 1x 10TB IronWolf Pro, 3x 2TB Generic HDD (`/mnt/data1`, `/mnt/data2`, `/mnt/data3`, `/mnt/data4`, `/mnt/data5`)
-    -   Parity Drive: 1x 14TB Exos Mach.2, 1x 2TB Generic HDD (`/mnt/parity1`, `/mnt/parity2`)
-    -   OS/Appdata/VM Drive: 1x Crucial MX500 1TB (SATA SSD)
-    -   Cost: $854.75 = $269.18 x 2 + $246.39 + $70
+    -   2x 14TB Exos Mach.2 HDD: $269.18 x2
+    -   1x 10TB IronWolf Pro HDD: $246.39
+    -   4x 2TB Seagate Constellation HDD: Free
+    -   1x Crucial MX500 1TB SSD: $70
+    -   1x Kingston KC600 256GB SSD: Free
 
 #### Total Cost: $984.75
 
@@ -76,7 +80,7 @@ While Docker is my primary tool, sometimes a full virtual machine is necessary o
 
 VMs consume more resources (RAM, disk space for the full OS) than containers but offer maximum compatibility and isolation when needed. My VM disk images reside on the SSD for performance.
 
-### Storage Strategy: MergerFS + SnapRAID
+### Storage Strategy: MergerFS and SnapRAID
 
 My primary goal was to combine my data drives (14TB and 10TB) into a single, large pool while maintaining redundancy against single drive failure. Hardware RAID wasn't ideal due to the mismatched drive sizes.
 
