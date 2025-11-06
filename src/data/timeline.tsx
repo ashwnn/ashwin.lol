@@ -1,6 +1,15 @@
 import { TimelineItemConfig } from "@/types"
 import { BookIcon } from "@/components/icons"
-import { TIMELINE_CATEGORIES, createTimelineItem, createButton } from "@/components/timeline"
+import { createTimelineItem, createButton } from "@/utils/timeline-helpers"
+
+// Timeline categories definition
+export const TIMELINE_CATEGORIES = [
+    { key: 'all', label: 'All', icon: '🎯' },
+    { key: 'development', label: 'Development', icon: '💻' },
+    { key: 'security', label: 'Security', icon: '🔒' },
+    { key: 'infrastructure', label: 'Infrastructure', icon: '🏗️' },
+    { key: 'hardware', label: 'Hardware', icon: '⚡' }
+];
 
 // Export categories for use in Timeline component
 export const timelineCategories = TIMELINE_CATEGORIES;

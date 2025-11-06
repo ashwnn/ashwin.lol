@@ -14,64 +14,15 @@ import { ChevronLeftIcon, ChevronRightIcon, ArrowRightIcon, LightningIcon } from
 export interface TimelineCategory {
     key: string;
     label: string;
-    icon: string;
 }
 
 export const TIMELINE_CATEGORIES: TimelineCategory[] = [
-    { key: 'all', label: 'All', icon: '🎯' },
-    { key: 'development', label: 'Development', icon: '💻' },
-    { key: 'security', label: 'Security', icon: '🔒' },
-    { key: 'infrastructure', label: 'Infrastructure', icon: '🏗️' },
-    { key: 'hardware', label: 'Hardware', icon: '⚡' }
+    { key: 'all', label: 'All'},
+    { key: 'development', label: 'Development'},
+    { key: 'security', label: 'Security'},
+    { key: 'infrastructure', label: 'Infrastructure'},
+    { key: 'hardware', label: 'Hardware'}
 ];
-
-// Helper function to create timeline items with common defaults
-export const createTimelineItem = ({
-    year,
-    title,
-    description,
-    image,
-    images,
-    techStack = [],
-    categories = [],
-    takeaways = [],
-    buttons = []
-}: {
-    year: string;
-    title: string;
-    description: string;
-    image?: string;
-    images?: string[];
-    techStack?: string[];
-    categories?: string[];
-    takeaways?: string[];
-    buttons?: Array<{
-        label: string;
-        url: string;
-        icon?: React.ReactNode;
-    }>;
-}) => ({
-    year,
-    title,
-    description,
-    image,
-    images,
-    techStack,
-    categories,
-    takeaways,
-    buttons
-});
-
-// Helper to create button objects
-export const createButton = (
-    label: string, 
-    url: string, 
-    icon?: React.ReactNode
-) => ({
-    label,
-    url,
-    icon
-});
 
 // ============================================
 // Timeline Header Component
@@ -117,7 +68,6 @@ const TimelineFilters = memo(function TimelineFilters({
           aria-label={`Filter by ${category.label}`}
           aria-pressed={activeFilter === category.key}
         >
-          <span className="mr-1.5 text-xs" aria-hidden="true">{category.icon}</span>
           {category.label}
         </button>
       ))}
@@ -413,7 +363,7 @@ const Timeline = ({ data }: TimelineProps) => {
             {/* Header */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 pb-4 border-b border-neutral-800">
                 <h2 className="text-2xl font-bold mb-4 lg:mb-0 bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
-                    Journey Thorugh Tech
+                    My Journey
                 </h2>
                 
                 {/* Filter Controls */}
