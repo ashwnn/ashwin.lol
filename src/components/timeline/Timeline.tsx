@@ -5,7 +5,7 @@ import Image from 'next/image';
 import type { TimelineItemConfig } from '@/types';
 import { categorizeItem, getTechStack, getCategories } from '@/utils/timeline';
 import ImageModal from '@/components/blog/ImageModal';
-import { ChevronLeftIcon, ChevronRightIcon, ArrowRightIcon, LightningIcon } from '@/components/icons';
+import { ChevronLeftIcon, ChevronRightIcon, ArrowRightIcon } from '@/components/icons';
 
 // ============================================
 // Timeline Configuration

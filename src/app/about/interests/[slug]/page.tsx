@@ -1,9 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import { getInterestImages, interestSlugs, getInterestDisplayName } from '@/utils/gallery';
 import type { InterestSlug, InterestPageParams } from '@/types';
-import { ChevronRightIcon } from '@/components/icons';
 import ClientGalleryPage from './ClientGalleryPage';
 
 export async function generateStaticParams() {
