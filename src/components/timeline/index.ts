@@ -1,3 +1,3 @@
 export { default as Timeline } from './Timeline';
-export * from './TimelineIcons';
-export * from './TimelineConfig';
+export { TIMELINE_CATEGORIES, createTimelineItem, createButton } from './Timeline';
+export type { TimelineCategory } from './Timeline';

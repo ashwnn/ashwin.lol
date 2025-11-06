@@ -1,6 +1,6 @@
 import { TimelineItem } from "@/types"
-import { BookIcon } from "@/components/timeline/TimelineIcons"
-import { TIMELINE_CATEGORIES, createTimelineItem, createButton } from "@/components/timeline/TimelineConfig"
+import { BookIcon } from "@/components/icons"
+import { TIMELINE_CATEGORIES, createTimelineItem, createButton } from "@/components/timeline"
 
 // Export categories for use in Timeline component
 export const timelineCategories = TIMELINE_CATEGORIES;
