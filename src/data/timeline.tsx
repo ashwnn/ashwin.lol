@@ -1,11 +1,11 @@
-import { TimelineItem } from "@/types"
+import { TimelineItemConfig } from "@/types"
 import { BookIcon } from "@/components/icons"
 import { TIMELINE_CATEGORIES, createTimelineItem, createButton } from "@/components/timeline"
 
 // Export categories for use in Timeline component
 export const timelineCategories = TIMELINE_CATEGORIES;
 
-export const data: TimelineItem[] = [
+export const data: TimelineItemConfig[] = [
     createTimelineItem({
         year: '2025',
         title: 'Enterprise IT Support & Forensics',

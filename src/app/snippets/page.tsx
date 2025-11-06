@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import type { Gist } from '@/types';
+import type { GistConfig } from '@/types';
 import { fetchUserGists } from '@/lib/api';
 import { logger } from '@/lib/logger';
 
@@ -17,10 +17,10 @@ export const metadata: Metadata = {
   },
 };
 
-async function getGists(): Promise<Gist[]> {
+async function getGists(): Promise<GistConfig[]> {
   try {
     // Use enhanced API utility with automatic retry and caching
-    const gists = await fetchUserGists('ashwnn') as Gist[];
+    const gists = await fetchUserGists('ashwnn') as GistConfig[];
     
     logger.info('Successfully fetched gists', { count: gists.length });
     return gists;

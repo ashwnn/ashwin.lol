@@ -4,18 +4,18 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import PostContent from "@/components/blog/BlogPost";
-import type { PostData, BlogPageParams } from '@/types';
+import type { PostDataConfig, BlogPageParams } from '@/types';
 
 // Enable ISR with revalidation every 1 hour (3600 seconds)
 // This allows the page to be statically generated and revalidated periodically
 export const revalidate = 3600;
 
-async function getPostBySlug(slug: string): Promise<PostData | null> {
+async function getPostBySlug(slug: string): Promise<PostDataConfig | null> {
   try {
     const postFilePath = path.join(process.cwd(), "src/data/blog", `${slug}.md`);
     const fileContent = await fs.readFile(postFilePath, "utf8");
     const { data, content } = matter(fileContent, { excerpt: true });
-    return { ...data, content } as PostData;
+    return { ...data, content } as PostDataConfig;
   } catch (error) {
     console.error("Failed to load post:", error);
     return null;

@@ -3,11 +3,11 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import type { GalleryImage } from '@/types';
+import type { GalleryImageConfig } from '@/types';
 
 // FullscreenModal Component
 interface FullscreenModalProps {
-    image: GalleryImage;
+    image: GalleryImageConfig;
     isOpen: boolean;
     onClose: () => void;
     onNext: () => void;
@@ -342,7 +342,7 @@ const MasonryImage = ({ src, alt, index, onClick, mediaType = 'image', location 
 
 // EnhancedMasonryLayout Component
 interface EnhancedMasonryLayoutProps {
-    images: GalleryImage[];
+    images: GalleryImageConfig[];
     onImageClick: (index: number) => void;
 }
 

@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import BlogCard from "@/components/blog/Card";
-import { BlogPost } from "@/types";
+import { BlogPostConfig } from "@/types";
 import matter from "gray-matter";
 
 // Enable ISR with revalidation every 30 minutes (1800 seconds)
@@ -23,7 +23,7 @@ export const metadata = {
   },
 };
 
-async function getLocalPosts(): Promise<BlogPost[]> {
+async function getLocalPosts(): Promise<BlogPostConfig[]> {
   const postsDir = path.join(process.cwd(), "src/data/blog");
   const files = await fs.readdir(postsDir);
 
@@ -45,7 +45,7 @@ async function getLocalPosts(): Promise<BlogPost[]> {
           tags: data.tags,
           content: content,
           published_date: data.published_data
-        } as BlogPost;
+        } as BlogPostConfig;
       })
   );
 

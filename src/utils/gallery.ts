@@ -1,7 +1,7 @@
 import pb from '@/lib/pocketbase';
-import type { GalleryImage, InterestSlug, PocketbaseGalleryRecord } from '@/types';
+import type { GalleryImageConfig, InterestSlug, PocketbaseGalleryRecord } from '@/types';
 
-export async function getInterestImages(interest: string): Promise<GalleryImage[]> {
+export async function getInterestImages(interest: string): Promise<GalleryImageConfig[]> {
     try {
         // Fetch images from Pocketbase where category matches the interest
         const records = await pb.collection('gallery').getFullList<PocketbaseGalleryRecord>({
@@ -9,7 +9,7 @@ export async function getInterestImages(interest: string): Promise<GalleryImage[
             sort: '-takenAt', // Sort by date, newest first
         });
 
-        const images: GalleryImage[] = records.map((record) => {
+        const images: GalleryImageConfig[] = records.map((record) => {
             // Use the direct CDN URL from the image field
             const imageUrl = record.image;
             

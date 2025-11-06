@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { BlogPost } from "@/types";
+import { BlogPostConfig } from "@/types";
 
-export default function BlogCard({ slug, title, description, cover_image, tags, published_date, author }: BlogPost) {
+export default function BlogCard({ slug, title, description, cover_image, tags, published_date, author }: BlogPostConfig) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 

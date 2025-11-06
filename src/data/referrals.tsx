@@ -1,6 +1,6 @@
-import { ReferralSource } from "@/types";
+import { ReferralConfig } from "@/types";
 
-const referrals: Record<string, ReferralSource> = {
+const referrals: Record<string, ReferralConfig> = {
   github: {
     id: "github",
     name: "GitHub",

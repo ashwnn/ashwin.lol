@@ -15,7 +15,7 @@ import BlogPostLayout from "@/components/blog/PostLayout";
 import BackToTop from "@/components/blog/BackToTop";
 import dynamic from "next/dynamic";
 import Link from "@/components/ui/Link";
-import type { PostData } from '@/types';
+import type { PostDataConfig } from '@/types';
 
 const ImageModal = dynamic(() => import("@/components/blog/ImageModal"), {
   ssr: false
@@ -28,7 +28,7 @@ SyntaxHighlighter.registerLanguage('json', json);
 SyntaxHighlighter.registerLanguage('ps1', powershell);
 
 interface PostContentProps {
-  post: PostData;
+  post: PostDataConfig;
   formattedDate: string;
   tags: string[];
 }

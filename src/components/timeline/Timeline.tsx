@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import Image from 'next/image';
-import type { TimelineItem } from '@/types';
+import type { TimelineItemConfig } from '@/types';
 import { categorizeItem, getTechStack, getCategories } from '@/utils/timeline';
 import ImageModal from '@/components/blog/ImageModal';
 import { ChevronLeftIcon, ChevronRightIcon, ArrowRightIcon, LightningIcon } from '@/components/icons';
@@ -130,7 +130,7 @@ const TimelineFilters = memo(function TimelineFilters({
 // ============================================
 
 interface TimelineCardProps {
-  item: TimelineItem;
+  item: TimelineItemConfig;
   index: number;
   isLast: boolean;
   onImageClick: (imageSrc: string) => void;
@@ -371,7 +371,7 @@ const TimelineCard = memo(function TimelineCard({
 
 // Main Timeline Component
 interface TimelineProps {
-  data: TimelineItem[];
+  data: TimelineItemConfig[];
 }
 
 const Timeline = ({ data }: TimelineProps) => {

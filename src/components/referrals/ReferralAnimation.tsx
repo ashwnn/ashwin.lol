@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ReferralSource } from "@/types";
+import { ReferralConfig } from "@/types";
 import { useRouter } from "next/navigation";
 
 interface ReferralAnimationProps {
-  referral: ReferralSource | null;
+  referral: ReferralConfig | null;
 }
 
 type GtagFunction = (command: string, eventName: string, parameters?: Record<string, unknown>) => void;

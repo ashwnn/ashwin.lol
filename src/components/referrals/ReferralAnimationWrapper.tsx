@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import dynamic from "next/dynamic";
-import { ReferralSource } from "@/types";
+import { ReferralConfig } from "@/types";
 import referrals from "@/data/referrals";
 
 const ReferralAnimation = dynamic(() => import('./ReferralAnimation'), {
@@ -13,7 +13,7 @@ export default function ReferralAnimationWrapper() {
   const searchParams = useSearchParams();
   const referralParam = searchParams.get('r');
 
-  let referralSource: ReferralSource = referrals.default;
+  let referralSource: ReferralConfig = referrals.default;
 
   if (referralParam) {
     const referralKey = referralParam.toLowerCase();

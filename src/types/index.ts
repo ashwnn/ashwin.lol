@@ -185,34 +185,6 @@ export interface ProjectConfig {
 export type InterestSlug = 'hiking' | 'working-out' | 'travelling' | 'gym';
 
 // ============================================
-// Discriminated Union Types for Component Variants
-// ============================================
-
-/**
- * Button action types using discriminated union
- * Allows type-safe handling of different button variants
- */
-export type ButtonAction =
-  | { variant: 'link'; href: string; target?: '_blank' | '_self' }
-  | { variant: 'button'; onClick: () => void }
-  | { variant: 'submit'; form?: string };
-
-/**
- * Modal types using discriminated union
- */
-export type ModalType =
-  | { type: 'image'; src: string; alt: string }
-  | { type: 'resume'; downloadUrl: string }
-  | { type: 'confirmation'; message: string; onConfirm: () => void };
-
-/**
- * Timeline card display variant
- */
-export type TimelineCardVariant =
-  | { variant: 'detailed'; showTechStack: true; showTakeaways: true }
-  | { variant: 'compact'; showTechStack: false; showTakeaways: false };
-
-// ============================================
 // Next.js Dynamic Route Params Types
 // ============================================
 
@@ -234,42 +206,3 @@ export interface InterestPageParams {
     slug: string;
   }>;
 }
-
-// ============================================
-// Legacy Type Aliases (for backward compatibility)
-// ============================================
-
-/**
- * @deprecated Use GalleryImageConfig instead
- */
-export type GalleryImage = GalleryImageConfig;
-
-/**
- * @deprecated Use LocationConfig instead
- */
-export type LocationData = LocationConfig;
-
-/**
- * @deprecated Use BlogPostConfig instead
- */
-export type BlogPost = BlogPostConfig;
-
-/**
- * @deprecated Use PostDataConfig instead
- */
-export type PostData = PostDataConfig;
-
-/**
- * @deprecated Use TimelineItemConfig instead
- */
-export type TimelineItem = TimelineItemConfig;
-
-/**
- * @deprecated Use ReferralConfig instead
- */
-export type ReferralSource = ReferralConfig;
-
-/**
- * @deprecated Use GistConfig instead
- */
-export type Gist = GistConfig;

@@ -7,9 +7,9 @@
 
 import type { ReactNode, SVGProps } from 'react';
 import type { 
-  TimelineItem, 
-  GalleryImage, 
-  ReferralSource,
+  TimelineItemConfig, 
+  GalleryImageConfig, 
+  ReferralConfig,
   ButtonConfig,
   MediaType,
   LocationConfig
@@ -37,24 +37,8 @@ export interface PageTransitionProps {
 // ============================================
 
 export interface TimelineProps {
-  data: TimelineItem[];
+  data: TimelineItemConfig[];
   initialFilter?: string;
-}
-
-export interface TimelineCardProps {
-  item: TimelineItem;
-  index: number;
-  isLast: boolean;
-  onImageClick: (imageSrc: string) => void;
-}
-
-export interface TimelineFiltersProps {
-  activeFilter: string;
-  onFilterChange: (filterKey: string) => void;
-}
-
-export interface TimelineHeaderProps {
-  className?: string;
 }
 
 // ============================================
@@ -62,22 +46,13 @@ export interface TimelineHeaderProps {
 // ============================================
 
 export interface GalleryProps {
-  images: GalleryImage[];
+  images: GalleryImageConfig[];
   columns?: 2 | 3 | 4;
   gap?: number;
 }
 
-export interface MasonryImageProps {
-  src: string;
-  alt: string;
-  index: number;
-  onClick: (index: number) => void;
-  mediaType?: MediaType;
-  location?: LocationConfig;
-}
-
 export interface FullscreenModalProps {
-  images: GalleryImage[];
+  images: GalleryImageConfig[];
   currentIndex: number;
   onClose: () => void;
   onPrevious: () => void;
@@ -90,10 +65,6 @@ export interface FullscreenModalProps {
 
 export interface BlogPostProps {
   slug: string;
-  content: string;
-}
-
-export interface PostContentProps {
   content: string;
 }
 
@@ -113,7 +84,7 @@ export interface BackToTopProps {
 // ============================================
 
 export interface ReferralAnimationProps {
-  source: ReferralSource;
+  source: ReferralConfig;
   onComplete?: () => void;
 }
 
@@ -130,14 +101,6 @@ export interface ResumeModalProps {
   onClose: () => void;
   downloadUrl?: string;
   fileName?: string;
-}
-
-export interface BaseModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title?: string;
-  className?: string;
-  children: ReactNode;
 }
 
 // ============================================
@@ -159,15 +122,6 @@ export interface LinkProps {
   className?: string;
   target?: '_blank' | '_self';
   rel?: string;
-}
-
-export interface ButtonProps extends ButtonConfig {
-  onClick?: () => void;
-  type?: 'button' | 'submit' | 'reset';
-  disabled?: boolean;
-  loading?: boolean;
-  className?: string;
-  children?: ReactNode;
 }
 
 export interface SocialsProps {
@@ -200,5 +154,5 @@ export interface ErrorBoundaryProps {
 
 export interface ClientGalleryPageProps {
   slug: string;
-  images: GalleryImage[];
+  images: GalleryImageConfig[];
 }

@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { EnhancedMasonryLayout, FullscreenModal } from '@/components/gallery';
-import type { GalleryImage } from '@/types';
+import type { GalleryImageConfig } from '@/types';
 
 interface ClientGalleryPageProps {
-    images: GalleryImage[];
+    images: GalleryImageConfig[];
     title: string;
 }
 
