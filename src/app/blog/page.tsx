@@ -1,8 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
-import BlogCard from "@/components/blog/Card";
 import { BlogPostConfig } from "@/types";
 import matter from "gray-matter";
+import BlogPageClient from "./BlogPageClient";
 
 // Enable ISR with revalidation every 30 minutes (1800 seconds)
 // Blog list page revalidates more frequently to show new posts faster
@@ -44,37 +44,21 @@ async function getLocalPosts(): Promise<BlogPostConfig[]> {
           cover_image: data.cover_image,
           tags: data.tags,
           content: content,
-          published_date: data.published_data
+          published_date: data.published_date || data.date
         } as BlogPostConfig;
       })
   );
 
-  return posts;
+  // Sort by newest first by default
+  return posts.sort((a, b) => {
+    const dateA = new Date(a.published_date).getTime();
+    const dateB = new Date(b.published_date).getTime();
+    return dateB - dateA;
+  });
 }
 
 export default async function BlogIndex() {
   const posts = await getLocalPosts();
 
-  return (
-    <div className="w-full md:max-w-3xl mx-auto px-4 md:px-0">
-      <div className="my-5">
-        <h1 className="text-3xl font-bold text-gray-100">Blog Posts</h1>
-        <p className="mt-2 text-gray-400">
-          Collection of my thoughts and experiences.
-        </p>
-      </div>
-
-      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {posts.length > 0 ? (
-          posts.map((post) => (
-            <BlogCard key={post.slug} {...post} />
-          ))
-        ) : (
-          <p className="text-gray-300 text-center col-span-2">
-            I&apos;m writing something, check back soon!
-          </p>
-        )}
-      </div>
-    </div>
-  );
+  return <BlogPageClient initialPosts={posts} />;
 }

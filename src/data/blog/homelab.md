@@ -1,7 +1,7 @@
 ---
 title: "Bepo: My Homelab Setup"
 description: "A look at my homelab setup: server specs, network configuration, storage strategy, virtualization with KVM/libvirt, and the extensive suite of self-hosted services."
-date: "2025-02-12"
+date: "2025-04-12"
 author: "Ashwin C."
 cover_image: "/blog/homelab.png"
 tags: "self-hosting, homelab, server"
