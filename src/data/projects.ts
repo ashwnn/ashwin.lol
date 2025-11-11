@@ -6,6 +6,7 @@ const projects = [
     image: "/projects/baulkham.png",
     tags: ["GoLang", "GraphQL", "PostgreSQL"],
     link: "https://baulkhamhillsvolleyball.com.au/",
+    year: "2024",
   },
   {
     title: "Personal Website",
@@ -13,28 +14,33 @@ const projects = [
     image: "/projects/website.png",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     link: "https://ashwin.lol",
-    github: "/socials/github/ashwin.lol"
+    github: "/socials/github/ashwin.lol",
+    year: "2024",
   },
   {
     title: "SalesScout",
-    description: "A full-stack website that alerts a user when specific deals are on RedFlagDeals.com",
-    image: "/projects/rfd.png",
+    description: "A full-stack application for a web development class that tracks and monitors deals from RedFlagDeals.",
+    image: "/projects/sales-scout.png",
     tags: ["Express", "React", "MongoDB"],
-    github: "/socials/github/SalesScout"
+    github: "/socials/github/SalesScout",
+    link: "https://ss.ashwin.lol/",
+    year: "2021",
   },
   {
     title: "Digispark",
     description: "Explore Keystroke Injection attacks with the Digispark USB development board.",
-    image: "/projects/digispark.jpg",
+    image: "/projects/digispark.png",
     tags: ["Arduino", "Digispark"],
-    github: "/socials/github/Digispark"
+    github: "/socials/github/Digispark",
+    year: "2022",
   },
   {
     title: "SIEM (In Progress)",
     description: "Build a SIEM system to monitor and analyze security events in real-time.",
     image: "/projects/siem.png",
     tags: ["Security", "Management"],
-    github: "/socials/github/it-geeks"
+    github: "/socials/github/SIEM",
+    year: "2025",
   }
 ];
 

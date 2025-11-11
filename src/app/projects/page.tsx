@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="max-w-3xl mx-auto px-4 md:px-0">
+    <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8">
       <div className="my-5">
         <h1 className="text-3xl font-bold text-gray-100">Projects</h1>
         <p className="mt-2 text-gray-400">
@@ -26,8 +26,12 @@ export default function ProjectsPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-        {Projects.map((project) => (
+      <div className="grid grid-cols-1 gap-4 md:gap-6 pb-8">
+        {Projects.sort((a, b) => {
+          const yearA = parseInt(a.year || '0');
+          const yearB = parseInt(b.year || '0');
+          return yearB - yearA; // Newest first
+        }).map((project) => (
           <ProjectCard
             key={project.title}
             title={project.title}
@@ -36,6 +40,7 @@ export default function ProjectsPage() {
             tags={project.tags}
             link={project.link}
             github={project.github}
+            year={project.year}
           />
         ))}
       </div>

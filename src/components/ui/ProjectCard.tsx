@@ -8,26 +8,43 @@ interface ProjectCardProps {
   tags: string[];
   link?: string;
   github?: string;
+  year?: string;
 }
 
-export default function ProjectCard({ title, description, image, tags, link, github }: ProjectCardProps) {
+export default function ProjectCard({ title, description, image, tags, link, github, year }: ProjectCardProps) {
   return (
-    <div className="group flex flex-col sm:flex-row h-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/80 transition-all duration-300 hover:border-neutral-700 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl mb-4 relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl before:z-10">
-      <div className="relative h-56 sm:h-auto sm:w-48 md:w-64 overflow-hidden">
+    <div className="group overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/80 transition-all duration-300 hover:border-neutral-700 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl mb-4 relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl before:z-10
+                    sm:grid sm:grid-cols-[260px,1fr] sm:items-stretch">
+      {/* Image column */}
+      <div className="relative aspect-[16/9] sm:aspect-auto sm:h-full overflow-hidden">
         <Image
           src={image}
           alt={title}
           fill
           className="object-cover transition-transform duration-500"
-          sizes="(max-width: 640px) 100vw, 256px"
+          sizes="(max-width: 640px) 100vw, 260px"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 to-transparent opacity-80 sm:bg-gradient-to-t"></div>
 
+        {/* Mobile gradient from bottom, desktop left to right */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-neutral-900/80 via-transparent to-transparent sm:bg-gradient-to-r sm:from-neutral-900/70 sm:via-transparent sm:to-transparent" />
       </div>
 
-      <div className="flex flex-col flex-grow p-4 sm:p-6">
-        <h3 className="mb-2 text-xl font-bold text-white group-hover:text-blue-400 transition-colors">{title}</h3>
-        <p className="mb-3 text-sm text-neutral-400 sm:line-clamp-3">{description}</p>
+      {/* Text column */}
+      <div className="flex flex-col p-4 sm:p-6">
+        <div className="flex items-start justify-between mb-2 gap-3">
+          <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+            {title}
+          </h3>
+          {year && (
+            <span className="flex-shrink-0 text-sm font-medium text-neutral-500">
+              {year}
+            </span>
+          )}
+        </div>
+
+        <p className="mb-3 text-sm text-neutral-400 sm:line-clamp-3">
+          {description}
+        </p>
 
         {tags.length > 0 && (
           <div className="mb-4 flex flex-wrap gap-1.5">
@@ -42,18 +59,20 @@ export default function ProjectCard({ title, description, image, tags, link, git
           </div>
         )}
 
-        <div className="flex items-center gap-3 mt-auto">
-          {link && (<Link
-            href={link}
-            target="_blank"
-            className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium text-white bg-neutral-800 hover:bg-neutral-700 transition-all duration-200 shadow-elevation-dark-sm hover:shadow-elevation-dark-md relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/15 before:to-transparent before:rounded-t-lg"
-            data-umami-event={`explore_project_${title}`}
-          >
-            Explore
-            <svg className="ml-1.5 h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </Link>)}
+        <div className="mt-auto flex items-center gap-3">
+          {link && (
+            <Link
+              href={link}
+              target="_blank"
+              className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium text-white bg-neutral-800 hover:bg-neutral-700 transition-all duration-200 shadow-elevation-dark-sm hover:shadow-elevation-dark-md relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/15 before:to-transparent before:rounded-t-lg"
+              data-umami-event={`explore_project_${title}`}
+            >
+              Explore
+              <svg className="ml-1.5 h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+          )}
 
           {github && (
             <a
