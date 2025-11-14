@@ -4,7 +4,7 @@ const projects = [
     description: "An AI powered document search and chat platform built with Next.js, Prisma, and the Google Gemini API.",
     image: "/projects/poneglyph.png",
     tags: ["React", "TypeScript", "Gemini API"],
-    link: "https://github.com/ashwnn/poneglyph",
+    github: "https://github.com/ashwnn/poneglyph",
     year: "2025",
   },
   {
