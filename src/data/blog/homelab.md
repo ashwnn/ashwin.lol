@@ -7,7 +7,6 @@ cover_image: "/blog/homelab.png"
 tags: "self-hosting, homelab, server"
 ---
 
-# Bepo: My Homelab Adventure (Containers & VMs)
 
 ## Table of Contents
 
