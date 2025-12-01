@@ -53,7 +53,7 @@ It started with a [Dell Optiplex 7010](https://www.amazon.ca/Dell-Optiplex-7010-
 
 ## Hardware Specifications & Cost
 
-![Hardware Specifications](/public/blog/extra/hardware-specs.jpg)
+![Hardware Specifications](/blog/extra/hardware-specs.jpg)
 
 Bepo is built on a Lenovo ThinkServer TD340, an enterprise-grade server targeted at smaller businesses, released in 2013. I got it for 60 dollars from a local seller who had it sitting in brand-new condition. After some research, it turned out to be a great deal and compatible with relatively inexpensive parts.
 
@@ -82,7 +82,7 @@ My server runs a combination of bare-metal services, containerized applications,
 
 ### Operating System & Containerization
 
-![Virtualization Setup](/public/blog/extra/virtualization-showcase.jpg)
+![Virtualization Setup](/blog/extra/virtualization-showcase.jpg)
 
 - **Host Operating System:** Ubuntu Server 24.04 LTS  
 - **Containerization:** Docker and Docker Compose  
@@ -107,7 +107,7 @@ VMs do consume more resources (RAM and disk space for the full OS) than containe
 
 ### Storage Strategy: MergerFS and SnapRAID
 
-![SnapRAID Strategy](/public/blog/extra/snapraid.jpg)
+![SnapRAID Strategy](/blog/extra/snapraid.jpg)
 
 My primary storage goal was to combine my data drives (14 TB and 10 TB) into a single, large pool while maintaining redundancy against single drive failure. Hardware RAID was not ideal because of the mismatched drive sizes.
 
@@ -159,7 +159,7 @@ With the core infrastructure defined, here is how networking, security, and actu
 
 ### Networking Approach
 
-![Networking](/public/blog/extra/network-diagram.jpg)
+![Networking](/blog/extra/network-diagram.jpg)
 
 - **Exposure:** `Cloudflared` tunnels provide secure, easy-to-manage public access to specific web services without opening firewall ports or wrestling with SSL certificates directly.  
 - **VPN:** `Gluetun` manages VPN connections for specific containers (mainly `qBittorrent`), so their traffic is routed securely.  
@@ -169,7 +169,7 @@ With the core infrastructure defined, here is how networking, security, and actu
 
 ### Security Measures
 
-![Security Measures](/public/blog/extra/security-measures.jpg)
+![Security Measures](/blog/extra/security-measures.jpg)
 
 Security is a priority, especially once anything touches the public internet.
 
@@ -182,7 +182,7 @@ Security is a priority, especially once anything touches the public internet.
 
 ### The Application Ecosystem (via Docker)
 
-![Application Ecosystem](/public/blog/extra/application-ecosystem.jpg)
+![Application Ecosystem](/blog/extra/application-ecosystem.jpg)
 
 Most of my day-to-day services run as Docker containers for efficiency and ease of management.
 

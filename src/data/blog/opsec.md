@@ -38,7 +38,7 @@ My baseline rule is simple: **no face, no case**. The less that directly ties ba
 
 ## Why Do I Care?
 
-![Personal Opsec Diagram](/public/blog/extra/personal-opsec.jpg)
+![Personal Opsec Diagram](/blog/extra/personal-opsec.jpg)
 
 What pushed me into OpSec was not theory. It was ego death via self search.
 
@@ -62,7 +62,7 @@ Once you see how much of your life leaks out through laziness, you start to appr
 
 ## Core Principles of OpSec
 
-![Core Principles](/public/blog/extra/core-principles.jpg)
+![Core Principles](/blog/extra/core-principles.jpg)
  
 OpSec is not a one time checklist. It is an iterative loop you run in your head when you sign up for something, post something, or connect a new device.
 
@@ -167,7 +167,7 @@ OpSec is mostly about making these decisions habit, not one time projects.
 
 ## De-Anonymization and How It Works
 
-![Core Principles](/public/blog/extra/de-anonymization.jpg)
+![Core Principles](/blog/extra/de-anonymization.jpg)
 
 De-anonymization is the process of starting from an alias or partial information and working backward until it links to a real person. It is not magic. It is pattern matching and correlation across a lot of small clues.
 
