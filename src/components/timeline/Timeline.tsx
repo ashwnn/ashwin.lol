@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import Image from 'next/image';
 import type { TimelineItemConfig } from '@/types';
 import { categorizeItem, getTechStack, getCategories } from '@/utils/timeline';
-import ImageModal from '@/components/blog/ImageModal';
+import ModernImageModal from '@/components/blog/ModernImageModal';
 import { ChevronLeftIcon, ChevronRightIcon, ArrowRightIcon } from '@/components/icons';
 
 // ============================================
@@ -58,8 +58,8 @@ const TimelineFilters = memo(function TimelineFilters({
           key={category.key}
           onClick={() => onFilterChange(category.key)}
           className={`inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 relative focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${activeFilter === category.key
-              ? 'bg-blue-600 text-white shadow-elevation-dark-md shadow-blue-600/40 scale-[1.02] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:rounded-t-lg'
-              : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700/30 shadow-elevation-dark-sm hover:shadow-elevation-dark-md'
+            ? 'bg-blue-600 text-white shadow-elevation-dark-md shadow-blue-600/40 scale-[1.02] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:rounded-t-lg'
+            : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700/30 shadow-elevation-dark-sm hover:shadow-elevation-dark-md'
             }`}
           aria-label={`Filter by ${category.label}`}
           aria-pressed={activeFilter === category.key}
@@ -145,8 +145,8 @@ const TimelineCard = memo(function TimelineCard({
 
       {/* Card Container */}
       <div className={`w-full lg:w-[calc(75%-1rem)] pl-12 lg:pl-0 ${isEven
-          ? 'lg:mr-auto lg:pr-6'
-          : 'lg:ml-auto lg:pl-12'
+        ? 'lg:mr-auto lg:pr-6'
+        : 'lg:ml-auto lg:pl-12'
         }`}>
         {/* Year Badge */}
         <div className={`inline-flex items-center px-3 py-1 mb-4 text-sm font-bold text-blue-400 bg-blue-400/10 border border-blue-400/20 rounded-full ${isEven ? 'lg:ml-auto' : ''
@@ -422,7 +422,7 @@ const Timeline = ({ data }: TimelineProps) => {
 
       {/* Image Modal */}
       {isModalOpen && selectedImage && (
-        <ImageModal
+        <ModernImageModal
           src={selectedImage}
           alt="Timeline Image"
           onClose={closeModal}

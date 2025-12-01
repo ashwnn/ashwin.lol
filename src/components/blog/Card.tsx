@@ -22,10 +22,19 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
     router.push(`/blog/${slug}`);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setIsLoading(true);
+      router.push(`/blog/${slug}`);
+    }
+  };
+
   return (
     <div
       className="relative flex flex-col h-full bg-[#2a2a2a] border border-zinc-700/50 rounded-xl shadow-elevation-dark-lg hover:shadow-elevation-dark-xl hover:border-zinc-600 transition-all duration-300 overflow-hidden group before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl before:z-10 hover:cursor-pointer"
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
       role="link"
       tabIndex={0}
       data-umami-event={`blog_${slug}`}
@@ -69,7 +78,7 @@ export default function BlogCard({ slug, title, description, cover_image, tags, 
                 {tag.trim()}
               </span>
             ))}
-            {tags.length > 3 && (
+            {tags.split(",").length > 3 && (
               <span className="text-xs text-gray-400 self-center">+ more</span>
             )}
           </div>
