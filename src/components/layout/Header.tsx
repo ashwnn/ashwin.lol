@@ -24,7 +24,7 @@ export default function Header() {
             </div>
             <div>
               <h1 className="text-2xl font-bold shine">Ashwin C.</h1>
-              <p className="text-sm text-gray-400">Student</p>
+              <p className="text-sm text-gray-400">Cybersecurity & IT</p>
             </div>
           </div>
 
