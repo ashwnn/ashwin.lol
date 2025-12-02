@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ModernImageModalProps {
@@ -12,8 +13,16 @@ interface ModernImageModalProps {
 export default function ModernImageModal({ src, alt, onClose }: ModernImageModalProps) {
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const modalRef = useRef<HTMLDivElement>(null);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
+        return () => setMounted(false);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+
         // Focus the close button when modal opens
         closeButtonRef.current?.focus();
 
@@ -71,9 +80,11 @@ export default function ModernImageModal({ src, alt, onClose }: ModernImageModal
             document.body.style.paddingRight = originalPaddingRight;
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [onClose]);
+    }, [onClose, mounted]);
 
-    return (
+    if (!mounted) return null;
+
+    return createPortal(
         <AnimatePresence>
             <motion.div
                 ref={modalRef}
@@ -144,6 +155,7 @@ export default function ModernImageModal({ src, alt, onClose }: ModernImageModal
                     )}
                 </motion.div>
             </motion.div>
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
     );
 }

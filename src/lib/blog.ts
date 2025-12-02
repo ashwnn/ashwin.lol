@@ -9,14 +9,14 @@ export async function getLocalPosts(): Promise<BlogPostConfig[]> {
 
     const posts = await Promise.all(
         files
-            .filter((file) => file.endsWith(".md"))
+            .filter((file) => file.endsWith(".md") || file.endsWith(".mdx"))
             .map(async (file) => {
                 const filePath = path.join(postsDir, file);
                 const fileContent = await fs.readFile(filePath, 'utf8');
                 const { data, content } = matter(fileContent);
 
                 return {
-                    slug: file.replace(/\.md$/, ""),
+                    slug: file.replace(/\.mdx?$/, ""),
                     title: data.title,
                     description: data.description,
                     date: data.date,

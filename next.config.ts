@@ -100,4 +100,10 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+import createMDX from '@next/mdx';
+
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+});
+
+export default withMDX(nextConfig);
