@@ -14,9 +14,33 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Home - Ashwin C.",
-  description: "Personal website of Ashwin Charathsandran",
+  title: {
+    default: "Ashwin Charathsandran",
+    template: "%s - Ashwin C.",
+  },
+  description: "Personal website of Ashwin Charathsandran - Cybersecurity Student & Service Desk Analyst.",
   metadataBase: new URL("https://ashwin.lol"),
+  keywords: ["Ashwin Charathsandran", "Cybersecurity", "IT", "Service Desk", "BCIT", "Forensics", "Portfolio", "Blog"],
+  authors: [{ name: "Ashwin Charathsandran" }],
+  creator: "Ashwin Charathsandran",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://ashwin.lol",
+    title: "Ashwin Charathsandran",
+    description: "Personal website of Ashwin Charathsandran - Cybersecurity Student & Service Desk Analyst.",
+    siteName: "Ashwin Charathsandran",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ashwin Charathsandran",
+    description: "Personal website of Ashwin Charathsandran - Cybersecurity Student & Service Desk Analyst.",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
