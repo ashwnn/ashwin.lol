@@ -19,7 +19,6 @@ export default async function Home() {
           </Link>{' '}
           program at <Link href="https://bcit.ca/">BCIT</Link> and work at{' '}
           <Link
-            className="text-red-400 border-b border-dotted border-red-400/40 pb-px no-underline transition-all duration-200 ease-in-out hover:border-solid hover:border-red-300/80 hover:text-red-300"
             href="https://tecnet.ca/"
           >
             Tecnet
