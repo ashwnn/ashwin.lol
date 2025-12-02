@@ -50,6 +50,26 @@ export default function RootLayout({
         />
         <Analytics />
         <SpeedInsights />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Ashwin Charathsandran',
+              url: 'https://ashwin.lol',
+              sameAs: [
+                'https://github.com/ashwnn',
+                'https://www.linkedin.com/in/ax2/',
+              ],
+              jobTitle: 'Service Desk Analyst',
+              worksFor: {
+                '@type': 'Organization',
+                name: 'Tecnet',
+              },
+            }),
+          }}
+        />
       </body>
     </html>
   );
