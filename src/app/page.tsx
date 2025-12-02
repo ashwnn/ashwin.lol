@@ -2,7 +2,7 @@ import { default as Link } from '@/components/ui/Link';
 import Socials from '@/components/ui/Socials';
 import { getLocalPosts } from '@/lib/blog';
 import projects from '@/data/projects';
-import Image from 'next/image';
+
 
 export default async function Home() {
   const latestPosts = (await getLocalPosts()).slice(0, 1);

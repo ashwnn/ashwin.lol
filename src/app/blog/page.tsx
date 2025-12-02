@@ -1,4 +1,4 @@
-import { BlogPostConfig } from "@/types";
+
 import BlogPageClient from "./BlogPageClient";
 
 // Enable ISR with revalidation every 30 minutes (1800 seconds)
