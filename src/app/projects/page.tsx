@@ -44,7 +44,7 @@ export default function ProjectsPage() {
           />
         ))}
       </div>
-      <div className="mt-10 mb-12 flex justify-center">
+      <div className="mb-12 flex justify-center">
         <a
           href="/socials/github?tab=repositories"
           target="_blank"

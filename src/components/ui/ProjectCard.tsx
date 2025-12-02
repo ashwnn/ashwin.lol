@@ -13,7 +13,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ title, description, image, tags, link, github, year }: ProjectCardProps) {
   return (
-    <div className="group overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/80 transition-all duration-300 hover:border-neutral-700 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl mb-4 relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl before:z-10
+    <div className="group overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/80 transition-all duration-300 hover:border-neutral-700 shadow-elevation-dark-lg hover:shadow-elevation-dark-xl relative before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/8 before:to-transparent before:rounded-t-xl before:z-10
                     sm:grid sm:grid-cols-[260px,1fr] sm:items-stretch">
       {/* Image column */}
       <div className="relative aspect-[16/9] sm:aspect-auto sm:h-full overflow-hidden">
