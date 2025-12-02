@@ -7,9 +7,6 @@ cover_image: "/blog/homelab.png"
 tags: "self-hosting, homelab, server"
 ---
 
-
-## Table of Contents
-
 - [Introduction](#introduction)
 - [Inspiration](#inspiration)
 - [Hardware Specifications & Cost](#hardware-specifications--cost)
@@ -26,7 +23,7 @@ tags: "self-hosting, homelab, server"
 - [Challenges Faced and Lessons Learned](#challenges-faced-and-lessons-learned)
 - [Conclusion](#conclusion)
 
-> **TLDR:** Bepo is my home server and ongoing homelab experiment, built on a cheap Lenovo ThinkServer TD340 with mixed storage drives pooled using MergerFS and protected by SnapRAID. Most of my workloads run as Docker containers on Ubuntu Server, with KVM/libvirt handling full VMs when I need stronger isolation or a different OS. Networking is handled with Cloudflared tunnels, Pi-hole, Gluetun, and a few carefully planned Docker and VM networks, while security leans on UFW, Crowdsec, OpenVAS, and solid access control. This post walks through the hardware, storage layout, virtualization stack, apps, networking, and the many mistakes and lessons that shaped the current setup.
+> **TLDR:** I built Bepo as a way to take control of my data, learn from past missteps, and grow a homelab that balances old hardware, modern tooling, and practical day to day usefulness. In this overview I walk through the server’s hardware, storage layout, virtualization stack, and the many Docker applications that run on it, along with the networking and security decisions that keep everything stable. I also share the mistakes I made early on and how each challenge shaped the system into something far more reliable and intentional.
 
 ## Introduction
 

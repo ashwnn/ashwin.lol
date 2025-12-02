@@ -7,9 +7,6 @@ cover_image: "/blog/opsec.png"
 tags: "opsec, hardening, privacy"
 ---
 
-> **TLDR:** Personal OpSec is not about being a paranoid ghost on the internet. It is about understanding what can hurt you if it leaks, who might care, and how to reduce the amount of data that can be tied back to you. The core ideas are simple: know your critical info, separate identities, avoid reuse (usernames, emails, passwords, devices), harden your accounts and devices, and accept that you are aiming for *hard to target*, not *impossible to find*.
-
-# Table of Contents
 - [Introduction](#introduction)
 - [Why Do I Care?](#why-do-i-care)
 - [Core Principles of OpSec](#core-principles-of-opsec)
@@ -18,7 +15,9 @@ tags: "opsec, hardening, privacy"
 - [Tools and Best Practices](#tools-and-best-practices)
 - [Emerging Trends in OpSec](#emerging-trends-in-opsec)
 - [Conclusion](#conclusion)
- 
+
+> **TLDR:** In this guide I walk through how I approach personal OpSec as an everyday mindset, not tinfoil hat paranoia. I explain how I map out what really matters about my identity, access, behavior, and content, how de anonymization actually works in the real world, and how I separate different personas so one slip does not expose my entire life. I cover practical habits and tools for passwords, devices, browsing, communication, email aliases, and social media, along with new trends like fingerprinting, data brokers, and AI driven OSINT, so that my online footprint is harder to connect to my real self and any eventual leak hurts less.
+
 ## Introduction
 
 You cannot rely on companies to protect your data, so it is on you to protect yourself. That is what Operational Security (OpSec) is about in a personal context: a mindset focused on limiting how much of your real life can be reconstructed from your online trail.
