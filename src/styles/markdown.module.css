@@ -40,6 +40,7 @@
   padding-bottom: 0.5rem;
   margin-top: 1.5rem;
   background: linear-gradient(90deg, #e2e2e2, #aaa);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -115,14 +116,9 @@
 .markdown_body img {
   max-width: 100%;
   display: block;
-  margin: 1.5rem auto;
+  margin: 0.5rem auto;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease;
-}
-
-.markdown_body img:hover {
-  transform: scale(1.01);
 }
 
 @media (min-width: 768px) {
@@ -159,8 +155,8 @@
 }
 
 /* Reduce spacing for nested lists */
-.markdown_body li > ul,
-.markdown_body li > ol {
+.markdown_body li>ul,
+.markdown_body li>ol {
   margin: 0.25rem 0;
 }
 
@@ -278,11 +274,11 @@
 }
 
 /* Ensure proper spacing between content elements */
-.markdown_body * + h2,
-.markdown_body * + h3,
-.markdown_body * + h4,
-.markdown_body * + h5,
-.markdown_body * + h6 {
+.markdown_body *+h2,
+.markdown_body *+h3,
+.markdown_body *+h4,
+.markdown_body *+h5,
+.markdown_body *+h6 {
   margin-top: 2rem;
 }
 
