@@ -1,7 +1,14 @@
 const projects = [
   {
+    title: "Forward Factor",
+    description: "A bot that scans option chains for dislocations where front-month implied volatility is elevated relative to the implied forward volatility, signaling potential calendar spread trades.",
+    image: "/projects/forward-factor.png",
+    tags: ["Python", "Polygon.io", "Finance", "Backtrader"],
+    year: "2025",
+  },
+  {
     title: "Poneglyph",
-    description: "An AI powered document search and chat platform built with Next.js, Prisma, and the Google Gemini API.",
+    description: "Poneglyph is an AI powered document search and chat platform built with Next.js. It integrates the Gemini File Search API to deliver Retrieval Augmented Generation for a large number of documents.",
     image: "/projects/poneglyph.png",
     tags: ["React", "TypeScript", "Gemini API"],
     github: "https://github.com/ashwnn/poneglyph",
@@ -9,7 +16,7 @@ const projects = [
   },
   {
     title: "Management System",
-    description: "A management system for a local club, built with GoLang, GraphQL, and PostgreSQL.",
+    description: "A robust management system for a local volleyball club to manage players, teams, and matches and handle scheduling games and players.",
     image: "/projects/baulkham.png",
     tags: ["GoLang", "GraphQL", "PostgreSQL"],
     link: "https://baulkhamhillsvolleyball.com.au/",
@@ -42,10 +49,10 @@ const projects = [
     year: "2022",
   },
   {
-    title: "SIEM (In Progress)",
-    description: "Build a SIEM system to monitor and analyze security events in real-time.",
+    title: "SIEM",
+    description: "Use Wazuh to monitor an endpoint system while performing Atomic Red Team testing and aggregating the data into a dashboard and performing analysis.",
     image: "/projects/siem.png",
-    tags: ["Security", "Management"],
+    tags: ["Security", "Management", "Wazuh"],
     github: "/socials/github/SIEM",
     year: "2025",
   }
